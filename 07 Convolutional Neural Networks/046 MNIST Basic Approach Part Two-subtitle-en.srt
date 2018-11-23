@@ -1,0 +1,928 @@
+1
+00:00:05,370 --> 00:00:08,240
+Welcome back everyone right here where we left off last time.
+
+2
+00:00:08,250 --> 00:00:09,280
+So we have our data.
+
+3
+00:00:09,330 --> 00:00:11,200
+It's now time to create our model.
+
+4
+00:00:11,430 --> 00:00:15,200
+So again we're doing a very basic soft Max regression approach.
+
+5
+00:00:15,360 --> 00:00:17,610
+So I'm going to map out the steps we need to do here.
+
+6
+00:00:17,640 --> 00:00:24,140
+We need to create our placeholders so we'll have our placeholders which essentially going to be X then
+
+7
+00:00:24,150 --> 00:00:33,480
+we also need our variable's then we're going to need to create the actual graph operations then we'll
+
+8
+00:00:33,480 --> 00:00:41,250
+need to have our last function then we'll need our optimizer how we're going to optimize that last function.
+
+9
+00:00:41,250 --> 00:00:47,410
+Essentially what we're going to minimize and then we'll create our session and run all this.
+
+10
+00:00:47,670 --> 00:00:48,200
+All right.
+
+11
+00:00:48,510 --> 00:00:50,870
+So let's start off with the placeholders.
+
+12
+00:00:50,940 --> 00:00:56,120
+So our placeholder we only have one set of input which is our image data.
+
+13
+00:00:56,120 --> 00:01:03,620
+So I'll say T.F. placeholder and it's going to be flat 32 and we're going to indicate that the shape
+
+14
+00:01:03,740 --> 00:01:07,700
+is none because it's essentially going to be filled in by the batch size.
+
+15
+00:01:07,940 --> 00:01:14,370
+And then 784 because that's 28 times 28 remember we have flattened the race.
+
+16
+00:01:14,430 --> 00:01:15,860
+OK so that's our placeholder.
+
+17
+00:01:15,930 --> 00:01:20,960
+And then we have our variables which is going to be our weights and our bias.
+
+18
+00:01:21,180 --> 00:01:22,500
+So we'll have our weights here.
+
+19
+00:01:22,620 --> 00:01:26,330
+And this is going to be T.F. variable.
+
+20
+00:01:26,660 --> 00:01:31,530
+And then just go ahead and initialize this our weights and biases with zeros.
+
+21
+00:01:31,700 --> 00:01:35,290
+We already have a discussion of why this is probably not such a great idea.
+
+22
+00:01:35,410 --> 00:01:38,310
+But right now we want to keep things as simple as possible.
+
+23
+00:01:38,360 --> 00:01:40,770
+So we'll initiate weight some by ISIS as zeros.
+
+24
+00:01:40,820 --> 00:01:46,320
+Now typically you probably shouldn't do this but again this is just for simplification.
+
+25
+00:01:46,400 --> 00:01:56,750
+So our weight should be 784 by 10 because we have 784 pixels by 10 possible labels.
+
+26
+00:01:57,160 --> 00:02:00,420
+And then the other variable we need to make is the bias term.
+
+27
+00:02:00,430 --> 00:02:02,200
+So this is what we're adding onto that.
+
+28
+00:02:02,380 --> 00:02:06,060
+So that just needs to be the same length as the actual labels.
+
+29
+00:02:06,060 --> 00:02:13,080
+So I'll say T.F. variable that's going to be T.F. zeroes and then we'll just say 10 there.
+
+30
+00:02:13,150 --> 00:02:18,940
+So those are variables you can mess around and maybe add some random numbers here instead of zeros in
+
+31
+00:02:18,940 --> 00:02:21,150
+fact tensor float does have its own.
+
+32
+00:02:21,340 --> 00:02:25,790
+If you take a look at random here it has its own random normal and other things of that nature.
+
+33
+00:02:25,840 --> 00:02:28,510
+But again keeping things simple We'll do it all zeros.
+
+34
+00:02:28,660 --> 00:02:31,740
+For this particular set it will have a huge effect.
+
+35
+00:02:31,750 --> 00:02:33,990
+Now we need to create our graph operation.
+
+36
+00:02:34,060 --> 00:02:37,360
+So remember this is what we just basically went over in those slides trust.
+
+37
+00:02:37,430 --> 00:02:45,230
+If we just have a matrix multiplication between X and W and then we're going to add to it.
+
+38
+00:02:45,260 --> 00:02:53,430
+And if you want it called this z instead of y it's up to you then we need to give our last function.
+
+39
+00:02:53,430 --> 00:02:58,720
+So in order to have a loss function we need one more placeholder and that is the why true values.
+
+40
+00:02:58,740 --> 00:03:02,700
+So you do it up here or do it down here in the last function the pudding how you want to think about
+
+41
+00:03:02,700 --> 00:03:11,750
+things but will say that the y true is equal to T.F. placeholder here.
+
+42
+00:03:11,850 --> 00:03:18,450
+Flo 32 and then this is going to be none because it's the again the bet size and then 10 because there's
+
+43
+00:03:18,450 --> 00:03:20,320
+10 possible labels.
+
+44
+00:03:20,520 --> 00:03:22,850
+So we still need to add more for this last function here.
+
+45
+00:03:22,860 --> 00:03:29,370
+So we're going to use a cross entropy loss function very common loss function to use say cross entropy
+
+46
+00:03:31,100 --> 00:03:40,310
+to T.F. reduce mean and then we can basically directly import this from sensor flow we'll say T.F. and
+
+47
+00:03:40,410 --> 00:03:49,730
+in soft Max and it's cross-bench repeat with logic there and then we're going to say labels is equal
+
+48
+00:03:49,730 --> 00:03:54,140
+to y true SWI true.
+
+49
+00:03:54,140 --> 00:03:56,610
+Let me zoom out one level so we can see the whole thing.
+
+50
+00:03:56,870 --> 00:04:06,150
+And then we say Blodgett's loops is equal to Y and this is basically just tensor flows built in across
+
+51
+00:04:06,270 --> 00:04:09,570
+entropy loss function where you're basically passing in.
+
+52
+00:04:09,600 --> 00:04:12,060
+Hey these are my true values which right now is a placeholder.
+
+53
+00:04:12,060 --> 00:04:13,470
+The painting on the back is being fed in.
+
+54
+00:04:13,770 --> 00:04:16,890
+And then y is going to be your actual predictions.
+
+55
+00:04:16,890 --> 00:04:20,880
+And then this is going to be cross entropy loss just how off are you.
+
+56
+00:04:21,060 --> 00:04:22,410
+So we'll run that now.
+
+57
+00:04:22,830 --> 00:04:24,620
+And we also need to then optimize this.
+
+58
+00:04:24,660 --> 00:04:32,870
+So let's create our optimizer can zoom back in for this will say that our optimizer is equal to T.F.
+
+59
+00:04:32,880 --> 00:04:37,150
+train dot and we'll use gradient descent optimizer.
+
+60
+00:04:37,360 --> 00:04:43,200
+And let's go ahead and just say learning rates of 0.5 a little bit of a larger learning rate and you
+
+61
+00:04:43,200 --> 00:04:44,810
+can play around that later on.
+
+62
+00:04:45,150 --> 00:04:50,460
+But then we'll say train is equal to optimizer and we want to minimize our loss function that we just
+
+63
+00:04:50,460 --> 00:04:55,050
+created which is going to be that cross entropy.
+
+64
+00:04:55,050 --> 00:04:56,580
+So we run that we have our optimizer.
+
+65
+00:04:56,580 --> 00:05:00,810
+Now it's time to create our session remember whenever we're creating a session we need to initialize
+
+66
+00:05:00,870 --> 00:05:02,140
+all the global variables.
+
+67
+00:05:02,220 --> 00:05:03,720
+So we'll do the following.
+
+68
+00:05:03,720 --> 00:05:13,040
+We'll see if it is equal to T.F. global variables initialiser have that going.
+
+69
+00:05:13,040 --> 00:05:25,000
+And then we want to just run our session which means we'll do with T.F. that session as SPSS we want
+
+70
+00:05:25,000 --> 00:05:27,570
+to run that initialization.
+
+71
+00:05:27,640 --> 00:05:32,230
+So SEST run in it and then we want to train the model.
+
+72
+00:05:32,230 --> 00:05:38,980
+So we'll say for step in range and we'll do 1000 steps on the training set.
+
+73
+00:05:38,980 --> 00:05:44,510
+Again you kind of play around with this number and what's really nice about the dataset that comes with
+
+74
+00:05:44,510 --> 00:05:48,490
+tensor flow is it actually has a method to feed in batches.
+
+75
+00:05:48,560 --> 00:05:55,730
+So if we take a look at Amnesty's that train the next batch this is the method where you just need to
+
+76
+00:05:55,730 --> 00:06:01,140
+provide then the batch size and it will return a batch of training samples.
+
+77
+00:06:01,190 --> 00:06:04,390
+So we'll say we want 100 for our batch size.
+
+78
+00:06:04,850 --> 00:06:12,120
+And let's go ahead and say this is equal to batch X batch y.
+
+79
+00:06:12,170 --> 00:06:16,010
+So this is essentially tuple unpacking packing and if you read the documentation of what this actually
+
+80
+00:06:16,010 --> 00:06:20,750
+returns it just returns a tuple with your X and Y.
+
+81
+00:06:21,110 --> 00:06:28,970
+So your X data that is your 700 and 84 pixels and then your batch Y which are the labels that belong
+
+82
+00:06:28,970 --> 00:06:33,730
+to those pixels as is your training data you're getting 100 of those samples at a time.
+
+83
+00:06:34,430 --> 00:06:38,950
+And then we're gonna say session run we're going to run the trainer and then we need to feed the training
+
+84
+00:06:38,960 --> 00:06:51,620
+for the trainer sort of say feed dictionary is equal to our X is just our X and then are y true.
+
+85
+00:06:51,920 --> 00:06:55,480
+So if we come up here remember that was the placeholder.
+
+86
+00:06:56,090 --> 00:07:03,400
+So we can just say placeholder here so here's our placeholder that's related to the actual loss function.
+
+87
+00:07:03,660 --> 00:07:08,720
+And we're going to say why true is that going to be that batch of white values.
+
+88
+00:07:08,850 --> 00:07:14,970
+Now the hard part when you're doing your own data is this line right here usually for other data sets.
+
+89
+00:07:14,970 --> 00:07:17,830
+You're not going to have such a convenient next batch function.
+
+90
+00:07:17,880 --> 00:07:23,160
+And that's kind of where the difficulty lies in when you're trying to apply tensor flow and these more
+
+91
+00:07:23,160 --> 00:07:25,220
+complicated models to your own data.
+
+92
+00:07:25,260 --> 00:07:29,910
+A lot of your time is going to be spent cleaning up the data and reshaping it and formatting it in a
+
+93
+00:07:29,910 --> 00:07:31,970
+way where you can easily grab batches.
+
+94
+00:07:32,040 --> 00:07:34,390
+So we'll show that in another example in the future.
+
+95
+00:07:34,410 --> 00:07:39,780
+But right now we're basically taking advantage of the fact that this train has a nice little Next batch
+
+96
+00:07:39,780 --> 00:07:40,420
+method.
+
+97
+00:07:40,530 --> 00:07:44,990
+Your life will always be this convenient but for now we'll take advantage of it.
+
+98
+00:07:45,030 --> 00:07:50,400
+The final step when you perform in this session is to actually evaluate our model.
+
+99
+00:07:50,400 --> 00:07:56,460
+So first we need to figure out where we actually predicted the correct label and we can use tensor Flo's
+
+100
+00:07:56,460 --> 00:07:58,200
+version of emacs to do that.
+
+101
+00:07:58,200 --> 00:08:03,840
+Remember arke Max is just a useful function which gives you the index position of the highest entry
+
+102
+00:08:03,840 --> 00:08:09,080
+point and with tensor flow it gives you the highest entry point of a tensor along some axis.
+
+103
+00:08:09,090 --> 00:08:11,490
+So let's go ahead and show you how to do that.
+
+104
+00:08:11,490 --> 00:08:17,170
+So outside of the for loop we're going to say time to evaluate the model.
+
+105
+00:08:17,590 --> 00:08:23,500
+So we're going to create this little correct prediction.
+
+106
+00:08:23,730 --> 00:08:25,050
+And this is going to do the following.
+
+107
+00:08:25,050 --> 00:08:29,600
+First let's kind of break it down into steps.
+
+108
+00:08:29,670 --> 00:08:38,550
+We're going to ask for the RMX of why member that is the why we come up here that is the output.
+
+109
+00:08:38,550 --> 00:08:40,370
+So what our prediction is.
+
+110
+00:08:40,530 --> 00:08:45,960
+So we're going to ask Hey where we're in this position is why the greatest.
+
+111
+00:08:46,080 --> 00:08:51,620
+And because we're using soft Max that's basically asking what is the highest probability class in the
+
+112
+00:08:51,640 --> 00:08:55,730
+in the expedition's match exactly up with the labels so we're fortunate there.
+
+113
+00:08:55,770 --> 00:09:00,230
+And the second argument one is just telling it to do this all on access equal to one.
+
+114
+00:09:00,330 --> 00:09:02,080
+So we have T.F. arguments here.
+
+115
+00:09:02,160 --> 00:09:07,590
+This is going to return the index position of the label with the highest probability essentially just
+
+116
+00:09:07,590 --> 00:09:14,670
+saying what label it thinks it is and then what we want to do is compare this to.
+
+117
+00:09:14,710 --> 00:09:21,040
+We put a comma here after RMX wups of the actual true values.
+
+118
+00:09:21,040 --> 00:09:23,240
+So that's going to be quite true.
+
+119
+00:09:25,710 --> 00:09:33,000
+One and I want to check where these are equal to so tensor flow has a nice equal function where I can
+
+120
+00:09:33,030 --> 00:09:37,730
+pass these two tensors in and it basically reports back a list of booleans.
+
+121
+00:09:37,920 --> 00:09:43,210
+So the result of this correct predictions looks like this is going to kind of comment here.
+
+122
+00:09:43,440 --> 00:09:49,710
+It's going to look something like True False True etc. all the way for all our predictions.
+
+123
+00:09:49,710 --> 00:09:54,130
+So again all we're doing here is this T.F. the RMX why come a one.
+
+124
+00:09:54,390 --> 00:10:00,480
+Essentially it directly outputs the predicted label because of the way we set up one encoding as well
+
+125
+00:10:00,480 --> 00:10:05,280
+as the fact the we using soft Max regression and the output of this is the same thing except for the
+
+126
+00:10:05,280 --> 00:10:06,090
+true values.
+
+127
+00:10:06,210 --> 00:10:08,450
+And then we check Well where are they equal to each other.
+
+128
+00:10:08,460 --> 00:10:11,100
+And that brings us this list of booleans.
+
+129
+00:10:11,100 --> 00:10:17,250
+Now we want to convert this list of booleans to something that looks like a list of zeros and ones we
+
+130
+00:10:17,250 --> 00:10:22,000
+want to have True's be one and then falses be zeros True's be ones etc..
+
+131
+00:10:22,230 --> 00:10:23,320
+So we want to convert that.
+
+132
+00:10:23,370 --> 00:10:29,470
+That way it's easier to work with mathematically and then do things like do a mean or average of them.
+
+133
+00:10:29,520 --> 00:10:38,470
+So we're going to say that our accuracy is going to be equal to T.F. reduce mean sensu is chicken taking
+
+134
+00:10:38,470 --> 00:10:45,710
+the average and then we want to cast that list of booleans or output of Blands into floating point.
+
+135
+00:10:45,880 --> 00:10:50,200
+So to do that sensor flow again has a convenience function called TFK.
+
+136
+00:10:50,460 --> 00:10:53,110
+Or you can passen the actual tensor.
+
+137
+00:10:53,110 --> 00:10:58,180
+In this case create prediction and as the second argument what you want to attempt to cast to every
+
+138
+00:10:58,180 --> 00:11:04,660
+data type can be cast to any other data type booleans can be cast it into a floating point numbers where
+
+139
+00:11:04,660 --> 00:11:10,680
+True's 1.0 and falses 0.0 throughness ATF flow 32.
+
+140
+00:11:11,530 --> 00:11:14,550
+And then we're going to take the average of that which is just for sensor flow.
+
+141
+00:11:14,550 --> 00:11:15,490
+Reduce mean.
+
+142
+00:11:15,760 --> 00:11:21,910
+So all we're doing here is this inside line of T.F. cast's is converting this list of Trium falses to
+
+143
+00:11:21,970 --> 00:11:23,300
+ones and zeros.
+
+144
+00:11:23,380 --> 00:11:24,870
+And then we're taking the average of that.
+
+145
+00:11:24,970 --> 00:11:31,750
+And that's just going to be your accuracy directly because remember our actual results here are just
+
+146
+00:11:31,810 --> 00:11:33,840
+ones and zeros.
+
+147
+00:11:33,850 --> 00:11:37,660
+All right let's actually take the time to kind of explain these two steps because there's actually a
+
+148
+00:11:37,660 --> 00:11:40,450
+lot going on here for just two lines of code.
+
+149
+00:11:40,480 --> 00:11:45,040
+We'll start off with T.F. RMX y one of the ATF RMX why.
+
+150
+00:11:45,090 --> 00:11:45,920
+True.
+
+151
+00:11:45,940 --> 00:11:48,580
+So basically what these two are going to output.
+
+152
+00:11:48,610 --> 00:11:55,090
+Let's imagine we just have one input so we're only predicting one label versus a y true label that we
+
+153
+00:11:55,090 --> 00:11:56,230
+would get something like this.
+
+154
+00:11:56,230 --> 00:12:00,620
+So the very first thing that would happen is we'd get two results here.
+
+155
+00:12:00,660 --> 00:12:07,080
+Would you get something like I believe the label is three and maybe the true label is three.
+
+156
+00:12:07,080 --> 00:12:08,600
+In fact let's do it for two.
+
+157
+00:12:08,920 --> 00:12:12,050
+So we have our predicted data.
+
+158
+00:12:12,250 --> 00:12:19,130
+So let's say we predicted that the first number was three and the second number was for and then for
+
+159
+00:12:19,190 --> 00:12:21,700
+our true data the actual label.
+
+160
+00:12:21,950 --> 00:12:23,420
+Let's say we got the first one right.
+
+161
+00:12:23,420 --> 00:12:24,370
+That was a three.
+
+162
+00:12:24,380 --> 00:12:26,510
+But the second one was a 9.
+
+163
+00:12:26,510 --> 00:12:30,680
+So you can see that sometimes when people had the right fours they sometimes look like nines.
+
+164
+00:12:30,680 --> 00:12:33,440
+So our particular algorithm wasn't able to catch that.
+
+165
+00:12:33,440 --> 00:12:34,880
+So that's what's going on here.
+
+166
+00:12:34,970 --> 00:12:41,630
+When we ask for ARC Max it just returns back to sort of list of the actual numbers it predicted for
+
+167
+00:12:41,630 --> 00:12:46,250
+the classes it says and I think the first 20 examples three in the second one is four.
+
+168
+00:12:46,340 --> 00:12:50,290
+And then we say well the real values were three and nine.
+
+169
+00:12:50,480 --> 00:12:55,640
+Then when we asked for a TAF equal then the result of that is something like this.
+
+170
+00:12:55,640 --> 00:13:01,910
+We say true and false because here we can see that they're equal that first one is equal.
+
+171
+00:13:01,920 --> 00:13:05,010
+The second one however is not equal for is not equal to nine.
+
+172
+00:13:05,010 --> 00:13:07,430
+So then that is a correct prediction.
+
+173
+00:13:07,500 --> 00:13:08,950
+True false.
+
+174
+00:13:08,970 --> 00:13:15,150
+The next step after that is to cast that correct prediction into T.F. of that flow essentially casting
+
+175
+00:13:15,150 --> 00:13:16,610
+it to ones and zeroes.
+
+176
+00:13:16,620 --> 00:13:23,560
+So then we get a list that looks like this one point zero and zero point zero then the final step is
+
+177
+00:13:23,560 --> 00:13:26,800
+to reduce the mean essentially take the average of this.
+
+178
+00:13:26,910 --> 00:13:33,160
+And if you take the average of that well that gives you back a single number 0.5 and that number directly
+
+179
+00:13:33,160 --> 00:13:35,800
+relates to the percentage that you got.
+
+180
+00:13:35,800 --> 00:13:36,460
+Correct.
+
+181
+00:13:36,670 --> 00:13:38,980
+And that's because these are ones and zeros.
+
+182
+00:13:39,040 --> 00:13:41,190
+So if we take the average of one and zero.
+
+183
+00:13:41,320 --> 00:13:46,810
+So 1 divided by two is there a point five which directly results into 50 percent correct and that's
+
+184
+00:13:46,810 --> 00:13:48,030
+her accuracy.
+
+185
+00:13:48,040 --> 00:13:52,330
+So just these two lines are doing what are essentially almost like four steps here.
+
+186
+00:13:52,390 --> 00:13:58,120
+So we compare the predicted the true values we get back a list of matches we convert that list of matches
+
+187
+00:13:58,480 --> 00:14:00,870
+to actual numbers ones and zeros.
+
+188
+00:14:00,880 --> 00:14:03,840
+And because they're ones and zeros it means directly through math.
+
+189
+00:14:03,850 --> 00:14:07,670
+If we take the average of those we get back the percent that we got right.
+
+190
+00:14:07,680 --> 00:14:08,600
+Or the accuracy.
+
+191
+00:14:08,620 --> 00:14:13,900
+So in this really simple example we've got 50 percent right out of two samples inputted compared to
+
+192
+00:14:13,900 --> 00:14:15,540
+there two true labels.
+
+193
+00:14:15,670 --> 00:14:17,400
+So then we can actually run this.
+
+194
+00:14:18,040 --> 00:14:25,450
+So say print the result of a session run and I'm going to run ack because this accuracy is essentially
+
+195
+00:14:25,450 --> 00:14:26,890
+its own graph.
+
+196
+00:14:26,890 --> 00:14:32,140
+So that's similar to what we did appear as far as the fighting steps the take except now we're just
+
+197
+00:14:32,200 --> 00:14:33,520
+actually running accuracy.
+
+198
+00:14:33,760 --> 00:14:39,550
+And then it needs its own feed dictionary so the feed dictionary we're going to feed in this time is
+
+199
+00:14:39,550 --> 00:14:41,070
+the actual test set.
+
+200
+00:14:41,140 --> 00:14:45,390
+So we'll say x is equal to just test images.
+
+201
+00:14:45,390 --> 00:14:52,510
+So those 10000 images and then we'll say why true is equal to minus test labels.
+
+202
+00:14:52,510 --> 00:14:56,650
+So again pretty convenient that we have those methods and attributes the call but that's what we're
+
+203
+00:14:56,650 --> 00:14:58,540
+doing here to evaluate our model.
+
+204
+00:14:58,540 --> 00:15:04,980
+We have this correct prediction which just turns the actual predicted labels and true labels into a
+
+205
+00:15:04,980 --> 00:15:08,990
+list of true or false booleans and then we convert that to ones and zeroes.
+
+206
+00:15:09,040 --> 00:15:11,200
+Take the mean of that are accuracy.
+
+207
+00:15:11,350 --> 00:15:15,190
+So we're going to run that accuracy in feet in our data as WIPs.
+
+208
+00:15:15,240 --> 00:15:19,510
+Make sure I have curly braces there because this is a dictionary as x.
+
+209
+00:15:19,510 --> 00:15:23,340
+Where are the test images and why true is this test labels.
+
+210
+00:15:23,480 --> 00:15:26,500
+So let's run that and make sure I don't have any typos here.
+
+211
+00:15:27,780 --> 00:15:32,790
+So late how many typos will run that C looks like I do have one dictionary that should be an equal sign.
+
+212
+00:15:32,790 --> 00:15:33,550
+There we go.
+
+213
+00:15:33,570 --> 00:15:36,500
+Now let's run that running this for a thousand steps.
+
+214
+00:15:36,570 --> 00:15:39,560
+It looks like we get 91 percent accuracy.
+
+215
+00:15:39,570 --> 00:15:41,790
+Now you may be thinking daar That's pretty good.
+
+216
+00:15:41,790 --> 00:15:47,250
+A 91 percent accuracy on handwritten digits that only took a few seconds on this computer.
+
+217
+00:15:47,280 --> 00:15:48,050
+Not bad.
+
+218
+00:15:48,180 --> 00:15:54,770
+Well in fact if you compare this to some of the latest models this actually isn't that great.
+
+219
+00:15:54,780 --> 00:16:00,390
+In fact some of the very best models can get over ninety nine point seven percent accuracy.
+
+220
+00:16:00,420 --> 00:16:05,010
+So what we're going to learn now later on is how we can use convolutional Nero that works to perform
+
+221
+00:16:05,070 --> 00:16:08,070
+much much better than just a high or low 90s.
+
+222
+00:16:08,070 --> 00:16:09,560
+We're going to get up to the high 90s.
+
+223
+00:16:09,830 --> 00:16:15,660
+OK so if you have any questions feel free to post the Q&amp;A forums but really take your time to go through
+
+224
+00:16:15,720 --> 00:16:16,770
+all of these steps.
+
+225
+00:16:16,770 --> 00:16:22,050
+Remember that you create your placeholders create your variables you have your last function you have
+
+226
+00:16:22,050 --> 00:16:28,670
+your optimizer you create your session and then run it as far as converting this for your own data sources.
+
+227
+00:16:28,680 --> 00:16:34,320
+The hard part is this kind of next batch England grabbing those images and those test labels so this
+
+228
+00:16:34,320 --> 00:16:38,360
+is the tricky part and we're going to spore that more when we actually have the exercise for a data
+
+229
+00:16:38,350 --> 00:16:40,750
+set that's not going to have these convenience methods.
+
+230
+00:16:40,920 --> 00:16:42,500
+But for now we're taking advantage of that.
+
+231
+00:16:42,600 --> 00:16:44,260
+And then we can evaluate our model.
+
+232
+00:16:44,550 --> 00:16:46,850
+All right thanks everyone and I'll see you at the next lecture.
+

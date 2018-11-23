@@ -1,0 +1,236 @@
+1
+00:00:06,080 --> 00:00:10,160
+Hello everyone and welcome to part two of the convolutional neural networks.
+
+2
+00:00:10,460 --> 00:00:12,410
+We're going to continue right where we left off.
+
+3
+00:00:12,410 --> 00:00:17,630
+Remember we were discussing the original convolutional neural network diagram and we were trying to
+
+4
+00:00:17,660 --> 00:00:20,630
+get a understanding of what the convolutions were.
+
+5
+00:00:20,660 --> 00:00:26,540
+Now what we need to do is discuss the subsampling or pooling portion of a convolutional neural network
+
+6
+00:00:26,690 --> 00:00:28,490
+and it's actually quite a simple idea.
+
+7
+00:00:30,460 --> 00:00:37,480
+So pooling layers will subsample the input image which reduces the memory use in computer load as well
+
+8
+00:00:37,480 --> 00:00:40,330
+as reducing the number of parameters.
+
+9
+00:00:40,340 --> 00:00:43,530
+Let's imagine we have a layer of pixels in our image.
+
+10
+00:00:43,550 --> 00:00:47,960
+Here we have a relatively simple input image is just six by six.
+
+11
+00:00:48,020 --> 00:00:53,120
+And recall that for this digital data set each pixel has some sort of value representing what we will
+
+12
+00:00:53,120 --> 00:00:57,460
+call a darkness so 0 to 1 or maybe negative 1 2 1 etc..
+
+13
+00:00:58,210 --> 00:00:59,820
+So here we have numbers filled out.
+
+14
+00:00:59,920 --> 00:01:04,870
+You can imagine that this grid is entirely filled with numbers and the way pooling works is we create
+
+15
+00:01:04,930 --> 00:01:08,280
+a two by two pool of pixels and that's known as a kernel.
+
+16
+00:01:08,530 --> 00:01:12,340
+And then we evaluate the maximum value and it doesn't have to be two by two.
+
+17
+00:01:12,340 --> 00:01:15,760
+It can be in any size you want but two by two is a pretty common choice.
+
+18
+00:01:15,760 --> 00:01:22,250
+Again kind of depends on the size of your input data and what you do is inside of two by two kernel.
+
+19
+00:01:22,270 --> 00:01:27,910
+You evaluate the maximum value and only the max value makes its the next layer.
+
+20
+00:01:27,910 --> 00:01:33,830
+So you basically decide the maximum value is going to be representative of the entire kernel.
+
+21
+00:01:34,090 --> 00:01:39,280
+So here we can see we have a two beta kernel we check OK what is the maximum pixel value and that's
+
+22
+00:01:39,280 --> 00:01:41,850
+the only value that makes it the next layer.
+
+23
+00:01:41,890 --> 00:01:43,540
+Then we move over by a stride.
+
+24
+00:01:43,540 --> 00:01:49,690
+In this case we can imagine our stride is to grab the max value there and continue along.
+
+25
+00:01:49,720 --> 00:01:54,400
+Now this pooling layer is going to end up removing a lot of information and even a small pulling kernel
+
+26
+00:01:54,400 --> 00:01:59,870
+of two by two with a stride of two actually ends up removing 75 percent of the input data.
+
+27
+00:02:00,130 --> 00:02:05,980
+However we should know that this is a really common step of convolutional neural networks as that vast
+
+28
+00:02:05,980 --> 00:02:07,780
+amount of input data from an image.
+
+29
+00:02:07,870 --> 00:02:15,900
+It's just basically going to be too computationally expensive to not have pooling layers for now another
+
+30
+00:02:15,900 --> 00:02:19,770
+common technique deployed of convolutional neural networks is called dropout.
+
+31
+00:02:19,830 --> 00:02:23,140
+Now we've actually discussed dropout in the past but let's have a quick review.
+
+32
+00:02:23,400 --> 00:02:28,650
+Dropout can essentially be thought as a form of regularization to help prevent overfitting and during
+
+33
+00:02:28,650 --> 00:02:29,240
+training.
+
+34
+00:02:29,310 --> 00:02:36,070
+Units are randomly dropped along with their connections and this helps prevent units from CO adapting
+
+35
+00:02:36,070 --> 00:02:39,400
+too much to any particular training set.
+
+36
+00:02:39,430 --> 00:02:44,100
+Now it's also quickly point out some famous convolutional neural network architectures.
+
+37
+00:02:44,180 --> 00:02:50,760
+So we already discussed Linette Phi and Lakhan But there's also famous sets like Alex that Google that
+
+38
+00:02:50,850 --> 00:02:56,810
+are Googling that read that and you can check out the research links to papers discussing these architectures.
+
+39
+00:02:56,810 --> 00:03:03,810
+But essentially each of these architects architectures is just a set of design of layers.
+
+40
+00:03:04,280 --> 00:03:09,800
+So for example in Alex that will look like this it has a particular stride for its convolution that
+
+41
+00:03:09,800 --> 00:03:15,380
+has a particular pooling layer that another pulling layer than another convolution etc. and we can see
+
+42
+00:03:15,380 --> 00:03:20,450
+here Alex that basically the first convolutions or just edges and blobs.
+
+43
+00:03:20,450 --> 00:03:26,210
+Then the third convolution suits Cripe texture convolutions as we go higher and higher we get higher
+
+44
+00:03:26,210 --> 00:03:32,480
+abstraction so then we can see the object parts and then we can eventually see objects classes able
+
+45
+00:03:32,480 --> 00:03:38,150
+to distinguish things between like a dining table or clock a ship etc. so you can see here it's able
+
+46
+00:03:38,150 --> 00:03:42,770
+to do up to a thousand or a hundred classes.
+
+47
+00:03:42,780 --> 00:03:49,080
+Now realistically Alex that is so computationally expensive that it's actually distributed apart multiple
+
+48
+00:03:49,080 --> 00:03:49,810
+GPS use.
+
+49
+00:03:49,890 --> 00:03:55,890
+So you end up seeing diagrams that look like this where only half the image is going into one GPU and
+
+50
+00:03:55,890 --> 00:03:59,600
+the other half is going to another chip you.
+
+51
+00:03:59,800 --> 00:04:03,230
+OK so now he should fully understand the convolutional neural network.
+
+52
+00:04:03,250 --> 00:04:08,290
+Remember we have convolutions then we have subsampling or pooling and eventually towards the end we
+
+53
+00:04:08,290 --> 00:04:13,990
+have some sort of densely connected neural network and we can even have a soft Max regression if you
+
+54
+00:04:13,990 --> 00:04:17,460
+want to use that for our output.
+
+55
+00:04:17,480 --> 00:04:21,770
+You can check out the various supplementary resources that are linked to at the very beginning of the
+
+56
+00:04:21,770 --> 00:04:22,710
+section of the course.
+
+57
+00:04:22,730 --> 00:04:27,020
+But now that we've covered the basics of convolutional neural networks let's go ahead and explore how
+
+58
+00:04:27,020 --> 00:04:30,680
+to implement one intenser flow on the data set.
+
+59
+00:04:30,690 --> 00:04:31,670
+I'll see you at the next lecture.
+

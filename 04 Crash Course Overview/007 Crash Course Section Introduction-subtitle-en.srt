@@ -1,0 +1,76 @@
+1
+00:00:05,570 --> 00:00:11,270
+Welcome everyone to the crash course basics section of the course in the section of the course we're
+
+2
+00:00:11,270 --> 00:00:16,130
+going to have just a few lectures that provide a very basic overview for some of the libraries we'll
+
+3
+00:00:16,130 --> 00:00:23,360
+be using throughout this course such as pi pandas that live and pandas built in data visualization as
+
+4
+00:00:23,360 --> 00:00:26,510
+well as using sikat learn for pre-processing data.
+
+5
+00:00:26,510 --> 00:00:30,120
+Now keep in mind most of the time we'll be working directly with tensor flow.
+
+6
+00:00:30,250 --> 00:00:34,460
+We're really just using these libraries for kind of reading in our data manipulating it or cleaning
+
+7
+00:00:34,460 --> 00:00:35,420
+it just a little bit.
+
+8
+00:00:35,420 --> 00:00:40,250
+The main focus of this course is tensor flow and hopefully before you've even started this course you
+
+9
+00:00:40,250 --> 00:00:44,570
+already have experience and worked with these libraries in the past if you feel very comfortable with
+
+10
+00:00:44,570 --> 00:00:45,500
+these libraries.
+
+11
+00:00:45,500 --> 00:00:47,940
+Feel free to just skip this section completely.
+
+12
+00:00:49,520 --> 00:00:53,620
+Again this is really not meant to be a comprehensive overview of these libraries.
+
+13
+00:00:53,690 --> 00:00:58,100
+If you've never heard of these libraries before you may want to check out my other course Python for
+
+14
+00:00:58,100 --> 00:01:01,870
+data science or machine learning bootcamp before actually attempting discourse.
+
+15
+00:01:01,940 --> 00:01:07,160
+Again these are very basic overviews just enough for a quick refresher in case it's been awhile since
+
+16
+00:01:07,160 --> 00:01:09,200
+you've worked at the falling libraries.
+
+17
+00:01:09,200 --> 00:01:09,620
+OK.
+
+18
+00:01:09,740 --> 00:01:10,630
+Let's get started.
+
+19
+00:01:10,640 --> 00:01:11,600
+I'll see at the next lecture.
+

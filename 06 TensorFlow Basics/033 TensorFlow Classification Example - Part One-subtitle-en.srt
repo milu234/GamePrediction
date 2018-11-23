@@ -1,0 +1,776 @@
+1
+00:00:05,310 --> 00:00:11,870
+Welcome everyone to the tensor flow classification example code along lecture in this lecture we're
+
+2
+00:00:11,870 --> 00:00:13,820
+going to be working in a real data set.
+
+3
+00:00:13,820 --> 00:00:15,800
+Previously we've been generating data sets.
+
+4
+00:00:15,800 --> 00:00:21,120
+Now we're actually going to show you how to work for real data set and we're going to be using the T.F.
+
+5
+00:00:21,320 --> 00:00:27,350
+estimator API discovery a little bit more and we'll also show you how to deal with categorical and continuous
+
+6
+00:00:27,350 --> 00:00:28,390
+features columns.
+
+7
+00:00:28,490 --> 00:00:32,990
+A lot of real life data sets aren't just going to have pure continuous numerical features that may have
+
+8
+00:00:32,990 --> 00:00:34,340
+categorical features.
+
+9
+00:00:34,430 --> 00:00:35,970
+So we're going to show you how to do all of those.
+
+10
+00:00:35,980 --> 00:00:42,320
+The TAF S-meter API and then will also show you how you can use the S-meter API to switch models between
+
+11
+00:00:42,320 --> 00:00:46,200
+like a linear classifier to a dense neural net classifier.
+
+12
+00:00:46,250 --> 00:00:49,570
+OK let's get started and hop over to Jupiter notebook.
+
+13
+00:00:49,580 --> 00:00:53,990
+OK the first thing I'm going to do here is actually get our data and I'm going to use panderers to do
+
+14
+00:00:53,990 --> 00:00:54,490
+that.
+
+15
+00:00:54,710 --> 00:01:01,400
+So let's say import panels as PD and I will create a data free and called diabetes and is going to read
+
+16
+00:01:01,400 --> 00:01:06,920
+in this provided see as we file for you which is under the tents full of basic's folder and you can
+
+17
+00:01:06,920 --> 00:01:09,660
+choose tab to autocomplete that.
+
+18
+00:01:09,890 --> 00:01:17,370
+And then if we check out the actual diabetes data frame head lips diabetes.
+
+19
+00:01:17,590 --> 00:01:18,220
+There we go.
+
+20
+00:01:18,310 --> 00:01:23,500
+I can see that there's various features such as number of times pregnant glucose concentration blood
+
+21
+00:01:23,500 --> 00:01:31,120
+pressure triceps insulin a body mass index pedigree the age of the person the class where one is whether
+
+22
+00:01:31,120 --> 00:01:35,600
+or not they have diabetes or one is if they do have diabetes 0 if they do not.
+
+23
+00:01:35,740 --> 00:01:41,280
+And then there's also this categorical column called group I actually added this column myself manually.
+
+24
+00:01:41,290 --> 00:01:43,190
+It's basically a meaningless column.
+
+25
+00:01:43,270 --> 00:01:48,790
+But the reason I added it in there was to show you how to deal with a feature column that's just a categorical
+
+26
+00:01:48,790 --> 00:01:49,750
+string.
+
+27
+00:01:49,750 --> 00:01:52,200
+And then we'll also do something a little special with age.
+
+28
+00:01:52,270 --> 00:01:56,950
+The rest of this are basically just continuous numerical values that we've seen before in the past so
+
+29
+00:01:56,950 --> 00:01:59,870
+we have various features and we're trying to predict this class.
+
+30
+00:01:59,880 --> 00:02:02,140
+This is a binary classification problem.
+
+31
+00:02:02,440 --> 00:02:05,040
+And the first thing you want to do is clean the data.
+
+32
+00:02:05,050 --> 00:02:07,620
+Remember I said a lot of times we need to normalize our data.
+
+33
+00:02:07,630 --> 00:02:11,220
+So let's walk through how we would do that for a real data set.
+
+34
+00:02:11,290 --> 00:02:17,860
+First thing to do is say diabetes not columns and get a list of the columns returned and then I'm going
+
+35
+00:02:17,860 --> 00:02:23,260
+to say calls to Norm and will create a list of the columns to normalize.
+
+36
+00:02:23,290 --> 00:02:28,030
+And the reason I have diabetes our columns here is that way I can just copy and paste this for convenience
+
+37
+00:02:28,810 --> 00:02:33,820
+and then put it in there and I don't want to normalize class because that is my feet or label column
+
+38
+00:02:33,820 --> 00:02:35,520
+that I'm trying to predict group.
+
+39
+00:02:35,530 --> 00:02:36,490
+I can't normalize that.
+
+40
+00:02:36,490 --> 00:02:38,420
+Those are strings and then age.
+
+41
+00:02:38,440 --> 00:02:41,940
+We're going to convert age to a categorical column as an example.
+
+42
+00:02:42,070 --> 00:02:44,010
+So I'm also going to remove that as well.
+
+43
+00:02:45,260 --> 00:02:45,870
+OK.
+
+44
+00:02:46,030 --> 00:02:51,700
+So those are my Combes to normalize and I'm going to show you how to normalize them with panderers.
+
+45
+00:02:51,730 --> 00:02:55,240
+We could also use cycle learns pre-processing as we've done in the past.
+
+46
+00:02:55,400 --> 00:03:01,290
+But I want to show you a little trick with Pancho's that may save you some time in your own data sets.
+
+47
+00:03:01,480 --> 00:03:08,380
+So we passing the columns to normalize into diabetes and then I'm going to set that equal to diabetes
+
+48
+00:03:08,470 --> 00:03:14,230
+and then passen columns to normalize and then what I will do is I'm going to apply a custom function
+
+49
+00:03:14,260 --> 00:03:16,140
+or it custom land expression.
+
+50
+00:03:16,450 --> 00:03:20,340
+So we'll say off of that list of columns.
+
+51
+00:03:20,350 --> 00:03:21,360
+Say Dot.
+
+52
+00:03:21,440 --> 00:03:31,790
+Apply and then I'm going to say lambda X and then anguishes the following will say X minus the minimum
+
+53
+00:03:31,880 --> 00:03:33,120
+value.
+
+54
+00:03:33,470 --> 00:03:47,340
+Then I will divide that by the maximum value of X minus the minimum value of x OK and that should normalize
+
+55
+00:03:47,340 --> 00:03:50,350
+the columns so let's see that in action.
+
+56
+00:03:50,660 --> 00:03:56,130
+So take the hand column again and now I can see a number of times pregnant glucose concentration BMI
+
+57
+00:03:56,150 --> 00:03:58,670
+etc. those are now all normalized.
+
+58
+00:03:58,710 --> 00:04:00,510
+So you can use this quick command.
+
+59
+00:04:00,780 --> 00:04:04,710
+It's a little more convenient for pandas because it's essentially just a nice one liner and you don't
+
+60
+00:04:04,710 --> 00:04:06,130
+really have to import anything.
+
+61
+00:04:06,210 --> 00:04:08,700
+And the mathematics essentially works out the same.
+
+62
+00:04:09,080 --> 00:04:09,660
+OK.
+
+63
+00:04:09,870 --> 00:04:12,250
+Now let's go ahead and create our feature columns.
+
+64
+00:04:12,250 --> 00:04:14,490
+Remember we're using the estimator API.
+
+65
+00:04:14,490 --> 00:04:17,960
+We need to pass in a list of those feature column objects.
+
+66
+00:04:18,000 --> 00:04:19,440
+So the first thing to do.
+
+67
+00:04:19,590 --> 00:04:20,600
+Zoom back in here.
+
+68
+00:04:21,910 --> 00:04:28,510
+Is Important sensor flows we're going to be using it say importance as T.F. And let's go out and grab
+
+69
+00:04:28,510 --> 00:04:34,840
+those columns again so diabetes columns and number pregnant glucose concentration et cetera.
+
+70
+00:04:34,890 --> 00:04:39,090
+And if you're wondering what these columns actually physically represent you can go ahead and check
+
+71
+00:04:39,090 --> 00:04:43,600
+out the notebook provided there's the full description of the diabetes dataset there.
+
+72
+00:04:43,950 --> 00:04:44,420
+OK.
+
+73
+00:04:44,580 --> 00:04:46,380
+So we have various continuous features.
+
+74
+00:04:46,380 --> 00:04:51,080
+Basically everything except age class and group are the ones we're going to be working with.
+
+75
+00:04:51,150 --> 00:04:54,450
+And in fact age could be treated as a continuous feature column.
+
+76
+00:04:54,450 --> 00:04:56,490
+So we'll go ahead and do that for now.
+
+77
+00:04:56,670 --> 00:05:00,820
+Well we need to do is create feature column and numeric columns off of these.
+
+78
+00:05:01,050 --> 00:05:06,960
+So the way we can do that is we create a new variable for each column such as number of times pregnant
+
+79
+00:05:07,110 --> 00:05:13,820
+and we set that equal to T.F. feature column numeric column.
+
+80
+00:05:13,850 --> 00:05:20,630
+And then I'm going to pass in that key name or that column name so let's go in and grab that and then
+
+81
+00:05:20,630 --> 00:05:21,800
+pass it in.
+
+82
+00:05:21,800 --> 00:05:25,790
+So that's what we're going to do for the rest of these continuous feature columns.
+
+83
+00:05:25,900 --> 00:05:30,620
+And if you want you can just copy and paste these results from the notebook if you have a really large
+
+84
+00:05:30,640 --> 00:05:35,690
+dataset you probably want to try to figure out some way to assign these using a for loop.
+
+85
+00:05:35,930 --> 00:05:37,070
+But there we go.
+
+86
+00:05:37,130 --> 00:05:41,210
+They're just going to copy and paste that from the provided notes and essentially all we did for each
+
+87
+00:05:41,210 --> 00:05:47,120
+of these continuous columns is T.F. feature column that numeric column and then passed in the actual
+
+88
+00:05:47,120 --> 00:05:49,270
+name of the column.
+
+89
+00:05:49,270 --> 00:05:49,820
+All right.
+
+90
+00:05:49,870 --> 00:05:51,970
+So those are our continuous values.
+
+91
+00:05:52,000 --> 00:05:56,370
+Now any of the categorical features the non-continuous values.
+
+92
+00:05:56,500 --> 00:05:58,500
+There's two main ways you can do this.
+
+93
+00:05:58,510 --> 00:06:03,040
+One is using a vocabulary list and one is using a hash bucket.
+
+94
+00:06:03,040 --> 00:06:09,120
+Let's go ahead and show you both methods because both are going to be useful depending on the situation.
+
+95
+00:06:09,370 --> 00:06:15,690
+Third thing going to do is say assign group is equal to that's my variable is going to be using then
+
+96
+00:06:15,700 --> 00:06:21,120
+I say T.F. feature column and then instead of using numerical column I'm going to begin to type out
+
+97
+00:06:21,130 --> 00:06:25,110
+categorical column and notice here we have caterwaul column with hash.
+
+98
+00:06:25,110 --> 00:06:30,370
+But I tend to see vocabulary file and vocabulary list the main ones are going to be using are either
+
+99
+00:06:30,370 --> 00:06:33,250
+hash bucket or the vocab list.
+
+100
+00:06:33,280 --> 00:06:39,700
+Let's first show you the vocabulary list so I know that there's only four possible groups A B C and
+
+101
+00:06:39,700 --> 00:06:40,530
+D.
+
+102
+00:06:40,540 --> 00:06:44,010
+So what I can do is what I am defining my categorical column.
+
+103
+00:06:44,170 --> 00:06:47,870
+I will say passen the key which is just group.
+
+104
+00:06:47,890 --> 00:06:53,170
+So if I come back up here this column is group and I know there's only a b c and d available.
+
+105
+00:06:53,470 --> 00:07:04,150
+So then I pass an A list of possible categories that's going to be a b c and d.
+
+106
+00:07:04,480 --> 00:07:10,240
+And that's how you can create a categorical feature column using tensor flow with a vocab list.
+
+107
+00:07:10,240 --> 00:07:16,090
+Now the important thing to note here is you're not always going to have such a convenient grouping of
+
+108
+00:07:16,090 --> 00:07:17,490
+categorical columns.
+
+109
+00:07:17,680 --> 00:07:24,110
+So let's say you have a column that for whatever reason has all the countries in the world in it.
+
+110
+00:07:24,190 --> 00:07:29,950
+We you don't want to have to write out hundreds or tens of countries depending on how many categories
+
+111
+00:07:29,950 --> 00:07:30,480
+you have.
+
+112
+00:07:30,680 --> 00:07:35,620
+Instead what would be nice if you could automatically create that using some sort of hash bucketing
+
+113
+00:07:35,620 --> 00:07:36,310
+system.
+
+114
+00:07:36,310 --> 00:07:39,900
+And that's exactly what tensor flow provides for you.
+
+115
+00:07:40,500 --> 00:07:45,360
+So if you're ever in a situation where you maybe don't know all the groupings themselves or you just
+
+116
+00:07:45,360 --> 00:07:47,430
+have so many you don't want to type them out.
+
+117
+00:07:47,430 --> 00:07:53,820
+You can say T.F. feature call them categorical call them and you can use a hash bucket.
+
+118
+00:07:53,850 --> 00:07:56,640
+And the way this works is pretty similar.
+
+119
+00:07:56,640 --> 00:08:03,570
+You say group for the key but now instead of providing a list of the possible categories you just define
+
+120
+00:08:03,570 --> 00:08:05,230
+a hash bucket size.
+
+121
+00:08:05,310 --> 00:08:10,930
+And this is the maximum amount of groups that you will believe will be in that category column.
+
+122
+00:08:11,130 --> 00:08:16,490
+So for example I can pasand 10 here and that's going to be fine because there's only four.
+
+123
+00:08:16,500 --> 00:08:18,880
+So at most there's going to be 10.
+
+124
+00:08:18,960 --> 00:08:24,720
+And basically the effect of this line is tensor flows making something like this automatically for you
+
+125
+00:08:24,840 --> 00:08:30,750
+in the background based off how many categorical entries you expect so you can make this as large as
+
+126
+00:08:30,750 --> 00:08:34,260
+you want depending on how many categories you expect for it.
+
+127
+00:08:34,260 --> 00:08:36,300
+Now we're going to go ahead and use the vocab list.
+
+128
+00:08:36,300 --> 00:08:42,660
+Either way we really shouldn't see a difference so a hash tag that our commented out and now I want
+
+129
+00:08:42,660 --> 00:08:46,830
+to discuss converting a continuous column to a categorical column.
+
+130
+00:08:46,830 --> 00:08:51,060
+So we have age here right now as a continuous value.
+
+131
+00:08:51,210 --> 00:08:55,610
+But notice we specifically did not convert it or normalize it.
+
+132
+00:08:55,620 --> 00:08:59,610
+And that's because I'm going to use it to convert it to a categorical column.
+
+133
+00:08:59,610 --> 00:09:02,310
+Sometimes you get more information out of your data this way.
+
+134
+00:09:02,340 --> 00:09:04,320
+This is known as feature engineering.
+
+135
+00:09:06,070 --> 00:09:15,670
+So I'd say first try to visualize this well say map plot lived a pipe plot as Pulte and then also say
+
+136
+00:09:15,730 --> 00:09:17,130
+map plot lib.
+
+137
+00:09:17,960 --> 00:09:29,540
+In line so now let's go ahead and say diabetes grabber age column and plot out a histogram from it so
+
+138
+00:09:29,540 --> 00:09:36,290
+we can actually do this quite easily by just saying dohis and then let's say 20 bins in the sister room.
+
+139
+00:09:36,290 --> 00:09:40,030
+All right so this histogram basically shows you the distribution of the ages.
+
+140
+00:09:40,070 --> 00:09:46,460
+Most of these people are quite young in their 20s and maybe late 20s early 30s and then it kind of goes
+
+141
+00:09:46,460 --> 00:09:47,360
+down from there.
+
+142
+00:09:47,540 --> 00:09:53,540
+So maybe instead of treating this as a continuous value I can get these together maybe I can make some
+
+143
+00:09:53,540 --> 00:09:59,390
+boundaries for each decade so you can see here there's 20 30 30 to 40 etc..
+
+144
+00:09:59,420 --> 00:10:04,400
+So the way I can do that is again with tensor Flo's feature column methods.
+
+145
+00:10:04,640 --> 00:10:12,400
+So if I want to ever take a continuous value and bucket it into categories I can say whatever the variable
+
+146
+00:10:12,400 --> 00:10:19,000
+name there is and then say a feature column and I can say but ghettoised the column in which case I
+
+147
+00:10:19,040 --> 00:10:22,540
+passen the continuous value feature.
+
+148
+00:10:22,540 --> 00:10:27,720
+So I already have this numeric column which has a continuous value I'm going to grab whatever variable
+
+149
+00:10:27,730 --> 00:10:28,330
+I called it.
+
+150
+00:10:28,330 --> 00:10:34,240
+In this case it's just age and then I'm going to pass it in here and then I'm going to provide one more
+
+151
+00:10:34,240 --> 00:10:37,830
+argument called boundaries which is a list of the buckets I want.
+
+152
+00:10:37,960 --> 00:10:44,760
+So I walked from 20 to 30 to 40 to 50 to 60 to 70 let's say to 80.
+
+153
+00:10:44,770 --> 00:10:45,640
+There we go.
+
+154
+00:10:45,640 --> 00:10:49,920
+So this is going to create buckets of values between 20 and 30.
+
+155
+00:10:49,930 --> 00:10:56,200
+Anything less than 20 between 30 and 40 50 60 60 70 etc. and then 80 and above.
+
+156
+00:10:56,200 --> 00:11:03,160
+So that's how you can convert a continuous numeric into a categorical column based off these booking
+
+157
+00:11:03,160 --> 00:11:04,030
+systems.
+
+158
+00:11:04,030 --> 00:11:06,340
+Now this doesn't always help you.
+
+159
+00:11:06,340 --> 00:11:09,520
+In fact it may make things worse depending on the situation.
+
+160
+00:11:09,520 --> 00:11:14,090
+So this is where your domain knowledge is going to come into play.
+
+161
+00:11:14,450 --> 00:11:19,760
+Now let's go ahead and put this all together and wanted to make a list of all my future columns.
+
+162
+00:11:19,760 --> 00:11:23,410
+And you don't just use tabs to complete this.
+
+163
+00:11:23,420 --> 00:11:24,400
+Help you out here.
+
+164
+00:11:25,240 --> 00:11:31,750
+Or you can just copy and paste this from the notes that we have just various ones got insulin.
+
+165
+00:11:31,750 --> 00:11:33,800
+I believe we have BMI.
+
+166
+00:11:33,810 --> 00:11:37,410
+We got one called Diabetes pedigree.
+
+167
+00:11:37,500 --> 00:11:44,900
+We got the assigned group one that we just made sign group let's go to continue here we also have the
+
+168
+00:11:44,990 --> 00:11:46,690
+age buckets that we made as well.
+
+169
+00:11:48,940 --> 00:11:49,190
+All right.
+
+170
+00:11:49,220 --> 00:11:54,250
+So now I have my list of all the feature columns which are these TFT feature columns.
+
+171
+00:11:54,260 --> 00:11:56,940
+Now it's time to perform a train test split.
+
+172
+00:11:57,170 --> 00:11:58,880
+Let's go ahead and do that.
+
+173
+00:11:59,300 --> 00:12:05,300
+So we'll say her my train test splits
+
+174
+00:12:07,880 --> 00:12:17,770
+we'll have our X data that's going to be equal to diabetes data frame and then I'm going to drop the
+
+175
+00:12:17,780 --> 00:12:25,940
+class label along the columns axis and if I take a look at x data it's just the features it no longer
+
+176
+00:12:25,940 --> 00:12:26,920
+has the class.
+
+177
+00:12:26,930 --> 00:12:30,690
+If you scroll Let's make this head so I don't scroll down here.
+
+178
+00:12:32,010 --> 00:12:35,310
+So if we skirl although it's that right we no longer see our class.
+
+179
+00:12:35,310 --> 00:12:37,790
+So this is just the data just the features.
+
+180
+00:12:37,800 --> 00:12:45,620
+And we're going to say that my labels is now equal to diabetes class.
+
+181
+00:12:45,850 --> 00:12:49,460
+And now if I take a look at labels it's just literally the labels themselves.
+
+182
+00:12:49,480 --> 00:12:58,670
+Once in suras OK now it's actually split up I'll say from a Skillern model selection import train test
+
+183
+00:12:58,680 --> 00:13:05,310
+split and then let's perform that train split will say train to split and I usually just like to copy
+
+184
+00:13:05,310 --> 00:13:10,770
+and paste this from the note so or from the documentation scroll all the way down here until you see
+
+185
+00:13:10,770 --> 00:13:20,460
+this nice little example line and then copy and paste this kind of save you some time.
+
+186
+00:13:20,460 --> 00:13:30,030
+All right so we have X train x test Y train Y test let's pass our features and our labels we can say
+
+187
+00:13:30,030 --> 00:13:35,370
+test size is equal to 30 percent not a big deal.
+
+188
+00:13:35,420 --> 00:13:42,170
+And if you want to make sure you get the exact same random splits I do so your random state to 1 1 run.
+
+189
+00:13:42,240 --> 00:13:44,000
+That and our ready to go.
+
+190
+00:13:44,220 --> 00:13:44,750
+OK.
+
+191
+00:13:44,880 --> 00:13:50,260
+We're going to stop this here since this basically concludes part 1 of classification where we fix the
+
+192
+00:13:50,260 --> 00:13:53,460
+data showed you how to do the feature columns in part 2.
+
+193
+00:13:53,450 --> 00:13:59,250
+We're actually going to create the input function create the models and then evaluate this I'll see
+
+194
+00:13:59,250 --> 00:13:59,710
+it there.
+

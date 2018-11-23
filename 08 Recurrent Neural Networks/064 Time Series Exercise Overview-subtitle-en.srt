@@ -1,0 +1,456 @@
+1
+00:00:05,340 --> 00:00:07,550
+Welcome back everyone in this lecture.
+
+2
+00:00:07,560 --> 00:00:13,020
+We're going to do a quick overview of the time series exercise and the next lecture will go a long face
+
+3
+00:00:13,020 --> 00:00:14,620
+solutions video.
+
+4
+00:00:14,670 --> 00:00:18,900
+So let's hop over to your recurrent neural networks folder and show you how you can get the exercise
+
+5
+00:00:18,900 --> 00:00:19,730
+notebook.
+
+6
+00:00:19,740 --> 00:00:20,040
+All right.
+
+7
+00:00:20,040 --> 00:00:26,760
+So under the recurrent neural networks folder you should see a file called Time series IPY and B so
+
+8
+00:00:26,760 --> 00:00:31,780
+it's a notebook file as well as a solution's file for the time series exercise.
+
+9
+00:00:31,860 --> 00:00:36,450
+And if you scroll down you'll also notice that there's a monthly milk production CXXVI file in that
+
+10
+00:00:36,450 --> 00:00:37,290
+same folder.
+
+11
+00:00:37,350 --> 00:00:39,630
+That's the file We're actually going to be using.
+
+12
+00:00:39,630 --> 00:00:42,770
+So when you click on that exercise notebook you should get something that looks like this.
+
+13
+00:00:42,880 --> 00:00:44,270
+The time series exercise.
+
+14
+00:00:44,310 --> 00:00:44,930
+And as always.
+
+15
+00:00:44,930 --> 00:00:49,020
+All you really have to do is follow along with the instructions in bold and if you ever get stuck on
+
+16
+00:00:49,020 --> 00:00:55,050
+something just go ahead and wash the solutions video where you'll get an explanation with a code a lecture.
+
+17
+00:00:55,050 --> 00:01:01,200
+Well we're going to be doing is trying to create a recurrent role that work model that is able to basically
+
+18
+00:01:01,200 --> 00:01:05,530
+successfully predict monthly milk production based off a real data set.
+
+19
+00:01:05,820 --> 00:01:08,280
+So here's a link to the actual data set.
+
+20
+00:01:08,280 --> 00:01:11,940
+Remember it's already been downloaded for you but in case you want another source you can click on that
+
+21
+00:01:11,940 --> 00:01:12,650
+link.
+
+22
+00:01:12,660 --> 00:01:19,530
+It's basically just milk production per month in units of pounds per cow from January 1962 to December
+
+23
+00:01:19,530 --> 00:01:21,030
+1975.
+
+24
+00:01:21,030 --> 00:01:25,710
+Again this is an older data set but the reason I really like using it is because as you scroll down
+
+25
+00:01:25,710 --> 00:01:27,520
+which you'll eventually plotted out.
+
+26
+00:01:27,630 --> 00:01:31,310
+You'll notice that it's a pretty obvious visual trend here.
+
+27
+00:01:31,440 --> 00:01:32,810
+So you get this upward trend.
+
+28
+00:01:32,850 --> 00:01:34,930
+And there's definitely a seasonality to it.
+
+29
+00:01:35,130 --> 00:01:40,320
+So hopefully it should be really obvious whether or not your network is doing a good job of generating
+
+30
+00:01:40,650 --> 00:01:44,220
+a time series for it so you can end up doing here.
+
+31
+00:01:44,250 --> 00:01:49,500
+You did the usual import panel those use panels to read and see as we file check out the head of the
+
+32
+00:01:49,500 --> 00:01:50,430
+data frame.
+
+33
+00:01:50,430 --> 00:01:54,010
+You'll notice here that this is actually still not a date time index.
+
+34
+00:01:54,120 --> 00:01:57,920
+So you're going to convert it to a date time index by using the following command.
+
+35
+00:01:58,020 --> 00:02:04,300
+And then from there you'll be able to easily plot out this milk production plot once you formatted the
+
+36
+00:02:04,300 --> 00:02:05,110
+data correctly.
+
+37
+00:02:05,110 --> 00:02:08,120
+The next step is to perform a train test split.
+
+38
+00:02:08,230 --> 00:02:11,070
+So we're going to attempt to predict a year's worth of data.
+
+39
+00:02:11,080 --> 00:02:17,650
+So 12 months or 12 steps into the future in order to successfully do a train test split you're not going
+
+40
+00:02:17,650 --> 00:02:23,500
+to be doing a random train test split because for a time series analysis that doesn't really convey
+
+41
+00:02:23,500 --> 00:02:30,220
+what you're trying to actually accomplish what we want to do is feed in everything into our network
+
+42
+00:02:30,280 --> 00:02:33,610
+except the last year of training data.
+
+43
+00:02:33,730 --> 00:02:38,950
+And then when we actually test our network we're going to test it against that last year and see how
+
+44
+00:02:38,950 --> 00:02:41,080
+well our network can predict.
+
+45
+00:02:41,080 --> 00:02:45,710
+The year we do know versus the actual prediction cycle.
+
+46
+00:02:46,090 --> 00:02:51,460
+So again we're going to do is take all the data except for that very last year and treat that as our
+
+47
+00:02:51,460 --> 00:02:52,320
+training set.
+
+48
+00:02:52,570 --> 00:02:58,810
+And then the last 12 months the data that's going to be our test set to see how well our model can actually
+
+49
+00:02:58,840 --> 00:03:03,760
+create one of these cycles as a prediction and then hopefully if it performs well then we be able to
+
+50
+00:03:03,760 --> 00:03:08,470
+use it for further years like 1976 or 1977 etcetera.
+
+51
+00:03:08,530 --> 00:03:12,490
+Now there is definitely a limit to how far into the future you can accurately predict.
+
+52
+00:03:12,490 --> 00:03:19,990
+But for now we'll use this last month of test data that we do know as our basically evaluation.
+
+53
+00:03:19,990 --> 00:03:24,550
+So are you going to perform a test train split again you're going to do this using indexing not using
+
+54
+00:03:24,610 --> 00:03:26,740
+random test train test split.
+
+55
+00:03:26,800 --> 00:03:28,630
+So follow the instructions here.
+
+56
+00:03:28,630 --> 00:03:33,700
+The last 12 months of data that's going to be the test set everything else is for training then we're
+
+57
+00:03:33,700 --> 00:03:34,780
+going to scale that data.
+
+58
+00:03:34,780 --> 00:03:40,480
+We didn't have to do that in the previous lectures because we were just using sign of x but in this
+
+59
+00:03:40,480 --> 00:03:45,600
+case and this is real data we should use some pre-processing to do the minimax scaler on it.
+
+60
+00:03:45,640 --> 00:03:50,260
+And remember you're only going to do that transform on the training data and then transform the test
+
+61
+00:03:50,260 --> 00:03:50,880
+data.
+
+62
+00:03:50,890 --> 00:03:52,830
+You should also fit on the test data.
+
+63
+00:03:52,930 --> 00:03:55,780
+Otherwise you're assuming you would know about future behavior.
+
+64
+00:03:55,780 --> 00:03:57,890
+So again really important points here.
+
+65
+00:03:57,970 --> 00:04:03,580
+The train split is different than we are typically doing because it's time series as well as the fit
+
+66
+00:04:03,610 --> 00:04:07,900
+transform then you're going to create a batch function.
+
+67
+00:04:07,900 --> 00:04:11,040
+So you don't need a function that's going to feed batches of training data.
+
+68
+00:04:11,230 --> 00:04:13,180
+So we're going to do several things.
+
+69
+00:04:13,180 --> 00:04:17,210
+You're going to need to follow these steps step one step two and step three.
+
+70
+00:04:17,260 --> 00:04:22,030
+And if this is pretty hard for you you can feel free to reference the solutions but this is heavily
+
+71
+00:04:22,030 --> 00:04:24,900
+based off of what we just did in the previous lectures.
+
+72
+00:04:24,970 --> 00:04:27,200
+So you can use those as references for you.
+
+73
+00:04:27,280 --> 00:04:31,120
+And there's essentially instructions here for you to follow for each of these three steps you're going
+
+74
+00:04:31,120 --> 00:04:36,520
+to create a function that basically takes in that training data takes in that batch size takes in a
+
+75
+00:04:36,520 --> 00:04:42,250
+number of steps and feeds it back out that you're going to set up your art and models your import tensor
+
+76
+00:04:42,250 --> 00:04:42,860
+flow.
+
+77
+00:04:43,060 --> 00:04:46,820
+You're going to have constants so you can find these constants in a cell.
+
+78
+00:04:46,960 --> 00:04:49,120
+I have things like the learning rate already laid out for you.
+
+79
+00:04:49,130 --> 00:04:52,380
+Number of neurons and the number of iterations for training etc..
+
+80
+00:04:52,570 --> 00:04:55,330
+But again these are the ones I use the my solution.
+
+81
+00:04:55,330 --> 00:04:57,540
+You can definitely play around with some of these values.
+
+82
+00:04:57,700 --> 00:05:00,820
+It is to say that this learning rate is the learning we should use.
+
+83
+00:05:00,820 --> 00:05:04,810
+You should definitely play around see if larger or smaller learning rates work better for this particular
+
+84
+00:05:04,860 --> 00:05:05,460
+dataset.
+
+85
+00:05:05,590 --> 00:05:10,500
+And again it's also going to depend on what type of cells you decide to eventually use.
+
+86
+00:05:10,710 --> 00:05:15,780
+Then you'll go ahead and create placeholders for x and y and then you'll create the recurrent neural
+
+87
+00:05:15,780 --> 00:05:17,990
+network layer or your cell layer.
+
+88
+00:05:18,330 --> 00:05:20,190
+You really have complete freedom over this.
+
+89
+00:05:20,220 --> 00:05:25,080
+I really want you to explore and play around with what works well but if you're ever in doubt keep in
+
+90
+00:05:25,080 --> 00:05:31,170
+mind solutions you can use something like an output protection wrapper around a basic LACMA cell or
+
+91
+00:05:31,170 --> 00:05:34,060
+even a basic gated recurrent unit cell.
+
+92
+00:05:34,290 --> 00:05:39,630
+So if you're in doubt of what combinations you should use just try out an al production wrapper around
+
+93
+00:05:39,630 --> 00:05:45,070
+the basic elist ham cell with a rectified linear unit activation function.
+
+94
+00:05:45,450 --> 00:05:51,870
+Then you get past those cells into this TFT and dynamic Arnon and along it for first placeholder acts
+
+95
+00:05:51,990 --> 00:05:56,820
+just like within the previous lectures you're going to create the mean square error loss function.
+
+96
+00:05:56,820 --> 00:06:02,340
+Use it to minimize the atom optimizer then you're going to initialize global variables.
+
+97
+00:06:02,340 --> 00:06:06,270
+Create an instance of T.F. thought train Savir seek and save your actual model.
+
+98
+00:06:06,420 --> 00:06:08,800
+Then you're going to run a session that trains it.
+
+99
+00:06:08,910 --> 00:06:12,480
+And hopefully once you then training it where are you going to do it predict the future.
+
+100
+00:06:12,480 --> 00:06:17,940
+So remember that Tesa is the last 12 months of original data that your model has never seen before.
+
+101
+00:06:17,940 --> 00:06:22,440
+So you going to perform a generation session that's going to allow you to try to predict those last
+
+102
+00:06:22,440 --> 00:06:27,990
+12 months of data and eventually you should end up doing after following these instructions is get something
+
+103
+00:06:27,990 --> 00:06:29,670
+that looks like this milk production.
+
+104
+00:06:29,670 --> 00:06:30,660
+That's the real stuff.
+
+105
+00:06:30,810 --> 00:06:32,750
+And then the generated values.
+
+106
+00:06:32,940 --> 00:06:38,150
+So you should get something that's pretty well aligned with the actual milk production.
+
+107
+00:06:38,160 --> 00:06:43,920
+You can see we are off but the general behavior and trends seem to be pretty darn close.
+
+108
+00:06:43,920 --> 00:06:44,400
+OK.
+
+109
+00:06:44,580 --> 00:06:47,620
+So this is a pretty challenging exercise.
+
+110
+00:06:47,640 --> 00:06:51,500
+Always feel free to jump to the solutions lecture in case you get stuck anywhere.
+
+111
+00:06:51,810 --> 00:06:57,010
+And like I mention play around the units player on the training steps play around the learning rate.
+
+112
+00:06:57,030 --> 00:06:59,220
+That's really half of the fun here.
+
+113
+00:06:59,500 --> 00:06:59,870
+OK.
+
+114
+00:06:59,910 --> 00:07:02,780
+Thanks everyone and I'll see you at the next lecture where we go through the solutions.
+

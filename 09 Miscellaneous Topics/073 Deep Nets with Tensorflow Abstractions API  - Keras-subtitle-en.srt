@@ -1,0 +1,708 @@
+1
+00:00:05,370 --> 00:00:11,070
+Welcome everyone in this lecture we're going to be showing you how to use the Keres API as a T.F. abstraction
+
+2
+00:00:11,340 --> 00:00:13,950
+and carious is actually now included within tensor flow.
+
+3
+00:00:14,070 --> 00:00:16,750
+So we'll show you how you can use it from tensor flow.
+
+4
+00:00:16,980 --> 00:00:20,180
+Let's jump to Jupiter notebook and discuss a few things about cars.
+
+5
+00:00:20,290 --> 00:00:20,580
+OK.
+
+6
+00:00:20,580 --> 00:00:27,050
+Here I am in the Jupiter notebook and as a quick note I've gone ahead and reran all the data code and
+
+7
+00:00:27,060 --> 00:00:31,790
+i deleted from the previous lecture video all our stuff about the S-meter pay.
+
+8
+00:00:31,860 --> 00:00:36,950
+So we're going to start fresh with carrots and if you go to the carrots documentation page here.
+
+9
+00:00:37,080 --> 00:00:38,880
+It's a python deep learning library.
+
+10
+00:00:38,910 --> 00:00:42,870
+And basically what it is it's a high level neural network API.
+
+11
+00:00:42,870 --> 00:00:48,440
+It's written in Python and it doesn't just run on top of tensor flow it can actually run on top of C.A.
+
+12
+00:00:48,440 --> 00:00:49,790
+Kate or C.A..
+
+13
+00:00:49,980 --> 00:00:55,440
+And if you want to use it in that manner you'll need to download keras as a separate library.
+
+14
+00:00:55,440 --> 00:01:01,650
+With the release of some newer versions of course what happened was cars eventually became part of tensor
+
+15
+00:01:01,650 --> 00:01:02,250
+flow.
+
+16
+00:01:02,460 --> 00:01:08,160
+And as I mentioned earlier in the beginning of the abstractions lecture series the contrib portion of
+
+17
+00:01:08,160 --> 00:01:12,630
+tensor flow has that section of things that are contributed to tensor flow.
+
+18
+00:01:12,750 --> 00:01:14,810
+So that's where Carse's.
+
+19
+00:01:14,970 --> 00:01:23,250
+So if we come back here after imports says T.F. I can also show you this from tensor flow dot contrib.
+
+20
+00:01:23,550 --> 00:01:29,250
+If you hit tab here you'll eventually see a list of all the options.
+
+21
+00:01:29,260 --> 00:01:34,630
+So here they are we see there's Android based flow Bouzid trees distribution's factorization framework
+
+22
+00:01:34,960 --> 00:01:37,620
+etc. layers which we'll discuss later on.
+
+23
+00:01:37,630 --> 00:01:43,780
+There's also a legacy code in here that will probably not be updated in the future metrics losses predictor.
+
+24
+00:01:43,780 --> 00:01:47,050
+And one of them you can eventually see is curse.
+
+25
+00:01:47,080 --> 00:01:51,670
+So basically the entire library is now with intenser full here.
+
+26
+00:01:51,850 --> 00:01:57,620
+So now you can import anything that's available in cars and there's activations applications etc..
+
+27
+00:01:57,760 --> 00:02:00,980
+So the first single import is models.
+
+28
+00:02:01,120 --> 00:02:04,410
+Keep in mind what we're going to show here is a really small part.
+
+29
+00:02:04,450 --> 00:02:09,910
+It's just building a very simple deep densely connected neural network curiousest can actually do things
+
+30
+00:02:09,910 --> 00:02:11,650
+like convolutional or one that works for current near.
+
+31
+00:02:11,650 --> 00:02:13,790
+That works all the higher level API.
+
+32
+00:02:13,930 --> 00:02:15,720
+Again you're sacrificing control for that.
+
+33
+00:02:15,790 --> 00:02:19,200
+But if you're more Istomin cares go ahead and check out the current documentation.
+
+34
+00:02:19,210 --> 00:02:24,090
+Right now we're showing how you can use it as a basic setup for a high level API.
+
+35
+00:02:24,330 --> 00:02:24,700
+OK.
+
+36
+00:02:24,850 --> 00:02:26,320
+So important models.
+
+37
+00:02:26,320 --> 00:02:31,080
+So I go ahead and with carriers we end up doing is you first create a model.
+
+38
+00:02:31,300 --> 00:02:36,910
+So I'll say my deep neural network care model is equal to models dots.
+
+39
+00:02:37,000 --> 00:02:42,370
+And here you can and that doing various models but the ones are mainly going to call his sequential
+
+40
+00:02:42,490 --> 00:02:47,290
+model and it's sequential because you basically just have a sequence of layers.
+
+41
+00:02:47,320 --> 00:02:56,230
+So in order to add layers of the model what you need to do is call from tensor flow contrib keris and
+
+42
+00:02:56,230 --> 00:03:01,570
+we're going to import layers from Keres and curious layers.
+
+43
+00:03:01,570 --> 00:03:07,240
+If you take a look at it do layers tab you realize that there's actually a bunch of layers already created
+
+44
+00:03:07,240 --> 00:03:11,940
+for you and Cara's There's the average pooling layer convolutional layers to the 3D.
+
+45
+00:03:12,070 --> 00:03:16,330
+All this stuff but we're really going to be focusing on the simplest layer which is just a dense layer
+
+46
+00:03:16,600 --> 00:03:17,530
+that's connected.
+
+47
+00:03:17,550 --> 00:03:19,590
+There's also drop layers et cetera.
+
+48
+00:03:20,260 --> 00:03:26,170
+So you can explore that later on but will first create a layer and what you end up doing is you take
+
+49
+00:03:26,170 --> 00:03:27,060
+your model.
+
+50
+00:03:27,250 --> 00:03:33,940
+That model we just define densely or near that work Cara's model and you call ad and then you end up
+
+51
+00:03:33,970 --> 00:03:36,600
+adding layers to it these layer objects.
+
+52
+00:03:36,610 --> 00:03:41,710
+So for dense network what you need end up defining is the number of units in this particular layer.
+
+53
+00:03:41,740 --> 00:03:47,140
+So we have 13 units in this layer and you also need to fine if it's the first one the input dimensions
+
+54
+00:03:47,230 --> 00:03:50,640
+and the input dimensions for us is going to be 13 features.
+
+55
+00:03:50,770 --> 00:03:53,380
+And then you can also define an activation.
+
+56
+00:03:53,380 --> 00:03:59,260
+So we'll go ahead and pass in the street code for activation as our E-L you are rectified linear unit
+
+57
+00:03:59,710 --> 00:04:03,820
+and later on we'll show you how you can discover the string codes for that.
+
+58
+00:04:03,820 --> 00:04:07,310
+You could just go to the doc documentation but you can actually see it quickly.
+
+59
+00:04:07,390 --> 00:04:10,440
+But we'll talk about that later on.
+
+60
+00:04:10,490 --> 00:04:12,160
+Forget the last prince who's there.
+
+61
+00:04:13,000 --> 00:04:13,450
+OK.
+
+62
+00:04:13,650 --> 00:04:18,160
+So let's basically mimic what we did before and added a couple more layers here.
+
+63
+00:04:18,300 --> 00:04:20,520
+Well again say Kurus model.
+
+64
+00:04:20,530 --> 00:04:25,260
+I'm going to add and here you know you could technically add whatever kind of players you want if you
+
+65
+00:04:25,260 --> 00:04:28,100
+for whatever reason needed a convolutional ere you do that as well.
+
+66
+00:04:28,380 --> 00:04:31,690
+But keeping things simple We'll have another dance layer.
+
+67
+00:04:31,920 --> 00:04:36,870
+We just say units is 13 because it's no longer the first input layer we don't need to find the dimensions
+
+68
+00:04:37,230 --> 00:04:42,070
+or we need to say again is the activation function which will pass in the street code there.
+
+69
+00:04:42,450 --> 00:04:44,230
+So I'm going to copy this and paste this.
+
+70
+00:04:44,300 --> 00:04:51,720
+So then we essentially add two more layers there and then finally when we get to our last layer we'll
+
+71
+00:04:51,720 --> 00:04:58,260
+say model and I'm going to add in other dense layer but the number of units is going to have is just
+
+72
+00:04:58,300 --> 00:04:59,470
+equal to three.
+
+73
+00:04:59,470 --> 00:05:06,490
+And the reason for that is because we're going to be using the activation function of a soft Max activation.
+
+74
+00:05:06,490 --> 00:05:12,060
+Remember back to the digits data lecture we had the one hot encoded classes.
+
+75
+00:05:12,220 --> 00:05:16,960
+So we're essentially going to be doing a very similar thing here except carious is going to take care
+
+76
+00:05:16,960 --> 00:05:18,030
+of all that in the background.
+
+77
+00:05:18,040 --> 00:05:19,430
+So we'll explain that in a little bit.
+
+78
+00:05:19,600 --> 00:05:25,570
+But essentially we just have three units one for each class using a soft mass Max activation there and
+
+79
+00:05:25,570 --> 00:05:28,210
+that's going to be our last layer.
+
+80
+00:05:28,240 --> 00:05:28,560
+OK.
+
+81
+00:05:28,600 --> 00:05:30,730
+Next we want to compile the model.
+
+82
+00:05:30,970 --> 00:05:39,610
+So the next thing I'm going to do is say from tensor flow contrib thuck Harris and going to import losses
+
+83
+00:05:40,090 --> 00:05:45,050
+optimizers metrics and activations.
+
+84
+00:05:45,300 --> 00:05:49,790
+So previously I said there's a quick way to figure out what activations are available.
+
+85
+00:05:49,860 --> 00:05:53,970
+So you don't just have to memorize these particular string codes and the quick way to do that is once
+
+86
+00:05:53,970 --> 00:06:02,740
+you've imported these you can just say activations dots that tab here and we'll show you all the activations
+
+87
+00:06:02,740 --> 00:06:03,800
+that are available for you.
+
+88
+00:06:04,000 --> 00:06:07,860
+And basically all the ones that you would expect are here for you their sigmoid activation and soft
+
+89
+00:06:07,870 --> 00:06:10,760
+Max rectifies linear unit etc..
+
+90
+00:06:10,930 --> 00:06:13,860
+Hyperbolic tangent all the basic ones are here for you.
+
+91
+00:06:14,110 --> 00:06:16,230
+So keep that in mind.
+
+92
+00:06:16,450 --> 00:06:21,400
+And if you're looking for whatever optimizers are available free you can do optimizers thought and then
+
+93
+00:06:21,430 --> 00:06:22,000
+hit tab.
+
+94
+00:06:22,000 --> 00:06:25,000
+Adam itemizes is available armis prop.
+
+95
+00:06:25,120 --> 00:06:26,050
+Gradient descent.
+
+96
+00:06:26,110 --> 00:06:28,290
+Cetera.
+
+97
+00:06:28,350 --> 00:06:31,420
+So we're going to do here is the following.
+
+98
+00:06:31,700 --> 00:06:35,620
+We are going to say grab our model.
+
+99
+00:06:35,720 --> 00:06:40,700
+So the final step after he added the layers is to compile it which basically sets up all the layers
+
+100
+00:06:40,760 --> 00:06:41,680
+as they should be.
+
+101
+00:06:41,990 --> 00:06:45,800
+So the compiling step needs an optimizer and it's a loss function.
+
+102
+00:06:45,980 --> 00:06:52,570
+And if you're doing classification you can pasand some metrics to classify by say optimizer and we're
+
+103
+00:06:52,570 --> 00:06:57,580
+going to pass that string code Adam which we saw right now how we can get it we just say optimizers
+
+104
+00:06:57,610 --> 00:06:59,980
+dot and then see the list of itemizes available.
+
+105
+00:07:00,160 --> 00:07:01,050
+And that for a.
+
+106
+00:07:01,080 --> 00:07:10,780
+We're going to do is the following will say sparse underscore categorical underscore cross entropy.
+
+107
+00:07:11,040 --> 00:07:15,690
+And for this one I would suggest looking into the documentation as far as which ones are appropriate.
+
+108
+00:07:15,690 --> 00:07:18,500
+It kind of depends on what format your data is in.
+
+109
+00:07:18,630 --> 00:07:25,410
+If your data is not one hot encoded coming in in order for Caris understand that we need to do is say
+
+110
+00:07:25,410 --> 00:07:32,130
+sparse categorical cross entropy if your data is already hot and coded then you can just do categorical
+
+111
+00:07:32,130 --> 00:07:33,340
+cross entropy.
+
+112
+00:07:33,360 --> 00:07:34,410
+So keep that in mind.
+
+113
+00:07:34,410 --> 00:07:37,280
+There's a lot more detail in the current documentation about this.
+
+114
+00:07:37,320 --> 00:07:40,350
+You won't really find this sort of detail in the text for the documentation.
+
+115
+00:07:40,350 --> 00:07:45,000
+Instead they would expect you to go to Paris and read about it because essentially everything that's
+
+116
+00:07:45,000 --> 00:07:48,290
+included in this is already here for you contrib that cares.
+
+117
+00:07:48,300 --> 00:07:54,500
+So we're using sparse Ketek we'll cross entropy because we're using categories as we have three of them.
+
+118
+00:07:54,510 --> 00:07:58,940
+Number those three classes and we're using sparse here because coming in they're not one high end code
+
+119
+00:07:58,980 --> 00:08:05,200
+already where you could do is one high end code them and then just have categorical entropy if you wanted
+
+120
+00:08:05,200 --> 00:08:06,410
+to.
+
+121
+00:08:06,460 --> 00:08:10,960
+So all the same metrics is going to be accuracy in case you ever want to do some sort of evaluation
+
+122
+00:08:11,940 --> 00:08:15,110
+so you compile that model AUPs that should just be single.
+
+123
+00:08:15,310 --> 00:08:16,090
+Yes.
+
+124
+00:08:16,140 --> 00:08:20,300
+That you run that and now it's ready to be trained.
+
+125
+00:08:20,520 --> 00:08:25,830
+So again the steps here was just to import your model create an instance of that sequential model and
+
+126
+00:08:25,830 --> 00:08:27,070
+you just add layers to it.
+
+127
+00:08:27,090 --> 00:08:29,290
+Pretty straightforward once you out of the layers.
+
+128
+00:08:29,310 --> 00:08:34,230
+You compile it with whatever optimize you want the last function you want and then if it's classification
+
+129
+00:08:34,230 --> 00:08:37,220
+you can add things like metrics.
+
+130
+00:08:37,260 --> 00:08:42,960
+So let's go ahead and train this model will say the end of this model and we're going to fit it to our
+
+131
+00:08:42,960 --> 00:08:44,190
+scaled data.
+
+132
+00:08:44,190 --> 00:08:45,950
+So scale x train.
+
+133
+00:08:46,050 --> 00:08:53,450
+And then our right train and then go in and train this for I don't know 50 parks or something so run
+
+134
+00:08:53,450 --> 00:08:55,260
+that you should see some output like this.
+
+135
+00:08:55,250 --> 00:08:58,500
+It probably won't run as fast as that here but mine is already done.
+
+136
+00:08:58,520 --> 00:09:01,910
+You'll see the loss and the accuracy metric kind of go up.
+
+137
+00:09:01,910 --> 00:09:05,570
+So that's basically what we were asked for right here as far as the metrics.
+
+138
+00:09:05,630 --> 00:09:10,300
+So if you scroll all the way down hopefully you started reaching close to 95.
+
+139
+00:09:10,340 --> 00:09:15,410
+So if you want to get predictions off of this it's actually quite easy you just say predictions as equal
+
+140
+00:09:15,410 --> 00:09:19,320
+to whatever your model name was.
+
+141
+00:09:19,320 --> 00:09:21,200
+And you can call predict.
+
+142
+00:09:21,200 --> 00:09:26,500
+And if you just can't predict that's going to return back the actual like soft Max the output layer.
+
+143
+00:09:26,660 --> 00:09:33,710
+So we won't predict classes here and there we're going to pass our scaled X test data and then let's
+
+144
+00:09:33,710 --> 00:09:35,930
+print out our classification report.
+
+145
+00:09:36,350 --> 00:09:46,340
+So let me actually import that from S-K learn dot metrics import classification report and let's run
+
+146
+00:09:46,340 --> 00:09:49,350
+that classification report.
+
+147
+00:09:49,500 --> 00:09:54,890
+In our predictions and then pass an the test values.
+
+148
+00:09:54,900 --> 00:10:00,260
+So if you're in that you should get somewhere around 80s or 90s percent.
+
+149
+00:10:00,450 --> 00:10:05,580
+I believe you ran this enough you should be able to get up to 95 percent maybe even higher.
+
+150
+00:10:05,600 --> 00:10:08,480
+OK so let's quickly review what we just did here of course.
+
+151
+00:10:08,490 --> 00:10:12,660
+It's a really great library especially just starting out learning of machine learning and you're not
+
+152
+00:10:12,660 --> 00:10:19,430
+sure what actual framework you want to use because you can basically put this on top of C A.K. or thanto.
+
+153
+00:10:19,630 --> 00:10:25,390
+But again you just tent's food that contribute Cara's import models create a sequential model instance
+
+154
+00:10:25,750 --> 00:10:29,980
+and then whatever layers you want you just add those layers on.
+
+155
+00:10:30,040 --> 00:10:34,900
+Once you've done that you go ahead and compile it using whatever optimized you want the loss and the
+
+156
+00:10:34,900 --> 00:10:37,090
+metrics and then you can fit this.
+
+157
+00:10:37,090 --> 00:10:41,590
+Now keep in mind this is a really simple example because we're just doing a densely connected neural
+
+158
+00:10:41,590 --> 00:10:44,260
+network and it's pretty straightforward.
+
+159
+00:10:44,260 --> 00:10:48,910
+But this sometimes gets a little more complicated as you add in more complex layers like recurrent neural
+
+160
+00:10:48,910 --> 00:10:51,300
+network layers or convolutional layers.
+
+161
+00:10:51,310 --> 00:10:55,770
+It's still intended to be much simpler than just doing it straight in pure tensor flow.
+
+162
+00:10:55,870 --> 00:10:57,130
+But keep that in mind.
+
+163
+00:10:57,400 --> 00:11:01,330
+All right so that's if you're interested in learning more about care since this course is mainly focused
+
+164
+00:11:01,390 --> 00:11:06,390
+on tensor flow I would recommend you check out the curiousest documentation is actually quite good and
+
+165
+00:11:06,410 --> 00:11:09,840
+they even have things like getting started guys for like a sequential model.
+
+166
+00:11:09,970 --> 00:11:14,200
+So you click here and it will tell you how to do a specific sequential model so specify an input shape
+
+167
+00:11:14,620 --> 00:11:16,840
+the compilation of it training etc..
+
+168
+00:11:16,870 --> 00:11:20,130
+So lots and lots of examples even has a full example folder.
+
+169
+00:11:20,140 --> 00:11:24,670
+If you go to that page it has lots of examples here on how to do various models.
+
+170
+00:11:24,670 --> 00:11:26,110
+It's a really great library.
+
+171
+00:11:26,290 --> 00:11:30,180
+And in my opinion it's the future of abstractions for tensor flow.
+
+172
+00:11:30,220 --> 00:11:34,210
+I believe this is probably the number one abstraction in the future.
+
+173
+00:11:34,210 --> 00:11:39,640
+Granted I may be totally wrong about that but Keres is probably the strongest one and that's especially
+
+174
+00:11:39,640 --> 00:11:45,680
+noted because it was an entirely separate library that got contributed into tensor flow again.
+
+175
+00:11:45,730 --> 00:11:50,080
+Don't forget about the estimator API and coming up next we're going to show you the layers API which
+
+176
+00:11:50,080 --> 00:11:51,330
+is also really popular.
+
+177
+00:11:51,580 --> 00:11:54,300
+So we'll cover the layers API in the very next lecture.
+

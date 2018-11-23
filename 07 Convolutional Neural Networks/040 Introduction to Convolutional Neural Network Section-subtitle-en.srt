@@ -1,0 +1,52 @@
+1
+00:00:05,660 --> 00:00:11,270
+Welcome everyone to this section on convolutional neural networks in this section we're going to be
+
+2
+00:00:11,270 --> 00:00:12,670
+covering several things.
+
+3
+00:00:12,710 --> 00:00:17,780
+We'll start off with a quick review of previous topics and neural networks then we'll discuss some new
+
+4
+00:00:17,780 --> 00:00:22,030
+theory topics that will help set up your learning for convolutional neural networks.
+
+5
+00:00:22,070 --> 00:00:25,840
+We'll also discuss the famous EMIs handwritten digits dataset.
+
+6
+00:00:25,900 --> 00:00:32,030
+Then we're going to solve the classification problem of this with a quote unquote normal neural network
+
+7
+00:00:32,030 --> 00:00:32,840
+set up.
+
+8
+00:00:32,880 --> 00:00:37,100
+We're going to learn about the theory behind that convolutional neural network and then we'll revisit
+
+9
+00:00:37,100 --> 00:00:38,690
+the problem and solve it.
+
+10
+00:00:38,720 --> 00:00:40,280
+Convolutional neural nets.
+
+11
+00:00:40,430 --> 00:00:45,550
+After that they'll have the convolutional neural network exercise and the solutions afterwards.
+
+12
+00:00:45,560 --> 00:00:47,070
+All right let's get started.
+
+13
+00:00:47,070 --> 00:00:48,110
+I'll see you at the next lecture.
+

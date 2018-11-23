@@ -1,0 +1,192 @@
+1
+00:00:05,690 --> 00:00:09,870
+Welcome everyone the tensor flow regression exercise lecture.
+
+2
+00:00:09,990 --> 00:00:14,490
+So it's time to test your new skills and you'll be creating a model that attempts to predict housing
+
+3
+00:00:14,490 --> 00:00:20,520
+prices using the 10th floor estimate or API in this lecture we're going to review the exercise notebook
+
+4
+00:00:20,550 --> 00:00:23,150
+and explain what you need to do as an option.
+
+5
+00:00:23,190 --> 00:00:28,320
+If it's more geared toward your learning style to coatl long lectures you can just skip this lecture
+
+6
+00:00:28,320 --> 00:00:32,100
+and go to the next lecture which is a solution's cut a long walk there.
+
+7
+00:00:32,130 --> 00:00:35,540
+For now let's open up the exercise notebook and tell you what you need to do.
+
+8
+00:00:36,790 --> 00:00:41,860
+OK so here you have the regression exercise notebook open and the dataset you're going to be using is
+
+9
+00:00:41,860 --> 00:00:44,920
+California housing data from a 1990 census.
+
+10
+00:00:44,920 --> 00:00:51,430
+And essentially each sample is an aggregate block group containing around 4500 individuals living in
+
+11
+00:00:51,430 --> 00:00:54,220
+some sort of geographically compact area in California.
+
+12
+00:00:54,430 --> 00:00:57,750
+And there's a link here in case you want to figure out more information about the data.
+
+13
+00:00:57,910 --> 00:01:03,720
+But I've actually already saved that for you in our zip file as Cal housing clean CXVII.
+
+14
+00:01:03,760 --> 00:01:09,040
+So are you going to do is once you have that data you're going to import it using Pandurs and then also
+
+15
+00:01:09,040 --> 00:01:13,610
+want you to separate it into training 70 percent and testing 30 percent.
+
+16
+00:01:13,960 --> 00:01:18,550
+And this is what the data should look like and you can go ahead and do it describe it to kind of get
+
+17
+00:01:18,670 --> 00:01:23,410
+a better idea of the statistical information of the data but once you'd have the train split ready to
+
+18
+00:01:23,410 --> 00:01:26,250
+go you're going to scale just to feature data.
+
+19
+00:01:26,410 --> 00:01:31,490
+So we're going to use sikat learn pre-processing to create a min max scaler for the feature data and
+
+20
+00:01:31,530 --> 00:01:33,940
+you going to fit that scaler only to the training data.
+
+21
+00:01:33,940 --> 00:01:38,800
+Basically as you just go along this notebook follow the instructions in bold and you're going to transform
+
+22
+00:01:38,880 --> 00:01:39,160
+x.
+
+23
+00:01:39,160 --> 00:01:40,550
+Test an X train.
+
+24
+00:01:40,550 --> 00:01:44,890
+But remember when you're fitting the scaler you only want to fit it towards the training data because
+
+25
+00:01:44,890 --> 00:01:49,470
+you don't want to assume you're going to have information about future test data.
+
+26
+00:01:49,480 --> 00:01:54,550
+Then once you have that skilled X test data and skilled X trained data you can use that along with PD
+
+27
+00:01:54,790 --> 00:01:59,380
+data frame to create recreate two data frames of the scaled versions of those data sets.
+
+28
+00:01:59,500 --> 00:02:05,900
+Because remember minimax scalar is just going to return an umpire res then you're going to create feature
+
+29
+00:02:05,900 --> 00:02:09,850
+columns so you'll create the necessary T.F. that feature column objects for the estimator.
+
+30
+00:02:09,890 --> 00:02:14,140
+They should all just be treated as continuous numeric columns just like that in the lectures.
+
+31
+00:02:14,150 --> 00:02:18,260
+Then you'll create an input function for the estimator object and then you create the actual estimator
+
+32
+00:02:18,260 --> 00:02:19,100
+object.
+
+33
+00:02:19,100 --> 00:02:22,720
+So you're going to create a densely connected neural network regress or model.
+
+34
+00:02:22,820 --> 00:02:25,840
+And I want you to play around the hidden units to see what works best.
+
+35
+00:02:25,850 --> 00:02:32,210
+But as a default you should probably choose three layers with each layer having as many neurons as there
+
+36
+00:02:32,210 --> 00:02:37,610
+are features so if we come back up here we can see that there's 1 2 3 4 5 6 features.
+
+37
+00:02:37,610 --> 00:02:42,610
+So maybe have six six six in your list here for the sexual estimator model.
+
+38
+00:02:42,650 --> 00:02:45,200
+So just a list of six come a six come to six.
+
+39
+00:02:45,290 --> 00:02:49,370
+They don't want to train the model for a thousand steps and then later you should come back to it and
+
+40
+00:02:49,370 --> 00:02:55,710
+train it for many more steps maybe try 10000 or 20000 and see how much that improves the model train
+
+41
+00:02:55,730 --> 00:03:00,740
+the model then you'll create a prediction input function and they'll use the Predict method off your
+
+42
+00:03:00,740 --> 00:03:05,930
+estimator to create a list of predictions and then you can calculate the route mean squirt air off those
+
+43
+00:03:05,930 --> 00:03:06,860
+predictions.
+
+44
+00:03:06,860 --> 00:03:12,000
+So you should be able to get around 100000 r m s e value once you've ran it.
+
+45
+00:03:12,050 --> 00:03:15,410
+I would say around 10000 steps or 20000 steps.
+
+46
+00:03:15,440 --> 00:03:15,990
+OK.
+
+47
+00:03:16,100 --> 00:03:17,250
+Best of luck to everyone.
+
+48
+00:03:17,390 --> 00:03:19,910
+And I will see in the next lecture where we walk through the solutions.
+

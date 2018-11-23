@@ -1,0 +1,396 @@
+1
+00:00:05,690 --> 00:00:10,460
+Welcome everyone to the series of lectures we're going to be discussing how to build deep networks with
+
+2
+00:00:10,470 --> 00:00:12,930
+tensor abstractions.
+
+3
+00:00:13,140 --> 00:00:18,660
+Now tensor flow has many abstractions and what I mean by the word abstraction is just some sort of higher
+
+4
+00:00:18,660 --> 00:00:24,270
+level API which allows you to simplify your code in order to still call the same sort of tensor flow
+
+5
+00:00:24,270 --> 00:00:25,200
+commands.
+
+6
+00:00:25,200 --> 00:00:30,390
+And that usually allows you to skip things like having to find a feed dictionary variables and placeholders
+
+7
+00:00:30,450 --> 00:00:33,540
+instead have a much simpler to use interface.
+
+8
+00:00:33,540 --> 00:00:37,410
+Now typically that's simpler to use interface comes at the cost of control.
+
+9
+00:00:37,410 --> 00:00:39,910
+Now often you won't need that sort of control.
+
+10
+00:00:40,010 --> 00:00:45,240
+That if you're dealing with a simple network such as a deep fancily connected network while you're concerned
+
+11
+00:00:45,240 --> 00:00:49,590
+about is really just stacking layers on top of each other and making sure all the neurons are connected
+
+12
+00:00:49,890 --> 00:00:52,920
+and that sort of use case is perfect for abstractions.
+
+13
+00:00:52,920 --> 00:00:56,130
+Now as I just mentioned senseful has many abstraction options.
+
+14
+00:00:56,130 --> 00:01:01,770
+There's T.F. learn Cristy of slim layers the estimator API that we've covered before and even more than
+
+15
+00:01:01,770 --> 00:01:05,520
+that and many of these abstractions reside intenser flows.
+
+16
+00:01:05,520 --> 00:01:11,400
+T.F. contrib section and basically the way the contrib section works is that typically libraries or
+
+17
+00:01:11,400 --> 00:01:17,580
+extra features get developed and people contribute to tensor flow so they eventually accept them under
+
+18
+00:01:17,580 --> 00:01:19,760
+the subsection of T.F. but contrib.
+
+19
+00:01:19,750 --> 00:01:25,440
+And then it becomes very popular or very useful they will quote unquote graduate to be included as part
+
+20
+00:01:25,440 --> 00:01:26,660
+of standard sense of flow.
+
+21
+00:01:26,760 --> 00:01:31,830
+And in fact one of these abstractions the layers abstraction is kind of half way some of it's in contrib
+
+22
+00:01:32,100 --> 00:01:38,860
+and some of it is directly accessible as part of T.F. the layers in issue with abstractions in general
+
+23
+00:01:38,980 --> 00:01:44,190
+is one there are in my opinion probably too many at this point in time for tensor flow.
+
+24
+00:01:44,230 --> 00:01:49,180
+They should probably all be consolidated into one more general abstraction and the other difficulty
+
+25
+00:01:49,210 --> 00:01:52,770
+is that it's really hard to tell which abstractions are worth learning and which are not.
+
+26
+00:01:52,810 --> 00:01:57,820
+And that's because the speed of development of tensor flow has caused abstractions to come and go quickly.
+
+27
+00:01:57,820 --> 00:02:03,670
+So some abstractions have really risen in popularity only to be abandoned a few months later when something
+
+28
+00:02:03,670 --> 00:02:06,850
+like Cara's comes out and Cure's gets included intenser flow.
+
+29
+00:02:06,850 --> 00:02:08,000
+So keep that in mind.
+
+30
+00:02:08,880 --> 00:02:13,470
+We're going to focus this series of lectures on presenting the most common abstractions used and the
+
+31
+00:02:13,470 --> 00:02:18,480
+ones that basically I personally believe will have the most longevity as far as tensor for development
+
+32
+00:02:18,480 --> 00:02:19,300
+is concerned.
+
+33
+00:02:19,410 --> 00:02:24,150
+And those are the estimator API that we first learned about so we'll do a quick review of that as well
+
+34
+00:02:24,180 --> 00:02:30,450
+as cares and Cure's was actually its own abstraction over sensor flow and another deep learning framework
+
+35
+00:02:30,460 --> 00:02:35,490
+called S.A. and it was this higher level API that eventually with one of the newer releases of tense
+
+36
+00:02:35,490 --> 00:02:39,390
+flow got accepted to be part of tensor flow through T.F. contrib.
+
+37
+00:02:39,570 --> 00:02:45,860
+And there's also this layer's API which is kind of halfway on contrib and Half-Way and T.F. layers.
+
+38
+00:02:45,870 --> 00:02:48,290
+So we'll talk about that later on.
+
+39
+00:02:48,310 --> 00:02:52,390
+So we're going to focus on understanding how to use these abstractions to build deep densely connected
+
+40
+00:02:52,390 --> 00:02:56,780
+neural networks basically focusing on how do we stack these layers on top of each other.
+
+41
+00:02:56,950 --> 00:03:02,740
+So that makes it really easy to use these abstractions for these simpler tasks all the code that I'm
+
+42
+00:03:02,740 --> 00:03:07,910
+about to show is available in deep nets with T.F. attraction's Python notebook file.
+
+43
+00:03:08,060 --> 00:03:12,550
+And keep in mind all the code is actually in there in one giant notebook if you're following along.
+
+44
+00:03:12,560 --> 00:03:15,760
+I would actually recommend creating one notebook per abstraction.
+
+45
+00:03:15,800 --> 00:03:18,190
+That way you don't get any sort of interference between them.
+
+46
+00:03:18,440 --> 00:03:18,910
+OK.
+
+47
+00:03:19,100 --> 00:03:23,270
+Let's start by exploring the dataset we're going to be using and open up a fresh Jupiter notebook and
+
+48
+00:03:23,270 --> 00:03:24,660
+then walk you through that dataset.
+
+49
+00:03:24,740 --> 00:03:26,670
+We're actually going to grab it using sikat learn.
+
+50
+00:03:26,700 --> 00:03:29,210
+So let's jump over to the notebook.
+
+51
+00:03:29,210 --> 00:03:29,480
+All right.
+
+52
+00:03:29,480 --> 00:03:32,300
+So as I just mentioned we're going to focus on grabbing that data right now.
+
+53
+00:03:32,300 --> 00:03:38,960
+We'll say from Eski learn datasets import and we're going to load this wind data set.
+
+54
+00:03:39,200 --> 00:03:44,720
+So the way S-K learned data sets works is that you basically import this function that allows you to
+
+55
+00:03:45,380 --> 00:03:53,090
+download this wind data set feel say wind data equals load wine run that and that loads up what is known
+
+56
+00:03:53,120 --> 00:04:00,290
+as a bunch file of S-K learn which is kind of its own special type of dictionary file which if you call
+
+57
+00:04:00,290 --> 00:04:03,510
+wind data keys it kind of behaves like a dictionary.
+
+58
+00:04:03,690 --> 00:04:05,100
+You see a couple of things here.
+
+59
+00:04:05,180 --> 00:04:13,370
+There are the feature names the target or label the target names the data and then the description attribute.
+
+60
+00:04:13,370 --> 00:04:20,610
+So what we can do here is we can say prints wind data and you can call here the description attribute
+
+61
+00:04:20,720 --> 00:04:22,000
+absolute mixtures that way.
+
+62
+00:04:22,070 --> 00:04:23,620
+And yes there we go.
+
+63
+00:04:23,660 --> 00:04:25,880
+And this is the wind data database.
+
+64
+00:04:25,880 --> 00:04:33,290
+So there's 170 instances there's 13 attributes and I have all these attributes things like the I don't
+
+65
+00:04:33,290 --> 00:04:37,250
+know chemical properties of the swine Plus the alcohol content things of that nature.
+
+66
+00:04:37,430 --> 00:04:39,410
+It's separated into three classes.
+
+67
+00:04:39,440 --> 00:04:44,390
+And if I remember correctly the three classes represent something like red white and ros but I'm not
+
+68
+00:04:44,390 --> 00:04:49,460
+a wine expert so you may have to look at the actual link to this wine data base.
+
+69
+00:04:49,490 --> 00:04:54,400
+So that gives you a bunch of summaries of mystics as well as the resource of where you can grab this.
+
+70
+00:04:54,590 --> 00:04:57,130
+So pretty small data set but it's perfect for us.
+
+71
+00:04:57,170 --> 00:05:01,510
+And luckily the classes are pretty well balanced there's a little more of class one than the other two.
+
+72
+00:05:01,520 --> 00:05:04,070
+But for our purposes that's fine.
+
+73
+00:05:04,070 --> 00:05:04,500
+OK.
+
+74
+00:05:05,270 --> 00:05:10,280
+So here's more information about the data set but we're going to do is continue on and we're going to
+
+75
+00:05:10,280 --> 00:05:14,180
+scroll down here and just grab the featured data as well as the labels.
+
+76
+00:05:14,240 --> 00:05:19,910
+So we're essentially going to attempt to do a classification task on this data will say feature data
+
+77
+00:05:19,910 --> 00:05:26,330
+is wind data and then we're going to grab the actual data key off that bunch object and then we'll say
+
+78
+00:05:26,330 --> 00:05:32,410
+labels is equal to wind data and then grab target.
+
+79
+00:05:32,500 --> 00:05:36,430
+So sikat learn tends to call that label as a target because it's the target you're trying to predict
+
+80
+00:05:36,940 --> 00:05:44,640
+then we will go ahead and perform a train test split as well as scale or data from S-K learn model selection.
+
+81
+00:05:44,920 --> 00:05:53,080
+I will import train split Coltrane to split and then pass that feature data as well as the labels.
+
+82
+00:05:53,120 --> 00:05:56,610
+And let me do shift enter here so I can grab the actual output.
+
+83
+00:05:56,620 --> 00:06:01,830
+So scrolling down like we've done before and then I will grab this line of code here.
+
+84
+00:06:03,410 --> 00:06:12,990
+Copy and paste that up and then it will say that the test size is equal to 30 percent of the data.
+
+85
+00:06:13,280 --> 00:06:19,310
+And so you get the same random split I do go ahead and say random state is equal to 101.
+
+86
+00:06:19,310 --> 00:06:24,100
+Again not necessary just an arbitrary number choice but that way your split can be the same as mine.
+
+87
+00:06:24,110 --> 00:06:31,680
+And lastly we are going to scale this data in order to pass into our neural network abstractions so
+
+88
+00:06:31,680 --> 00:06:33,340
+we'll use the minimax scalar.
+
+89
+00:06:33,570 --> 00:06:42,630
+I'll create an instance of the minimax scalar and I say scaled X train is equal to scalar and it will
+
+90
+00:06:42,630 --> 00:06:46,660
+fit transform on my training features.
+
+91
+00:06:46,860 --> 00:06:50,810
+And then I will say scaled X steps is scalar.
+
+92
+00:06:50,910 --> 00:06:55,230
+In this case I'm not going to do it I will just transform because remember we don't want to assume that
+
+93
+00:06:55,230 --> 00:06:57,800
+we're going to know future test data.
+
+94
+00:06:57,900 --> 00:06:58,230
+All right.
+
+95
+00:06:58,230 --> 00:06:58,770
+Perfect.
+
+96
+00:06:58,770 --> 00:07:03,810
+So we have our data set up coming up next in the next lecture or we're going to do is discuss our first
+
+97
+00:07:03,840 --> 00:07:08,760
+abstraction which is essentially going to be a review of the estimator API we saw at the beginning of
+
+98
+00:07:08,760 --> 00:07:09,610
+the course.
+
+99
+00:07:09,630 --> 00:07:11,340
+Thanks everyone and I'll see you at that lecture.
+

@@ -1,0 +1,548 @@
+1
+00:00:05,380 --> 00:00:07,120
+Welcome back everyone to this lecture.
+
+2
+00:00:07,120 --> 00:00:10,080
+We're going to be talking about Jim observations.
+
+3
+00:00:11,430 --> 00:00:16,400
+So you may have noticed that we were calling each and every step and then passing an action into it
+
+4
+00:00:16,980 --> 00:00:22,170
+the environment step function that we saw earlier returns back really useful objects that we can use
+
+5
+00:00:22,440 --> 00:00:24,040
+with our learning agent.
+
+6
+00:00:25,230 --> 00:00:30,120
+So let's go ahead and discuss what actually gets returned back when we call that step function.
+
+7
+00:00:30,120 --> 00:00:32,640
+There's four key things that get returned back.
+
+8
+00:00:32,640 --> 00:00:35,520
+One of them is called an observation variable.
+
+9
+00:00:35,520 --> 00:00:40,440
+So you call that step function off your environment you pass an action and one of the things is going
+
+10
+00:00:40,440 --> 00:00:45,780
+to give you back is the observation and that's the environment specific information that represents
+
+11
+00:00:45,860 --> 00:00:47,550
+the environment observations.
+
+12
+00:00:47,580 --> 00:00:51,630
+So those can be things like angles of velocities the state of a game etc..
+
+13
+00:00:51,870 --> 00:00:56,880
+In our case there's reason the cart pull we actually already know that there's a fourth dimension array
+
+14
+00:00:57,150 --> 00:01:02,550
+which has information such as the velocity at the current position angular velocity and the angle of
+
+15
+00:01:02,550 --> 00:01:03,630
+the pole itself.
+
+16
+00:01:03,630 --> 00:01:08,140
+So that's the observation that gets returned once you call that step function.
+
+17
+00:01:08,160 --> 00:01:11,880
+There's three more things that also get returned the pot calling the step function.
+
+18
+00:01:11,880 --> 00:01:13,560
+The next one is the reward.
+
+19
+00:01:13,680 --> 00:01:17,040
+And that's the amount of reward achieved by the previous action.
+
+20
+00:01:17,040 --> 00:01:22,000
+Remember we passed an action in that step function and then we can get back in a reward amount.
+
+21
+00:01:22,410 --> 00:01:28,380
+So the actual scale of this reward it varies based off what environment you're using so certain environments
+
+22
+00:01:28,380 --> 00:01:33,150
+such as car pool are going to be different in their scale of reward versus a go game.
+
+23
+00:01:33,270 --> 00:01:38,640
+But overall the agent should always want to increase that reward level so you can think about it as
+
+24
+00:01:38,640 --> 00:01:40,280
+you always want to increase the reward.
+
+25
+00:01:40,380 --> 00:01:43,910
+The actual scale of that number may change though depending on your environment.
+
+26
+00:01:45,390 --> 00:01:49,120
+Another thing that gets returned upon passing an action is the step function.
+
+27
+00:01:49,260 --> 00:01:50,930
+Is this done variable.
+
+28
+00:01:51,060 --> 00:01:55,300
+And that's just a boolean indicating whether or not the environment needs to be reset.
+
+29
+00:01:55,380 --> 00:01:59,750
+So you can imagine this is going to be really useful because you can pass this into a WHILE loop.
+
+30
+00:01:59,760 --> 00:02:05,520
+So while this environment is not done yet you want to keep passing in the actions so that allows you
+
+31
+00:02:05,520 --> 00:02:10,860
+to basically set up your agent ready to learn and you keep doing this over and over and over again for
+
+32
+00:02:10,860 --> 00:02:16,350
+a certain number of iterations and then you stop those intermediate iterations based off the environment
+
+33
+00:02:16,350 --> 00:02:17,610
+being done or not.
+
+34
+00:02:17,610 --> 00:02:22,110
+So what would actually indicate whether the environment is done or completed.
+
+35
+00:02:22,260 --> 00:02:27,490
+Well that can be things like losing the game of Pac-Man that would issue the done variable to be true.
+
+36
+00:02:27,660 --> 00:02:30,170
+Or for instance your pull tipped over all the way.
+
+37
+00:02:30,240 --> 00:02:36,840
+That means it's done it's time for the agent to start over and reset etc. and then finally there is
+
+38
+00:02:36,840 --> 00:02:39,130
+an info object that also gets returned.
+
+39
+00:02:39,270 --> 00:02:42,110
+That's a dictionary object with some diagnostic information.
+
+40
+00:02:42,120 --> 00:02:43,650
+It's usually used for debugging.
+
+41
+00:02:43,680 --> 00:02:46,580
+We don't really see it use that much in these lectures.
+
+42
+00:02:46,680 --> 00:02:48,450
+But it also gets returned.
+
+43
+00:02:48,450 --> 00:02:51,200
+Let's go ahead and explore what this looks like in practice.
+
+44
+00:02:51,210 --> 00:02:54,490
+I'm going to open up my editor and create another postscript.
+
+45
+00:02:54,710 --> 00:02:55,050
+OK.
+
+46
+00:02:55,050 --> 00:03:00,030
+This is the postscript we were working with earlier we imported Jim we created that Karpel environment.
+
+47
+00:03:00,030 --> 00:03:02,250
+We reset the environment to its default state.
+
+48
+00:03:02,460 --> 00:03:06,270
+And then for about a thousand time steps we kept rendering the environment that was a little image we
+
+49
+00:03:06,270 --> 00:03:06,930
+saw.
+
+50
+00:03:06,990 --> 00:03:12,260
+And here we have this environment thought step action and then we passed then some sort of action.
+
+51
+00:03:12,270 --> 00:03:15,150
+And in this case we haven't really talked that much about the actual space.
+
+52
+00:03:15,150 --> 00:03:16,560
+We will the next lecture.
+
+53
+00:03:16,740 --> 00:03:22,890
+But this right here this line in the action underscore space that sample that just provides a random
+
+54
+00:03:22,890 --> 00:03:23,590
+action.
+
+55
+00:03:23,760 --> 00:03:27,940
+And eventually if some of the random actions the cart just swings off the page.
+
+56
+00:03:27,990 --> 00:03:32,380
+OK so let's explore what else this step function actually returns.
+
+57
+00:03:32,380 --> 00:03:37,430
+And for this we actually are even going to render the image so you won't see an image pop up.
+
+58
+00:03:37,430 --> 00:03:38,630
+The environment will still go.
+
+59
+00:03:38,630 --> 00:03:40,880
+We won't just be rendering the visualization of it.
+
+60
+00:03:40,880 --> 00:03:45,410
+And we're just going to run this for one timestep because I want to actually run this for a two time
+
+61
+00:03:45,410 --> 00:03:45,940
+steps.
+
+62
+00:03:45,940 --> 00:03:49,450
+Does it really matter because I want to see what's actually returned here.
+
+63
+00:03:49,790 --> 00:03:51,520
+So let's go ahead and do this.
+
+64
+00:03:51,560 --> 00:03:56,470
+When we say environment reset we're going to set that equal to observation.
+
+65
+00:03:56,690 --> 00:04:01,230
+And essentially we're going to be doing here is saying this is our initial observation.
+
+66
+00:04:01,250 --> 00:04:10,410
+So initial observation and then let's go ahead and print out the observation.
+
+67
+00:04:10,510 --> 00:04:11,070
+Okay.
+
+68
+00:04:11,140 --> 00:04:12,960
+So we have our initial observation.
+
+69
+00:04:13,000 --> 00:04:18,250
+We reset the environment and then we print out the observation and this observation is basically just
+
+70
+00:04:18,250 --> 00:04:20,820
+going to show what the environment state is right now.
+
+71
+00:04:20,830 --> 00:04:24,630
+So we're going to see an umpire rate of four steps basically.
+
+72
+00:04:24,640 --> 00:04:28,960
+So let's save that and let's run this script will say Python.
+
+73
+00:04:28,960 --> 00:04:36,150
+My test whip's my test Jim PI enter.
+
+74
+00:04:36,460 --> 00:04:38,200
+And here is our initial observation.
+
+75
+00:04:38,200 --> 00:04:41,090
+So this is the state that the environment starts out.
+
+76
+00:04:41,080 --> 00:04:44,660
+And so that is what return is return when you reset the state.
+
+77
+00:04:44,760 --> 00:04:50,320
+This the array here and this basically represents that poll standing straight up with the cart in the
+
+78
+00:04:50,320 --> 00:04:51,290
+middle position.
+
+79
+00:04:52,110 --> 00:04:56,940
+And some things are barely off zero so you can see here that it's already starting to feel a little
+
+80
+00:04:56,940 --> 00:04:57,220
+bit.
+
+81
+00:04:57,270 --> 00:05:01,380
+If it was straight up it would just stay that way so we needed to be tilted a little bit so that it
+
+82
+00:05:01,380 --> 00:05:03,390
+can continue to start moving.
+
+83
+00:05:03,390 --> 00:05:03,780
+OK.
+
+84
+00:05:04,020 --> 00:05:07,260
+So let's go ahead and separate this line right here.
+
+85
+00:05:08,920 --> 00:05:10,740
+And set that as action.
+
+86
+00:05:10,750 --> 00:05:13,240
+So remember we haven't talked that much about actions yet.
+
+87
+00:05:13,480 --> 00:05:16,590
+But again this is just performing a random action.
+
+88
+00:05:16,660 --> 00:05:20,800
+So in that environment the action space we will talk about this term for the next lecture.
+
+89
+00:05:20,800 --> 00:05:25,780
+Sample It basically take a random action and set that as reaction then I'm going to pass that action
+
+90
+00:05:26,230 --> 00:05:28,210
+into step later on.
+
+91
+00:05:28,360 --> 00:05:31,990
+Our agent is actually going to take care of doing these actions.
+
+92
+00:05:33,320 --> 00:05:34,140
+So we have our action.
+
+93
+00:05:34,160 --> 00:05:37,790
+And we passed that into step and the step function returns for things.
+
+94
+00:05:37,790 --> 00:05:40,330
+And these are the four things we were discussing in the slides.
+
+95
+00:05:40,640 --> 00:05:51,100
+So return back in observation a reward a done variable and the info and we can set that equal to environment
+
+96
+00:05:51,100 --> 00:05:51,560
+step.
+
+97
+00:05:51,700 --> 00:05:56,600
+So here I'm just doing tuple and packing to grab the four things that are returned as a result of passing
+
+98
+00:05:56,620 --> 00:05:59,720
+an action into the next step of the environment.
+
+99
+00:05:59,740 --> 00:06:05,950
+You reward your get back an observation a reward the stun variable and info and I'm just going to copy
+
+100
+00:06:05,950 --> 00:06:11,500
+and paste from the notes a bunch of print statements that print these out along with a little string
+
+101
+00:06:11,530 --> 00:06:12,510
+indicating what they are.
+
+102
+00:06:12,520 --> 00:06:13,900
+Only place that in here.
+
+103
+00:06:14,050 --> 00:06:16,020
+All this is just from your notes.
+
+104
+00:06:16,030 --> 00:06:23,000
+But all I'm doing here is I'm printing out each of these with a little bit of spacing for readability.
+
+105
+00:06:23,050 --> 00:06:27,460
+So we're going to perform one random action that I'm going to print out the observation print out the
+
+106
+00:06:27,460 --> 00:06:28,620
+reward.
+
+107
+00:06:28,620 --> 00:06:31,770
+Print out the done variable and then print out info.
+
+108
+00:06:32,200 --> 00:06:34,450
+So let's save that and run this again.
+
+109
+00:06:35,400 --> 00:06:39,620
+On my test Jim and I'm going to expand this because basically we it render render everything we just
+
+110
+00:06:39,620 --> 00:06:41,170
+have a bunch of stuff printed out.
+
+111
+00:06:41,300 --> 00:06:43,340
+So let's scroll back up here.
+
+112
+00:06:43,340 --> 00:06:47,170
+So we have our initial observation that is this right here.
+
+113
+00:06:47,360 --> 00:06:51,590
+And then we performed the one random action and you can see here now our observation has changed after
+
+114
+00:06:51,590 --> 00:06:52,990
+performing that random action.
+
+115
+00:06:53,210 --> 00:06:55,990
+Our reward return back is just one point zero.
+
+116
+00:06:56,060 --> 00:06:56,850
+Is it done.
+
+117
+00:06:56,880 --> 00:06:58,280
+No it's false it's not done yet.
+
+118
+00:06:58,280 --> 00:07:03,200
+Which kind of makes sense after one timestep you're unlikely to have the pool fall over yet and that
+
+119
+00:07:03,200 --> 00:07:05,760
+info because we don't have any debugging issues.
+
+120
+00:07:05,830 --> 00:07:07,040
+Just an empty dictionary.
+
+121
+00:07:07,310 --> 00:07:09,080
+Then we perform another random action.
+
+122
+00:07:09,080 --> 00:07:10,830
+We get back another observation.
+
+123
+00:07:11,000 --> 00:07:13,520
+The reward right now is just 1.0 done.
+
+124
+00:07:13,550 --> 00:07:15,540
+False info etc..
+
+125
+00:07:15,710 --> 00:07:23,180
+So you can imagine is if we're performing an action that moves the poll with a less angle across that
+
+126
+00:07:23,180 --> 00:07:26,210
+vertical basically fixed in the poll so it stands straight again.
+
+127
+00:07:26,210 --> 00:07:28,240
+Our reward is going to be bigger.
+
+128
+00:07:28,430 --> 00:07:33,890
+So eventually we're going to want our agent to take in these four values and do whatever it needs to
+
+129
+00:07:33,890 --> 00:07:40,040
+do action wise either go left or right to initiate a bigger reward and right now convert based reward
+
+130
+00:07:40,040 --> 00:07:44,410
+is 1.0 because since we're performing random actions we're not really doing anything.
+
+131
+00:07:44,740 --> 00:07:45,250
+OK.
+
+132
+00:07:45,530 --> 00:07:47,480
+So that's really all we need to understand about this.
+
+133
+00:07:47,480 --> 00:07:52,580
+We can get back an observation a reward a done variable indicating whether or not we're done with this
+
+134
+00:07:52,580 --> 00:07:56,900
+particular iteration the environment and then back this in for debugging.
+
+135
+00:07:56,900 --> 00:08:00,890
+All right thanks everyone and I'll see you at the next lecture where we begin to discuss how we can
+
+136
+00:08:00,890 --> 00:08:03,950
+actually set actions into the environment.
+
+137
+00:08:03,970 --> 00:08:04,540
+I'll see you there.
+

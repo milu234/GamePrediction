@@ -1,0 +1,356 @@
+1
+00:00:05,480 --> 00:00:11,460
+Welcome everyone to this lecture on using tensor flow for variables and placeholders so there's really
+
+2
+00:00:11,460 --> 00:00:15,230
+two main types of tents or objects in a tensor flow graph.
+
+3
+00:00:15,450 --> 00:00:20,250
+And we're going to talk about variables and placeholders and they should feel already familiar based
+
+4
+00:00:20,250 --> 00:00:22,040
+off the last section of the course.
+
+5
+00:00:23,120 --> 00:00:28,280
+During the optimization process tensor flow tune's the parameters of the model to try to get a better
+
+6
+00:00:28,280 --> 00:00:34,100
+fit on your training data and the variables can hold the values of weights and biases throughout the
+
+7
+00:00:34,100 --> 00:00:37,070
+session variables do need to be initialized.
+
+8
+00:00:37,070 --> 00:00:41,870
+So when you're running your session you're going to run a line command that initializes all the variables
+
+9
+00:00:42,100 --> 00:00:43,380
+that you've already defined.
+
+10
+00:00:44,470 --> 00:00:50,410
+Now let's talk about placeholders placeholders as we've already discussed are initially empty and they're
+
+11
+00:00:50,410 --> 00:00:53,640
+used to feed in the actual training examples.
+
+12
+00:00:53,710 --> 00:00:56,560
+That is your actual data that you're training your model on.
+
+13
+00:00:56,620 --> 00:01:00,380
+However you should note they do need a declared expected data type.
+
+14
+00:01:00,490 --> 00:01:05,200
+For example T.F. flow 32 with an optional shape argument.
+
+15
+00:01:05,200 --> 00:01:08,450
+So what the placeholder is doing it's going to be empty at first.
+
+16
+00:01:08,470 --> 00:01:13,240
+Essentially a placeholder and then your data is going to be fed into that placeholder.
+
+17
+00:01:13,270 --> 00:01:19,720
+A lot of times in small batches so that placeholder needs to know mainly two things what the data type
+
+18
+00:01:19,720 --> 00:01:23,250
+is going to look like whether it's going to be an integer floating point number etc..
+
+19
+00:01:23,530 --> 00:01:25,830
+And then it also needs to know the shape of the data.
+
+20
+00:01:27,120 --> 00:01:29,260
+All right let's go ahead and see some examples of each.
+
+21
+00:01:29,280 --> 00:01:33,510
+And then once we understand placeholders and variables we're going to be ready to build our first model
+
+22
+00:01:33,510 --> 00:01:34,740
+with tensor flow.
+
+23
+00:01:34,740 --> 00:01:36,900
+Let's open up a Jupiter notebook.
+
+24
+00:01:36,900 --> 00:01:37,170
+All right.
+
+25
+00:01:37,170 --> 00:01:43,230
+So just very quickly I'm going to show you the syntax used intenser flow for variables and placeholders.
+
+26
+00:01:43,230 --> 00:01:49,170
+And I'm actually going to create an interactive session here so I'll say T.F. interactive session.
+
+27
+00:01:49,170 --> 00:01:51,740
+That way it can run all of this in different cells.
+
+28
+00:01:51,870 --> 00:01:56,330
+So I'll say my tensor is equal to.
+
+29
+00:01:56,340 --> 00:02:00,380
+And let's go ahead and create a tensor of let's say a random uniform.
+
+30
+00:02:00,380 --> 00:02:07,070
+So we'll say random uniform and we're going to make this be a four by four and if we take a look we'll
+
+31
+00:02:07,070 --> 00:02:10,800
+say minimum value is zero maximum value is 1.
+
+32
+00:02:10,820 --> 00:02:16,240
+So now we have this tensor So if I take a look at it my tensor it's this random uniform tensor flew
+
+33
+00:02:16,280 --> 00:02:17,100
+32.
+
+34
+00:02:17,300 --> 00:02:20,730
+So notice here has 32 data type.
+
+35
+00:02:21,260 --> 00:02:28,480
+So then I'm going to create a variable and this is going to be T.F. variable and if you take a look
+
+36
+00:02:28,480 --> 00:02:33,700
+at the initial arguments here you have an initial valuable initial value excuse me trainable collections
+
+37
+00:02:33,770 --> 00:02:38,590
+etc. mainly all we have to do is just tell it the actual initial value.
+
+38
+00:02:38,670 --> 00:02:42,860
+So we're seeing actual value is equal to my tensor.
+
+39
+00:02:43,070 --> 00:02:45,330
+The rest of that can be under defaults.
+
+40
+00:02:45,350 --> 00:02:51,060
+So now if I say print's my variable I now have T.F. variable.
+
+41
+00:02:51,270 --> 00:02:53,670
+So if I actually want to run this variable.
+
+42
+00:02:53,700 --> 00:03:02,320
+So if I say session run my variable you'll notice you get a failure here and that's because as I mentioned
+
+43
+00:03:02,320 --> 00:03:08,040
+in the slides you need to initialize your variables so you're going to see us run initialize lines pretty
+
+44
+00:03:08,040 --> 00:03:09,690
+much every single model we build.
+
+45
+00:03:09,840 --> 00:03:16,480
+So the way you do that let me husht to come at this out first is you need to say in its is equal to
+
+46
+00:03:16,580 --> 00:03:24,690
+T.F. and you'll say global variables initializer initialiser open and close parentheses and then will
+
+47
+00:03:24,710 --> 00:03:27,620
+you need to do is run this initializer first.
+
+48
+00:03:27,640 --> 00:03:30,600
+So I'll say that session run.
+
+49
+00:03:30,630 --> 00:03:35,380
+And a lot of times you'll see us run this nation with with session.
+
+50
+00:03:35,380 --> 00:03:37,360
+But right now we're just doing interactive session.
+
+51
+00:03:37,690 --> 00:03:42,520
+So I need to run this initializations or say SEST thought run in it.
+
+52
+00:03:42,850 --> 00:03:47,540
+And now all these variables have been initialized so I should be able to run this line again.
+
+53
+00:03:49,170 --> 00:03:53,190
+And hopefully now I see that four by four matrix of random uniform numbers.
+
+54
+00:03:53,190 --> 00:03:56,120
+And there it is four by four random numbers.
+
+55
+00:03:56,190 --> 00:04:00,660
+So again the key thing to note here is when you're creating a variable and you intend to use it in your
+
+56
+00:04:00,660 --> 00:04:05,990
+session you're going to need to initialize all these variables and it's quite simple after you create
+
+57
+00:04:06,030 --> 00:04:06,660
+your variables.
+
+58
+00:04:06,690 --> 00:04:12,330
+You just set this in two global variables initializer and then some more in your session you're going
+
+59
+00:04:12,330 --> 00:04:13,600
+to run it.
+
+60
+00:04:13,720 --> 00:04:18,340
+And that allows you to run all of these variables in the operations that depend on them.
+
+61
+00:04:18,340 --> 00:04:20,740
+Placeholders look really similar.
+
+62
+00:04:20,740 --> 00:04:22,910
+So I'm going to make a really simple placeholder here.
+
+63
+00:04:22,910 --> 00:04:32,080
+PH's equal to we'll see T.F. leps place holder and then mainly the thing to say is what data type to
+
+64
+00:04:32,080 --> 00:04:34,240
+expect and what shape to expect.
+
+65
+00:04:34,240 --> 00:04:41,690
+So for instance a lot of times you can just say T.F. will say flow 32 or 64.
+
+66
+00:04:41,740 --> 00:04:45,810
+Generally for us 32 bits of information is more than enough for all our training.
+
+67
+00:04:45,970 --> 00:04:52,900
+And then depending on what shape you expect you can say shape is equal to something like none or 4 or
+
+68
+00:04:52,900 --> 00:04:55,260
+maybe four by four etc..
+
+69
+00:04:55,390 --> 00:04:56,770
+That really depends on the data itself.
+
+70
+00:04:56,770 --> 00:04:59,160
+So we're going to cover that in a little more detail later on.
+
+71
+00:04:59,160 --> 00:05:03,970
+But for now we can just say there is no shape and then we have a placeholder.
+
+72
+00:05:04,300 --> 00:05:05,030
+OK.
+
+73
+00:05:05,440 --> 00:05:08,520
+So again those are variables in placeholders.
+
+74
+00:05:08,770 --> 00:05:14,710
+So really the thing you need to remember out of this lecture is that once you create a variable before
+
+75
+00:05:14,710 --> 00:05:19,270
+you run it in your session you need to initialize all the variables placeholders essentially the same
+
+76
+00:05:19,270 --> 00:05:20,840
+thing you provide a data type.
+
+77
+00:05:20,860 --> 00:05:26,200
+And as far as the shape it's really common to have a shape that looks as far as the tuples concerned
+
+78
+00:05:26,200 --> 00:05:28,200
+something like none.
+
+79
+00:05:28,330 --> 00:05:29,650
+Comma 5.
+
+80
+00:05:29,860 --> 00:05:34,300
+And the reason a lot of times if you're looking stuff up in the documentation you see placeholders with
+
+81
+00:05:34,300 --> 00:05:39,130
+this first one being none is because none as this first one can be filled with the actual number of
+
+82
+00:05:39,130 --> 00:05:44,290
+samples in the data which if you're feeding it in batches you may not know beforehand before creating
+
+83
+00:05:44,290 --> 00:05:45,330
+the placeholder.
+
+84
+00:05:45,340 --> 00:05:49,510
+So a lot of times you'll see that none and there will be more clear as we create our own models and
+
+85
+00:05:49,510 --> 00:05:50,500
+sensor flow.
+
+86
+00:05:50,890 --> 00:05:51,570
+All right.
+
+87
+00:05:51,730 --> 00:05:54,910
+Now that we understand this we're ready to build our first model which we're going to do in the next
+
+88
+00:05:54,910 --> 00:05:55,570
+lecture.
+
+89
+00:05:55,630 --> 00:05:56,370
+I'll see you there.
+

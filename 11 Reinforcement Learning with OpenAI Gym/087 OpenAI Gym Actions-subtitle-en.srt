@@ -1,0 +1,512 @@
+1
+00:00:05,560 --> 00:00:07,360
+Welcome back everyone in this lecture.
+
+2
+00:00:07,360 --> 00:00:13,030
+We're finally going to discuss Jim actions and basically show you how you can perform very basic actions
+
+3
+00:00:13,360 --> 00:00:15,070
+in your environment.
+
+4
+00:00:15,070 --> 00:00:20,890
+So we're going to do is create a very simple policy and our policy is going to be if we notice that
+
+5
+00:00:20,890 --> 00:00:23,080
+the pole is falling to the right.
+
+6
+00:00:23,080 --> 00:00:28,390
+We will move the cart to the right to try to adjust for that change and vice versa if the pool is moving
+
+7
+00:00:28,390 --> 00:00:33,730
+to the left starting to fall to the left will try to move the cart to the left to basically try to catch
+
+8
+00:00:33,730 --> 00:00:34,350
+it.
+
+9
+00:00:34,390 --> 00:00:39,910
+Now this is a very simple policy it's not taking into account things like the angular velocity of the
+
+10
+00:00:39,910 --> 00:00:43,230
+pole how fast it's falling down or even the velocity of the car.
+
+11
+00:00:43,360 --> 00:00:48,400
+So it's going to shift left and right and this sort of strategy is eventually going to fail.
+
+12
+00:00:48,430 --> 00:00:55,060
+But let's go ahead and do it anyway just tweaking it some practice with the action capabilities of the
+
+13
+00:00:55,060 --> 00:00:55,930
+environment.
+
+14
+00:00:55,930 --> 00:01:00,880
+And we're also going to explore just a little bit of that action underscore space variable that we've
+
+15
+00:01:00,880 --> 00:01:06,250
+been looking at before which means we'll do a little bit of Python code straight into the command line.
+
+16
+00:01:06,250 --> 00:01:10,730
+You don't really need to follow along with that but that's just more for exploring the action underscore
+
+17
+00:01:10,720 --> 00:01:11,770
+space variable.
+
+18
+00:01:11,950 --> 00:01:16,390
+OK let's open our text editor and if you want you can also open up your command prompt.
+
+19
+00:01:16,540 --> 00:01:17,380
+Let's hop to that.
+
+20
+00:01:17,670 --> 00:01:17,920
+OK.
+
+21
+00:01:17,920 --> 00:01:19,700
+Here I am at my text editor.
+
+22
+00:01:19,720 --> 00:01:24,610
+I haven't emptied up my script file but what I want to do first is with my environment activated I'm
+
+23
+00:01:24,610 --> 00:01:26,400
+going to call Python.
+
+24
+00:01:26,740 --> 00:01:31,430
+And this is going to allow me to basically explore some of the extra capabilities of Jim.
+
+25
+00:01:31,550 --> 00:01:32,010
+So we'll see.
+
+26
+00:01:32,020 --> 00:01:37,230
+Import Jim and then we're going to do here is create an environment just as we did before.
+
+27
+00:01:37,450 --> 00:01:39,660
+Basically we're doing this all at the command line.
+
+28
+00:01:40,060 --> 00:01:46,690
+So we'll say cart pull cash the zero past in that string and then we're going to have here is the ability
+
+29
+00:01:46,690 --> 00:01:54,460
+to say in the dot and then if I hit tab here I'm going to see the various attributes and methods that
+
+30
+00:01:54,460 --> 00:01:56,470
+are available to this environment.
+
+31
+00:01:56,530 --> 00:02:00,940
+And the one that we've been working with right now is action space and there's another one called observation
+
+32
+00:02:00,940 --> 00:02:01,750
+space.
+
+33
+00:02:01,750 --> 00:02:04,130
+So these are the two space attributes.
+
+34
+00:02:04,130 --> 00:02:07,000
+So let's go ahead and call action space.
+
+35
+00:02:07,000 --> 00:02:10,670
+And if you do a dot and hit tab again it's basically working like a Jupiter notebook.
+
+36
+00:02:10,840 --> 00:02:14,270
+You can see that we have contains sample shape etc..
+
+37
+00:02:14,650 --> 00:02:20,260
+So if we just do the action space call that with no extra prince is there an action or enter excuse
+
+38
+00:02:20,260 --> 00:02:20,560
+me.
+
+39
+00:02:20,560 --> 00:02:26,520
+You see that we see discrete too and that basically means that our actions we have two the screen numbers
+
+40
+00:02:26,530 --> 00:02:27,440
+available to us.
+
+41
+00:02:27,460 --> 00:02:31,390
+And if you look up the documentation again that's just 0 and 1.
+
+42
+00:02:31,510 --> 00:02:38,190
+So the total space of the actions available are just two discrete numbers zero and one left and right.
+
+43
+00:02:38,380 --> 00:02:41,720
+And then similarly there's an observation space.
+
+44
+00:02:41,740 --> 00:02:43,550
+You can do tabbed out a complete that.
+
+45
+00:02:43,750 --> 00:02:46,190
+And if I hit Enter Lotus we get Box 4.
+
+46
+00:02:46,210 --> 00:02:48,390
+So there's four observations that come back.
+
+47
+00:02:48,610 --> 00:02:53,060
+And those are the current position velocity the pull angle and the angular velocity.
+
+48
+00:02:53,140 --> 00:02:57,270
+And if you want to know more about that again you'd have to check into the documentation.
+
+49
+00:02:57,280 --> 00:03:02,420
+Basically all these environments are documented in open the eye for what actions are available and what
+
+50
+00:03:02,440 --> 00:03:03,930
+observations are available.
+
+51
+00:03:03,970 --> 00:03:08,020
+And this is one quick way of knowing if you're on the right environment.
+
+52
+00:03:08,020 --> 00:03:12,900
+So here we have two discrete actions available and for observations to get back.
+
+53
+00:03:12,900 --> 00:03:14,090
+So I'm going to quit this now.
+
+54
+00:03:14,970 --> 00:03:19,590
+And then it's clear that and let's minimize this a little more.
+
+55
+00:03:19,590 --> 00:03:24,270
+So let's go ahead and do that hard coded policy.
+
+56
+00:03:24,270 --> 00:03:29,630
+So we'll start by saying import Jim and I'm going to create an environment variable.
+
+57
+00:03:29,740 --> 00:03:34,440
+Jim make and again it's just going to be carpool.
+
+58
+00:03:34,740 --> 00:03:46,780
+Zero and I'll set my initial observation observation which is spelled right to be equal to reset here.
+
+59
+00:03:46,850 --> 00:03:49,400
+So we're going to reset the environment to its defaults.
+
+60
+00:03:49,430 --> 00:03:53,030
+And then let's go ahead and do this for 1000 times steps.
+
+61
+00:03:53,620 --> 00:03:58,690
+So for one time steps in this environment I will render the environment so we're actually going to view
+
+62
+00:03:58,720 --> 00:03:59,670
+our policy.
+
+63
+00:03:59,710 --> 00:04:03,730
+You don't always have to do this especially when you're training maybe you're not going to be watching
+
+64
+00:04:03,730 --> 00:04:06,060
+a computer so you don't really care about rendering the environment.
+
+65
+00:04:06,100 --> 00:04:12,250
+But for now we will go ahead and see what it looks like and the next thing to do is grab the four things
+
+66
+00:04:12,250 --> 00:04:13,990
+that are observation returns back.
+
+67
+00:04:14,020 --> 00:04:20,440
+So remember or observation returns back the current position the current velocity and you can call these
+
+68
+00:04:20,440 --> 00:04:24,110
+whatever you want the pull angle and then angular velocity.
+
+69
+00:04:24,160 --> 00:04:29,740
+So I just created four variables there and I'm going to essentially unpack this tuple of the observation
+
+70
+00:04:31,070 --> 00:04:35,070
+and now it's time to actually create a very simple hard coded policy.
+
+71
+00:04:35,060 --> 00:04:41,460
+So the pull angle is greater than zero than what's actually happening here.
+
+72
+00:04:41,490 --> 00:04:46,920
+Well the angle is measured off a straight vertical line from the cart which means if it starts to lean
+
+73
+00:04:46,920 --> 00:04:52,140
+towards the right and getting a positive angle and it starts to lean towards the left off that vertical
+
+74
+00:04:52,140 --> 00:04:53,690
+line I get a negative angle.
+
+75
+00:04:53,760 --> 00:04:57,670
+So if the pull angle is greater than zero then I know it's starting to lean towards the right.
+
+76
+00:04:57,720 --> 00:04:59,180
+So if the pulls lean towards the right.
+
+77
+00:04:59,190 --> 00:05:01,800
+Let's go ahead and move the cart towards the right.
+
+78
+00:05:01,950 --> 00:05:04,310
+In an attempt to try to fix that.
+
+79
+00:05:04,490 --> 00:05:07,130
+So we're going to say action is equal to 1
+
+80
+00:05:09,910 --> 00:05:10,540
+else.
+
+81
+00:05:10,660 --> 00:05:14,680
+Well in that case we know that the angle is going to be negative meaning the pole is falling to the
+
+82
+00:05:14,680 --> 00:05:15,170
+left.
+
+83
+00:05:15,280 --> 00:05:17,090
+So we can try to move to the left.
+
+84
+00:05:17,200 --> 00:05:24,040
+So I'll say action is an equal to zero.
+
+85
+00:05:24,050 --> 00:05:24,410
+All right.
+
+86
+00:05:24,530 --> 00:05:29,940
+So again very simple hard coded policy here and we're going to go ahead and then just perform that action.
+
+87
+00:05:30,790 --> 00:05:39,530
+So I'll say observation reward done info is equal to the environment.
+
+88
+00:05:39,930 --> 00:05:42,720
+Step and then import that action.
+
+89
+00:05:42,870 --> 00:05:49,080
+And this is the very basic idea of how you can use open aiight gym for environment and working within
+
+90
+00:05:49,080 --> 00:05:49,940
+an environment.
+
+91
+00:05:50,160 --> 00:05:55,410
+So these are the absolute basics and we're going to do is eventually use tensor flow to try to create
+
+92
+00:05:55,410 --> 00:05:57,160
+a reinforcement learning algorithm.
+
+93
+00:05:57,210 --> 00:06:01,770
+But it's important to understand everything that you see here because these are the basic building blocks
+
+94
+00:06:01,770 --> 00:06:04,830
+that we're going to use when creating our learning agent.
+
+95
+00:06:04,830 --> 00:06:06,320
+So let's go interview each of these lines.
+
+96
+00:06:06,330 --> 00:06:07,470
+We import Jim.
+
+97
+00:06:07,620 --> 00:06:08,940
+We make the environment.
+
+98
+00:06:08,970 --> 00:06:13,260
+Again you have some sort of string code here that you look up in the documentation for each specific
+
+99
+00:06:13,260 --> 00:06:13,890
+environment.
+
+100
+00:06:13,950 --> 00:06:17,310
+Certain string codes have dependencies such as the Atari games.
+
+101
+00:06:17,430 --> 00:06:22,590
+Then you reset the environment to the default that's going to be your first observation and for how
+
+102
+00:06:22,590 --> 00:06:25,780
+ever many times steps you want operationally you can render this.
+
+103
+00:06:25,920 --> 00:06:29,080
+So if there's a visual aspect to this you can see the visual aspect.
+
+104
+00:06:29,250 --> 00:06:32,990
+Then you go ahead and grab whatever the observation returns back.
+
+105
+00:06:33,030 --> 00:06:37,110
+In our case we saw that this observation returns back four variables.
+
+106
+00:06:37,110 --> 00:06:40,730
+The cart position cart velocity at the pole angle and angular velocity.
+
+107
+00:06:40,920 --> 00:06:45,360
+And then you're going to have your learning agent do some sort of logic here or some sort of learning.
+
+108
+00:06:45,360 --> 00:06:50,040
+Right now we have a simple hardcoded policy where we're just moving left and right depending on the
+
+109
+00:06:50,040 --> 00:06:51,150
+puls angle.
+
+110
+00:06:51,210 --> 00:06:55,440
+Then once you've done that you're learning agent will decide on an action you're going to feed that
+
+111
+00:06:55,440 --> 00:06:58,960
+action into this step function off the environment.
+
+112
+00:06:59,040 --> 00:07:04,620
+And then that's going to return back a new observation to a new set of positions and velocities a reward
+
+113
+00:07:04,710 --> 00:07:09,810
+that your agent is eventually going to use trying to maximize that reward an indication whether or not
+
+114
+00:07:09,900 --> 00:07:10,880
+it's done.
+
+115
+00:07:11,040 --> 00:07:16,710
+So if this is done what you may want to do here is that say maybe put this in a for loop and put your
+
+116
+00:07:16,710 --> 00:07:21,960
+learning agent within a while loop so that it keeps iterating over while not done or something similar.
+
+117
+00:07:22,020 --> 00:07:28,030
+And then you also have this info which is used for debugging purposes OK let's save that right now and
+
+118
+00:07:28,030 --> 00:07:33,610
+let's actually see how this performs we'll say Python my apps my test Jim.
+
+119
+00:07:33,670 --> 00:07:36,630
+So my test Jim that PI enter.
+
+120
+00:07:36,640 --> 00:07:42,640
+And we should see kind of wobble a little bit and then it's a field but you can see here that it performs
+
+121
+00:07:42,640 --> 00:07:44,580
+a lot better than just random sampling.
+
+122
+00:07:44,710 --> 00:07:46,650
+When you ran them sample they went straight off the screen.
+
+123
+00:07:46,660 --> 00:07:49,030
+But here we can see it trying to adjust.
+
+124
+00:07:49,060 --> 00:07:50,840
+And then it failed.
+
+125
+00:07:50,860 --> 00:07:51,480
+All right.
+
+126
+00:07:51,700 --> 00:07:55,880
+So by now we should understand how you actually work with open a gym.
+
+127
+00:07:55,930 --> 00:07:59,900
+The next step is to use test flow to build out a learning agent.
+
+128
+00:08:00,100 --> 00:08:02,020
+Thanks everyone and I'll see at the next lecture.
+

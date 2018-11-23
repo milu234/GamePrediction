@@ -1,0 +1,652 @@
+1
+00:00:05,420 --> 00:00:10,860
+Welcome back everyone to where we left off last time the next thing we want to do is get our and see
+
+2
+00:00:10,860 --> 00:00:12,740
+e loss ready to go.
+
+3
+00:00:12,740 --> 00:00:19,850
+So we're going to create two variables are NC weights and see biases so we'll see errancy weights or
+
+4
+00:00:19,850 --> 00:00:26,960
+ATF variable and then we're going to just start these off from a truncated normal distribution so they
+
+5
+00:00:26,970 --> 00:00:34,620
+truncated normal and then we'll passen for the dimensions vocabulary size by the number of dimensions
+
+6
+00:00:34,620 --> 00:00:38,710
+for the embeddings which in our case we define as 150.
+
+7
+00:00:38,730 --> 00:00:47,490
+And then we'll go ahead and say the standard deviation is equal to 1.0 divided by the square root of
+
+8
+00:00:47,910 --> 00:00:50,780
+the imbedding size.
+
+9
+00:00:50,820 --> 00:00:52,750
+We'll go ahead and put that in.
+
+10
+00:00:53,250 --> 00:00:58,820
+So those are weights and then we'll go ahead and create our bias term So says.
+
+11
+00:00:59,080 --> 00:01:04,200
+And this is also going to be a variable and for these We'll just initiate them as heroes.
+
+12
+00:01:07,320 --> 00:01:11,700
+And the dimensions are going to be by the vocabulary size.
+
+13
+00:01:11,850 --> 00:01:12,130
+All right.
+
+14
+00:01:12,140 --> 00:01:19,620
+Now we want to compute the average and the last for the Bache so following along with the documentation
+
+15
+00:01:19,620 --> 00:01:21,880
+example we'll say T.F. that reduce mean.
+
+16
+00:01:22,260 --> 00:01:26,730
+And then we get called T.F. and then dot and C E loss.
+
+17
+00:01:26,760 --> 00:01:32,040
+And this is a function that basically just nicely takes in a lot of the parameters we are just describing.
+
+18
+00:01:32,040 --> 00:01:35,150
+So a lot of variables that we just made we're going to pass them in.
+
+19
+00:01:35,160 --> 00:01:39,660
+So if you do shift tabs you can see the various orders that ask for weights the biases the labels the
+
+20
+00:01:39,660 --> 00:01:40,730
+inputs etc..
+
+21
+00:01:41,010 --> 00:01:49,340
+So say ency weights and see bias's will pass and the training labels the embed parameter we created
+
+22
+00:01:49,340 --> 00:01:53,860
+earlier than the number sampled variable.
+
+23
+00:01:54,180 --> 00:02:02,160
+And then finally the vocabulary size OK once we have that lost it's time for the optimizer will say
+
+24
+00:02:02,210 --> 00:02:06,710
+optimizer is equal to T.F. train and we use an atom optimizer.
+
+25
+00:02:06,710 --> 00:02:12,110
+You can also use gradient descent optimizer and we'll make the learning rate a little faster just because
+
+26
+00:02:12,110 --> 00:02:14,050
+it takes a really long time to train.
+
+27
+00:02:14,190 --> 00:02:16,820
+That may affect our results so just keep that in mind.
+
+28
+00:02:16,860 --> 00:02:22,260
+Usually you have to run this for something like 100000 steps or more to get anything meaningful depending
+
+29
+00:02:22,260 --> 00:02:24,130
+on how large your data is.
+
+30
+00:02:24,390 --> 00:02:28,470
+Then we'll say optimizer that minimize and say loss.
+
+31
+00:02:28,490 --> 00:02:32,660
+Up next we want to be able to compute the cosigners similarity between many bad examples in all the
+
+32
+00:02:32,660 --> 00:02:33,450
+embeddings.
+
+33
+00:02:33,500 --> 00:02:38,840
+So I the copy and paste here directly from the documentation example the code that allows us to do that
+
+34
+00:02:38,960 --> 00:02:44,620
+and it basically ends up creating some sort of normalized embeddings and then it uses this T.F. and
+
+35
+00:02:44,880 --> 00:02:49,530
+imbedding lookup functionality in order to continue on with that.
+
+36
+00:02:49,550 --> 00:02:50,510
+So we'll run that.
+
+37
+00:02:50,600 --> 00:02:55,750
+And then finally we're going to set data index as 0.
+
+38
+00:02:56,000 --> 00:03:00,240
+So the reason I'm doing that is because this is a global variable that's called by the batch generators
+
+39
+00:03:00,240 --> 00:03:03,770
+generators we come up here it asks for the data index.
+
+40
+00:03:03,770 --> 00:03:06,250
+So we'll go ahead and set that as a zero.
+
+41
+00:03:06,530 --> 00:03:16,880
+And then finally we'll say in it is equal to T.F. global variables initialiser and then we'll go ahead
+
+42
+00:03:16,910 --> 00:03:18,530
+and begin our session.
+
+43
+00:03:18,620 --> 00:03:20,880
+Now I'm going to run the Soneji pew.
+
+44
+00:03:21,020 --> 00:03:27,680
+So I need to put in this cheaper options code so I don't get any errors or basically So my GP isn't
+
+45
+00:03:27,690 --> 00:03:32,850
+crashed by taking up 100 percent of the GPU and then we'll start our first session.
+
+46
+00:03:32,850 --> 00:03:36,750
+So let me type out this line from the notes.
+
+47
+00:03:36,750 --> 00:03:46,260
+First off we're going to run that in it and we'll set our average loss to start off as 0 and then we'll
+
+48
+00:03:46,260 --> 00:03:46,800
+do the following.
+
+49
+00:03:46,800 --> 00:03:52,310
+We'll say first that an range number of steps.
+
+50
+00:03:52,600 --> 00:03:53,770
+Scroll down here.
+
+51
+00:03:55,610 --> 00:04:05,980
+We'll have the batch inputs and batch labels equal to that generate batch function or we pass in the
+
+52
+00:04:05,980 --> 00:04:16,290
+batch size we declared earlier the number skips and then the skip window then we'll go hand the finer
+
+53
+00:04:16,290 --> 00:04:19,640
+feed dictionary so we can easily call it later on.
+
+54
+00:04:20,100 --> 00:04:26,340
+So this is just going to be for the placeholders of train inputs we pass in those batch inputs that
+
+55
+00:04:26,340 --> 00:04:27,420
+we just made.
+
+56
+00:04:27,660 --> 00:04:32,970
+And then for the trained labels for that placeholder we're going to pass in the labels
+
+57
+00:04:36,380 --> 00:04:36,750
+OK.
+
+58
+00:04:36,750 --> 00:04:44,490
+Finally we need to say session run and we're going to grab the trainer and the loss and then we're going
+
+59
+00:04:44,490 --> 00:04:51,030
+to give it the feed dictionary that we just created and then this is going to return a tuple So let's
+
+60
+00:04:51,030 --> 00:04:52,400
+go ahead and pack it.
+
+61
+00:04:52,710 --> 00:04:59,500
+I won't bother with the first item I want the second item which is the last value first I was going
+
+62
+00:04:59,500 --> 00:05:02,950
+to be the results of that trainer but I'm really just looking for the loss here because I'm going to
+
+63
+00:05:02,950 --> 00:05:06,450
+use that to add it on to the average loss.
+
+64
+00:05:07,380 --> 00:05:15,170
+So say average loss that's I say plus equal to loss value.
+
+65
+00:05:15,250 --> 00:05:18,820
+And then finally let's have some sort of evaluation metric continuing.
+
+66
+00:05:18,820 --> 00:05:26,980
+So say if step maade 1000 so we'll say every 1000 steps that's equal to zero.
+
+67
+00:05:26,980 --> 00:05:32,840
+What I'm going to do is say if step is greater than zero.
+
+68
+00:05:34,070 --> 00:05:43,860
+Then take the average loss and set it equal to average loss divided by a thousand.
+
+69
+00:05:43,880 --> 00:05:49,840
+Because what I'm going to do is take the average loss as an estimate over the last 1000 batches.
+
+70
+00:05:49,990 --> 00:05:52,780
+So then I will say once that's done print
+
+71
+00:05:56,520 --> 00:06:07,610
+average loss at Stapp they'll pass and the stop recurrently at they say is and then we'll finally say
+
+72
+00:06:07,610 --> 00:06:16,790
+average loss OK once that's done we'll just reset the average loss again to be zero.
+
+73
+00:06:17,000 --> 00:06:26,190
+And then we can say final embeddings is equal to the normalized beddings evaluated.
+
+74
+00:06:26,230 --> 00:06:30,670
+All right so now we just want to decide what number of steps we want to run this for.
+
+75
+00:06:30,670 --> 00:06:35,860
+So there is a higher rate that's within your current year that work where I ran this for 200 thousand
+
+76
+00:06:35,860 --> 00:06:41,980
+steps and we'll go ahead and just make this run for let's say 5000 steps so our results are probably
+
+77
+00:06:41,980 --> 00:06:43,180
+gonna be pretty meaningless.
+
+78
+00:06:43,240 --> 00:06:45,110
+But that way we don't wait here forever.
+
+79
+00:06:45,310 --> 00:06:53,260
+So we'll say number of steps is equal to 5000 so will run this mixture would have the errors average
+
+80
+00:06:53,260 --> 00:06:57,100
+loss and a little bit we should see 1000.
+
+81
+00:06:57,280 --> 00:06:58,120
+Make sure it's running
+
+82
+00:07:01,200 --> 00:07:02,250
+all right there it is.
+
+83
+00:07:02,250 --> 00:07:06,780
+So what I'm going to do now is Skip forward in time until it's then training for 5000 steps.
+
+84
+00:07:06,990 --> 00:07:10,270
+Again this is definitely going to take a while especially if you're on a CPQ.
+
+85
+00:07:10,530 --> 00:07:14,850
+So that's why we have that an umpire Ray that's already been trained for you so you can load it up if
+
+86
+00:07:14,850 --> 00:07:15,780
+you want to.
+
+87
+00:07:16,140 --> 00:07:16,460
+OK.
+
+88
+00:07:16,480 --> 00:07:21,260
+And then hop forward in time OK it's done running for those 5000 steps.
+
+89
+00:07:21,270 --> 00:07:26,820
+We're going to do now is try to visualize it by using the distributed stochastic neighbor embedding
+
+90
+00:07:27,180 --> 00:07:30,420
+which basically allows us to transform these final embeddings.
+
+91
+00:07:30,510 --> 00:07:34,540
+Take a look at the final embeddings the shape of them.
+
+92
+00:07:35,100 --> 00:07:37,000
+It's going to be 50000 by 150.
+
+93
+00:07:37,000 --> 00:07:42,120
+So it's 50000 vocabulary words defined by vectors in 150 dimensions.
+
+94
+00:07:42,240 --> 00:07:47,460
+So we want to reduce that to just be on to them and shows that we can plot it so we can do this using
+
+95
+00:07:47,780 --> 00:07:55,750
+the Essenes all say S-K learn manifold import T S and E.
+
+96
+00:07:56,020 --> 00:07:58,770
+So the way I like to just intuitively explain this.
+
+97
+00:07:58,810 --> 00:08:03,700
+It's a pretty complicated algorithm but basically what it does is you can imagine that if you had a
+
+98
+00:08:03,700 --> 00:08:09,700
+bunch of points on a crumpled up piece of paper you could then unfold that piece of paper to make it
+
+99
+00:08:09,700 --> 00:08:15,960
+flat and to that missional see transform it to this three the wad into this to the flat plane.
+
+100
+00:08:16,180 --> 00:08:21,230
+So this is essentially what this algorithm is trying to do except it's going to do that for 150 that
+
+101
+00:08:21,250 --> 00:08:24,850
+mentions all wadded up and then bring it back down to two.
+
+102
+00:08:24,880 --> 00:08:26,500
+So this by itself does take a while.
+
+103
+00:08:26,500 --> 00:08:27,710
+So just keep that in mind.
+
+104
+00:08:29,170 --> 00:08:34,180
+So we're going to create an instance of this and there's various parameters you can use various parameters
+
+105
+00:08:34,180 --> 00:08:36,220
+you can play around of here.
+
+106
+00:08:36,220 --> 00:08:38,240
+Perplexity is one of them a mixture.
+
+107
+00:08:38,260 --> 00:08:39,150
+That's correct.
+
+108
+00:08:39,400 --> 00:08:42,050
+So perplexity will set that equal to 30.
+
+109
+00:08:42,370 --> 00:08:46,060
+The number of components we want at the end is just going to be equal to two.
+
+110
+00:08:46,060 --> 00:08:52,540
+So we just want to them mentions and we're going to initialize with PCa principal component analysis
+
+111
+00:08:53,020 --> 00:09:00,090
+and say the number of iterations you can go through are 5000 so run that and then we only are going
+
+112
+00:09:00,090 --> 00:09:03,720
+to plot let's say just 500 of our words.
+
+113
+00:09:04,200 --> 00:09:14,510
+So if say plot only 500 words and then we're saying that the low dimension embeddings are going to be
+
+114
+00:09:14,510 --> 00:09:19,880
+equal to that model and we're going to say fit.
+
+115
+00:09:19,890 --> 00:09:26,700
+Transform the final embeddings and we're only going to go for those first five hundred.
+
+116
+00:09:26,890 --> 00:09:33,670
+So say plot only comma colon so only grabbed the first five hundred words.
+
+117
+00:09:33,710 --> 00:09:39,250
+OK so now that's fitting transforming basically reducing those 150 them mentions into two that mentions
+
+118
+00:09:39,640 --> 00:09:45,670
+through the relatively complicated process of T distributed sarcastic neighbor imbedding and this line
+
+119
+00:09:45,670 --> 00:09:47,620
+should take you a while.
+
+120
+00:09:47,620 --> 00:09:49,320
+Took me just a couple of seconds here.
+
+121
+00:09:49,330 --> 00:09:51,040
+Maybe 15 10 seconds.
+
+122
+00:09:51,040 --> 00:09:54,250
+So now we're going to do is plot this out and see how it goes.
+
+123
+00:09:54,250 --> 00:09:57,480
+So the other thing we need to do is grab the labels so I can plot those as well.
+
+124
+00:09:57,910 --> 00:10:07,180
+Well see labels is vocabulary I for I in arr. 500.
+
+125
+00:10:07,190 --> 00:10:09,220
+So plot only.
+
+126
+00:10:09,230 --> 00:10:15,070
+So now if I take a look at my load then mention imbedding it looks something like this.
+
+127
+00:10:15,080 --> 00:10:22,510
+So if I take a look at the shape of it it's going to be 500 words with two dimensional vectors representation.
+
+128
+00:10:22,510 --> 00:10:25,000
+So let's go ahead and plot that up in order to do that.
+
+129
+00:10:25,030 --> 00:10:28,450
+I'm going to copy and paste a plot function.
+
+130
+00:10:28,450 --> 00:10:37,210
+So first off is say import that plot lived the pipe plot as PLDT and we'll say map plot lib in line
+
+131
+00:10:37,900 --> 00:10:41,970
+and then I copy this plot functionality directly from the notes.
+
+132
+00:10:42,220 --> 00:10:44,930
+Basically just makes really nice scatterplot with the labels.
+
+133
+00:10:45,010 --> 00:10:47,830
+So it kind of the hard part was annotating it for the labels.
+
+134
+00:10:47,830 --> 00:10:50,800
+So now let's go ahead and plot and see what it looks like.
+
+135
+00:10:52,210 --> 00:10:56,350
+We'll save the plot with labels and load them.
+
+136
+00:10:56,490 --> 00:10:58,510
+So instead of embed
+
+137
+00:11:03,280 --> 00:11:06,450
+run that and add a little bit we should see the plot.
+
+138
+00:11:06,840 --> 00:11:11,740
+OK so now we can see the two that missional representation of the words.
+
+139
+00:11:11,770 --> 00:11:18,100
+So we only ran for 5000 steps so we may not see a whole lot of similarity between words that are together
+
+140
+00:11:18,490 --> 00:11:23,700
+but hopefully you can end up loading the actual NUMP tirade that has the higher training.
+
+141
+00:11:23,950 --> 00:11:27,270
+So what you can do is load that up through the following manner.
+
+142
+00:11:28,600 --> 00:11:41,650
+You'll scroll down here and say final embeddings equal to the DOT load and I call the train embeddings
+
+143
+00:11:41,650 --> 00:11:45,100
+200 case steps so you can go ahead and load that.
+
+144
+00:11:45,110 --> 00:11:48,910
+And now that we overwrote final embeddings with this one that's already been pre-trained for you of
+
+145
+00:11:48,910 --> 00:11:51,250
+200 K is just an empire.
+
+146
+00:11:51,490 --> 00:11:56,610
+So if you take a look at final embeddings now it's the same thing as before.
+
+147
+00:11:56,610 --> 00:12:01,140
+Fifty thousand words by a hundred fifty dimensions except this one was just trained for 200 steps or
+
+148
+00:12:01,150 --> 00:12:03,000
+200000 steps excuse me.
+
+149
+00:12:03,000 --> 00:12:08,160
+So then you can explore the process here and repeat the labeling and the plotting.
+
+150
+00:12:08,160 --> 00:12:15,930
+So you would have to come back up here and rerun these lines that basically fit transform and fit transform
+
+151
+00:12:15,930 --> 00:12:17,540
+is baffling and take a while.
+
+152
+00:12:17,580 --> 00:12:24,270
+So you run this again load them and they mention embeds shape that again and again you don't really
+
+153
+00:12:24,270 --> 00:12:28,650
+need to redefine the plot or run that again and then you can plot with labels.
+
+154
+00:12:28,650 --> 00:12:28,990
+All right.
+
+155
+00:12:29,050 --> 00:12:33,120
+So to hop forward in time to this label's done.
+
+156
+00:12:33,170 --> 00:12:34,990
+All right so just finished for me.
+
+157
+00:12:35,360 --> 00:12:40,390
+And now you should see the embeddings for the 200 K steps trained.
+
+158
+00:12:40,730 --> 00:12:46,640
+And again remember that we actually are only showing if you look at this the 500 words.
+
+159
+00:12:46,670 --> 00:12:51,920
+So out of those 500 words we may not be able to choose things that are close enough together.
+
+160
+00:12:52,040 --> 00:12:55,540
+So what you can do is expand this number of 500.
+
+161
+00:12:55,550 --> 00:13:01,190
+However the larger you choose that means the longer it's going to take for this any to fit transform.
+
+162
+00:13:01,190 --> 00:13:06,050
+So if you want you could choose a really large value like 5000 less than 10 percent of our vocabulary.
+
+163
+00:13:06,170 --> 00:13:10,430
+But running this line the fit transform isn't going to take a much longer time.
+

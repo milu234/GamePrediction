@@ -1,0 +1,596 @@
+1
+00:00:05,440 --> 00:00:06,630
+Welcome back everyone.
+
+2
+00:00:06,640 --> 00:00:10,440
+Finally PIII we're going to talk about is the layers API abstraction.
+
+3
+00:00:10,450 --> 00:00:13,660
+Let's over with the Jupiter notebook and show you how to use it.
+
+4
+00:00:13,780 --> 00:00:18,340
+All right before we get started with the layers API I want to make a quick point here that currently
+
+5
+00:00:18,340 --> 00:00:24,360
+the layers API is kind of separated between the layers contrib portion and the TFT layers portion.
+
+6
+00:00:24,610 --> 00:00:30,750
+If you come over here to the documentation of the general API docs you can see the python API guides.
+
+7
+00:00:30,790 --> 00:00:35,470
+So if you keep scrolling down eventually you'll find layers contrib and if you click on that you'll
+
+8
+00:00:35,470 --> 00:00:40,870
+see layer's contrib So there's T.F. contrib and then there's various layers and basically we end up
+
+9
+00:00:40,870 --> 00:00:46,480
+doing is you just stack layers on top of each other and then pass them in with placeholders variables
+
+10
+00:00:46,750 --> 00:00:48,150
+and a T.F. session.
+
+11
+00:00:48,400 --> 00:00:53,860
+You can remember from our lecture on convolutional neural networks we basically created our own layer
+
+12
+00:00:53,860 --> 00:00:54,870
+type objects.
+
+13
+00:00:54,880 --> 00:00:58,370
+That is what this T.F. trip contrib is for.
+
+14
+00:00:58,380 --> 00:01:02,710
+Now as I mentioned there's T.F. contrib layers and you can use those.
+
+15
+00:01:02,740 --> 00:01:08,770
+And there's a lot more layers here but if he keeps scrolling down past T.F. left contrib layers you'll
+
+16
+00:01:08,770 --> 00:01:13,660
+eventually realize that there's already a T.F. layers for us.
+
+17
+00:01:13,660 --> 00:01:16,300
+So right here there's T.F. layers.
+
+18
+00:01:16,510 --> 00:01:21,340
+And this is what's been able to essentially graduate from contrib over to layers.
+
+19
+00:01:21,330 --> 00:01:24,850
+So there's an overview here and it will tell you more about the actual layers.
+
+20
+00:01:24,850 --> 00:01:29,020
+So this is the layers module and you can see here has various functions.
+
+21
+00:01:29,020 --> 00:01:34,000
+And keep in mind some of these functions got changed as far as their naming convention when it got passed
+
+22
+00:01:34,000 --> 00:01:37,090
+from contrib to the TFA layers.
+
+23
+00:01:37,090 --> 00:01:42,700
+So for example A.F. duck and contrib that layer's the fully connected layer for dense neural network
+
+24
+00:01:42,700 --> 00:01:46,010
+is called fully underscore connected A.F. thought layers.
+
+25
+00:01:46,020 --> 00:01:47,680
+It's just called dense.
+
+26
+00:01:47,980 --> 00:01:53,200
+If you want to find that more information about how to use T.F. layers for more complex tasks like convolutional
+
+27
+00:01:53,250 --> 00:01:58,120
+all that work you can click over here there's a link in your notebook but just go to Florida the org
+
+28
+00:01:58,360 --> 00:02:05,650
+slash tutorial slash layers and it has a full guy to basically solving the data set task with the layers
+
+29
+00:02:05,710 --> 00:02:07,620
+API so you can see here.
+
+30
+00:02:07,750 --> 00:02:13,480
+If you scroll down they basically import convolutional layers pulling layers etc. and again.
+
+31
+00:02:13,480 --> 00:02:18,430
+Main idea here of the abstractions is you kind of just take care of the layers with one or two lines
+
+32
+00:02:18,430 --> 00:02:18,980
+of code.
+
+33
+00:02:19,890 --> 00:02:25,830
+Let's go ahead and solve the problem of the wind classification with the layers API in order to do this.
+
+34
+00:02:25,860 --> 00:02:30,030
+We are going to need to one in code our data.
+
+35
+00:02:30,330 --> 00:02:36,460
+The easiest way to do that is with Panas basically pantless has a really quick method to do this.
+
+36
+00:02:36,480 --> 00:02:46,240
+So we're going to say one hot underscore why train is equal to PD and the get dummys method quickly
+
+37
+00:02:46,240 --> 00:02:49,810
+creates one high encoding for anything you pasan.
+
+38
+00:02:49,840 --> 00:02:55,330
+So if you say P-T that dummys on this y train and then check out that one hot train you can see here
+
+39
+00:02:55,390 --> 00:03:00,850
+now are classes 0 1 and 2 are encoded throughout this entire white train.
+
+40
+00:03:01,490 --> 00:03:09,080
+Now if I want this as a Panas data frame but instead as a matrix I can say as matrix here and then run
+
+41
+00:03:09,080 --> 00:03:10,810
+that and then I have the same thing.
+
+42
+00:03:10,820 --> 00:03:16,070
+But now it's as a PI matrix which is the format that the layers API is going to need this in.
+
+43
+00:03:16,250 --> 00:03:19,180
+So let's do this one more time for the test data.
+
+44
+00:03:19,310 --> 00:03:35,520
+We'll say one ha y test is equal to PD get dummies and then we'll pass y test as the matrix gets.
+
+45
+00:03:35,520 --> 00:03:40,100
+OK so we have our one hot encoded training and testing labels.
+
+46
+00:03:40,110 --> 00:03:45,690
+Now it's time to find some parameters for our actual layer's API the way we're going to do this is the
+
+47
+00:03:45,690 --> 00:03:47,070
+following method.
+
+48
+00:03:47,070 --> 00:03:52,890
+We're going to say the number of features is 13 and then we're going to say the number of neurons in
+
+49
+00:03:52,890 --> 00:03:55,160
+the first layer is 13.
+
+50
+00:03:55,380 --> 00:04:03,140
+The number of neurons in the second hidden layer is 13 and then the number of outputs is equal to three.
+
+51
+00:04:03,290 --> 00:04:11,920
+And let's also find now a learning rate for our optimizer will go ahead and just say 0.01 and then we'll
+
+52
+00:04:11,970 --> 00:04:18,860
+be using the contrib layer's API because it has slightly more options.
+
+53
+00:04:18,860 --> 00:04:21,530
+So because of that we're going to be using the fully connected
+
+54
+00:04:25,390 --> 00:04:27,850
+and wups mixture.
+
+55
+00:04:27,860 --> 00:04:29,030
+That's okay.
+
+56
+00:04:29,600 --> 00:04:29,840
+OK.
+
+57
+00:04:29,870 --> 00:04:31,610
+So now I have a fully connected.
+
+58
+00:04:31,610 --> 00:04:37,370
+And what's interesting about this layer's API is it kind of is a halfway point between a simple abstraction
+
+59
+00:04:37,640 --> 00:04:38,930
+and full tensor flow.
+
+60
+00:04:38,960 --> 00:04:42,880
+It really connects nicely with sessions last functions and optimizers.
+
+61
+00:04:42,980 --> 00:04:49,040
+So it has that half of control of using pure tensor flow but it basically takes care of building out
+
+62
+00:04:49,040 --> 00:04:50,250
+common layers for you.
+
+63
+00:04:50,420 --> 00:04:55,830
+So it's a pretty useful API which is why I think it might have some more lasting power.
+
+64
+00:04:57,230 --> 00:05:02,040
+So the first thing to do is create or placeholders will say to float 32.
+
+65
+00:05:02,550 --> 00:05:06,980
+And then the shape of this is going to be based on the batch size and then the number of features which
+
+66
+00:05:06,990 --> 00:05:08,670
+in our case was 13.
+
+67
+00:05:08,670 --> 00:05:17,340
+And then we also need a placeholder for the actual labels so placeholder 32 and then the shape here
+
+68
+00:05:17,360 --> 00:05:23,210
+is going to be equal to that size and then three on that output because it's coded.
+
+69
+00:05:23,240 --> 00:05:28,260
+Next we're going to need the activation function in order so I don't keep rewriting this for every single
+
+70
+00:05:28,260 --> 00:05:28,630
+layer.
+
+71
+00:05:28,650 --> 00:05:36,020
+I'm just going to call TFT and N for Ariail you as my X F or activation function.
+
+72
+00:05:36,150 --> 00:05:38,700
+Next we're going to find hidden one layer.
+
+73
+00:05:38,700 --> 00:05:39,960
+So these are the actual layers.
+
+74
+00:05:39,960 --> 00:05:42,980
+Keep in mind appear this numb head in one hand and two.
+
+75
+00:05:42,980 --> 00:05:44,580
+Those are the neurons for these layers.
+
+76
+00:05:44,760 --> 00:05:50,700
+So when I find hit in one I call the fully connected function and then this just needs the inputs the
+
+77
+00:05:50,700 --> 00:05:53,070
+number of outputs and then the activation function.
+
+78
+00:05:53,130 --> 00:05:57,180
+So you passen the input which is going to be that X placeholder for that first layer.
+
+79
+00:05:58,730 --> 00:06:05,170
+And if you want you could call this input layer to maybe a more appropriate there was a hidden one and
+
+80
+00:06:05,310 --> 00:06:14,800
+also the activation function actif it into fully connected it in one.
+
+81
+00:06:14,840 --> 00:06:20,390
+And then it's going to need number hit into 13 year olds there and the activation function is again
+
+82
+00:06:20,390 --> 00:06:25,300
+going to be act f and then finally we'll have our output layer.
+
+83
+00:06:25,590 --> 00:06:31,860
+It's also going to be a fully connected layer that takes in that hidden to layer and then whatever number
+
+84
+00:06:31,860 --> 00:06:32,720
+of outputs you want.
+
+85
+00:06:32,730 --> 00:06:36,870
+In our case it's going to be three outputs.
+
+86
+00:06:36,870 --> 00:06:39,270
+OK so let's go ahead and define the last function.
+
+87
+00:06:39,270 --> 00:06:44,330
+So this kind of feels like a blend between pure tensor flow and the layers API.
+
+88
+00:06:44,340 --> 00:06:46,800
+Basically the layers API already done using it.
+
+89
+00:06:46,800 --> 00:06:49,130
+It was just these three lines right here.
+
+90
+00:06:49,140 --> 00:06:55,200
+Hopefully I'll say this a little bit of time but we're going to use our soft Max cross entropy when
+
+91
+00:06:55,220 --> 00:06:59,990
+I say our one hot labels is equal to that y true placeholder.
+
+92
+00:07:00,290 --> 00:07:07,090
+And then the logic is essentially our prediction is going to be the output K so that's our last function
+
+93
+00:07:07,100 --> 00:07:11,890
+we need to of course build an optimizer that attempts to minimize it.
+
+94
+00:07:12,260 --> 00:07:17,780
+So I will say optimizers T.F. train and we'll choose an atom optimizer with the learning rate that we
+
+95
+00:07:17,840 --> 00:07:18,720
+find earlier.
+
+96
+00:07:20,290 --> 00:07:24,930
+And we're going to hear training up operation is just minimizing that optimizer.
+
+97
+00:07:25,010 --> 00:07:31,600
+So we see optimizer and we call it to minimise our loss function just as we've done before.
+
+98
+00:07:31,630 --> 00:07:38,220
+Then finally we say in its T.F. global variables initialiser and now we're going to run the session
+
+99
+00:07:38,220 --> 00:07:43,280
+just like we would any other time well to find some number of training steps I'll go ahead and say a
+
+100
+00:07:43,280 --> 00:07:49,530
+thousand training steps and then I will say with T.F. session as SPSS
+
+101
+00:07:52,490 --> 00:07:59,240
+run that global variables initialiser and then see for I in range the number of training steps you want
+
+102
+00:08:00,470 --> 00:08:06,590
+to do here is just run that trainer so run that trainer and then pass in that feat dictionary.
+
+103
+00:08:06,590 --> 00:08:08,720
+So very typical of tensor flow basically.
+
+104
+00:08:08,720 --> 00:08:10,840
+Now you're just back to the classic tensor flow.
+
+105
+00:08:11,150 --> 00:08:19,220
+Having used that layer's API to quickly create in your own that worked for you and then will pass and
+
+106
+00:08:19,220 --> 00:08:20,330
+why train here.
+
+107
+00:08:20,330 --> 00:08:22,250
+So there's our feed dictionary.
+
+108
+00:08:22,250 --> 00:08:27,440
+So what we're doing that we're going to go ahead and grab the predictions so say logic is equal to the
+
+109
+00:08:27,530 --> 00:08:32,080
+output layer and we're going to evaluate that output later and we'll give it a feed dictionary of the
+
+110
+00:08:32,080 --> 00:08:45,320
+test data which is just going to be the scaled X test that our predictions is going to be RMX of logic
+
+111
+00:08:45,350 --> 00:08:47,950
+here along x is equal to 1.
+
+112
+00:08:48,120 --> 00:08:49,650
+So what does that actually mean.
+
+113
+00:08:49,650 --> 00:08:55,470
+Remember we're going to be basically asking what value has the highest probability for the class.
+
+114
+00:08:55,470 --> 00:08:58,050
+That's what the output layer is going to give back.
+
+115
+00:08:58,050 --> 00:09:03,650
+So we're going to use that RMX along access equal to one in order to actually grab that.
+
+116
+00:09:03,670 --> 00:09:08,260
+So that's going return that index position which luckily for us we just have 0 1 and 2.
+
+117
+00:09:08,440 --> 00:09:11,080
+That correlates exactly with the predicted class.
+
+118
+00:09:11,140 --> 00:09:16,080
+So the result is just going to be the evaluation of that.
+
+119
+00:09:16,240 --> 00:09:22,280
+And let's make sure that it actually have a typo there can't feed can't feed this wups.
+
+120
+00:09:22,280 --> 00:09:25,320
+Looks like we forgot to actually pass the one hot uncoated.
+
+121
+00:09:25,420 --> 00:09:30,450
+So I mean take a look up here with that we actually call the one hot coated one hot white train.
+
+122
+00:09:30,490 --> 00:09:31,450
+So let's grab that
+
+123
+00:09:34,390 --> 00:09:35,300
+and pass that in.
+
+124
+00:09:37,620 --> 00:09:37,880
+OK.
+
+125
+00:09:37,890 --> 00:09:39,060
+Now that train trained fine.
+
+126
+00:09:39,070 --> 00:09:43,400
+Remember we had a pass and the one hot forgot about that and let's test this out.
+
+127
+00:09:43,400 --> 00:09:47,920
+We'll say from S-K learn metrics.
+
+128
+00:09:47,950 --> 00:09:50,750
+I'm going to import the classification report.
+
+129
+00:09:51,080 --> 00:09:55,970
+And let's see how we did will say Prince classification report.
+
+130
+00:09:56,600 --> 00:09:57,990
+Passen those results.
+
+131
+00:09:58,040 --> 00:10:02,100
+And then the actual test run that.
+
+132
+00:10:02,120 --> 00:10:05,740
+And luckily for us we got 100 percent accuracy with this.
+
+133
+00:10:05,750 --> 00:10:08,120
+Now we did run it for a thousand training steps.
+
+134
+00:10:08,120 --> 00:10:11,890
+So we performed really well as a quick precaution.
+
+135
+00:10:11,930 --> 00:10:18,350
+If you ever get perfect results like this they're not completely unknown when you're dealing with really
+
+136
+00:10:18,350 --> 00:10:20,050
+complex models like neural networks.
+
+137
+00:10:20,050 --> 00:10:21,700
+We should be suspicious of them.
+
+138
+00:10:21,860 --> 00:10:27,680
+So something I like to do if I ever get this kind of perfect result is maybe skew the parameters to
+
+139
+00:10:27,680 --> 00:10:31,290
+make sure that I would not get a good result if I did this wrong.
+
+140
+00:10:31,490 --> 00:10:36,120
+So what I'm going to do here now is just reduce this to just two training steps.
+
+141
+00:10:36,190 --> 00:10:41,090
+So I get to run this all again and hopefully now when I run this I can see worse performance and that's
+
+142
+00:10:41,090 --> 00:10:41,780
+exactly what I get.
+
+143
+00:10:41,780 --> 00:10:44,520
+So of just two training steps I'm not getting a good performance.
+
+144
+00:10:44,600 --> 00:10:49,810
+So I know here that it is a result of my actual model and not some sort of air.
+
+145
+00:10:49,820 --> 00:10:54,530
+So just a quick precaution if you ever get perfect results always have some sort of healthy suspicion
+
+146
+00:10:54,530 --> 00:10:57,950
+for them and confirm that it is actually your model.
+
+147
+00:10:57,950 --> 00:10:58,680
+All right.
+
+148
+00:10:58,700 --> 00:11:00,250
+Hope you enjoy that series of lectures.
+
+149
+00:11:00,260 --> 00:11:01,580
+I will see you at the next one.
+

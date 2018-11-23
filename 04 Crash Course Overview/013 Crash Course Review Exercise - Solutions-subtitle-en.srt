@@ -1,0 +1,380 @@
+1
+00:00:05,380 --> 00:00:07,320
+Welcome back everyone in this lecture.
+
+2
+00:00:07,330 --> 00:00:09,880
+We're going to go through the solutions to the crash course.
+
+3
+00:00:10,060 --> 00:00:10,910
+Let's get started.
+
+4
+00:00:11,110 --> 00:00:15,580
+OK so here I am at the crash course review exercises notebook and if you want you could put these all
+
+5
+00:00:15,580 --> 00:00:16,320
+in the same cell.
+
+6
+00:00:16,330 --> 00:00:23,930
+But basically you just have to do all the imports import pandas PD import map plot lived up plots as
+
+7
+00:00:23,940 --> 00:00:24,930
+PLCC.
+
+8
+00:00:25,490 --> 00:00:33,740
+And then we're also going to be using sikat learn we'll say from S-K learn pre-processing in poor minimax
+
+9
+00:00:33,740 --> 00:00:36,440
+scaler and you could import that later.
+
+10
+00:00:36,470 --> 00:00:37,610
+Not a huge deal.
+
+11
+00:00:37,670 --> 00:00:45,800
+And we're also going to be using train to split from model selection import train to split.
+
+12
+00:00:45,800 --> 00:00:49,370
+Next thing I wanted to do was to set up Paice random seed to 101.
+
+13
+00:00:49,400 --> 00:00:54,140
+So it's going to do that say any random seed is 101.
+
+14
+00:00:54,140 --> 00:00:54,920
+Run that.
+
+15
+00:00:55,220 --> 00:01:00,590
+Let me zoom in one more level here so you can clearly see this so any random seed that we want to create
+
+16
+00:01:00,620 --> 00:01:10,110
+a matrix of 100 rows so I'll say math is equal to the random random I.A. because I want a random integers
+
+17
+00:01:10,110 --> 00:01:12,120
+that can go from 1 to 100.
+
+18
+00:01:12,890 --> 00:01:19,880
+So we're going to say 1 to 1 comma 101 because I wanted them to be a hundred and then I could say a
+
+19
+00:01:19,880 --> 00:01:21,080
+hundred and five.
+
+20
+00:01:21,110 --> 00:01:26,600
+Not a huge deal if you interpreted this to be a 100 here instead of 8 101.
+
+21
+00:01:26,600 --> 00:01:32,150
+Not really the purpose of the exercise just for you to remember how to create a matrix of integers.
+
+22
+00:01:32,150 --> 00:01:35,170
+So again not a huge deal if you put that as 100.
+
+23
+00:01:35,690 --> 00:01:35,960
+OK.
+
+24
+00:01:35,960 --> 00:01:37,350
+So kind of back down here.
+
+25
+00:01:37,410 --> 00:01:44,300
+Then we wanted to create art to the visualization the way we did that is we say peel t him show you
+
+26
+00:01:44,300 --> 00:01:51,470
+passing in your matrix and then we say peel t color bar in order to see a color bar and then if we want
+
+27
+00:01:51,470 --> 00:01:55,250
+to title it we just say PBT title and say my plot.
+
+28
+00:01:55,250 --> 00:01:59,750
+Now if you just run this notice that I didn't get anything out and that's because I haven't set map
+
+29
+00:01:59,970 --> 00:02:00,940
+in inline.
+
+30
+00:02:01,280 --> 00:02:02,320
+So let's go ahead and do this.
+
+31
+00:02:02,360 --> 00:02:05,450
+And you could do this above as well.
+
+32
+00:02:05,450 --> 00:02:07,070
+So I'll say Matt puts it in line.
+
+33
+00:02:07,070 --> 00:02:09,440
+Now when I run this I can see my plot.
+
+34
+00:02:09,440 --> 00:02:14,390
+Notice here though the dimensions feel off and that's because I haven't specified the aspect ratio I
+
+35
+00:02:14,390 --> 00:02:15,980
+want for show.
+
+36
+00:02:16,220 --> 00:02:19,860
+So if you go ahead and click on this link it'll take you to a stack overflow post.
+
+37
+00:02:20,000 --> 00:02:26,120
+That essentially describes how to resize any show and later on it just says hey use aspect here.
+
+38
+00:02:26,180 --> 00:02:28,690
+So we're going to go ahead and play around with that aspect.
+
+39
+00:02:28,790 --> 00:02:34,860
+Once you play around the aspect I ended up choosing a really small aspect ratio to kind of stretch it
+
+40
+00:02:34,860 --> 00:02:35,540
+out.
+
+41
+00:02:35,610 --> 00:02:37,500
+So that's the aspect ratio.
+
+42
+00:02:37,530 --> 00:02:38,750
+No right or wrong answer here.
+
+43
+00:02:38,770 --> 00:02:40,680
+Just wanted you to kind of play around with that.
+
+44
+00:02:41,040 --> 00:02:41,760
+OK.
+
+45
+00:02:41,760 --> 00:02:47,350
+So next we wanted to use PD that data frame to read in the array as a data frame.
+
+46
+00:02:47,580 --> 00:02:53,690
+That's quite easy we just say F is equal to PD data frame and then pass the cent as our data.
+
+47
+00:02:53,700 --> 00:02:56,240
+So I can say data is equal to Matt.
+
+48
+00:02:56,610 --> 00:03:00,920
+And then whoops if I check out my diff there it is 0 1 2 3 4.
+
+49
+00:03:01,430 --> 00:03:03,400
+Ok then moving along.
+
+50
+00:03:03,570 --> 00:03:09,690
+I want to scroll down here now create a scatterplot using Pandurs of the zero column versus the one
+
+51
+00:03:09,690 --> 00:03:12,360
+column and 0 0 and then 1.
+
+52
+00:03:12,360 --> 00:03:19,030
+So to do that all I have to say death plot I'll say x is equal to zero y is equal to 1.
+
+53
+00:03:19,230 --> 00:03:25,920
+And then I will specify kind as equal to scatter and then I have that scatterplot.
+
+54
+00:03:26,200 --> 00:03:31,530
+Next up I wanted to scale the data to have a minimum of zero and a maximum value of 1 Using say Hitler.
+
+55
+00:03:31,810 --> 00:03:40,230
+So I just create my scalar objects I'll say min max scaler and then you can have the results the scale
+
+56
+00:03:40,230 --> 00:03:45,740
+data and just say scaler in this case we'll do a transform that will always be the case for a train
+
+57
+00:03:45,750 --> 00:03:48,590
+to split but that wasn't really specified here.
+
+58
+00:03:48,600 --> 00:03:49,960
+We just show the skill result.
+
+59
+00:03:50,000 --> 00:03:55,800
+I can see here the minimum values are zeros and the maximum values are ones scrolling down.
+
+60
+00:03:55,800 --> 00:04:00,750
+We get to using your previously created data frame use D-Nev. columns to rename the pan those columns
+
+61
+00:04:00,750 --> 00:04:02,760
+to be these columns right here.
+
+62
+00:04:02,760 --> 00:04:05,420
+Then perform a train to split with sikat learn.
+
+63
+00:04:05,760 --> 00:04:09,340
+So if you click on that link it kind of explains what I'm trying to say here.
+
+64
+00:04:09,600 --> 00:04:14,470
+But you can grab this attribute off the data frame columns and set it to be equal to this list.
+
+65
+00:04:14,490 --> 00:04:15,860
+So I'm going to copy and paste this
+
+66
+00:04:18,710 --> 00:04:24,080
+in now if I check out my data frame I can see I've been able to rename the columns and if you only want
+
+67
+00:04:24,080 --> 00:04:29,650
+to see the head of your data frame that is the first and number of rows you can say DFA head passen
+
+68
+00:04:29,690 --> 00:04:34,410
+the first couple of number of rows you want to see and will return back 10 rows for you zero tonight.
+
+69
+00:04:34,490 --> 00:04:38,380
+And if you don't pass anything there automatically just returns the top five.
+
+70
+00:04:38,800 --> 00:04:39,190
+OK.
+
+71
+00:04:39,380 --> 00:04:43,820
+So I want to do the train test split which means I need to select my feature columns.
+
+72
+00:04:43,820 --> 00:04:48,380
+So one way to do that is say F and then pass and a list of columns I want.
+
+73
+00:04:48,380 --> 00:04:50,810
+So in this case it's all the feature columns.
+
+74
+00:04:50,810 --> 00:04:51,540
+Copy that.
+
+75
+00:04:51,650 --> 00:04:57,990
+And then I'm going to paste that in run that looks like I have one too many brackets there.
+
+76
+00:04:58,730 --> 00:04:59,410
+There we go.
+
+77
+00:04:59,600 --> 00:05:05,060
+And then for the label column just going to the F label run that as well.
+
+78
+00:05:05,270 --> 00:05:07,120
+And then finally and the train split.
+
+79
+00:05:07,160 --> 00:05:08,450
+So we actually already imported that.
+
+80
+00:05:08,450 --> 00:05:12,420
+So when I say train to split and then I was going to copy and paste.
+
+81
+00:05:12,420 --> 00:05:17,360
+I almost always do this just because the actual terms is a lot to type out manually.
+
+82
+00:05:17,400 --> 00:05:23,460
+So all these four things that are returned that I usually just copy them here and then paste them in
+
+83
+00:05:25,170 --> 00:05:26,850
+and then I change whatever I need to change.
+
+84
+00:05:26,850 --> 00:05:29,060
+In this case I have capital X and lowercase y.
+
+85
+00:05:29,070 --> 00:05:30,660
+So that makes sense.
+
+86
+00:05:30,660 --> 00:05:31,620
+Test size.
+
+87
+00:05:31,620 --> 00:05:33,840
+Not sure if I actually specify this doesn't really matter.
+
+88
+00:05:33,840 --> 00:05:37,830
+Random state again doesn't really matter as long as you're able to figure out they could do a train
+
+89
+00:05:37,830 --> 00:05:43,060
+test this way and then you can kind of view your results and you can see here that it works if both
+
+90
+00:05:43,210 --> 00:05:45,420
+non-payers and Pan those data frames.
+
+91
+00:05:45,630 --> 00:05:46,860
+OK that's it.
+
+92
+00:05:46,860 --> 00:05:49,430
+If you have any questions feel free to post to the Kewney forums.
+
+93
+00:05:49,440 --> 00:05:54,120
+But really what I can be using these libraries a whole lot these basics here is essentially all we need
+
+94
+00:05:54,120 --> 00:05:56,280
+to know to move onto a tensor flow.
+
+95
+00:05:56,310 --> 00:05:57,780
+Thanks and I'll see you at the next lecture.
+

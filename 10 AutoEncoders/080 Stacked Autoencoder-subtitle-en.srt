@@ -1,0 +1,1100 @@
+1
+00:00:05,390 --> 00:00:11,720
+Welcome everyone to this stacked couter lecture Let's go ahead and take a look at a stack of couter
+
+2
+00:00:11,810 --> 00:00:17,990
+operating on the digits dataset that will give us a really good opportunity to visualize how well the
+
+3
+00:00:17,990 --> 00:00:21,010
+reconstructions are coming out at the output layer.
+
+4
+00:00:21,200 --> 00:00:23,600
+Let's open a particular notebook and get started.
+
+5
+00:00:23,610 --> 00:00:27,380
+Okay right off the bat as always we start off with a couple of imports here.
+
+6
+00:00:27,440 --> 00:00:31,000
+We will be doing some plotting in order to visualize those numbers.
+
+7
+00:00:31,310 --> 00:00:33,190
+So I need to import that plot lib in line.
+
+8
+00:00:33,230 --> 00:00:35,290
+And of course we're gonna be using pi.
+
+9
+00:00:35,510 --> 00:00:43,110
+And then finally let me import tensor flow as T.F. and let's grab our digits data set.
+
+10
+00:00:43,190 --> 00:00:47,890
+So we'll say from tensor flow examples tutorials.
+
+11
+00:00:47,900 --> 00:00:55,010
+Just import the input data function that's input data.
+
+12
+00:00:55,010 --> 00:01:01,420
+So don't run that then the next thing I'm going to do is say this is equal to and we'll make sure this
+
+13
+00:01:02,650 --> 00:01:03,130
+doesn't work.
+
+14
+00:01:03,130 --> 00:01:03,880
+OK good.
+
+15
+00:01:03,890 --> 00:01:06,820
+And this data is equal to input data.
+
+16
+00:01:06,820 --> 00:01:08,330
+We're going to call read data sets.
+
+17
+00:01:08,500 --> 00:01:12,530
+And right now I'm located underneath the auto encoders folder.
+
+18
+00:01:12,610 --> 00:01:17,670
+So I need to grab the convolutional neural networks folder.
+
+19
+00:01:17,760 --> 00:01:23,200
+So I just have autocomplete that and then I also want to grab the data and I want it to be one high
+
+20
+00:01:23,200 --> 00:01:24,100
+end code.
+
+21
+00:01:24,570 --> 00:01:29,280
+So we'll say one hot equals true OK.
+
+22
+00:01:29,340 --> 00:01:32,570
+And you should only see extracting here if you did this properly.
+
+23
+00:01:32,640 --> 00:01:34,430
+If you begin to see that it's downloading.
+
+24
+00:01:34,650 --> 00:01:36,780
+That's totally OK if you want to wait for it to download.
+
+25
+00:01:36,780 --> 00:01:41,790
+But remember you already have the data set ready for you underneath the convolutional neural networks.
+
+26
+00:01:41,790 --> 00:01:47,300
+Up next we want to reset the default graph just in case to have some other notebooks running.
+
+27
+00:01:47,910 --> 00:01:49,190
+And let's get started.
+
+28
+00:01:49,530 --> 00:01:53,320
+OK so let's start creating the parameters for our stacked auto encoder.
+
+29
+00:01:53,490 --> 00:01:56,300
+We'll go ahead and design a pretty simple stacked auto encoder.
+
+30
+00:01:56,370 --> 00:02:01,100
+We're going to say we start off 784 inputs which is the result of 28 times 28.
+
+31
+00:02:01,140 --> 00:02:04,780
+Remember we have 28 28 pixels in the digits dataset.
+
+32
+00:02:04,860 --> 00:02:07,880
+Then for the next layer I'm going to go ahead and divide it by half.
+
+33
+00:02:07,920 --> 00:02:12,750
+Is kind of an arbitrary choice for my stack stonecutter but I kind of want to make it clear that we're
+
+34
+00:02:12,750 --> 00:02:17,640
+continually decreasing the number of neurons available and then for that sensor hidden layer I'll go
+
+35
+00:02:17,640 --> 00:02:20,760
+ahead and divide that in half again we'll say 186.
+
+36
+00:02:20,760 --> 00:02:26,370
+Now of course you could keep going to smaller and smaller encoding but instead we're going to begin
+
+37
+00:02:26,370 --> 00:02:27,360
+to expand that back out.
+
+38
+00:02:27,360 --> 00:02:29,920
+So we'll see 392 here again.
+
+39
+00:02:29,940 --> 00:02:35,530
+And then finally 784 remember we need to have the output match the input.
+
+40
+00:02:35,580 --> 00:02:44,480
+So let's set this up in terms of some variable names missing number of inputs is equal to 784 will say
+
+41
+00:02:44,660 --> 00:02:45,530
+neurons.
+
+42
+00:02:45,530 --> 00:02:50,170
+In fact lushest but the solid and useful that we don't get this kind of Misi commenting.
+
+43
+00:02:50,570 --> 00:02:53,570
+OK we're going to have number of inputs at 784.
+
+44
+00:02:53,570 --> 00:02:56,280
+I will say neurons in that first hidden layer.
+
+45
+00:02:56,350 --> 00:03:02,840
+So your odds underscore here in one is equal to 392 going to see neurons.
+
+46
+00:03:03,070 --> 00:03:08,150
+And the second hidden layer is equal to 186 than the number of neurons.
+
+47
+00:03:09,750 --> 00:03:11,060
+In my third hit in Alair.
+
+48
+00:03:11,180 --> 00:03:14,800
+Well that's going to be equal to the number of neurons in my first hit.
+
+49
+00:03:14,820 --> 00:03:17,530
+So that's where we begin to expand backout 392.
+
+50
+00:03:17,730 --> 00:03:22,470
+And then finally I will say the number of outputs is equal to the number of inputs.
+
+51
+00:03:22,470 --> 00:03:27,660
+Now keep in mind as you begin to reduce the number of neurons available in the hidden layer later on
+
+52
+00:03:27,660 --> 00:03:32,250
+when you visualize your reconstructions you may not get a clear reconstruction because you may have
+
+53
+00:03:32,250 --> 00:03:38,270
+sacrificed too much information by decreasing number of neurons too quickly or by too much.
+
+54
+00:03:38,520 --> 00:03:42,930
+And these are numbers you can definitely play around with and see how it affects your actual stack quarter
+
+55
+00:03:43,290 --> 00:03:45,360
+because you're actually built to visualize this at the very end.
+
+56
+00:03:45,380 --> 00:03:47,160
+We see the results.
+
+57
+00:03:47,160 --> 00:03:49,390
+So kind of a fun project here.
+
+58
+00:03:49,550 --> 00:03:53,010
+Finally a scribe are learning right because it's another constant we have to provide.
+
+59
+00:03:53,030 --> 00:04:02,860
+So we'll see 0.01 and I'm going to say that my activation function is equal to T.F. But again rectified
+
+60
+00:04:02,860 --> 00:04:03,610
+linear unit.
+
+61
+00:04:03,670 --> 00:04:08,250
+And the reason I find the right now is a variable is that way I can just call this shorter variable
+
+62
+00:04:08,240 --> 00:04:11,960
+name instead of having haven't call this all the time.
+
+63
+00:04:11,990 --> 00:04:12,390
+All right.
+
+64
+00:04:12,410 --> 00:04:16,990
+Now it's time to actually begin setting up everything we need for our session and our Grath.
+
+65
+00:04:17,000 --> 00:04:21,470
+The first thing we need is a placeholder and we don't need a placeholder for our relabelled since this
+
+66
+00:04:21,460 --> 00:04:23,170
+is unsupervised learning.
+
+67
+00:04:23,210 --> 00:04:29,610
+So now that I'm just having a placeholder for X that's going to be to float 32 and the shape is going
+
+68
+00:04:29,610 --> 00:04:33,310
+to be pretty simple just none which is going to be based off the bat size.
+
+69
+00:04:33,330 --> 00:04:40,050
+And then the number of inputs which is the number of pixels OK so repassing and 784 pixels for each
+
+70
+00:04:40,080 --> 00:04:41,190
+image in that batch.
+
+71
+00:04:41,280 --> 00:04:48,590
+And then let's go ahead and set up our weights so I can say initialiser is equal to.
+
+72
+00:04:48,590 --> 00:04:54,880
+And I can tell you something we haven't seen before which is T.F. variance scaling initialiser and I'm
+
+73
+00:04:54,870 --> 00:04:58,220
+going to run that and then talk a little bit about it.
+
+74
+00:04:59,670 --> 00:05:05,310
+If we scroll back up here we realize that we're going to have to build the weights for our inputs are
+
+75
+00:05:05,310 --> 00:05:08,680
+hidden layer 1 in our hidden layer 2 and then back out again.
+
+76
+00:05:08,820 --> 00:05:13,410
+And when you're constructing and initializing these weights typically will be done in the past just
+
+77
+00:05:13,740 --> 00:05:19,530
+grab from some sort of Renn distribution or maybe even set them all to start off it's ones or zeros.
+
+78
+00:05:19,560 --> 00:05:26,310
+But there's going to be a problem that occurs in the fact that the scale of these weight tensors is
+
+79
+00:05:26,310 --> 00:05:29,890
+quite different because we're dividing it in half each time.
+
+80
+00:05:30,150 --> 00:05:36,600
+And what T.F. variance scaling initialiser allows us to do is basically as a name says it's an initialiser
+
+81
+00:05:36,600 --> 00:05:41,640
+that's capable of adapting its scale to the shape of the weight sensors and there are parameters you
+
+82
+00:05:41,640 --> 00:05:42,200
+can do here.
+
+83
+00:05:42,210 --> 00:05:47,400
+But basically it's going to if you do shift help here have some basic scaling.
+
+84
+00:05:47,400 --> 00:05:50,920
+So at one point zero and it's going to scale it's the size of the tensors.
+
+85
+00:05:50,940 --> 00:05:55,990
+So because here it's going to adapt its initialization based on the distribution that it chooses.
+
+86
+00:05:56,100 --> 00:06:01,290
+Distribution normal to the shape of the weight tensors and that's going to allow us to have much better
+
+87
+00:06:01,290 --> 00:06:07,320
+training because we're going to initialize it based off a distribution that's based off the size of
+
+88
+00:06:07,320 --> 00:06:09,340
+these hidden layers.
+
+89
+00:06:09,360 --> 00:06:13,830
+So that's going to create a much better training than if you just initialized it with random weights
+
+90
+00:06:13,830 --> 00:06:17,990
+across the board because of the size difference in these weight sensors.
+
+91
+00:06:18,410 --> 00:06:23,370
+So that's usually a necessity when you're dealing with auto encoders especially if you start to do a
+
+92
+00:06:23,370 --> 00:06:26,460
+really quick shift in the size of the hidden layers.
+
+93
+00:06:26,460 --> 00:06:34,190
+So let's show you how we can use this guy to actually quite easy and then create some weights variables.
+
+94
+00:06:34,260 --> 00:06:38,820
+So just as we then in the past we're going to say T.F. variable and then we're going to initialize it.
+
+95
+00:06:38,830 --> 00:06:45,420
+Previously we did things like T.F. zeros or T.F. ones or T.F. you know truncated normal those kind of
+
+96
+00:06:45,420 --> 00:06:46,230
+things.
+
+97
+00:06:46,230 --> 00:06:52,230
+But what I'm going to do now is just call the initialiser object they just created and then passed in
+
+98
+00:06:52,240 --> 00:06:54,310
+the shape so it's expecting Here's the shape.
+
+99
+00:06:54,610 --> 00:06:56,710
+So it's going to be not quite simple.
+
+100
+00:06:56,710 --> 00:07:03,520
+The first weight needs to be the number of inputs and then the output is going to be neurons hit one
+
+101
+00:07:04,150 --> 00:07:08,710
+and then when you can also tell it what data type is going to be for the variable and the data type.
+
+102
+00:07:08,880 --> 00:07:12,740
+So the type is equal to T.F. flute 32.
+
+103
+00:07:13,200 --> 00:07:18,550
+OK so let's copy and paste this because we need a couple of more sets of weights and then let's change
+
+104
+00:07:18,550 --> 00:07:19,500
+and edit what we need to.
+
+105
+00:07:19,570 --> 00:07:22,660
+So we have the first set of weights for the input layer.
+
+106
+00:07:22,660 --> 00:07:24,990
+Second set of weights for that first layer.
+
+107
+00:07:25,470 --> 00:07:29,900
+Third set of weights for that next hidden layer and force that awaits there.
+
+108
+00:07:29,920 --> 00:07:31,280
+So let's see what happens here.
+
+109
+00:07:31,290 --> 00:07:35,740
+We have a number of inputs two neurons hit and one that means neurons hit and one is going to be the
+
+110
+00:07:35,740 --> 00:07:43,040
+next set and the weights are which means you're get into coming up next they're And then that means
+
+111
+00:07:43,100 --> 00:07:47,050
+you're on hit into is coming over here.
+
+112
+00:07:48,730 --> 00:07:54,650
+And then you're on student 3 coming over there which means you're on student 3 going to come here.
+
+113
+00:07:54,730 --> 00:07:56,340
+And then finally we're going to have our outputs.
+
+114
+00:07:56,420 --> 00:07:59,220
+So outputs.
+
+115
+00:07:59,490 --> 00:07:59,890
+All right.
+
+116
+00:08:00,770 --> 00:08:03,470
+Let's make sure I didn't actually have a typo.
+
+117
+00:08:03,470 --> 00:08:06,920
+So neurons hit three not define.
+
+118
+00:08:06,980 --> 00:08:09,950
+Make sure I find that appear neurons high theory.
+
+119
+00:08:09,950 --> 00:08:11,610
+OK.
+
+120
+00:08:12,140 --> 00:08:13,420
+Let's run that again.
+
+121
+00:08:13,960 --> 00:08:15,410
+Okay perfect.
+
+122
+00:08:15,410 --> 00:08:20,920
+So save that and now we're going to do the same thing but offer our biased terms now are biases.
+
+123
+00:08:21,020 --> 00:08:25,200
+Those still have to be as strict as the weights we can just start those off as ones or zeroes.
+
+124
+00:08:25,280 --> 00:08:26,180
+Basically up to you.
+
+125
+00:08:26,300 --> 00:08:27,260
+Well go ahead.
+
+126
+00:08:27,290 --> 00:08:31,280
+Because when I was running earlier that tended to give a little bit of some cleaner results.
+
+127
+00:08:31,400 --> 00:08:34,790
+So I'll say T.F. zeros and that's going to be defined here by the output.
+
+128
+00:08:34,790 --> 00:08:42,440
+So neurons hit one going to copy this and then paste it four more times for each of those weights.
+
+129
+00:08:42,470 --> 00:08:51,300
+So we have to be three before zeros menow now need to say it and Lerer to hit only three in the last
+
+130
+00:08:51,300 --> 00:08:55,490
+decade is going to be the output tools and numb outputs.
+
+131
+00:08:55,730 --> 00:09:02,970
+OK so we have our weights our biases and we have our activation function defined appear as a CTF.
+
+132
+00:09:03,000 --> 00:09:09,990
+So we'll keep that and in the notes actually redefined as LCT underscore phunk just to make it a little
+
+133
+00:09:09,990 --> 00:09:10,910
+more readable.
+
+134
+00:09:10,920 --> 00:09:12,160
+So I'll go ahead to do the same thing here.
+
+135
+00:09:12,180 --> 00:09:15,990
+We match exactly the notes but again serving the same purposes like that up there.
+
+136
+00:09:16,110 --> 00:09:20,040
+Except now I think it's a little more readable than actif.
+
+137
+00:09:20,050 --> 00:09:23,990
+OK so our activation phunk Let's go ahead and create our hidden layers.
+
+138
+00:09:24,340 --> 00:09:30,610
+So our hidden layer one is going to be equal to the activation function we chose and then we're going
+
+139
+00:09:30,610 --> 00:09:37,360
+to say just T.F. matrix multiplication of our placeholder by those weights and then we add in our bias
+
+140
+00:09:37,360 --> 00:09:43,640
+term Sofala is feels really familiar from the very first lectures covering tensor flow basically doing
+
+141
+00:09:43,730 --> 00:09:49,790
+the classic neural network design of multiplying your input your weights adding some biased term and
+
+142
+00:09:49,790 --> 00:09:51,810
+then passing it through an activation function.
+
+143
+00:09:52,070 --> 00:09:55,990
+We're going to need to do this a couple of more times though let's copy paste here.
+
+144
+00:09:56,970 --> 00:10:00,290
+So after a hit or one as you may have guessed is hidden there too.
+
+145
+00:10:00,320 --> 00:10:05,240
+Same deal we're going to say T.F. Mitchell to cation except instead of passing x now we're passing and
+
+146
+00:10:05,240 --> 00:10:15,020
+the result of Hitler 1 times waits to plus Bice's do and similar thing for that next it.
+
+147
+00:10:16,050 --> 00:10:17,150
+Doodler 3.
+
+148
+00:10:17,480 --> 00:10:20,700
+Instead of saying Hit it layer 1 we're going to see him later to
+
+149
+00:10:24,570 --> 00:10:28,910
+and then this is going to be the third way Tobias's.
+
+150
+00:10:29,160 --> 00:10:37,040
+And this is actually the upper layers let's call it up layer and this is going to be hidden layer 3
+
+151
+00:10:38,670 --> 00:10:47,250
+Hitler 3 hopefully and how it's PayPal's there and then for Byass for OK.
+
+152
+00:10:47,650 --> 00:10:49,980
+And now it's time to find the last function.
+
+153
+00:10:50,170 --> 00:11:00,860
+We'll just go ahead and say T.F. reduce mean T.F. square of the output layer basically the predictions
+
+154
+00:11:00,890 --> 00:11:02,250
+minus the results.
+
+155
+00:11:03,510 --> 00:11:04,030
+OK.
+
+156
+00:11:04,300 --> 00:11:08,830
+And this is not really in essence a prediction it's more like how good of a representation are we able
+
+157
+00:11:08,830 --> 00:11:11,020
+to create based off the original data.
+
+158
+00:11:11,050 --> 00:11:12,730
+So just the mean square error here.
+
+159
+00:11:13,620 --> 00:11:16,090
+And then we're going to pick an optimizer.
+
+160
+00:11:16,230 --> 00:11:18,340
+We're going to use the atom optimizer for this.
+
+161
+00:11:18,360 --> 00:11:26,230
+Say T.F. train atom optimizer and then going to pass in the learning rate that we decided earlier on
+
+162
+00:11:26,230 --> 00:11:34,320
+which was I believe 0.01 find my training operation as just the optimizer attempting to minimize our
+
+163
+00:11:34,320 --> 00:11:36,160
+loss function.
+
+164
+00:11:36,170 --> 00:11:38,270
+Let's go ahead and initialize the variables.
+
+165
+00:11:38,360 --> 00:11:41,200
+Hopefully this all feels pretty familiar right now.
+
+166
+00:11:41,340 --> 00:11:46,250
+There's a T.F. global variables initialiser and run that.
+
+167
+00:11:46,580 --> 00:11:47,010
+OK.
+
+168
+00:11:47,120 --> 00:11:49,130
+So we basically have everything ready to go.
+
+169
+00:11:49,220 --> 00:11:54,680
+All we have next is to actually run our session and then test out the output.
+
+170
+00:11:54,680 --> 00:11:56,650
+So let's go ahead and check that out.
+
+171
+00:11:56,660 --> 00:11:58,320
+We're almost done here actually.
+
+172
+00:11:58,570 --> 00:12:04,820
+I'm going to be saving this in order to get on the train data or testator's Well we'll say T.F. train
+
+173
+00:12:05,430 --> 00:12:07,170
+Savir.
+
+174
+00:12:07,190 --> 00:12:09,960
+OK so let's actually start constructing our session.
+
+175
+00:12:10,250 --> 00:12:17,560
+We'll go ahead and run it through five e POCs and we'll fit in in batch sizes of 150 where each IPAC
+
+176
+00:12:17,570 --> 00:12:23,450
+is going to be an entire run through all your training data and the batch sizes just how large of batches
+
+177
+00:12:23,450 --> 00:12:24,290
+you're feeding in.
+
+178
+00:12:24,440 --> 00:12:27,780
+So 15 in and 150 images at a time.
+
+179
+00:12:28,160 --> 00:12:33,670
+And I say with T.F. session as SPSS we're going to say session ront in
+
+180
+00:12:36,570 --> 00:12:37,770
+and then we'll do the following.
+
+181
+00:12:37,770 --> 00:12:46,920
+So I'm going to say for every epoch in the range of the number of the POCs chosen we'll do the following.
+
+182
+00:12:46,920 --> 00:12:50,380
+The first thing to decide well how many batches is that actually going to be.
+
+183
+00:12:50,580 --> 00:12:55,010
+Well luckily for us that's quite simple the way this dataset works for us.
+
+184
+00:12:55,050 --> 00:13:02,470
+We know the number of batches is just going to be this train number of examples divided by the batch
+
+185
+00:13:02,470 --> 00:13:04,400
+size.
+
+186
+00:13:04,510 --> 00:13:09,810
+And the reason I'm doing this two forward slashes is in order to not get a small point now.
+
+187
+00:13:09,820 --> 00:13:14,450
+This basically does a kind of classic division sort of truth division here.
+
+188
+00:13:14,590 --> 00:13:18,170
+So we know the number of batches we need to go through now just the number of examples of about the
+
+189
+00:13:18,340 --> 00:13:20,740
+size that equals the number of batches to go through.
+
+190
+00:13:20,950 --> 00:13:28,750
+So say for every iteration in range of the number of batches we need to go through that are going to
+
+191
+00:13:28,760 --> 00:13:35,540
+say X batch y batch is equal to this train.
+
+192
+00:13:35,720 --> 00:13:43,690
+The next batch pests and the batch size again kind of uses convenience methods from him.
+
+193
+00:13:44,070 --> 00:13:50,180
+They were frightened to say session run that training Optum or training operation we define earlier
+
+194
+00:13:50,500 --> 00:13:56,910
+and that our dictionary just expects one placeholder value that's going to be X as the next batch.
+
+195
+00:13:59,700 --> 00:14:06,420
+So once we train that entire number of batches we'll go head and print out our training loss which is
+
+196
+00:14:06,420 --> 00:14:08,800
+just going to be evaluating our loss.
+
+197
+00:14:09,030 --> 00:14:13,870
+And again we'll pass it in the dictionary next ex-pats.
+
+198
+00:14:13,870 --> 00:14:18,550
+Whoops make sure it'll have strings there right.
+
+199
+00:14:20,690 --> 00:14:26,120
+And we'll go ahead and print out something like Poch
+
+200
+00:14:29,280 --> 00:14:38,940
+the Los Angeles pitance of formatting there will pass in the pocket number and then that training loss.
+
+201
+00:14:39,000 --> 00:14:45,390
+Finally once we're done with all the pox I'm going to save this so we'll pasand and save session and
+
+202
+00:14:45,390 --> 00:15:01,770
+then we'll say example Stex auto encoder checkpoint auto Khutor checkpoint S.K. OK run that and fast
+
+203
+00:15:01,770 --> 00:15:03,450
+forward in time for this to finish running.
+
+204
+00:15:03,540 --> 00:15:07,170
+Then we're going to test our auto encoder output on the test data and then we're going to visualize
+
+205
+00:15:07,170 --> 00:15:09,330
+it.
+
+206
+00:15:09,510 --> 00:15:12,480
+OK so I just finished running a fiver POCs.
+
+207
+00:15:12,570 --> 00:15:16,130
+This may take a little bit of time depending on how good your machine is.
+
+208
+00:15:16,140 --> 00:15:18,330
+Let's go ahead and test that 10 images.
+
+209
+00:15:18,330 --> 00:15:24,360
+So we're going to say run now 10 test images or images that the auto hasn't seen before.
+
+210
+00:15:24,450 --> 00:15:26,580
+And let's see how they come out on the other end.
+
+211
+00:15:26,610 --> 00:15:29,580
+Hopefully they still represent numbers more or less.
+
+212
+00:15:29,580 --> 00:15:34,260
+They should look like the numbers the past then they may be a little blurry or a little skewed a little
+
+213
+00:15:34,260 --> 00:15:39,880
+noisy but we should be able to tell that they are fairly similar.
+
+214
+00:15:39,950 --> 00:15:45,490
+So I'm going to restore that model I just credence let me copy and paste this here.
+
+215
+00:15:45,560 --> 00:15:47,680
+Examples that out and couter.
+
+216
+00:15:47,930 --> 00:15:51,950
+And again if you don't actually want to run this there is an example of checkpoint file free to load
+
+217
+00:15:51,950 --> 00:15:55,350
+up that we don't wait for all this training OK.
+
+218
+00:15:55,350 --> 00:16:01,710
+So those are examples that Uttam couter I'm going to say that the results are equal to the output layer.
+
+219
+00:16:01,860 --> 00:16:07,270
+And then I will evaluate it same as we did last time based off the feed dictionary of X..
+
+220
+00:16:07,450 --> 00:16:09,630
+But in this case of pasand test images.
+
+221
+00:16:09,670 --> 00:16:14,890
+So the in my test images and then we're just going to passen the number of test images we actually want
+
+222
+00:16:14,890 --> 00:16:17,810
+to test which in this case are tentes images.
+
+223
+00:16:17,820 --> 00:16:19,740
+All right so right now I have my results.
+
+224
+00:16:19,770 --> 00:16:25,650
+So if I take a look at my results they're just basically 10 arrays and I'm going to copy and paste a
+
+225
+00:16:25,650 --> 00:16:28,050
+plotting function that's in your notebook.
+
+226
+00:16:28,050 --> 00:16:30,880
+I'll briefly walk through it to tell you what it's kind of actually doing here.
+
+227
+00:16:31,910 --> 00:16:35,930
+But this is from the notebook that goes along this lecture.
+
+228
+00:16:35,930 --> 00:16:40,070
+Basically what this does is it creates that polyps subplots.
+
+229
+00:16:40,460 --> 00:16:46,340
+So it's going to create two rows by 10 collops and the figure size is something you can adjust.
+
+230
+00:16:46,490 --> 00:16:52,340
+And what it's going to do is for every thing for every test image basically it's going to show the original
+
+231
+00:16:52,340 --> 00:16:56,840
+test image shown just reshaping it to a 28 by 20 then passing it to show.
+
+232
+00:16:57,080 --> 00:17:00,120
+And what this represents is the axes of the subplot.
+
+233
+00:17:00,320 --> 00:17:03,830
+So it's going to plot it at the very top that first rose zero.
+
+234
+00:17:03,980 --> 00:17:06,830
+So at the very first row we'll see all the real test images.
+
+235
+00:17:06,830 --> 00:17:08,370
+So those should look really clean.
+
+236
+00:17:08,630 --> 00:17:13,640
+And then on that second row we're going to see what happens when we pass those test images through the
+
+237
+00:17:13,640 --> 00:17:15,840
+actual stacked auto encoder.
+
+238
+00:17:15,860 --> 00:17:17,510
+So let's run this.
+
+239
+00:17:17,750 --> 00:17:18,830
+And here we go.
+
+240
+00:17:18,990 --> 00:17:24,640
+OK so this is actually basically we should expect depending on how you actually ran this.
+
+241
+00:17:24,680 --> 00:17:26,250
+It may be a little noisier.
+
+242
+00:17:26,300 --> 00:17:31,250
+That is to say you may see a little more coloring around these numbers but you should be able to basically
+
+243
+00:17:31,250 --> 00:17:36,060
+tell especially for really obvious ones like the ones that it did OK.
+
+244
+00:17:36,150 --> 00:17:38,960
+Now you'll notice there is definitely some noise here.
+
+245
+00:17:39,020 --> 00:17:42,560
+For example if you look at the two it's kind of drawing as if it was a 3.
+
+246
+00:17:42,560 --> 00:17:44,300
+So that's not really good.
+
+247
+00:17:44,420 --> 00:17:48,500
+And you can see for the four it's kind of getting a piece of a 7 and this one that's kind of like a
+
+248
+00:17:48,500 --> 00:17:49,800
+really bad five.
+
+249
+00:17:49,820 --> 00:17:51,740
+It's starting to really get some blurry here.
+
+250
+00:17:51,770 --> 00:17:57,280
+But for really obvious ones like zeros and ones and even the input 7 it performed pretty well.
+
+251
+00:17:57,530 --> 00:18:01,850
+So keep that in mind you can definitely kind of begin to tell what features that's learning here.
+
+252
+00:18:02,060 --> 00:18:05,340
+As a quick note something that's really common for people to do that.
+
+253
+00:18:05,390 --> 00:18:10,700
+Otto coder's is that instead of the valuating at the output layer with the end up doing is to see what
+
+254
+00:18:10,700 --> 00:18:14,390
+features the stack auto Khutor is kind of learning.
+
+255
+00:18:14,480 --> 00:18:19,570
+They end up coming up here and grabbing one of the hidden layers and evaluating at that.
+
+256
+00:18:19,760 --> 00:18:23,390
+So this actually isn't very useful for the way we designed our stack out in coater.
+
+257
+00:18:23,440 --> 00:18:25,310
+Basically just nothing or noise.
+
+258
+00:18:25,310 --> 00:18:29,690
+But if you're interested to see kind of what neurons are highlighting at certain inputs what you could
+
+259
+00:18:29,690 --> 00:18:35,510
+do theoretically is grab this second hidden layer rummer or second hand and layers one of the smaller
+
+260
+00:18:35,510 --> 00:18:35,870
+ones.
+
+261
+00:18:35,900 --> 00:18:41,680
+The one that D6 come all the way down and evaluate at the second hidden layer is sort of the outer layer.
+
+262
+00:18:41,900 --> 00:18:47,450
+So we're going to pass in these images and then here you're going to see kind of what pixels light up
+
+263
+00:18:47,450 --> 00:18:50,630
+essentially in this model second hidden layer.
+
+264
+00:18:50,810 --> 00:18:54,400
+As I mentioned in our case it's going to be almost nothing or kind of noisy.
+
+265
+00:18:54,560 --> 00:18:58,490
+And if you actually want to run this so now it's evaluating at the hidden layer that's two that's actually
+
+266
+00:18:58,490 --> 00:19:06,750
+just 196 pixels which means the second one is to be 14 by 14 because 14:10 14 is 186.
+
+267
+00:19:06,760 --> 00:19:11,260
+So if you're on that you should be able to just kind of see some noise here so you can kind of see maybe
+
+268
+00:19:11,260 --> 00:19:11,860
+some trends.
+
+269
+00:19:11,890 --> 00:19:14,020
+In this case it's not super clear.
+
+270
+00:19:14,410 --> 00:19:17,120
+Maybe you can added some more neurons that kind of play around with that.
+
+271
+00:19:17,140 --> 00:19:22,240
+But the more important part is actually evaluating at the output layer where you do get to see basically
+
+272
+00:19:22,240 --> 00:19:27,430
+that the stacked couter is trying its best to represent the numbers at the output.
+
+273
+00:19:27,430 --> 00:19:29,670
+All right I hope you found this lecture interesting.
+
+274
+00:19:29,680 --> 00:19:31,480
+I will see you at the next section of course.
+
+275
+00:19:31,480 --> 00:19:32,250
+Thanks everyone.
+

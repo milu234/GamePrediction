@@ -1,0 +1,48 @@
+1
+00:00:05,630 --> 00:00:10,820
+Welcome everyone to an introduction to neural networks in this section of the course we're going to
+
+2
+00:00:10,820 --> 00:00:16,370
+have a series of lectures that will cover key theoretical topics and aspects surrounding the neural
+
+3
+00:00:16,370 --> 00:00:22,700
+network model that is things like neurons percept trons activation functions as well as cost functions.
+
+4
+00:00:22,700 --> 00:00:29,680
+Gradient descent and back propagation once we build a general very high level understanding we're going
+
+5
+00:00:29,680 --> 00:00:35,220
+to code out all of these topics manually with Python without the use of a deep learning library.
+
+6
+00:00:35,230 --> 00:00:41,400
+Basically we're actually going to try to do is manually create a very simple version of tensor flow.
+
+7
+00:00:41,410 --> 00:00:46,560
+Once you've actually built this by hand manually with Python we're going to move on to using the deep
+
+8
+00:00:46,690 --> 00:00:52,840
+library for this course tensor flow understanding a high level overview of these key elements is really
+
+9
+00:00:52,840 --> 00:00:55,350
+going to make it much easier to understand what's happening.
+
+10
+00:00:55,390 --> 00:01:02,700
+Once we begin to use tensor flow and tensor flow has direct connections to these concepts in its syntax.
+
+11
+00:01:02,710 --> 00:01:04,180
+All right let's get started.
+
+12
+00:01:04,180 --> 00:01:05,520
+I'll see you at the next lecture.
+

@@ -1,0 +1,260 @@
+1
+00:00:05,290 --> 00:00:07,460
+Welcome back everyone to this series of lectures.
+
+2
+00:00:07,470 --> 00:00:10,800
+We're going to be building out a recurrent neural network with tent's flows.
+
+3
+00:00:10,840 --> 00:00:16,420
+API now that we understand the various possible improvements for recurrent neural networks we're going
+
+4
+00:00:16,420 --> 00:00:23,690
+to use tensor Flo's built in T.F. thought and functionality to solve time series and sequence problems.
+
+5
+00:00:23,740 --> 00:00:29,600
+So let's recall our original sequence thought exercise we are given a sequence one two three four five
+
+6
+00:00:29,600 --> 00:00:30,460
+six.
+
+7
+00:00:30,520 --> 00:00:36,490
+And now the question arises Can we predict this sequence shifted one time step forward and hopefully
+
+8
+00:00:36,490 --> 00:00:39,560
+you would end up predicting two three four five six seven.
+
+9
+00:00:39,730 --> 00:00:45,410
+And if this one two three four five six was part of a larger data set as a treating batch you wouldn't
+
+10
+00:00:45,460 --> 00:00:51,370
+hopefully be able to confirm that 7 was that correct sequence shift at one time step forward.
+
+11
+00:00:52,580 --> 00:00:54,410
+But what about this time series.
+
+12
+00:00:54,460 --> 00:00:57,250
+This is a harder problem for someone to actually solve.
+
+13
+00:00:57,320 --> 00:01:01,670
+And this is the exact problem we're going to try to give our recurrent neural network.
+
+14
+00:01:01,760 --> 00:01:06,270
+If you were to actually visualize this time series data you would hopefully just realize that it's a
+
+15
+00:01:06,260 --> 00:01:07,380
+sign of x.
+
+16
+00:01:07,490 --> 00:01:13,130
+So we're going to be feeding in a time series that looks like that top time series from 0 all the way
+
+17
+00:01:13,130 --> 00:01:21,410
+to negative 0.2 eights and then we want our actual model to spit back out a time series shifted over
+
+18
+00:01:21,500 --> 00:01:22,570
+one timestep.
+
+19
+00:01:22,640 --> 00:01:24,510
+So then we no longer have that initial 0.
+
+20
+00:01:24,530 --> 00:01:28,520
+But it's that towards the end it went ahead and predicted 0.6 5.
+
+21
+00:01:28,550 --> 00:01:32,910
+But keep in mind it's actually trying to generate the entire time series.
+
+22
+00:01:32,930 --> 00:01:36,200
+So it's not just grabbing the previous values and sticking them in.
+
+23
+00:01:36,350 --> 00:01:39,910
+It's going to attempt to generate the entire time series shift that over 1.
+
+24
+00:01:39,920 --> 00:01:45,480
+So you may get small errors throughout that entire time series so we're going to start by creating a
+
+25
+00:01:45,480 --> 00:01:49,530
+recurrent year all that work that attempts to predict the time series shifted over one unit into the
+
+26
+00:01:49,530 --> 00:01:53,960
+future then we'll attempt to generate new sequences with a seed series.
+
+27
+00:01:55,610 --> 00:02:00,950
+So going to first create a simple class to generate sign of x and also grab random batches of sign of
+
+28
+00:02:00,950 --> 00:02:01,560
+x.
+
+29
+00:02:01,640 --> 00:02:07,520
+So we'll have some time series data class and it's going to be able to initiate or generate sign effects
+
+30
+00:02:07,640 --> 00:02:08,690
+as we see here.
+
+31
+00:02:08,990 --> 00:02:12,380
+But it's also going to be able to then feed in batches of training sets.
+
+32
+00:02:12,380 --> 00:02:14,640
+So here we can see this training batch.
+
+33
+00:02:14,660 --> 00:02:16,590
+This is part of sign of x.
+
+34
+00:02:16,640 --> 00:02:20,570
+So if we were to view it overlapping sign of t it would look something like this.
+
+35
+00:02:20,570 --> 00:02:27,080
+So basically the batches that we're going to feed into our model are just going to be batches or groupings
+
+36
+00:02:27,170 --> 00:02:29,040
+of this sign of the algorithm.
+
+37
+00:02:29,180 --> 00:02:33,560
+So those orange stars represent a single training instance.
+
+38
+00:02:33,580 --> 00:02:39,790
+So then when we actually train the model and attempt to predict a new time series shifted one step ahead
+
+39
+00:02:39,850 --> 00:02:41,250
+it's going to look like this.
+
+40
+00:02:41,260 --> 00:02:44,890
+So the train model you're going to give it a training instance.
+
+41
+00:02:44,890 --> 00:02:46,930
+So those are those blue points there.
+
+42
+00:02:47,080 --> 00:02:49,630
+And then you have a target which are the black points.
+
+43
+00:02:49,630 --> 00:02:55,030
+So that's the target shifted over one time step and then hopefully that model is going to attempt to
+
+44
+00:02:55,030 --> 00:03:00,100
+predict what that time series is going to look like shifted over one time step and you can see here
+
+45
+00:03:00,100 --> 00:03:05,200
+that we are off on some points not perfectly centered especially the very first point is pretty way
+
+46
+00:03:05,200 --> 00:03:09,260
+off but you can see that last point is almost right on top of its target.
+
+47
+00:03:09,280 --> 00:03:13,300
+So obviously you can still tune this and try to get better predictions but this is the main idea that
+
+48
+00:03:13,300 --> 00:03:14,230
+we're trying to do.
+
+49
+00:03:14,320 --> 00:03:19,660
+We give it a time series and have it generate a time series shifted over one time step into the future
+
+50
+00:03:20,930 --> 00:03:21,560
+afterwards.
+
+51
+00:03:21,590 --> 00:03:26,620
+We're going to be using the same model to generate much longer time series given a seed series.
+
+52
+00:03:26,810 --> 00:03:34,460
+So if we take a look at the previous use of the model we gave it a training instance essentially a sequence
+
+53
+00:03:34,580 --> 00:03:40,290
+in this time series and then asked it to predict a time series shifted over by one timestep.
+
+54
+00:03:40,310 --> 00:03:45,950
+Now we're going to do later on is give it again a seed series except this time we're going to ask it
+
+55
+00:03:46,130 --> 00:03:49,710
+to predict way past just one time step forward.
+
+56
+00:03:49,730 --> 00:03:52,890
+In fact we'll ask it to generate many many times step forward.
+
+57
+00:03:53,090 --> 00:03:59,110
+So you can see here that red represents the seed series given in this case we just fed it straight zeros
+
+58
+00:03:59,450 --> 00:04:04,190
+and then it attempts to generate a sign you saw it a wave and you could see it's pretty cool.
+
+59
+00:04:04,190 --> 00:04:10,590
+That is generating this just based off of what it knows from learning about the sign of x function.
+
+60
+00:04:10,670 --> 00:04:15,770
+And here you can see it's a bit of a sloppy sinusoidal wave and it only goes from negatives or 0.6 to
+
+61
+00:04:15,880 --> 00:04:20,480
+0.4 and that's because you're feeding it straight zeros as it seed series.
+
+62
+00:04:20,480 --> 00:04:26,360
+However if you were to actually feed it sign of x in the very beginning so we feed it that red portion
+
+63
+00:04:26,690 --> 00:04:31,540
+you can see that it predicts a something much closer to sign of x.
+
+64
+00:04:31,550 --> 00:04:35,930
+All right let's get started in the next lecture will open up a Jupiter note book and start by creating
+
+65
+00:04:35,990 --> 00:04:37,670
+the time series data class.
+

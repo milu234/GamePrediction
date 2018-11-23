@@ -1,0 +1,880 @@
+1
+00:00:05,240 --> 00:00:06,750
+Welcome everyone to solutions.
+
+2
+00:00:06,750 --> 00:00:10,890
+Part one for the Safar it's an exercise for convolutional neural networks.
+
+3
+00:00:10,910 --> 00:00:13,250
+Let's go straight to the Jupiter notebook and get started.
+
+4
+00:00:13,510 --> 00:00:13,760
+OK.
+
+5
+00:00:13,770 --> 00:00:16,600
+Here we are for the project exercise notebook.
+
+6
+00:00:16,700 --> 00:00:22,910
+And a lot of the first steps in step zero is to just organize and get the data.
+
+7
+00:00:22,930 --> 00:00:25,810
+So there's already a link here in the notebook where you can download the data.
+
+8
+00:00:25,810 --> 00:00:28,070
+Keep in mind it's already been downloading for you.
+
+9
+00:00:28,210 --> 00:00:33,850
+So instead we're going to do just put a file path here as a stream to where the directory of the data
+
+10
+00:00:33,850 --> 00:00:34,450
+is.
+
+11
+00:00:34,570 --> 00:00:40,550
+And in this case it's for 10 batches pie from the zip file.
+
+12
+00:00:40,580 --> 00:00:46,500
+So that's a directory that contains several files that about 1 that attach to that about 5 et cetera
+
+13
+00:00:46,880 --> 00:00:48,820
+as well as test batch.
+
+14
+00:00:48,830 --> 00:00:55,490
+So each of those files is a python pickled object that's been produced with the Python C pickle library
+
+15
+00:00:55,550 --> 00:00:57,620
+which is essentially just a way of storing data.
+
+16
+00:00:57,950 --> 00:01:04,070
+So what we end up doing is we use this code right here on pickle to open up those files essentially
+
+17
+00:01:04,470 --> 00:01:11,810
+we're going to run these cells and then I have a list here of directory names that's already there underneath
+
+18
+00:01:11,900 --> 00:01:12,890
+that folder.
+
+19
+00:01:13,100 --> 00:01:17,900
+So we have batches mete out about 1 out of each two etc. all the way through that about 5.
+
+20
+00:01:17,930 --> 00:01:19,630
+And then we have our test batch.
+
+21
+00:01:19,940 --> 00:01:27,370
+So then I also have a corresponding all data 0 through 6 so essentially index or indices for that.
+
+22
+00:01:27,740 --> 00:01:31,490
+So we're going to do is run these two.
+
+23
+00:01:31,500 --> 00:01:34,950
+And I guess you could have also used enumerate instead of zippin these together like I did.
+
+24
+00:01:35,200 --> 00:01:39,890
+But we're going to say that the object all data index i.
+
+25
+00:01:40,060 --> 00:01:45,820
+Is that equal to an pickling Safar directory plus direc.
+
+26
+00:01:45,820 --> 00:01:51,280
+So all I'm doing is I'm saying OK for each of these files that's underneath this directory.
+
+27
+00:01:51,400 --> 00:01:55,120
+Go ahead and then put it in the list that the index position.
+
+28
+00:01:55,180 --> 00:02:00,280
+So if we come back up here and check out these actual files I'm basically saying unpick all these files
+
+29
+00:02:00,610 --> 00:02:03,610
+and then save them as part of the list.
+
+30
+00:02:03,660 --> 00:02:09,680
+So we're going to run these lines then and then when I'm going to do is each of these items in the list
+
+31
+00:02:09,740 --> 00:02:12,440
+I'm going to assign them to each variable.
+
+32
+00:02:12,470 --> 00:02:14,420
+That way I can easily call these variables.
+
+33
+00:02:14,420 --> 00:02:19,130
+So now I have variable names that essentially match up with the directory names.
+
+34
+00:02:19,340 --> 00:02:21,330
+So then I'm willing to run that cell.
+
+35
+00:02:21,620 --> 00:02:26,220
+And if we take a look at the first one that's essentially the meta data for this dataset.
+
+36
+00:02:26,480 --> 00:02:27,640
+So we have a dictionary here.
+
+37
+00:02:27,660 --> 00:02:32,900
+There's label names and these are all the possible labels or there's 10 labels here says pictures of
+
+38
+00:02:32,900 --> 00:02:40,320
+airplanes birds dogs frogs etc. also ships and trucks that we have 10000 number of cases per batch.
+
+39
+00:02:40,460 --> 00:02:45,020
+And there's also a note here on why there's bees in front of these strings of basically a way of denoting
+
+40
+00:02:45,040 --> 00:02:46,220
+and by literals.
+
+41
+00:02:46,370 --> 00:02:51,290
+And that's actually important because when you're using the keys of this dictionary you need to provide
+
+42
+00:02:51,290 --> 00:02:52,050
+the be there.
+
+43
+00:02:52,100 --> 00:02:56,930
+So that's why there's a little link here to a stack overflow post on that.
+
+44
+00:02:56,940 --> 00:03:01,150
+OK so then we also have the number of them mentions three thousand seventy two.
+
+45
+00:03:01,160 --> 00:03:06,390
+We'll explore that later on if we take a look at just one of these variable objects or remember this
+
+46
+00:03:06,420 --> 00:03:11,450
+and we just created up here at about one and we say keys off of it.
+
+47
+00:03:11,470 --> 00:03:17,000
+Notice we have the file names the data the batched label and then the labels themselves.
+
+48
+00:03:17,200 --> 00:03:22,840
+So when it's loaded this way each of the batch files contains a dictionary with the following elements.
+
+49
+00:03:22,840 --> 00:03:28,060
+First off it has the data already represented as a ten thousand by three thousand seventy two an umpire
+
+50
+00:03:28,060 --> 00:03:34,660
+array of integer numbers where each row of the array stores a 32 by 32 color image.
+
+51
+00:03:34,690 --> 00:03:41,500
+So you can already tell that it's actually a flattened out the first 1200 are 1024 entries contain the
+
+52
+00:03:41,500 --> 00:03:45,910
+red channel values the next are the green ones and the next are the blue ones so we already have to
+
+53
+00:03:45,910 --> 00:03:49,220
+start thinking about tensors with depth for that channel.
+
+54
+00:03:50,780 --> 00:03:56,180
+And then we also have the labels so that's a list of 10000 numbers in the range 0 through 9.
+
+55
+00:03:56,300 --> 00:04:00,300
+So the number index indicates the label of the image in the array data.
+
+56
+00:04:00,320 --> 00:04:06,290
+So this is just one hot encoding and each of these numbers that corresponds to one of these labels so
+
+57
+00:04:06,560 --> 00:04:14,720
+0 airplane 1 automobile etc. So in the dataset contains another file called batches of matter and to
+
+58
+00:04:14,740 --> 00:04:18,580
+also contains the python dictionary object and it's actually the one we were exploited up here has the
+
+59
+00:04:18,580 --> 00:04:21,260
+label names that correspond to those numbers.
+
+60
+00:04:23,080 --> 00:04:23,420
+All right.
+
+61
+00:04:23,420 --> 00:04:28,400
+So your real first part where you were asked to start coding something was to display a single image
+
+62
+00:04:28,430 --> 00:04:29,870
+using that plot lib.
+
+63
+00:04:29,990 --> 00:04:32,750
+You actually got a lot of helpful hints and code here.
+
+64
+00:04:32,930 --> 00:04:38,040
+So we wanted you to grab a single image from data batch one and display it with real teeth that show.
+
+65
+00:04:38,210 --> 00:04:43,280
+And there's actually several ways of doing this the Pennyhill want to do it one image at a time or reformat
+
+66
+00:04:43,340 --> 00:04:45,690
+the entire tensor images.
+
+67
+00:04:45,800 --> 00:04:51,260
+So you need to reshape and transpose an umpire array inside the data batch.
+
+68
+00:04:51,260 --> 00:04:57,050
+So you need to call data dictionary and then you could reshape all the images for formatted viewing
+
+69
+00:04:57,320 --> 00:04:58,730
+using this one line command.
+
+70
+00:04:58,730 --> 00:04:59,870
+So we'll do it this way first.
+
+71
+00:04:59,890 --> 00:05:04,800
+It will show you kind of a more intuitive way of how to do it one image at a time.
+
+72
+00:05:04,850 --> 00:05:10,310
+This transpose command is kind of hard to understand because it's essentially transposing for them engines.
+
+73
+00:05:10,490 --> 00:05:15,250
+So we run this mapped plot lib and map Libin line important umpire et cetera.
+
+74
+00:05:16,180 --> 00:05:23,660
+Then we're going to say is the following we'll say x is equal to data batch 1.
+
+75
+00:05:23,660 --> 00:05:26,890
+So it's our first batch of data and I'm going to grab that data from it.
+
+76
+00:05:26,900 --> 00:05:30,480
+Now unfortunately if I just say data they'll say hey that key is not there.
+
+77
+00:05:30,510 --> 00:05:33,050
+That's because of the byte string issue from before.
+
+78
+00:05:33,050 --> 00:05:39,950
+So has the box here which means I need actually provide an B and then I'll have the data.
+
+79
+00:05:40,040 --> 00:05:46,880
+So if I take a look at the current shape of my X it's right now 10000 images and essentially all the
+
+80
+00:05:46,880 --> 00:05:52,510
+pixel data for each image has been kind of flattened out into three thousand seventy two.
+
+81
+00:05:52,640 --> 00:05:56,270
+So that comes from for Take a look here.
+
+82
+00:05:56,690 --> 00:06:01,360
+We have 32 32 pixels and three color channels for each of them.
+
+83
+00:06:01,430 --> 00:06:03,850
+That's where that three thousand seventy two is coming from.
+
+84
+00:06:04,070 --> 00:06:11,630
+So each of these images is 32 by 32 and then we have three sets of information essentially one greyscale
+
+85
+00:06:11,690 --> 00:06:13,310
+image per color channel.
+
+86
+00:06:13,310 --> 00:06:19,570
+So one representation of reds one representation of greens and one representation of blues.
+
+87
+00:06:19,610 --> 00:06:22,660
+So we're going to do essentially copy and paste this command here.
+
+88
+00:06:24,400 --> 00:06:29,210
+And this will conveniently reshape and format all the images for viewing.
+
+89
+00:06:29,230 --> 00:06:37,430
+So if you run that and then check out one of those images 0 you in the beginning the Saray and this
+
+90
+00:06:37,430 --> 00:06:42,060
+is an array the capacity directly with Piel t m show.
+
+91
+00:06:42,320 --> 00:06:44,060
+So if take a look at the shape of the.
+
+92
+00:06:44,390 --> 00:06:47,630
+It's 32 by 32 and then it has three.
+
+93
+00:06:47,810 --> 00:06:53,550
+So basically has 32 by 32 pixels and 3 stacked layers one for each color channel.
+
+94
+00:06:53,570 --> 00:07:01,400
+And this is something that T are guilty the show can understand and they can say Piazzi show and see
+
+95
+00:07:01,430 --> 00:07:04,060
+x 0.
+
+96
+00:07:04,220 --> 00:07:09,590
+And here we can see a picture of a frog 32 by 32 pixels and you can grab kind of other random images
+
+97
+00:07:09,620 --> 00:07:12,890
+let's say 99 you can see here is a picture of a car.
+
+98
+00:07:13,280 --> 00:07:17,310
+I don't know THIRTY-NINE there's a picture of let's say a cat.
+
+99
+00:07:17,320 --> 00:07:18,560
+It's kind of small here.
+
+100
+00:07:18,610 --> 00:07:22,510
+Of these you can see aren't really that clear even for humans.
+
+101
+00:07:22,550 --> 00:07:24,490
+I would say that's a duck or goose.
+
+102
+00:07:24,500 --> 00:07:27,110
+Maybe their neck 12 horse OK.
+
+103
+00:07:27,140 --> 00:07:27,920
+Nice.
+
+104
+00:07:27,920 --> 00:07:32,120
+All right so we saw to do this one line kind of all automatically.
+
+105
+00:07:32,120 --> 00:07:37,130
+Let's go ahead and explore what's actually happening here of transpose and this reshape.
+
+106
+00:07:37,130 --> 00:07:41,960
+By doing this all one image at a time in a manual fashion.
+
+107
+00:07:41,960 --> 00:07:50,940
+So I'll come back down here and I'm going to reread the data in well say about one and I'm going to
+
+108
+00:07:51,090 --> 00:07:59,590
+grab that data and if I take a look at the shape of my data I can see that it's in 10000 by three thousand
+
+109
+00:07:59,590 --> 00:08:00,580
+seventy two.
+
+110
+00:08:00,670 --> 00:08:03,160
+So I already know I need to reshape it.
+
+111
+00:08:03,230 --> 00:08:05,100
+It's still 10000 training images.
+
+112
+00:08:05,120 --> 00:08:12,130
+But I need to reshape it into three color channels 32 by 32 pixels.
+
+113
+00:08:12,150 --> 00:08:19,460
+So then let's go ahead and say this is all my images so now they have all my images.
+
+114
+00:08:19,460 --> 00:08:22,780
+Let's go ahead and just grab one.
+
+115
+00:08:22,960 --> 00:08:25,290
+So I'll say this is a sample image.
+
+116
+00:08:25,570 --> 00:08:31,050
+So if you take a look at my sample now I have this and the array.
+
+117
+00:08:31,090 --> 00:08:35,950
+Now if I take a look at the shape of my sample it's three 32 32.
+
+118
+00:08:36,280 --> 00:08:43,110
+So that actually doesn't work for Piel t show because remember Altium show needs it to be 32 by 32 pixels.
+
+119
+00:08:43,150 --> 00:08:44,990
+And then the three color channels here.
+
+120
+00:08:45,340 --> 00:08:52,210
+Which means if I actually tried to do something like this where I say peel t him show on this one sample
+
+121
+00:08:52,920 --> 00:08:56,380
+it's going to report back hey you have the wrong dimensions here.
+
+122
+00:08:56,440 --> 00:09:01,600
+So if you scroll down it says Invalid dimensions for image data which means I need to kind of shift
+
+123
+00:09:01,600 --> 00:09:03,500
+this around.
+
+124
+00:09:03,740 --> 00:09:10,380
+So if I take a look at my shape again I can see here I have along the zero axis the three color channels
+
+125
+00:09:10,760 --> 00:09:16,300
+and then along Axis 1 and access to those 32 pixels.
+
+126
+00:09:16,460 --> 00:09:23,330
+So I will end up doing is I will say sample and then I'm going to transpose this and I'm going to shift
+
+127
+00:09:23,450 --> 00:09:29,480
+these two over one to the left and then set the zero axis all the way to the end essentially matching
+
+128
+00:09:29,480 --> 00:09:31,100
+up all we have over here.
+
+129
+00:09:31,760 --> 00:09:34,350
+So those comments are then pretty straightforward.
+
+130
+00:09:34,670 --> 00:09:42,560
+I'm going to set the values at access one and access to when I transpose this to the first and then
+
+131
+00:09:42,620 --> 00:09:48,010
+I want the values on Access 0 to be all the way at the end just like they are over here.
+
+132
+00:09:48,110 --> 00:09:50,540
+So then we shift that zero.
+
+133
+00:09:50,630 --> 00:09:55,430
+So you can see each of these numbers corresponds with the index position of the previous shape and then
+
+134
+00:09:55,430 --> 00:10:00,410
+the location underneath this transpose method basically shifts them.
+
+135
+00:10:00,410 --> 00:10:07,640
+So now if I say peel t him show off this one sample I can see the sample of the frog.
+
+136
+00:10:07,730 --> 00:10:13,190
+So that's how you could do this and you could kind of make a function out of this to basically reset
+
+137
+00:10:13,220 --> 00:10:17,090
+the shapes of each individual image.
+
+138
+00:10:17,090 --> 00:10:22,140
+Now in order to do it across the entire array that's where this transpose comes into play.
+
+139
+00:10:22,340 --> 00:10:27,400
+And this as type you are eight that comes directly from the link.
+
+140
+00:10:27,420 --> 00:10:31,150
+So basically tells you to use as type.
+
+141
+00:10:31,610 --> 00:10:33,370
+OK so let's go in and move along.
+
+142
+00:10:33,600 --> 00:10:35,220
+So you can circle those various images here.
+
+143
+00:10:35,220 --> 00:10:36,480
+Here's an image of a truck.
+
+144
+00:10:36,510 --> 00:10:38,370
+Here's an image of a car etc..
+
+145
+00:10:38,460 --> 00:10:38,700
+All right.
+
+146
+00:10:38,700 --> 00:10:43,100
+The final thing we have to do is just go through these helper functions for dealing with the data.
+
+147
+00:10:43,130 --> 00:10:48,930
+And part one of our solutions lecture the very first thing was this function one high end code which
+
+148
+00:10:48,930 --> 00:10:54,900
+just takes in a vector of labels and then we don't have 10 possible values and it's going to return
+
+149
+00:10:55,620 --> 00:11:02,220
+essentially as a to the matrix of just a bunch of arrays of one hot and coded for the 10 possible labels.
+
+150
+00:11:02,280 --> 00:11:05,490
+So we say end is equal to the length of that vector of labels.
+
+151
+00:11:05,610 --> 00:11:09,220
+We make the output equal to zeros where it's.
+
+152
+00:11:09,270 --> 00:11:13,590
+And so that's the number of actual inputs in that vector by vals.
+
+153
+00:11:13,590 --> 00:11:16,070
+We know vals is 10 because there's 10 possible labels.
+
+154
+00:11:16,170 --> 00:11:25,320
+So we have and by 10 then we're going to just basically reassign out where range n is going to basically
+
+155
+00:11:25,350 --> 00:11:31,050
+access that current vector and then we're going to set that equal to 1.
+
+156
+00:11:31,350 --> 00:11:34,210
+So we have our range of in comma there.
+
+157
+00:11:34,230 --> 00:11:37,700
+So that's the indexing set that to 1 and then return that out.
+
+158
+00:11:37,920 --> 00:11:44,450
+So essentially it's the Matrix where each entry is going to be that list of one high end coded labels.
+
+159
+00:11:44,550 --> 00:11:46,280
+We have this class Safar helper.
+
+160
+00:11:46,350 --> 00:11:47,900
+And this there's a bunch of stuff.
+
+161
+00:11:47,970 --> 00:11:52,310
+So I'm going to zoom out one level here so we can kind of get a look at it all.
+
+162
+00:11:52,320 --> 00:11:56,000
+So the first thing it does it grabs a list of all the data batches for training.
+
+163
+00:11:56,220 --> 00:11:59,790
+So it's dated batches 1 through 5 and then we have the test batch.
+
+164
+00:11:59,790 --> 00:12:07,210
+So that's just the test batch we initialize them into variables for later on we have self-training images
+
+165
+00:12:07,210 --> 00:12:11,290
+self-training labels self-test images and self-test labels.
+
+166
+00:12:11,340 --> 00:12:15,020
+Then after that we have this other method called set up images.
+
+167
+00:12:15,030 --> 00:12:17,780
+And what this does is it just sets up the images.
+
+168
+00:12:17,820 --> 00:12:22,370
+So it does it through reshaping and transposition just like we did appear.
+
+169
+00:12:22,440 --> 00:12:29,370
+If you scroll back up what it's basically going to do is set this up so this reshape transposition for
+
+170
+00:12:29,460 --> 00:12:30,720
+all those batches of data.
+
+171
+00:12:30,720 --> 00:12:36,720
+So what we did there manually is going to end up doing it across the entire data set.
+
+172
+00:12:36,780 --> 00:12:42,350
+So what it does is it vertically stacks the training images using the stack here.
+
+173
+00:12:42,570 --> 00:12:48,550
+So it does that for all the training batches that grabs the data 4-D and all the training batches than
+
+174
+00:12:48,570 --> 00:12:50,380
+vertically stacks them together.
+
+175
+00:12:50,380 --> 00:12:53,210
+So now you have those 50000 training images.
+
+176
+00:12:53,280 --> 00:12:57,360
+So the train length should be equal to then 50000 and then we're going to reshape.
+
+177
+00:12:57,390 --> 00:13:00,410
+And we're also going to normalize the training images.
+
+178
+00:13:00,560 --> 00:13:04,750
+If you notice back up when we were kind of plotting these values let's see if there's any values here.
+
+179
+00:13:04,760 --> 00:13:05,530
+I guess not.
+
+180
+00:13:05,570 --> 00:13:07,610
+So scratch one of these.
+
+181
+00:13:07,760 --> 00:13:11,610
+So if we see the max here it's actually two five.
+
+182
+00:13:11,630 --> 00:13:13,490
+So we want that to be one.
+
+183
+00:13:13,490 --> 00:13:19,760
+So coming back down here all we're gonna do is after we do the reshape to 3:32 32 and then we do the
+
+184
+00:13:19,760 --> 00:13:20,880
+transposition.
+
+185
+00:13:21,080 --> 00:13:23,420
+We're going to say divide by 255.
+
+186
+00:13:23,420 --> 00:13:28,070
+So it's basically just dividing by the max value to normalize the images that we're going to one hot
+
+187
+00:13:28,070 --> 00:13:30,310
+encode the training labels off of that.
+
+188
+00:13:30,350 --> 00:13:35,740
+So we're going to horizontally stacked this and then we're going to say grab the labels 4-D and self-taught
+
+189
+00:13:35,840 --> 00:13:36,940
+all trained batches.
+
+190
+00:13:37,070 --> 00:13:41,570
+So remember we have all we have this other dictionary entry or key for labels just like we have for
+
+191
+00:13:41,570 --> 00:13:47,090
+data that is going to print setting up test images and test labels.
+
+192
+00:13:47,140 --> 00:13:49,550
+So it's going to do basically the exact same thing.
+
+193
+00:13:49,570 --> 00:13:51,100
+But now for the test images.
+
+194
+00:13:51,100 --> 00:13:53,340
+So we did it for the training images appear.
+
+195
+00:13:53,350 --> 00:14:00,010
+Repeat that for the test images and then we have this next batch method which is going to serve pretty
+
+196
+00:14:00,010 --> 00:14:04,070
+much the exact same way the next batch image method works for that.
+
+197
+00:14:04,120 --> 00:14:06,320
+And this dataset.
+
+198
+00:14:06,400 --> 00:14:09,890
+So we're going to say x is equal to self-taught training images.
+
+199
+00:14:10,150 --> 00:14:15,340
+And what I'm going to do here is just note that the 100 dimension in the reshape call is set by an assumed
+
+200
+00:14:15,340 --> 00:14:16,990
+Bache size of 100.
+
+201
+00:14:17,020 --> 00:14:22,240
+So I have a hundred here and that's because later on I'm going to assume that batch size is going to
+
+202
+00:14:22,240 --> 00:14:23,220
+be equal to 100.
+
+203
+00:14:23,320 --> 00:14:27,020
+Well I could also do is an passen batch size here.
+
+204
+00:14:27,030 --> 00:14:30,780
+OK so then we say reshaped by 132 three to three.
+
+205
+00:14:30,780 --> 00:14:37,230
+So again hundreds because I'm assuming the batches of 100 and then I'm going to grab from Celta I up
+
+206
+00:14:37,230 --> 00:14:42,990
+to Celta I plus the bat size for training images and then for the trained labels I'm going to say self-taught
+
+207
+00:14:43,080 --> 00:14:44,830
+I up to CELTA.
+
+208
+00:14:44,880 --> 00:14:52,590
+Plus the batch size then I will say Celta eyes to Celta I plus the batch size then I'm going to do a
+
+209
+00:14:52,600 --> 00:14:56,870
+mod by the length of the self-training images and then return x and y.
+
+210
+00:14:57,000 --> 00:14:59,630
+And that's basically just my Bachche.
+
+211
+00:14:59,650 --> 00:15:01,740
+So how do we actually use all this above code.
+
+212
+00:15:01,780 --> 00:15:07,580
+All you have to do is before UTF session you run these two lines you create an instance of Safar helper.
+
+213
+00:15:07,810 --> 00:15:14,770
+Then you set up the images and then if you want to grow a batch you just do this batch is equal to that
+
+214
+00:15:15,070 --> 00:15:15,880
+object.
+
+215
+00:15:15,940 --> 00:15:17,740
+Next batch give me 100.
+
+216
+00:15:17,740 --> 00:15:18,320
+All right.
+
+217
+00:15:18,410 --> 00:15:19,760
+So that's all you have to do.
+
+218
+00:15:19,990 --> 00:15:21,760
+And up next is creating the model.
+
+219
+00:15:21,820 --> 00:15:23,940
+So we'll go ahead and do that in the next lecture.
+
+220
+00:15:23,950 --> 00:15:24,660
+I'll see you there.
+

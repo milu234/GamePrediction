@@ -1,0 +1,1008 @@
+1
+00:00:05,470 --> 00:00:09,610
+Hello everyone and welcome to this lecture where we're going to be showing you an awesome visualization
+
+2
+00:00:09,610 --> 00:00:12,280
+tool that already comes built into tensor flow.
+
+3
+00:00:12,430 --> 00:00:18,600
+And that is tensor board and it really allows you to visualize complex graphs and a very organized manner.
+
+4
+00:00:18,610 --> 00:00:22,430
+Keep in mind that we will be using the command prompt as well as the Jupiter notebook.
+
+5
+00:00:22,480 --> 00:00:26,800
+So go ahead and open up either your terminal or your command prompt and make sure you have your environment
+
+6
+00:00:26,800 --> 00:00:28,780
+file ready to be activated.
+
+7
+00:00:28,780 --> 00:00:33,790
+Let's open up a Jupiter notebook create a simple graph and then visualize it ok here and at my Jupiter
+
+8
+00:00:33,800 --> 00:00:38,620
+notebook I've already imported tensor flow and what I'm going to do is just build out a really simple
+
+9
+00:00:38,650 --> 00:00:39,860
+graph session.
+
+10
+00:00:40,200 --> 00:00:45,010
+I'm going to say T.F. is equal to T.F. and I'm going to add two numbers together.
+
+11
+00:00:45,190 --> 00:00:54,030
+They wanted to that I'm going to say B is equal to T.F. and three and four together and then I will
+
+12
+00:00:54,030 --> 00:00:56,270
+say C is equal to T.F..
+
+13
+00:00:56,490 --> 00:01:01,600
+And then I will multiply A and B together.
+
+14
+00:01:01,600 --> 00:01:08,950
+So a very simple graph and then what I will do now is run the sessional say with t f session as SPSS
+
+15
+00:01:09,530 --> 00:01:12,230
+like and say session run.
+
+16
+00:01:12,250 --> 00:01:18,850
+And then I just actually need to run C and in fact I can print out the output of this so I can see it
+
+17
+00:01:19,170 --> 00:01:25,590
+and I get 21 which makes sense because I basically have one plus two here which is three and then three
+
+18
+00:01:25,590 --> 00:01:27,130
+times three plus four to seven.
+
+19
+00:01:27,150 --> 00:01:28,010
+So if through them.
+
+20
+00:01:28,070 --> 00:01:29,140
+21.
+
+21
+00:01:29,250 --> 00:01:34,620
+Now if I have a really complex graph I'm not going to be able to directly interpret it just using these
+
+22
+00:01:34,620 --> 00:01:37,470
+lines of code if I have more than just these three entries.
+
+23
+00:01:37,470 --> 00:01:41,240
+It's going to be really hard to basically trace back where all these variables come from.
+
+24
+00:01:41,340 --> 00:01:43,980
+So it'd be really nice if I could visualize that graph.
+
+25
+00:01:43,980 --> 00:01:46,380
+And that's actually really easy with tensor board.
+
+26
+00:01:46,380 --> 00:01:51,060
+So let's show you how you can do that will you end up doing is within your session where you're going
+
+27
+00:01:51,060 --> 00:01:53,490
+to do is the very first thing of your session.
+
+28
+00:01:53,820 --> 00:02:00,090
+You're going to say T.F. or excuse me writer is equal to see summary and then you going to call file
+
+29
+00:02:00,090 --> 00:02:04,020
+writer and you're going to create an output file location.
+
+30
+00:02:04,020 --> 00:02:12,080
+So I'll say it Dopp forward slash output and then of this we're going to save our session graph.
+
+31
+00:02:12,330 --> 00:02:17,710
+And then once you're finished running your operations you're going to make sure to close your writer.
+
+32
+00:02:17,810 --> 00:02:18,920
+So let's run that.
+
+33
+00:02:19,490 --> 00:02:24,560
+And right now we see the same result but if we take a look at where this trooper notebook is located
+
+34
+00:02:25,010 --> 00:02:27,170
+for my case it's located under miscellaneous topics.
+
+35
+00:02:27,170 --> 00:02:31,880
+If I come back to the miscellaneous topics folder click on the output folder I can now see this T.F.
+
+36
+00:02:31,880 --> 00:02:32,800
+events file.
+
+37
+00:02:32,990 --> 00:02:35,670
+And that basically has all the information about that graph.
+
+38
+00:02:35,690 --> 00:02:41,050
+So we're going to do now is open up our command prompt and show you how you can run tensor board.
+
+39
+00:02:41,150 --> 00:02:46,610
+So I will open up my command prompt and inside the command prompt the first thing I want to do is make
+
+40
+00:02:46,610 --> 00:02:49,620
+sure that I activate my deep learning environment.
+
+41
+00:02:49,640 --> 00:02:54,880
+The reason for that is because I need to make sure that I have tensor flow available in this environment.
+
+42
+00:02:54,890 --> 00:02:57,140
+That way I can call sensor board at the command line.
+
+43
+00:02:57,320 --> 00:03:03,580
+Otherwise you get some sort of error saying something like tensor board not recognized the next loops.
+
+44
+00:03:03,700 --> 00:03:07,680
+The next they're going to do is call a tensor board and then the following command.
+
+45
+00:03:07,720 --> 00:03:09,400
+Dash dash.
+
+46
+00:03:09,400 --> 00:03:10,570
+Well make sure there's a space there.
+
+47
+00:03:10,570 --> 00:03:15,940
+So it's a little harder to tell my screen but I'm typing tensor board and then typing a space and then
+
+48
+00:03:15,940 --> 00:03:20,930
+I will say dash dash log directory is equal to.
+
+49
+00:03:21,070 --> 00:03:24,490
+And then if you're on Windows you may need to use double quotes here.
+
+50
+00:03:24,520 --> 00:03:26,540
+And if you get an error of double quotes go ahead and try.
+
+51
+00:03:26,560 --> 00:03:31,360
+No quotes that kind of depends on what operating system whether you use single quotes double quotes
+
+52
+00:03:31,390 --> 00:03:32,520
+or no quotes at all.
+
+53
+00:03:32,530 --> 00:03:38,020
+So just keep that in mind and you're going Pathans pass in the same path that you created earlier.
+
+54
+00:03:38,020 --> 00:03:39,610
+So let me make sure I call the output.
+
+55
+00:03:39,640 --> 00:03:42,450
+So there it is support slash output.
+
+56
+00:03:42,520 --> 00:03:46,340
+And I can just do that because I'm located in the miscellaneous topics folder.
+
+57
+00:03:46,350 --> 00:03:51,640
+If you want to you can write the full path out here but since I'm located in the same folder I just
+
+58
+00:03:51,640 --> 00:03:56,330
+need to run that and I see centerboard running at this HTP.
+
+59
+00:03:56,460 --> 00:03:57,990
+So I will go ahead and copy this.
+
+60
+00:03:57,990 --> 00:04:01,220
+Make sure you don't copy of control c otherwise you're going to end up putting.
+
+61
+00:04:01,380 --> 00:04:06,360
+So in my case I just did it right click that and then I will go back to my browser and paste that in
+
+62
+00:04:08,300 --> 00:04:08,770
+and here.
+
+63
+00:04:08,780 --> 00:04:11,360
+Now we see this awesome visualization of my graphs.
+
+64
+00:04:11,390 --> 00:04:17,600
+So I have adding X and Y here add 1 x and y these two scalars and then they get multiplied and I can
+
+65
+00:04:17,600 --> 00:04:21,600
+click on one of these nodes and I can see the various operations the data types expects.
+
+66
+00:04:21,620 --> 00:04:25,670
+And then I can actually remove it from the main graph etc. and if you come over here to tensor flow
+
+67
+00:04:25,940 --> 00:04:32,840
+there's things like downloading it to a PNB file thing to a screen if you have a very large plot or
+
+68
+00:04:32,840 --> 00:04:34,630
+a graph you may need to do that.
+
+69
+00:04:34,670 --> 00:04:38,390
+You can see the various runs in case you randomly fill sessions of this.
+
+70
+00:04:38,450 --> 00:04:42,390
+You can upload graph files you can highlight this thing that says trace inputs.
+
+71
+00:04:42,410 --> 00:04:46,640
+In this case we actually have no placeholder input so we'll just turn that off and then you can also
+
+72
+00:04:46,640 --> 00:04:51,020
+see the graph essentially a legend telling you what the name spaces are.
+
+73
+00:04:51,050 --> 00:04:53,890
+The operation nodes constants etc..
+
+74
+00:04:53,960 --> 00:04:58,870
+Now as you can imagine if we have a ton of operations here this sort of automatic naming of add add
+
+75
+00:04:58,890 --> 00:05:03,820
+1 add to multiply and multiply 3 etc. isn't actually going to be very helpful.
+
+76
+00:05:03,980 --> 00:05:07,300
+So you can actually add names to your notes.
+
+77
+00:05:07,310 --> 00:05:09,810
+So let me come back here and show you how you can do that.
+
+78
+00:05:10,250 --> 00:05:17,030
+Basically every tensor flow operation has the ability of a parameter called name and you'll see this
+
+79
+00:05:17,030 --> 00:05:21,860
+often throughout a different storyline on line where they just assign names and if they never use centerboard
+
+80
+00:05:21,860 --> 00:05:23,660
+you might be wondering well why are they assigning the names.
+
+81
+00:05:23,670 --> 00:05:26,450
+If we never actually use them well they're for centerboard.
+
+82
+00:05:26,480 --> 00:05:32,480
+So let's go ahead and say this was our first ad operation and keep in mind you can't have spaces in
+
+83
+00:05:32,480 --> 00:05:33,060
+the string.
+
+84
+00:05:33,080 --> 00:05:34,510
+Otherwise we'll have an error there.
+
+85
+00:05:35,540 --> 00:05:46,620
+This name we'll say is our seconds at operation and then this multiply we'll give it the name of final
+
+86
+00:05:46,710 --> 00:05:47,430
+results.
+
+87
+00:05:49,010 --> 00:05:53,590
+So I'm going to run these again and let's refresh our Tencent board.
+
+88
+00:05:53,640 --> 00:05:59,250
+So when I refreshed tensor board if you take a look at what happens I end up getting my original graph
+
+89
+00:05:59,250 --> 00:06:02,570
+here as well as this new named graph.
+
+90
+00:06:02,580 --> 00:06:08,670
+So if you want you can edit that if we come back to our output folder you can see now I have T.F. events.
+
+91
+00:06:08,670 --> 00:06:11,860
+So I have my old one and the one I just created.
+
+92
+00:06:12,180 --> 00:06:15,310
+And also if you open up your command prompt it will basically report to you.
+
+93
+00:06:15,360 --> 00:06:17,940
+Hey I found a more than one Medak Raffy wants to run.
+
+94
+00:06:18,010 --> 00:06:22,320
+I move right in that graph with the newest event and what it means by overwrite is that it's overwriting
+
+95
+00:06:22,320 --> 00:06:23,480
+with a new graph here.
+
+96
+00:06:23,490 --> 00:06:24,930
+So it's adding that on top.
+
+97
+00:06:24,930 --> 00:06:28,520
+So it's technically showing two graphs if you wanted to edit that.
+
+98
+00:06:28,620 --> 00:06:32,550
+You could just kind of delete your old plot file or overwrite it cetera.
+
+99
+00:06:32,700 --> 00:06:37,950
+But again pretty good news here that we don't accidentally overwrite a graph because notice you're still
+
+100
+00:06:37,950 --> 00:06:39,370
+giving it the same output.
+
+101
+00:06:39,450 --> 00:06:45,000
+But luckily for us censor board and sensor flow is smart enough to know that you may not want to accidentally
+
+102
+00:06:45,000 --> 00:06:46,130
+overwrite your old stuff.
+
+103
+00:06:46,290 --> 00:06:50,180
+So basically just keeps adding to those crafty events.
+
+104
+00:06:50,190 --> 00:06:50,640
+All right.
+
+105
+00:06:50,780 --> 00:06:53,440
+So you can name stuff in your graph.
+
+106
+00:06:53,700 --> 00:06:55,830
+Well you can also do is add scope's.
+
+107
+00:06:55,860 --> 00:06:59,650
+So to do that we're going to add in a couple of more variables here.
+
+108
+00:07:00,540 --> 00:07:05,380
+I'm going to say 8 is equal to T.F..
+
+109
+00:07:05,420 --> 00:07:10,710
+And let's go ahead and add one hundred and 200 together and it will give us the name
+
+110
+00:07:13,470 --> 00:07:19,310
+a add the names aren't really important here is just for demonstration purposes we'll make another variable.
+
+111
+00:07:19,370 --> 00:07:26,840
+Well another operation really not really a central variable and this one's going to be called at 300
+
+112
+00:07:26,840 --> 00:07:34,700
+and 400 will name this be at.
+
+113
+00:07:34,890 --> 00:07:37,690
+And then we have this final result of C..
+
+114
+00:07:37,830 --> 00:07:40,230
+So what we'll do is we'll do the following.
+
+115
+00:07:40,230 --> 00:07:45,720
+We're going to add a two or multiply and B to.
+
+116
+00:07:45,790 --> 00:07:55,110
+So let's add those and we'll say A2 is T.F. and I'm going to multiply the result of an 8 1 and they
+
+117
+00:07:55,120 --> 00:07:57,310
+will say BE2 is equal to T.F..
+
+118
+00:07:57,310 --> 00:08:05,960
+Multiply the results of B and B one.
+
+119
+00:08:05,970 --> 00:08:11,730
+OK so we can so far follow along with the general logic because we kind of wrote this from the start.
+
+120
+00:08:11,890 --> 00:08:17,200
+But if you begin to just see this as code you kind of have no idea what's going on just at a quick glance
+
+121
+00:08:17,470 --> 00:08:23,050
+but luckily if tensor board will be able to see that now what we're going to do is we can see here that
+
+122
+00:08:23,050 --> 00:08:28,780
+our code is organized in blocks and we can actually project that organization with the use of scopes
+
+123
+00:08:29,200 --> 00:08:30,540
+in tensor board.
+
+124
+00:08:30,850 --> 00:08:37,060
+So what we end up doing is wow are the finance operations we can do the following we'll say with T.F.
+
+125
+00:08:38,130 --> 00:08:42,840
+name scope and then you pass in the name or what you want the scope to be called so we can say like
+
+126
+00:08:42,870 --> 00:08:45,320
+Operation a.
+
+127
+00:08:45,530 --> 00:08:48,510
+And then we have a colon here and then you write in as a block.
+
+128
+00:08:48,510 --> 00:08:54,090
+So just tab and dance all the operations you want to find within that scope and what that scope is going
+
+129
+00:08:54,090 --> 00:09:00,850
+to look like with intenser board is basically a big grey box that it can expand.
+
+130
+00:09:00,860 --> 00:09:06,200
+So then the next thing to do here is say if name scope and this will be all be called Operation be
+
+131
+00:09:09,080 --> 00:09:14,050
+inlets in that this is now all go within the scope and you can actually have some scopes.
+
+132
+00:09:14,050 --> 00:09:18,730
+So if you have like another set of operations inside the scope you could have also had with T.F. name
+
+133
+00:09:18,740 --> 00:09:22,180
+scope operation you know Delta A or something like that.
+
+134
+00:09:24,520 --> 00:09:27,280
+OK so now we have these two scopes.
+
+135
+00:09:27,280 --> 00:09:29,100
+So let's go ahead and check this out.
+
+136
+00:09:29,260 --> 00:09:30,470
+So we'll run these again.
+
+137
+00:09:30,780 --> 00:09:33,260
+And now I'm getting a much larger number which kind of makes sense.
+
+138
+00:09:33,410 --> 00:09:40,140
+And if I refresh my tensor board what's going to happen now is this third graph looks a little different.
+
+139
+00:09:40,190 --> 00:09:44,390
+It now has these operations and those that are actually kind of named and what you can do is you can
+
+140
+00:09:44,390 --> 00:09:49,460
+expand these operations so you can double click on that plus sign and then see the graph that is within
+
+141
+00:09:49,460 --> 00:09:50,220
+that operation.
+
+142
+00:09:50,240 --> 00:09:54,060
+So there was my first that my 8 and I multiplied it and that's operation.
+
+143
+00:09:54,110 --> 00:09:55,340
+I can expand on this.
+
+144
+00:09:55,400 --> 00:09:58,010
+Click on that and then you can see operation B.
+
+145
+00:09:58,040 --> 00:10:00,830
+So now this allows you to organize really large graphs.
+
+146
+00:10:00,830 --> 00:10:05,780
+So when you see these really awesome pictures of tensor board running in action they're usually using
+
+147
+00:10:05,780 --> 00:10:09,200
+these operations so you can see here the really nice flow.
+
+148
+00:10:09,200 --> 00:10:14,790
+So we start off really simple graph that we named our nodes and then we group them together in operations.
+
+149
+00:10:14,930 --> 00:10:17,690
+And like I mentioned before we can have subgroups here.
+
+150
+00:10:17,720 --> 00:10:21,340
+So if you wanted a scope within a scope you could have done that as well.
+
+151
+00:10:21,340 --> 00:10:21,650
+All right.
+
+152
+00:10:21,680 --> 00:10:25,810
+Now so I want to know that there's actually a lot more to censor board than just visualizing graphs.
+
+153
+00:10:25,910 --> 00:10:30,770
+If you click here where it says interactive you can also see options for visualizing things like distribution's
+
+154
+00:10:30,770 --> 00:10:36,310
+histograms teks profile images and sensorial actually has really great documentation on this.
+
+155
+00:10:36,320 --> 00:10:41,240
+It basically has a censor board tutorial walkthrough for visualizing learning grafters ization histogram
+
+156
+00:10:41,240 --> 00:10:42,030
+dashboards.
+
+157
+00:10:42,140 --> 00:10:45,530
+But I also just want to walk you through not just graphs but also histograms.
+
+158
+00:10:45,650 --> 00:10:50,690
+So let's try to do that going to come back here to censor board.
+
+159
+00:10:50,960 --> 00:10:55,310
+And what I'm want to do is copy and paste some code this code directly from the documentation so you
+
+160
+00:10:55,310 --> 00:11:00,680
+can always reference it there or just copy and paste from the actual notebook for this lecture.
+
+161
+00:11:00,680 --> 00:11:05,800
+So I will copy and paste this but all I'm doing here is we're creating a placeholder k just like you
+
+162
+00:11:05,790 --> 00:11:06,270
+would.
+
+163
+00:11:06,410 --> 00:11:08,280
+And then we're making a normal distribution.
+
+164
+00:11:08,300 --> 00:11:14,240
+But what's interesting about this distribution is it has a shifting mean so it has the shape 1000 different
+
+165
+00:11:14,250 --> 00:11:17,780
+than normal but the mean is defined by this placeholder.
+
+166
+00:11:17,780 --> 00:11:22,960
+So basically have some sort of distribution that's slowly moving depending on this.
+
+167
+00:11:23,330 --> 00:11:25,730
+And then I'm going to record the histogram.
+
+168
+00:11:25,730 --> 00:11:31,880
+Now this T.F. summary histogram is a way that you can actually record things like variables or weights.
+
+169
+00:11:31,880 --> 00:11:37,400
+So if you recall back we're creating our own models we have T.F. variable you could pass that T.F. variable
+
+170
+00:11:37,400 --> 00:11:42,680
+here and then give it some sort of name or file path and then we're going to do is we'll create a session
+
+171
+00:11:42,680 --> 00:11:43,390
+here.
+
+172
+00:11:43,820 --> 00:11:45,460
+So let's actually say this.
+
+173
+00:11:45,560 --> 00:11:48,730
+Say with C-f session
+
+174
+00:11:51,440 --> 00:11:55,300
+as SPSS so it follows the same path we've been doing.
+
+175
+00:11:55,340 --> 00:11:59,120
+We're going to say that we have a writer it's equal to a summary writer and we're actually going to
+
+176
+00:11:59,120 --> 00:12:00,770
+follow this into another directory.
+
+177
+00:12:00,830 --> 00:12:07,790
+We'll say it goes to this temporary folder histogram example and then we'll say summaries and we're
+
+178
+00:12:07,790 --> 00:12:10,930
+going to say summary merge all.
+
+179
+00:12:11,000 --> 00:12:15,460
+And what this does is going to merge all your T.F. summaries into a single node.
+
+180
+00:12:15,620 --> 00:12:20,210
+So in this case we actually just have one T.F. that some recall but a lot of times you'll have lots
+
+181
+00:12:20,210 --> 00:12:22,450
+of histogram calls and you'll be able to see them all.
+
+182
+00:12:22,640 --> 00:12:26,240
+So we say T.F. that summary that merge all and then we're going to set up a loop.
+
+183
+00:12:26,300 --> 00:12:27,640
+So let's go ahead and do this.
+
+184
+00:12:27,680 --> 00:12:30,590
+Inside the session we're going to say Ed is equal to 400.
+
+185
+00:12:30,630 --> 00:12:35,660
+And we'll say for step in range and what we're going to do is say our current k value and make sure
+
+186
+00:12:35,660 --> 00:12:37,510
+my invitation is correct.
+
+187
+00:12:37,580 --> 00:12:39,120
+What's our current value.
+
+188
+00:12:39,140 --> 00:12:44,990
+Is it called Step divided by the flow then then we have this summary which is going to be some is equal
+
+189
+00:12:44,990 --> 00:12:48,950
+to session run you're going to run our summaries and we're going to feed it some feed dictionary of
+
+190
+00:12:48,950 --> 00:12:52,510
+those values which in this case is just that 400.
+
+191
+00:12:52,550 --> 00:12:54,100
+Are those values to 400.
+
+192
+00:12:54,380 --> 00:12:58,990
+And then we're also going to be calling our writer to add that summary.
+
+193
+00:12:59,210 --> 00:13:04,990
+And then at the very end of all this we're going to say writer and we're going to close that off.
+
+194
+00:13:05,010 --> 00:13:07,380
+OK let's go in and run this maternal on typos here.
+
+195
+00:13:08,300 --> 00:13:09,890
+And it looks like it ran correctly.
+
+196
+00:13:09,890 --> 00:13:14,900
+So what we're going to do is recall tensor board actually pointed to this histogram example because
+
+197
+00:13:14,900 --> 00:13:16,800
+right now it's just pointed at the output.
+
+198
+00:13:16,850 --> 00:13:19,100
+So we'll come back to our command prompt.
+
+199
+00:13:19,100 --> 00:13:30,420
+I'm going to say control see here and then we'll say tensor board space dash dash log directory is equal
+
+200
+00:13:30,420 --> 00:13:30,910
+to.
+
+201
+00:13:30,930 --> 00:13:36,470
+And then we're going to pass that file so's I believe Tim and make sure I get the name correct.
+
+202
+00:13:36,490 --> 00:13:42,720
+It was his Gramp underscore example histogram underscore example.
+
+203
+00:13:42,750 --> 00:13:44,870
+So let's run that make sure we don't get any errors.
+
+204
+00:13:45,210 --> 00:13:46,260
+Ok looks like it's running.
+
+205
+00:13:46,260 --> 00:13:49,170
+So I'm going to now refresh this page.
+
+206
+00:13:49,320 --> 00:13:52,230
+So I'll come over here refreshed that you are ill.
+
+207
+00:13:52,470 --> 00:13:55,120
+And now I can see I have my distributions.
+
+208
+00:13:55,130 --> 00:13:56,250
+Next we see that distribution.
+
+209
+00:13:56,250 --> 00:13:58,760
+Let me zoom in here so you guys can see it as well.
+
+210
+00:13:59,040 --> 00:14:03,330
+And I can see here the distribution as it moves throughout the various values from where we have those
+
+211
+00:14:03,360 --> 00:14:04,740
+400 different values.
+
+212
+00:14:04,890 --> 00:14:09,120
+And then you click here on histograms and I can see what's really cool is this moving histogram.
+
+213
+00:14:09,120 --> 00:14:14,940
+And this is a really cool way to visualize your weights as they move and kind of center on some particular
+
+214
+00:14:14,940 --> 00:14:15,420
+values.
+
+215
+00:14:15,420 --> 00:14:18,750
+But again this is T.F. summary for histograms.
+
+216
+00:14:18,750 --> 00:14:24,480
+So essentially summarize them just to review that you call T.F. but some read the histogram you pass
+
+217
+00:14:24,480 --> 00:14:25,500
+and the name of what you want.
+
+218
+00:14:25,500 --> 00:14:29,250
+This particular one to be called in this case we called it moving mean.
+
+219
+00:14:29,280 --> 00:14:32,360
+And so if you come over here it relates as moving mean.
+
+220
+00:14:32,460 --> 00:14:35,540
+And then we can end up doing is merging all of them.
+
+221
+00:14:35,550 --> 00:14:39,480
+So you can have several histograms one for your biases one for your weights and you can check out all
+
+222
+00:14:39,480 --> 00:14:41,520
+those examples in the documentation.
+
+223
+00:14:41,520 --> 00:14:43,770
+All right so those are the basics of using tensor board.
+
+224
+00:14:43,800 --> 00:14:45,270
+Definitely check out the documentation.
+
+225
+00:14:45,270 --> 00:14:47,280
+There's lots of useful links there for you.
+
+226
+00:14:47,320 --> 00:14:52,290
+I'm going to just bring it in real quick so you can see it over here at my browser so you'll notice
+
+227
+00:14:52,290 --> 00:14:54,890
+that if you go to tensor flowed or slash get started.
+
+228
+00:14:54,890 --> 00:14:59,210
+Slash Well if you just go to get started here you'll notice there's lots of Tauriel.
+
+229
+00:14:59,220 --> 00:15:04,470
+But at the very end there's three full tensor board tutorial so visualizing learning of tensor board
+
+230
+00:15:04,770 --> 00:15:09,900
+there's also this great video here that's kind of really popular on YouTube where they discuss how tensor
+
+231
+00:15:09,900 --> 00:15:11,280
+board works.
+
+232
+00:15:11,390 --> 00:15:12,620
+They can come over here.
+
+233
+00:15:12,620 --> 00:15:13,680
+It'll give you more information.
+
+234
+00:15:13,680 --> 00:15:17,940
+There's also T.F. That's somebody that's scaler so you can do things like plot out your last throughout
+
+235
+00:15:17,940 --> 00:15:18,420
+time.
+
+236
+00:15:18,450 --> 00:15:20,190
+Summary operations etc..
+
+237
+00:15:20,220 --> 00:15:25,140
+It has tons of example code and it's relatively easy to understand now that you understand how to work
+
+238
+00:15:25,140 --> 00:15:25,770
+with tensor flow.
+
+239
+00:15:25,770 --> 00:15:31,860
+It's essentially just calling a summary scalar or summary histogram or summary file writer to whatever
+
+240
+00:15:31,860 --> 00:15:32,970
+you want to save.
+
+241
+00:15:33,180 --> 00:15:36,820
+So you can check out that visually like visualizing learning to Tauriel that's the main one.
+
+242
+00:15:36,960 --> 00:15:40,440
+And then there's also things like Graph visualization which you've actually basically already covered
+
+243
+00:15:40,740 --> 00:15:45,330
+so you can have those operations those nodes and then there's also the histogram dashboard which you
+
+244
+00:15:45,510 --> 00:15:47,890
+also basically cover it already for you.
+
+245
+00:15:47,910 --> 00:15:48,480
+All right.
+
+246
+00:15:48,600 --> 00:15:49,820
+So check that out.
+
+247
+00:15:49,830 --> 00:15:51,400
+It's a lot of fun to play with.
+
+248
+00:15:51,410 --> 00:15:56,370
+You won't use it too much throughout this course because we're really focused on learning tensor flow.
+
+249
+00:15:56,370 --> 00:16:01,200
+This is a really cool way to visualize and makes us feel look really pretty but it won't be the actual
+
+250
+00:16:01,200 --> 00:16:04,230
+main focus of a lot of our projects throughout the course.
+
+251
+00:16:04,230 --> 00:16:04,630
+Okay.
+
+252
+00:16:04,830 --> 00:16:06,540
+Thanks everyone and I'll see you at the next lecture.
+

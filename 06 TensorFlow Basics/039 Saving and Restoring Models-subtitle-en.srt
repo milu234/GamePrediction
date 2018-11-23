@@ -1,0 +1,400 @@
+1
+00:00:05,360 --> 00:00:07,180
+Welcome back everyone in this lecture.
+
+2
+00:00:07,190 --> 00:00:09,920
+We're going to quickly discuss saving and restoring models.
+
+3
+00:00:09,920 --> 00:00:12,520
+You've created some pretty interesting models of tensor flow.
+
+4
+00:00:12,650 --> 00:00:15,630
+So it might be nice to be able to save them and then recall them later.
+
+5
+00:00:15,830 --> 00:00:18,680
+Let's open up a Jupiter notebook and show you how this is done.
+
+6
+00:00:18,710 --> 00:00:23,930
+All right so here I am underneath the tensor flow basics folder and if you go to that folder and scroll
+
+7
+00:00:23,930 --> 00:00:27,360
+down you'll see a notebook called saving and loading models.
+
+8
+00:00:27,360 --> 00:00:31,880
+I'm trying to walk you through this notebook and show you how this is done because otherwise we'll have
+
+9
+00:00:31,880 --> 00:00:33,960
+to create a whole nother model.
+
+10
+00:00:34,040 --> 00:00:36,500
+And since we already have one ready we'll go ahead and use it.
+
+11
+00:00:36,560 --> 00:00:41,360
+So saving and loading models and what this does is it runs through the network example that we've already
+
+12
+00:00:41,360 --> 00:00:41,990
+created.
+
+13
+00:00:42,200 --> 00:00:45,730
+So I'm going to go ahead and just run these cells and we kind of go along.
+
+14
+00:00:46,040 --> 00:00:47,770
+We remember we created some artificial data.
+
+15
+00:00:47,780 --> 00:00:53,840
+We saw the x data we plotted it out created some variables have our costs function the optimizer and
+
+16
+00:00:53,860 --> 00:00:57,610
+then we initialize the variables and then it comes time to actually run the model.
+
+17
+00:00:57,620 --> 00:01:03,810
+But this time we're going to save it and then restore it the easiest way to save a model intenser flow
+
+18
+00:01:03,960 --> 00:01:07,090
+is using the ETF train that saver object.
+
+19
+00:01:07,200 --> 00:01:10,190
+If you look at the documentation it shows you some other ways to do it.
+
+20
+00:01:10,290 --> 00:01:15,090
+But if you actually start looking at Stack Overflow posts everyone suggests to use this method because
+
+21
+00:01:15,090 --> 00:01:17,390
+it really is the easiest way to go.
+
+22
+00:01:17,700 --> 00:01:22,740
+So all you have to do to save a model of tensor flow is say some Savir or whatever you want to call
+
+23
+00:01:22,740 --> 00:01:27,870
+this variable is equal to an instance of the T.F. train that Savir object.
+
+24
+00:01:27,870 --> 00:01:29,270
+So I'm going to go ahead and run that.
+
+25
+00:01:29,580 --> 00:01:35,190
+And then during your session where you're going to do is you'll run your session initialiser variables
+
+26
+00:01:35,520 --> 00:01:41,370
+either go first some epochs or some training steps et cetera you're going to run your training optimization
+
+27
+00:01:41,370 --> 00:01:44,200
+algorithm you're going to get back any results you want to get back.
+
+28
+00:01:44,220 --> 00:01:47,850
+And then once you're done with everything where you're going to do is at the very end you're going to
+
+29
+00:01:47,850 --> 00:01:53,220
+call your saver object that you've already defined and then call the Save method off of it and it takes
+
+30
+00:01:53,220 --> 00:01:58,110
+in two arguments it's going to take in SPSS or whatever you decided to call your session.
+
+31
+00:01:58,290 --> 00:02:00,060
+In the course we always call it s.c.s.
+
+32
+00:02:00,060 --> 00:02:05,040
+So you're going to pass in your session and then what you're going to do is passen the pathway to your
+
+33
+00:02:05,040 --> 00:02:06,810
+checkpoint file.
+
+34
+00:02:06,810 --> 00:02:11,120
+And typically this works a lot better if you provide a directory.
+
+35
+00:02:11,130 --> 00:02:19,700
+So what you need to do is for instance if I want to say save or save I'm going to pasan my session and
+
+36
+00:02:19,700 --> 00:02:26,060
+then I always recommend to pass some new directory for your model so we can say new model directory
+
+37
+00:02:26,390 --> 00:02:33,920
+and forward slash when the whatever you want to call your model so we can say my second model that and
+
+38
+00:02:33,910 --> 00:02:35,060
+then you're going to create a checkpoint.
+
+39
+00:02:35,070 --> 00:02:41,610
+See Kate Peetie Now if you want to just say my second model checkpoint.
+
+40
+00:02:41,640 --> 00:02:46,860
+Typically you get errors if you just pass in the checkpoint file itself.
+
+41
+00:02:46,860 --> 00:02:50,100
+So if you just want the checkpoint file you don't want another folder so to show you what I mean by
+
+42
+00:02:50,100 --> 00:02:50,960
+another folder.
+
+43
+00:02:51,090 --> 00:02:55,110
+If I come back here you can see I already have a model's folder created and if I click on that model
+
+44
+00:02:55,140 --> 00:02:56,940
+I can see that checkpoint data.
+
+45
+00:02:57,240 --> 00:03:00,950
+But if you don't want to create another folder you just want the checkpoint data here.
+
+46
+00:03:01,140 --> 00:03:05,370
+We usually have to do is put a dot and then a forward slash.
+
+47
+00:03:05,370 --> 00:03:10,290
+Now if you get errors you know kind of depends on your operating system then I would suggest actually
+
+48
+00:03:10,290 --> 00:03:13,340
+create in that directory depending on your operating system.
+
+49
+00:03:13,350 --> 00:03:18,270
+If you just pass this checkpoint file as I'm doing on this last line you sometimes get errors or it
+
+50
+00:03:18,270 --> 00:03:19,800
+doesn't actually save it.
+
+51
+00:03:19,800 --> 00:03:26,520
+So again I recommend either providing a directory or doing a forward slash if you for whatever reason
+
+52
+00:03:26,520 --> 00:03:30,110
+just really want the checkpoint files in the same directory as this notebook.
+
+53
+00:03:30,120 --> 00:03:31,880
+So let's go ahead and test this out.
+
+54
+00:03:32,030 --> 00:03:35,690
+And I put a hash tag here and let's go ahead and try this.
+
+55
+00:03:35,700 --> 00:03:39,460
+So saying new models my second model.
+
+56
+00:03:39,720 --> 00:03:45,100
+I'm going to run this now it trained it and if I come back over here to senseful basics now I see my
+
+57
+00:03:45,120 --> 00:03:49,080
+new models folder and I see a bunch of stuff with the checkpoint data.
+
+58
+00:03:49,290 --> 00:03:50,890
+So I'm going to actually restore it.
+
+59
+00:03:51,120 --> 00:03:54,960
+And again if I evaluate my results and the training data that's still working.
+
+60
+00:03:54,960 --> 00:03:55,800
+So that's good.
+
+61
+00:03:55,920 --> 00:03:57,630
+So now we're going to show you how to load the model.
+
+62
+00:03:57,630 --> 00:03:59,710
+So remember I still have my test data.
+
+63
+00:04:00,210 --> 00:04:04,860
+So what I will do is you start another session and then the very first thing you do.
+
+64
+00:04:04,920 --> 00:04:08,880
+Unlike last time it was the very last thing you're going to say Sabor thought restore you're going to
+
+65
+00:04:08,880 --> 00:04:14,210
+pass in your session and then you going to pass in the path to that checkpoint file that you just created.
+
+66
+00:04:14,220 --> 00:04:16,010
+So basically you can just copy and paste that.
+
+67
+00:04:16,020 --> 00:04:18,270
+So it was Kennebec appear it was new models.
+
+68
+00:04:18,270 --> 00:04:20,060
+My second model checkpoint.
+
+69
+00:04:20,100 --> 00:04:22,440
+Copy that scroll down.
+
+70
+00:04:22,620 --> 00:04:27,960
+Paste it in and then now you're going to have all the variables from your model so you can continue
+
+71
+00:04:27,960 --> 00:04:30,110
+trading it on more data if you want to.
+
+72
+00:04:30,120 --> 00:04:31,830
+Or you can just Fich back results.
+
+73
+00:04:31,830 --> 00:04:34,420
+Remember model has the variables and B.
+
+74
+00:04:34,440 --> 00:04:36,610
+So all that information is already saved here.
+
+75
+00:04:36,840 --> 00:04:42,030
+So I could continue training on more data or I could just run the variables themselves and grab that
+
+76
+00:04:42,030 --> 00:04:42,960
+information.
+
+77
+00:04:42,990 --> 00:04:46,630
+So going to fetch back the results this restored slope and restored int..
+
+78
+00:04:46,830 --> 00:04:51,870
+So let me run that real quick so you can see it's restoring the parameters from the model set.
+
+79
+00:04:51,870 --> 00:04:53,680
+My second model checkpoint file.
+
+80
+00:04:53,790 --> 00:04:54,920
+And just to show that it worked.
+
+81
+00:04:54,930 --> 00:04:59,030
+I'm now going to do the plot with this restored slope and this restored intercept.
+
+82
+00:04:59,040 --> 00:05:04,410
+And if you run that you should see kind of that same slope line because we're able to successfully restore
+
+83
+00:05:04,410 --> 00:05:05,350
+it from our model.
+
+84
+00:05:05,520 --> 00:05:06,040
+OK.
+
+85
+00:05:06,210 --> 00:05:08,640
+And that's really the basics of saving and loading models.
+
+86
+00:05:08,640 --> 00:05:13,110
+You'll see us use this later on in a little bit in the convolutional neural networks and a little bit
+
+87
+00:05:13,110 --> 00:05:17,800
+more in the current year that works throughout the course whenever we need to call our model.
+
+88
+00:05:17,820 --> 00:05:24,090
+And as far as general workflow for restoring a model and saving a model I personally like to usually
+
+89
+00:05:24,390 --> 00:05:31,260
+have my training data in it's own session and then I save the model and then I restore the model for
+
+90
+00:05:31,320 --> 00:05:32,640
+my test data.
+
+91
+00:05:32,640 --> 00:05:34,440
+We won't do that throughout the course.
+
+92
+00:05:34,440 --> 00:05:37,680
+A lot of times we'll just run everything in one session just to save time.
+
+93
+00:05:37,680 --> 00:05:38,980
+As far as tape is concerned.
+
+94
+00:05:39,210 --> 00:05:43,440
+But my personal preference is to have kind of a training session and then a testing session where I
+
+95
+00:05:43,440 --> 00:05:45,210
+just restore the trained model.
+
+96
+00:05:45,420 --> 00:05:45,810
+OK.
+
+97
+00:05:45,900 --> 00:05:46,990
+Again that's a personal preference.
+
+98
+00:05:47,030 --> 00:05:48,800
+There's no right or wrong way to go about it.
+
+99
+00:05:48,810 --> 00:05:51,570
+You could just do everything in one session if you really wanted to.
+
+100
+00:05:51,570 --> 00:05:53,760
+Thanks everyone and I will see you at the next lecture.
+

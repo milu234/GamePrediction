@@ -1,0 +1,692 @@
+1
+00:00:05,250 --> 00:00:09,360
+Welcome everyone to the solution lecture for the tense flow classification exercise.
+
+2
+00:00:09,450 --> 00:00:12,780
+Let's go to the Juber notebook in code along the solutions.
+
+3
+00:00:12,780 --> 00:00:14,410
+All right so let's get started.
+
+4
+00:00:14,670 --> 00:00:15,960
+Firstly in the data.
+
+5
+00:00:16,050 --> 00:00:25,260
+So I need to import it also import Pandurs as PD and then I'm going to say census is equal to PD read
+
+6
+00:00:25,260 --> 00:00:29,360
+C S V and then I'm going to Redan census data that CXXVIII.
+
+7
+00:00:29,490 --> 00:00:31,370
+Remember you have to pass in the whole file path.
+
+8
+00:00:31,380 --> 00:00:38,680
+If you're not in the same directory and then we'll say sensus head so we can check out the data so you
+
+9
+00:00:38,680 --> 00:00:43,720
+can see here I have a lot of categorical categorical data where we have strings as the categories so
+
+10
+00:00:43,710 --> 00:00:48,060
+we need to work with that later on with tensor Flo's estimator API.
+
+11
+00:00:48,490 --> 00:00:54,930
+Up next we need to say that the label columns of less than or equal to 50 k are greater than 50 k those
+
+12
+00:00:54,940 --> 00:01:00,400
+are strings and we need to convert them to zero and ones in order for tent's flow to understand.
+
+13
+00:01:00,400 --> 00:01:06,670
+So the way I did this is first off if you ever want to figure out what are the actual unique values
+
+14
+00:01:07,060 --> 00:01:15,800
+inside a column you can just say unique as a method of a column and report back that unique values here.
+
+15
+00:01:15,800 --> 00:01:19,400
+So we know now that these are the strings we need to convert.
+
+16
+00:01:19,460 --> 00:01:23,060
+So the way we can do this is using the panels to apply method.
+
+17
+00:01:23,120 --> 00:01:28,340
+So I create a function that converts these two strings to either zero or 1 and then apply it to the
+
+18
+00:01:28,340 --> 00:01:29,670
+entire column.
+
+19
+00:01:29,810 --> 00:01:33,320
+So I'll say label 6.
+
+20
+00:01:33,520 --> 00:01:38,710
+It takes in a label that is either the string or the string and we'll do the following.
+
+21
+00:01:38,740 --> 00:01:44,800
+If that label is equal to the string right here and again note the spacing there's a space right there
+
+22
+00:01:44,800 --> 00:01:46,040
+in that string.
+
+23
+00:01:46,120 --> 00:01:51,700
+Then I'm going to return a zero else I'll return a 1.
+
+24
+00:01:51,910 --> 00:01:55,840
+And if you check out the solutions book there's kind of a nice little land expression that does this
+
+25
+00:01:55,870 --> 00:01:56,780
+all in one line.
+
+26
+00:01:56,950 --> 00:01:59,610
+But I think this one is really clear on what it's actually doing.
+
+27
+00:02:00,750 --> 00:02:03,230
+And Chips equals equals.
+
+28
+00:02:03,240 --> 00:02:04,000
+There we go.
+
+29
+00:02:04,380 --> 00:02:14,840
+And then I'm going to say sensus income bracket is not equal to sensus income bracket how about a complete
+
+30
+00:02:15,350 --> 00:02:22,030
+and then I'm going to say apply and I will apply the function so labeled 6.
+
+31
+00:02:22,100 --> 00:02:25,130
+I know here I'm not calling the function I'm just passing it in there.
+
+32
+00:02:25,430 --> 00:02:25,910
+Perfect.
+
+33
+00:02:25,910 --> 00:02:33,370
+So now if I take a look at my data from again census had run that and if I go all the way to the right
+
+34
+00:02:33,750 --> 00:02:37,910
+you know Notice here that the income brackets are either zeros or ones.
+
+35
+00:02:37,910 --> 00:02:39,940
+Now I want to perform a train test split on the data.
+
+36
+00:02:39,940 --> 00:02:45,160
+It's pretty straightforward from S-K learn model selection.
+
+37
+00:02:45,160 --> 00:02:50,470
+Import train to split run that you want to grab our data.
+
+38
+00:02:50,800 --> 00:02:57,450
+So our actual features that's going to be sensus and then we're going to drop the income bracket column.
+
+39
+00:02:57,740 --> 00:03:03,200
+So income bracket and we want to drop that along access is equal to 1.
+
+40
+00:03:03,220 --> 00:03:07,020
+Then we also want to get our y true or Y labels.
+
+41
+00:03:07,660 --> 00:03:11,960
+And that's just going to be equal to the income bracket column.
+
+42
+00:03:12,360 --> 00:03:13,040
+There we go.
+
+43
+00:03:13,110 --> 00:03:16,880
+And then we call train to split shift enter.
+
+44
+00:03:16,980 --> 00:03:18,590
+Expand on this.
+
+45
+00:03:18,630 --> 00:03:23,410
+Scroll down until we find this nice little convenience line copy.
+
+46
+00:03:24,870 --> 00:03:28,470
+Paste that in and then we just need to do a couple of replacements here.
+
+47
+00:03:28,470 --> 00:03:37,800
+Change this to be ex-state to change that to be white labels test size is just 30 percent.
+
+48
+00:03:38,280 --> 00:03:40,780
+And I do want one for my random state.
+
+49
+00:03:41,130 --> 00:03:41,360
+OK.
+
+50
+00:03:41,370 --> 00:03:45,400
+So there's a train to split up next you want to create the feature columns.
+
+51
+00:03:45,810 --> 00:03:51,360
+So I always recommend using the name your data frame and then calling the columns to get a list of the
+
+52
+00:03:51,360 --> 00:03:52,050
+column names.
+
+53
+00:03:52,050 --> 00:03:54,500
+This gives you the exact strings in the passen.
+
+54
+00:03:54,510 --> 00:03:57,940
+First off we're going to create the columns for the categorical values.
+
+55
+00:03:58,100 --> 00:04:02,430
+I want to show you two examples and then I get a copy and paste the rest from the actual notebook.
+
+56
+00:04:02,430 --> 00:04:07,630
+But first off I need to import tensor flow as T.F..
+
+57
+00:04:07,640 --> 00:04:11,700
+OK so let's create the feature columns or do two of them.
+
+58
+00:04:11,710 --> 00:04:17,640
+So for the gender column I would need to say T.F. feature column is a categorical column.
+
+59
+00:04:17,740 --> 00:04:22,540
+And since I know there's only two genders female and male I'll say with a vocab list.
+
+60
+00:04:24,000 --> 00:04:29,850
+So I pasan gender is the name of the column and then I pass in a list of possible options which is just
+
+61
+00:04:30,390 --> 00:04:34,060
+female and male.
+
+62
+00:04:34,150 --> 00:04:38,890
+So that's one way to do it the other way is let's say you have the occupation column where I have no
+
+63
+00:04:38,890 --> 00:04:43,070
+idea how many categories there are and I don't want to provide a full vocab list.
+
+64
+00:04:43,360 --> 00:04:45,700
+Well I just create an occupation variable here.
+
+65
+00:04:46,150 --> 00:04:48,070
+It's going to be a feature column.
+
+66
+00:04:48,070 --> 00:04:49,650
+Again a categorical column.
+
+67
+00:04:49,660 --> 00:04:51,510
+But instead I'm going to use a hash bucket.
+
+68
+00:04:53,100 --> 00:04:58,450
+We'll say occupation the name of the column and then I just choose the hash bucket size large enough
+
+69
+00:04:58,450 --> 00:05:04,570
+that I know I will run into any limitation so I can just put a thousand here because I know there's
+
+70
+00:05:04,660 --> 00:05:07,250
+no more than 1000 occupation's.
+
+71
+00:05:07,390 --> 00:05:07,720
+All right.
+
+72
+00:05:07,750 --> 00:05:12,250
+And you can do the same thing for the various other ones either provide a vocab list or provide the
+
+73
+00:05:12,250 --> 00:05:13,100
+hash buckets.
+
+74
+00:05:13,150 --> 00:05:15,300
+Obviously hash book it's a lot easier.
+
+75
+00:05:15,310 --> 00:05:17,830
+So let me just copy and paste from the solutions book here.
+
+76
+00:05:18,790 --> 00:05:24,160
+And there we have now all our categorical columns so that the marital status relationship education
+
+77
+00:05:24,190 --> 00:05:26,410
+or class and then native country.
+
+78
+00:05:26,440 --> 00:05:30,680
+So I just set the hash bucket size 2000 because I know that's a large enough number.
+
+79
+00:05:30,760 --> 00:05:32,610
+It's not going to make a thousand categories.
+
+80
+00:05:32,620 --> 00:05:35,340
+It's just going to make up to 1000 categories.
+
+81
+00:05:35,440 --> 00:05:35,990
+OK.
+
+82
+00:05:36,190 --> 00:05:37,600
+Now we have the continuous features.
+
+83
+00:05:37,600 --> 00:05:39,700
+So let me just do one example here.
+
+84
+00:05:39,700 --> 00:05:46,800
+We've done this before we say a feature column numeric column and then we'd just say age.
+
+85
+00:05:46,800 --> 00:05:47,080
+All right.
+
+86
+00:05:47,080 --> 00:05:51,900
+So then I'm going to copy and paste the rest of these from the solutions.
+
+87
+00:05:51,910 --> 00:05:55,510
+No but I have these for you so you can copy and paste this as well.
+
+88
+00:05:55,510 --> 00:05:58,170
+Now we want to put all these variables into a single list.
+
+89
+00:05:58,390 --> 00:06:02,150
+So we just say feet calls is equal to.
+
+90
+00:06:02,170 --> 00:06:08,910
+And then we just create our list with these variables so gender occupation marital status etc..
+
+91
+00:06:08,950 --> 00:06:13,170
+So I'm going to copy and paste this so you don't see me just type a bunch of variable names here.
+
+92
+00:06:15,380 --> 00:06:16,640
+There we go.
+
+93
+00:06:16,670 --> 00:06:18,410
+So that is our feature column.
+
+94
+00:06:18,410 --> 00:06:20,560
+So we just created for the T.F. estimator.
+
+95
+00:06:20,570 --> 00:06:23,090
+Now it's time for the input function.
+
+96
+00:06:23,180 --> 00:06:24,880
+So the bet size is up to you.
+
+97
+00:06:24,980 --> 00:06:27,440
+But I mentioned that I did choose a batch size of 100.
+
+98
+00:06:27,440 --> 00:06:30,060
+You can kind of play around to see what works best for your model.
+
+99
+00:06:31,720 --> 00:06:38,200
+So same tensor flow estimator inputs and we're dealing with panel data frames so we'll choose a Pancho's
+
+100
+00:06:38,260 --> 00:06:39,120
+input function.
+
+101
+00:06:39,960 --> 00:06:48,570
+And then we're going to say x is equal to x train Y is equal to y train I'll choose batch size equal
+
+102
+00:06:48,570 --> 00:06:53,550
+to 100 will leave number of the pox as none that is default.
+
+103
+00:06:53,590 --> 00:06:59,300
+And then we also want to say shuffle is equal to true because the training input function.
+
+104
+00:06:59,470 --> 00:07:00,950
+Next we want to create our model.
+
+105
+00:07:01,000 --> 00:07:05,710
+So let's go and do that we'll say model is equal to T.F. estimator.
+
+106
+00:07:06,040 --> 00:07:07,970
+And we're going to use a linear classifier.
+
+107
+00:07:08,230 --> 00:07:13,270
+As I mentioned if you want to use a densely neural network classifier are connected in your own that
+
+108
+00:07:13,270 --> 00:07:19,030
+were classifier then back for these categorical columns you'll need to convert them into embedded categorical
+
+109
+00:07:19,030 --> 00:07:19,610
+columns.
+
+110
+00:07:19,720 --> 00:07:23,290
+So you need to pass all of these into that embedding function.
+
+111
+00:07:23,290 --> 00:07:25,320
+So go ahead and review the lectures and we did that.
+
+112
+00:07:25,630 --> 00:07:28,480
+But for right now we're using linear classifiers we don't need to do that.
+
+113
+00:07:28,480 --> 00:07:33,760
+We basically just need to say what the feature columns are which is feek calls.
+
+114
+00:07:33,760 --> 00:07:35,320
+All right so we have our linear classifier.
+
+115
+00:07:35,350 --> 00:07:37,330
+Now it's time to trayner data.
+
+116
+00:07:37,330 --> 00:07:45,430
+So I'll say model train input function we'll say that's equal to the input phunk we created.
+
+117
+00:07:45,580 --> 00:07:47,700
+And you provide how many training steps you can do.
+
+118
+00:07:47,920 --> 00:07:49,350
+So it's really up to you.
+
+119
+00:07:49,560 --> 00:07:56,750
+I'll just do 10000 pretty fast computer and then I'm going to hop forward in time for the evaluation.
+
+120
+00:07:56,890 --> 00:07:58,500
+All right so hopping forward into the future.
+
+121
+00:07:58,510 --> 00:08:00,220
+My model is now done training.
+
+122
+00:08:00,220 --> 00:08:02,880
+It's time to create a prediction function.
+
+123
+00:08:03,250 --> 00:08:04,410
+So let's do that.
+
+124
+00:08:04,400 --> 00:08:11,330
+We'll say my prediction function is going to have some major thought inputs that pand those input function.
+
+125
+00:08:11,500 --> 00:08:18,890
+And because I'm using prediction not evaluation I really only need the features if I was doing evaluation
+
+126
+00:08:18,980 --> 00:08:23,310
+then I would end up needing something to evaluate against such as white tests.
+
+127
+00:08:23,360 --> 00:08:31,230
+But in this case I'm just going to say test will say batch size is equal to the length of X test.
+
+128
+00:08:31,560 --> 00:08:37,200
+And then because we want to use this for prediction we'll say shuffle is equal to false and then I just
+
+129
+00:08:37,200 --> 00:08:45,110
+use model that predict and I pass that input function is equal to that prediction function.
+
+130
+00:08:45,110 --> 00:08:46,050
+I just made.
+
+131
+00:08:46,280 --> 00:08:52,970
+And that's going to give us a generator results so let's say prediction generator is equal to that model
+
+132
+00:08:53,000 --> 00:09:01,070
+prediction and then let's say predictions themselves is a list or converting that.
+
+133
+00:09:01,370 --> 00:09:04,760
+So that takes a little bit of time because it's actually generating the results.
+
+134
+00:09:04,760 --> 00:09:09,510
+So now if I take a look at predictions it's a list of dictionaries where I have class IDs.
+
+135
+00:09:09,620 --> 00:09:10,970
+So that's what I actually want to grab.
+
+136
+00:09:10,970 --> 00:09:12,600
+So let's go ahead and do that.
+
+137
+00:09:12,620 --> 00:09:16,650
+You can do this for loop or with a list comprehension.
+
+138
+00:09:16,670 --> 00:09:23,560
+So he basically wants pred the class.
+
+139
+00:09:23,980 --> 00:09:25,940
+Let's do this like this.
+
+140
+00:09:26,200 --> 00:09:30,740
+We want pred for class underscore IDs.
+
+141
+00:09:30,760 --> 00:09:32,290
+We want the first item there.
+
+142
+00:09:33,920 --> 00:09:36,290
+For prayer in prediction.
+
+143
+00:09:36,290 --> 00:09:37,920
+So this is of a list comprehension.
+
+144
+00:09:37,970 --> 00:09:42,670
+You can check up these solutions book if you want the actual For loop that does this.
+
+145
+00:09:42,680 --> 00:09:46,380
+But then we'll just set the sequel to final sets.
+
+146
+00:09:46,440 --> 00:09:46,790
+There we go.
+
+147
+00:09:46,790 --> 00:09:48,770
+So there's our list comprehension.
+
+148
+00:09:48,920 --> 00:09:50,770
+And as I mentioned we have those dictionaries.
+
+149
+00:09:50,780 --> 00:09:53,140
+But if I take a look at final spreads.
+
+150
+00:09:53,630 --> 00:10:00,620
+Now I just have a big list of all the values all the labels that predicted.
+
+151
+00:10:00,680 --> 00:10:06,090
+So once I have that list which is basically what we did here I can use classification report from scalar
+
+152
+00:10:06,110 --> 00:10:13,580
+metrics so let's do that from S-K learn metrics import the classification report.
+
+153
+00:10:13,760 --> 00:10:18,830
+And this is a really nice tool that essentially gives you a precision and recall value or a fun score
+
+154
+00:10:19,100 --> 00:10:21,740
+for binary classification and we use it.
+
+155
+00:10:21,770 --> 00:10:26,810
+If you just say classification and poor you shift tab here Ill report back the White shirt or excuse
+
+156
+00:10:26,810 --> 00:10:26,980
+me.
+
+157
+00:10:26,990 --> 00:10:30,760
+It needs provided the y true values and the way predicted values.
+
+158
+00:10:30,800 --> 00:10:35,680
+So I know the y true values equal to white test and then I know the predicted values.
+
+159
+00:10:35,690 --> 00:10:42,200
+Those are the ones that you just create appear which you have as final Pretz.
+
+160
+00:10:42,230 --> 00:10:43,110
+So there we have it.
+
+161
+00:10:43,130 --> 00:10:44,940
+And then when I run this it looks a little weird.
+
+162
+00:10:44,950 --> 00:10:47,770
+That's because it's meant to be printed.
+
+163
+00:10:47,850 --> 00:10:51,000
+So we need to print this out.
+
+164
+00:10:51,250 --> 00:10:55,930
+And now we get this nice little format so you can see here I got around 85 percent precision recall
+
+165
+00:10:55,930 --> 00:10:59,630
+and EF 1 score which is definitely not so bad given the data set.
+
+166
+00:10:59,650 --> 00:11:05,140
+That's pretty much close to the best you can do using regularisation you may be able to push it a little
+
+167
+00:11:05,140 --> 00:11:07,830
+further up but that's pretty good.
+
+168
+00:11:07,840 --> 00:11:08,240
+All right.
+
+169
+00:11:08,260 --> 00:11:12,940
+If you have any questions feel free to post the Kewney forums but basically ends the section on using
+
+170
+00:11:13,240 --> 00:11:16,060
+the dancefloor basics for things like regression and classification.
+
+171
+00:11:16,270 --> 00:11:20,740
+Coming up next in future sections we're going to start tackling problems that really only tensor flow
+
+172
+00:11:20,950 --> 00:11:25,890
+are only deep learning has the capabilities of solving things like image classification.
+
+173
+00:11:25,900 --> 00:11:27,340
+All right I'll see you there.
+

@@ -1,0 +1,184 @@
+1
+00:00:06,030 --> 00:00:09,980
+Welcome back everyone to this lecture on gradient descent and back propagation.
+
+2
+00:00:11,020 --> 00:00:15,640
+If you've dabbled in machine learning before or if you've even looked at some online articles you've
+
+3
+00:00:15,640 --> 00:00:18,190
+probably already heard of the term grading the sense.
+
+4
+00:00:18,370 --> 00:00:25,370
+Let's quickly go over a high level overview and then discuss back propagation gradient descent is an
+
+5
+00:00:25,430 --> 00:00:30,380
+optimization algorithm for finding the minimum of a function which is useful to us because we want to
+
+6
+00:00:30,380 --> 00:00:32,280
+minimize that cost function.
+
+7
+00:00:32,390 --> 00:00:37,360
+So to find a local minimum we take steps proportional to the negative of the gradient.
+
+8
+00:00:37,370 --> 00:00:41,180
+Let's go ahead and go through a very simple example in just one dimension.
+
+9
+00:00:41,180 --> 00:00:46,970
+So basically what we have here is our cost on the y axis so the result of that cost function and then
+
+10
+00:00:46,970 --> 00:00:50,990
+on the x axis we have a particular way that we're trying to choose.
+
+11
+00:00:50,990 --> 00:00:53,800
+So remember we end up choosing a random weight in the beginning.
+
+12
+00:00:53,810 --> 00:00:58,970
+So let's say that Bluepoint initiate that ran the weight that we chose and we want to somehow choose
+
+13
+00:00:58,970 --> 00:01:03,310
+a weight that's going to minimize that cost and we can see here just visually when they mention.
+
+14
+00:01:03,320 --> 00:01:08,680
+That's basically at the bottom of that parabola so the weight gradient descent works in just a high
+
+15
+00:01:08,680 --> 00:01:13,750
+level overview is that you end up taking the gradient which we know is a derivative of the function
+
+16
+00:01:13,750 --> 00:01:19,140
+at that point and then seeing which way it goes in the negative direction and then we end up taking
+
+17
+00:01:19,150 --> 00:01:20,290
+step by step.
+
+18
+00:01:20,470 --> 00:01:25,820
+A The sense along that gradient until we finally see that we get that minimum cost.
+
+19
+00:01:25,840 --> 00:01:32,730
+So we see here just visually what the parameter values to choose to minimize our cost is.
+
+20
+00:01:32,750 --> 00:01:37,010
+So finally this minimum is really simple for one dimension but our cases are going to have a lot more
+
+21
+00:01:37,010 --> 00:01:37,710
+parameters.
+
+22
+00:01:37,790 --> 00:01:40,820
+So we're not going to do that visually or with such a simple diagram.
+
+23
+00:01:40,970 --> 00:01:45,470
+Meaning we're going to need to use built in linear algebra libraries that are deep learning library
+
+24
+00:01:45,610 --> 00:01:51,150
+will provide using greened the sense we can figure out the best parameters for minimizing our cost.
+
+25
+00:01:51,150 --> 00:01:55,710
+So for example find the best values for the weights of the neuron inputs and we're going to go a lot
+
+26
+00:01:55,710 --> 00:02:00,700
+more into the mathematics hungry in the sense when we actually go through the math example.
+
+27
+00:02:01,940 --> 00:02:06,380
+So now we just have one issue to solve and that is how can we quickly adjust the optimal parameters
+
+28
+00:02:06,410 --> 00:02:08,930
+or weights across our entire network.
+
+29
+00:02:08,930 --> 00:02:11,320
+In that one example we just showed for a single weight.
+
+30
+00:02:11,540 --> 00:02:17,120
+But what if we want to actually go and then fix all the weights or adjust all the weights for the entire
+
+31
+00:02:17,120 --> 00:02:17,650
+network.
+
+32
+00:02:17,720 --> 00:02:24,200
+And that's we're back propagation comes in basically back propagation is used to calculate the air contribution
+
+33
+00:02:24,470 --> 00:02:29,990
+of each year on after a batch of data is processed and it relies heavily on the chain rule from calculus
+
+34
+00:02:30,260 --> 00:02:33,320
+to go back through the network and calculate these errors.
+
+35
+00:02:34,080 --> 00:02:39,040
+And the way back propagation works it calculates the air at the output and then distributes back through
+
+36
+00:02:39,040 --> 00:02:43,430
+the network layers and it requires a known desired output for each input value.
+
+37
+00:02:43,450 --> 00:02:49,490
+Remember that supervised learning needs some sort of comparison to actually get that error.
+
+38
+00:02:49,640 --> 00:02:53,390
+So the implementation of back propagation is going to be further clarified when we dive into the math
+
+39
+00:02:53,390 --> 00:02:56,950
+example because it really relies heavily on the chain rule and the river lives.
+
+40
+00:02:56,960 --> 00:02:58,900
+And it's not something that really works of sleights.
+
+41
+00:02:58,910 --> 00:03:02,400
+So instead what kind of show you by hand how this entire process works.
+
+42
+00:03:02,480 --> 00:03:07,510
+But now that we finished off our very high level overview of the theory behind your own that works let's
+
+43
+00:03:07,520 --> 00:03:12,200
+go ahead and get a quick discussion of tensor Flo's playground which is a really fun Web site that allows
+
+44
+00:03:12,200 --> 00:03:16,460
+you to kind of visually see a lot of the aspects we've been talking about through the last previous
+
+45
+00:03:16,460 --> 00:03:17,510
+lectures.
+
+46
+00:03:17,510 --> 00:03:19,270
+Thanks everyone and I'll see at the next lecture.
+

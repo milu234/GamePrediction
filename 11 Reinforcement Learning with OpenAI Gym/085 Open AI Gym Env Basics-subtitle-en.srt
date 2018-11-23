@@ -1,0 +1,368 @@
+1
+00:00:05,360 --> 00:00:07,190
+Welcome back everyone in this lecture.
+
+2
+00:00:07,190 --> 00:00:13,530
+We're going to discuss just the very basics of creating in an environment with opening gym library.
+
+3
+00:00:13,570 --> 00:00:16,230
+So we're going to explore how to create the carpool environment.
+
+4
+00:00:16,240 --> 00:00:21,070
+One of the most basic environments that comes of opening a gym and it also doesn't require any additional
+
+5
+00:00:21,070 --> 00:00:22,730
+libraries to be installed.
+
+6
+00:00:22,750 --> 00:00:26,770
+So let's discuss what the actual carpool problem is.
+
+7
+00:00:26,770 --> 00:00:31,810
+So the goal of this carpooling environment is to balance the pull on the cart and the car can move left
+
+8
+00:00:31,870 --> 00:00:37,650
+or right and you can imagine as the cart moves around the pole will end up sliding down.
+
+9
+00:00:38,380 --> 00:00:44,320
+So we have actions available to us in order to move the cart either left or right in an attempt to balance
+
+10
+00:00:44,320 --> 00:00:44,880
+the pull.
+
+11
+00:00:44,920 --> 00:00:48,990
+Well actually Theale actions in this lecture that will deal in a future lecture.
+
+12
+00:00:49,000 --> 00:00:53,660
+But right now just keep in mind that we're going to be able to enter one of two actions either zero
+
+13
+00:00:53,680 --> 00:00:55,760
+for left or one for right.
+
+14
+00:00:55,780 --> 00:01:02,140
+So we're going to move that car left to right to try to keep it up pull balance as far as the environment
+
+15
+00:01:02,140 --> 00:01:02,910
+is concerned.
+
+16
+00:01:02,950 --> 00:01:06,040
+It's actually going to be represented with a pie array.
+
+17
+00:01:06,070 --> 00:01:11,380
+So even though the opening I Chim library comes a nice rendering tool so you can visualize all of this
+
+18
+00:01:11,710 --> 00:01:13,740
+as far as your actual model is concerned.
+
+19
+00:01:13,780 --> 00:01:19,510
+It's just going to receive back a number higher rate for floating point numbers and those floating point
+
+20
+00:01:19,510 --> 00:01:22,250
+numbers will indicate the horizontal position.
+
+21
+00:01:22,420 --> 00:01:26,270
+So there's some initial position of the cart which we mark at zero.
+
+22
+00:01:26,470 --> 00:01:30,350
+And then the horizontal position can be either to the left of that initial mark.
+
+23
+00:01:30,370 --> 00:01:33,110
+So that would be some negative number or to the right of it.
+
+24
+00:01:33,130 --> 00:01:35,290
+So we have that first horizontal position.
+
+25
+00:01:35,290 --> 00:01:37,490
+Then we also have the horizontal velocity.
+
+26
+00:01:37,660 --> 00:01:41,090
+So that's how fast the actual cart is moving left or right.
+
+27
+00:01:41,110 --> 00:01:46,240
+Then we also know the angle of the pole itself as well as the angular velocity of the pole as it tends
+
+28
+00:01:46,240 --> 00:01:47,110
+to fall down.
+
+29
+00:01:48,340 --> 00:01:55,010
+So we can grab these values from the environment that umpire and then we'll use them for our agent right
+
+30
+00:01:55,010 --> 00:01:58,190
+now let's just focus on the very basics of creating this environment.
+
+31
+00:01:58,250 --> 00:02:03,710
+So I will open up my editor or open up whatever IP you're using to create your PI scripts and follow
+
+32
+00:02:03,710 --> 00:02:05,060
+along with me.
+
+33
+00:02:05,060 --> 00:02:06,360
+Let's go to the editor now.
+
+34
+00:02:06,620 --> 00:02:12,830
+OK so right here we have a PI script files called my test Jim and the first thing we need to do is actually
+
+35
+00:02:12,890 --> 00:02:14,030
+import Jim.
+
+36
+00:02:14,060 --> 00:02:16,750
+So I will say import Jim and we'll just do that.
+
+37
+00:02:16,910 --> 00:02:22,190
+And now it's time to actually create or make the environment that we create or make an environment is
+
+38
+00:02:22,190 --> 00:02:25,270
+create some sort of environmental variable we'll say envy.
+
+39
+00:02:25,490 --> 00:02:28,370
+And you can ignore this kind of drop down right here.
+
+40
+00:02:28,370 --> 00:02:32,990
+It's just basic drop down help for Python but it's not necessary here.
+
+41
+00:02:33,160 --> 00:02:34,660
+There we're going to call Jim.
+
+42
+00:02:34,850 --> 00:02:37,430
+Well called the make method off the gym.
+
+43
+00:02:37,490 --> 00:02:43,280
+So you say Jim thought make and then the passing some string code for the environment some environments
+
+44
+00:02:43,310 --> 00:02:48,890
+as I've mentioned before have dependencies such as the Atari game environments require the Atari emulator.
+
+45
+00:02:48,890 --> 00:02:54,080
+But in this case we're going to be using the environment that doesn't require anything to keep things
+
+46
+00:02:54,080 --> 00:02:58,180
+simple and it will be just cart pole dash vs zero.
+
+47
+00:02:58,480 --> 00:03:01,360
+And if you want more string codes you can always just check out the documentation.
+
+48
+00:03:01,400 --> 00:03:05,750
+So you click on the environments page that we saw earlier and then choose any string you want.
+
+49
+00:03:05,840 --> 00:03:08,500
+If you get an error it's probably because you needed the pendency.
+
+50
+00:03:08,600 --> 00:03:12,760
+So go ahead and look up on the documentation what dependencies need to install.
+
+51
+00:03:12,800 --> 00:03:17,780
+So once you've made the environment what we wanted to do is reset the environment to its default starting
+
+52
+00:03:17,780 --> 00:03:18,560
+stage.
+
+53
+00:03:18,650 --> 00:03:22,010
+In our case the shifts that the car is at the Zero location.
+
+54
+00:03:22,280 --> 00:03:24,290
+So we say reset.
+
+55
+00:03:24,590 --> 00:03:27,170
+Open and close print sees on the environment.
+
+56
+00:03:28,230 --> 00:03:33,660
+And then what you can do is you can render the environment over several times steps she can say something
+
+57
+00:03:33,660 --> 00:03:37,590
+like for tea in range 1000.
+
+58
+00:03:37,590 --> 00:03:44,280
+So for some 1000 times steps we're going to do is we're going to render the environment and rendering
+
+59
+00:03:44,280 --> 00:03:48,740
+the environment basically creates this little pop up that allows you to view the environment.
+
+60
+00:03:48,930 --> 00:03:51,920
+And then what we're going to do here is we're going to do the following.
+
+61
+00:03:51,930 --> 00:03:56,210
+The worry about this line of code is something we're going to talk about a lot more in the next lecture.
+
+62
+00:03:56,220 --> 00:04:03,120
+But essentially what I'm going to do is I'm going to call the action space office environment and then
+
+63
+00:04:03,120 --> 00:04:06,460
+I'm going to call a sample open and close princes.
+
+64
+00:04:06,510 --> 00:04:08,470
+And what this line does the Slide 11.
+
+65
+00:04:08,580 --> 00:04:13,740
+It's basically saying take some sort of random action from the action space from the actions available
+
+66
+00:04:13,740 --> 00:04:16,440
+to us were either 0 or 1 left or right.
+
+67
+00:04:16,470 --> 00:04:22,360
+What this is going to do is going to randomly sample that and then provide that step into the environment.
+
+68
+00:04:22,380 --> 00:04:27,610
+So we shouldn't actually see the pull balance we should eventually just see some sort of random sliding.
+
+69
+00:04:27,670 --> 00:04:31,280
+And what should happen is that slides off the actual page.
+
+70
+00:04:31,350 --> 00:04:36,460
+So let's save this and run this so we'll say Python.
+
+71
+00:04:36,810 --> 00:04:38,400
+My test Jim that pi.
+
+72
+00:04:38,430 --> 00:04:43,080
+Just have to complete that and make sure that you're running this with your environment activated or
+
+73
+00:04:43,090 --> 00:04:44,190
+they gym installed.
+
+74
+00:04:44,190 --> 00:04:48,930
+Otherwise we're going to err enter to run this and eventually should see a little pop up there and you
+
+75
+00:04:48,930 --> 00:04:51,040
+should see it swing off the page.
+
+76
+00:04:51,360 --> 00:04:51,790
+OK.
+
+77
+00:04:51,870 --> 00:04:53,790
+So that's all we have to do.
+
+78
+00:04:53,790 --> 00:04:59,180
+Again the lines here that really focus on is you make your environment with some sort of street code.
+
+79
+00:04:59,190 --> 00:05:03,450
+Again the string codes available to you and the documentation reset the environment to the starting
+
+80
+00:05:03,900 --> 00:05:08,460
+position and then for a certain number of time steps you can render the environment which is what we
+
+81
+00:05:08,460 --> 00:05:09,150
+just saw.
+
+82
+00:05:09,360 --> 00:05:12,600
+And then you can't perform an read off that environment.
+
+83
+00:05:12,600 --> 00:05:15,290
+So we're going to focus on next as a quick note.
+
+84
+00:05:15,300 --> 00:05:19,230
+It really doesn't matter what you call this temporary variable because we don't actually use it inside
+
+85
+00:05:19,230 --> 00:05:20,300
+this for loop.
+
+86
+00:05:20,430 --> 00:05:25,260
+So it's common to just have an underscore here because underscores are typically kind of throw away
+
+87
+00:05:25,260 --> 00:05:30,060
+variables stuff you don't really end up using inside your for loops so just keep that in mind if you
+
+88
+00:05:30,060 --> 00:05:30,900
+ever see this.
+
+89
+00:05:31,170 --> 00:05:33,300
+It's really come just these underscore there.
+
+90
+00:05:33,630 --> 00:05:34,730
+All right thanks everyone.
+
+91
+00:05:34,730 --> 00:05:39,120
+And the next lecture we're going to focus on being able to take actions and reading the environment
+
+92
+00:05:39,590 --> 00:05:40,450
+I'll see it there.
+

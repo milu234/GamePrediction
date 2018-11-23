@@ -1,0 +1,240 @@
+1
+00:00:06,040 --> 00:00:11,110
+Welcome everyone to this overview lecture on reinforcement learning.
+
+2
+00:00:11,220 --> 00:00:15,530
+So is reinforcement learning reinforcement learning allows machines.
+
+3
+00:00:15,540 --> 00:00:20,970
+And what we're later going to call software agents to automatically determine the ideal behavior within
+
+4
+00:00:20,970 --> 00:00:27,360
+a specific contexts such as playing a game in order to maximize the performance in that context such
+
+5
+00:00:27,360 --> 00:00:29,430
+as getting a high score in that game.
+
+6
+00:00:31,270 --> 00:00:36,400
+So reinforcement learning uses a simple reward feedback and it's required for the agent to learn its
+
+7
+00:00:36,400 --> 00:00:37,230
+behavior.
+
+8
+00:00:37,330 --> 00:00:43,630
+And this is known as that reinforcement signal basically reinforcing good behavior.
+
+9
+00:00:43,650 --> 00:00:47,600
+So there's lots of different types of algorithms that fall under reinforcement learning and you should
+
+10
+00:00:47,610 --> 00:00:52,360
+know that not all of these algorithms actually require frameworks such as tensor flow.
+
+11
+00:00:52,380 --> 00:00:55,900
+Now all of them need some sort of neural network tensor flow situation.
+
+12
+00:00:57,080 --> 00:01:02,300
+OK so let's discuss the four main things that concern reinforcement learning.
+
+13
+00:01:02,420 --> 00:01:06,120
+And that is the agent the environment the action and the reward.
+
+14
+00:01:07,940 --> 00:01:11,630
+So all these four things are connected through basically a loop.
+
+15
+00:01:11,630 --> 00:01:15,500
+You have the agent which is what we're actually going to be programming you can essentially think of
+
+16
+00:01:15,500 --> 00:01:18,900
+that as either your network or software program et cetera.
+
+17
+00:01:19,080 --> 00:01:27,220
+The agent is going to take in observations and also a reward later on from the environment and the environment.
+
+18
+00:01:27,230 --> 00:01:31,150
+A lot of times when you're reading about reinforcement learning it's some sort of game.
+
+19
+00:01:31,160 --> 00:01:32,700
+It doesn't always have to be a game.
+
+20
+00:01:32,750 --> 00:01:37,120
+It can basically be anything you want it to be such as learning how to walk down a path.
+
+21
+00:01:37,130 --> 00:01:43,000
+But in this case and because we're going to be using open gym later on we'll mostly be dealing of games.
+
+22
+00:01:43,160 --> 00:01:48,080
+But once you take an observations from that environment you get to perform an action on that environment
+
+23
+00:01:48,500 --> 00:01:50,240
+and that basically creates a loop.
+
+24
+00:01:50,420 --> 00:01:55,760
+So you have your agent it performs an action onto the environment such as moving a piece in whatever
+
+25
+00:01:55,760 --> 00:01:57,470
+specific game you're playing.
+
+26
+00:01:57,470 --> 00:02:03,200
+And then from that it taken observations and you also take in a reward level and the reward level basically
+
+27
+00:02:03,200 --> 00:02:06,730
+the finds how well you performed in that environment.
+
+28
+00:02:07,220 --> 00:02:10,210
+So let's break this down a little more formally.
+
+29
+00:02:10,610 --> 00:02:16,610
+So our agent or program or bot it can receive inputs based off the environment and it can also perform
+
+30
+00:02:16,640 --> 00:02:19,900
+actions that we have the environment itself.
+
+31
+00:02:19,920 --> 00:02:23,000
+That's the actual setting that the agent is interacting with.
+
+32
+00:02:23,220 --> 00:02:28,630
+A lot of times it's often a game and examples but it can really be any real world or artificial environment.
+
+33
+00:02:30,070 --> 00:02:34,660
+And keep in mind you need to be able to represent this environment in a way that an agent can understand.
+
+34
+00:02:34,660 --> 00:02:40,420
+So what I mean by that is that they need to be some sort of array or some sort representation that your
+
+35
+00:02:40,420 --> 00:02:41,740
+program can understand.
+
+36
+00:02:41,740 --> 00:02:47,170
+So if you're dealing with a real world environment such as teaching a robot how to walk down a hill
+
+37
+00:02:47,320 --> 00:02:52,360
+you're going to need to have cameras on that robot and then eventually those images need to be translated
+
+38
+00:02:52,360 --> 00:02:56,350
+to arrays that your agent can understand.
+
+39
+00:02:56,350 --> 00:03:00,700
+Now previously it was actually really difficult to create environments that were easy to use and that
+
+40
+00:03:00,700 --> 00:03:01,570
+were shareable.
+
+41
+00:03:01,660 --> 00:03:06,280
+But later on we're going to discover how open the eyes Jim library actually helped solve this pretty
+
+42
+00:03:06,280 --> 00:03:11,530
+big problem so we can actually focus on building agents instead of building all the necessary frameworks
+
+43
+00:03:11,590 --> 00:03:12,570
+of an environment.
+
+44
+00:03:14,100 --> 00:03:19,210
+Now as far as the action is concerned that's the actual interaction your agent will perform on the environment.
+
+45
+00:03:19,380 --> 00:03:23,290
+So you can move in an environment maybe choose the next move in a game etc..
+
+46
+00:03:23,310 --> 00:03:24,620
+That's the actual action.
+
+47
+00:03:25,830 --> 00:03:28,410
+Then comes the reward after you perform an action.
+
+48
+00:03:28,590 --> 00:03:33,960
+So the reward is a metric that allows your agent to understand whether or not the previous sets of actions
+
+49
+00:03:34,050 --> 00:03:36,740
+either helped or hurt in its overall goal.
+
+50
+00:03:38,430 --> 00:03:44,070
+So these four aspects are fundamental to reinforcement learning and the way open gym works with variables
+
+51
+00:03:44,070 --> 00:03:46,090
+designed to fit within this framework.
+
+52
+00:03:46,190 --> 00:03:48,400
+It's going to allow us to focus on model building.
+
+53
+00:03:48,400 --> 00:03:51,650
+So you're going to hear these terms again and again as we work with opening.
+
+54
+00:03:51,660 --> 00:03:58,530
+Jim and keep in mind reinforcement learning isn't just for games it's for a variety of tasks.
+
+55
+00:03:58,540 --> 00:04:02,610
+Games are just an easy way to clearly show all the major aspects of reinforcement learning.
+
+56
+00:04:02,800 --> 00:04:07,000
+Which is why when you're learning about reinforcement learning it's really popular that you see it in
+
+57
+00:04:07,000 --> 00:04:10,540
+the setting of things like board games or simple tasks.
+
+58
+00:04:10,750 --> 00:04:12,350
+All right that's it for this lecture.
+
+59
+00:04:12,370 --> 00:04:16,860
+The next lecture we're going to discuss a little further about open gym library.
+
+60
+00:04:16,900 --> 00:04:17,660
+I'll see you there.
+

@@ -1,0 +1,628 @@
+1
+00:00:05,490 --> 00:00:06,470
+Welcome back everybody.
+
+2
+00:00:06,540 --> 00:00:10,960
+Let's go ahead and get started coding out our policy greens.
+
+3
+00:00:11,070 --> 00:00:12,520
+First we need our imports.
+
+4
+00:00:12,540 --> 00:00:23,740
+We're going to be using tensor flow of course as well as Jim Lewis as well as Jim and pi so say import
+
+5
+00:00:24,430 --> 00:00:26,570
+comp. that isn't.
+
+6
+00:00:26,820 --> 00:00:28,120
+All next step.
+
+7
+00:00:28,120 --> 00:00:30,680
+Let's go ahead and define our variables.
+
+8
+00:00:30,700 --> 00:00:32,310
+Very similar to what we did before.
+
+9
+00:00:33,310 --> 00:00:35,850
+We're going to say the number of inputs will we know that's four.
+
+10
+00:00:35,860 --> 00:00:38,020
+There's four observations coming back.
+
+11
+00:00:38,020 --> 00:00:42,970
+Number of hidden neurons let's also keep it for and we'll just do something simple like just one layer
+
+12
+00:00:42,970 --> 00:00:44,350
+here and then.
+
+13
+00:00:44,360 --> 00:00:47,050
+Number outputs is going to be one again.
+
+14
+00:00:47,050 --> 00:00:52,450
+Basically for that action whether you're going left or right and this time we're also going to be finding
+
+15
+00:00:52,450 --> 00:00:57,040
+a learning rate for our sense of say 0.01.
+
+16
+00:00:57,370 --> 00:00:59,850
+And we will be using again the T.F. layers API.
+
+17
+00:00:59,860 --> 00:01:07,130
+So we're going to have an initialiser again will say initialiser is equal to T.F. contrib layers.
+
+18
+00:01:07,180 --> 00:01:16,790
+And we're going to do it just like we did before the variants scaling initialiser or so we have our
+
+19
+00:01:16,800 --> 00:01:17,420
+variables.
+
+20
+00:01:17,430 --> 00:01:21,930
+Let's go ahead and create the network it's going to look similar to what we did last time with a few
+
+21
+00:01:21,930 --> 00:01:23,570
+minor changes.
+
+22
+00:01:23,610 --> 00:01:31,380
+So first we are going to create our placeholder and the placeholder is going to hold 32 and the shape
+
+23
+00:01:31,440 --> 00:01:38,500
+just like last time it's going to be by the number of inputs and then we'll have our first layer let's
+
+24
+00:01:38,500 --> 00:01:46,040
+call it the hidden layer that's going to be T.F. layers but then Slayer that's connected takes and XTi
+
+25
+00:01:46,070 --> 00:01:52,550
+inputs has four hidden units or four neurons I should say the activation function.
+
+26
+00:01:52,580 --> 00:01:54,070
+We're going to go ahead and choose.
+
+27
+00:01:54,660 --> 00:01:57,510
+Let's go in and choose Eliu for this.
+
+28
+00:01:57,680 --> 00:02:01,670
+When I was testing around that perform a little better than the rectified linear unit units an exponential
+
+29
+00:02:01,670 --> 00:02:02,750
+linear unit.
+
+30
+00:02:02,750 --> 00:02:12,570
+And we also need our kernel initialiser initialiser synthetical to the initialiser we find before and
+
+31
+00:02:12,570 --> 00:02:16,770
+then our next step here is to actually get the outputs and we're going to do this in two steps.
+
+32
+00:02:16,800 --> 00:02:17,770
+One of the logic.
+
+33
+00:02:17,790 --> 00:02:20,990
+And then on the outputs and we'll explain why in a second here.
+
+34
+00:02:21,390 --> 00:02:24,200
+But we're going to do the following.
+
+35
+00:02:24,280 --> 00:02:31,270
+We're going to say T.F. Clear's dance Pessin or hidden layer.
+
+36
+00:02:31,760 --> 00:02:35,320
+And then we want the number outputs out basically just one.
+
+37
+00:02:35,740 --> 00:02:43,880
+And then we're also going to then find outputs and we're going to pass this sigmoid function.
+
+38
+00:02:43,920 --> 00:02:46,530
+And the reason for that we're doing this kind of two separate steps.
+
+39
+00:02:46,530 --> 00:02:51,500
+Previously we essentially did all this in one layer is because we're going to be using both these variables
+
+40
+00:02:51,510 --> 00:02:55,250
+before and after the function is applied.
+
+41
+00:02:55,260 --> 00:02:56,550
+So right now it's go ahead and do.
+
+42
+00:02:56,560 --> 00:03:00,980
+Well we're going to do after this him would function is applied which is get those probabilities.
+
+43
+00:03:01,080 --> 00:03:07,790
+So we'll say probabilities just like we did last time is equal to if we're going to concatenate along
+
+44
+00:03:07,800 --> 00:03:14,380
+X to 1 values and it's going to be outputs and one minus outputs.
+
+45
+00:03:16,880 --> 00:03:23,180
+Then we're going to here is have an action and that's going to be able to multinomial just like we did
+
+46
+00:03:23,180 --> 00:03:31,400
+last time and we're going to pass in the probabilities and say a number of samples equal to one.
+
+47
+00:03:31,420 --> 00:03:31,630
+OK.
+
+48
+00:03:31,630 --> 00:03:36,190
+So very similar to what we did last time except here we're basically splitting this up into two steps
+
+49
+00:03:36,190 --> 00:03:38,640
+because we're really using both these variables.
+
+50
+00:03:38,740 --> 00:03:45,490
+And then finally we want to do is actually get some sort of output y to train the network on.
+
+51
+00:03:45,610 --> 00:03:51,710
+So we're going to say why is equal to and we'll say it's going to be one minus the actual action.
+
+52
+00:03:51,730 --> 00:03:54,640
+So the action is the probability to go left remember that.
+
+53
+00:03:54,640 --> 00:04:00,350
+So unfortunately we can't just say one minus action because this action is actually still a tenser and
+
+54
+00:04:00,370 --> 00:04:01,290
+intenser flow.
+
+55
+00:04:01,390 --> 00:04:05,130
+But we can easily convert it to a floating point number using tensor flow.
+
+56
+00:04:05,290 --> 00:04:09,130
+You can say T.F. to flow on that action.
+
+57
+00:04:10,270 --> 00:04:13,670
+And that way we can interact with it with a normal floating point number.
+
+58
+00:04:13,780 --> 00:04:18,890
+Right now it's a sensor here to spy action so you can only deal with it if you were to have another
+
+59
+00:04:18,970 --> 00:04:20,900
+tensor representing just one point zero.
+
+60
+00:04:20,920 --> 00:04:24,940
+But because we actually want this just to be a floating point number at the end we're going to go ahead
+
+61
+00:04:24,940 --> 00:04:29,830
+and translate that action or transform that action into a floating point number here.
+
+62
+00:04:31,090 --> 00:04:34,730
+Next up is for the last function in optimization.
+
+63
+00:04:35,050 --> 00:04:38,110
+So we're going to be defining cross entropy here.
+
+64
+00:04:39,470 --> 00:04:48,080
+So T.F. and I we're going to say sigmoid cross entropy with Blodgett's
+
+65
+00:04:52,520 --> 00:04:57,080
+and we'll say the labels is equal to Y and largest sequel to lodge it's here
+
+66
+00:05:00,960 --> 00:05:01,330
+OK.
+
+67
+00:05:01,410 --> 00:05:06,270
+Then the optimizer set that equal to T.F. train and we're going to use an atom optimizer
+
+68
+00:05:09,210 --> 00:05:12,050
+and then we're going to apply the learning rate from earlier.
+
+69
+00:05:12,340 --> 00:05:12,710
+OK.
+
+70
+00:05:12,800 --> 00:05:15,440
+And this is where it's going to differ a little bit from what we've done before.
+
+71
+00:05:15,620 --> 00:05:16,400
+Well we're going to do.
+
+72
+00:05:16,410 --> 00:05:23,940
+Instead of minimizing the optimizer we're going to compute the gradients using cross entropy.
+
+73
+00:05:24,500 --> 00:05:30,530
+So we're going to see gradients and variables because this returns back actually two things we're going
+
+74
+00:05:30,540 --> 00:05:37,250
+to grab the optimizer and instead of saying minimise based off cross entropy we're going to say compute
+
+75
+00:05:37,340 --> 00:05:43,670
+the gradients so kind of this in-between step here.
+
+76
+00:05:43,800 --> 00:05:47,040
+So usually when we did end up doing is saying optimizer minimize cross-bench B.
+
+77
+00:05:47,100 --> 00:05:51,020
+Right now we're competing the gradients because we're going to multiply these later on by the discounted
+
+78
+00:05:51,030 --> 00:05:51,840
+scores.
+
+79
+00:05:53,700 --> 00:05:58,200
+Now in order to work with these actual gradients and variables that are return back when we compute
+
+80
+00:05:58,200 --> 00:06:01,910
+the gradients later on we're going to want to apply the gradients.
+
+81
+00:06:01,950 --> 00:06:06,180
+So what we need to do here is a little bit of kind of tensor flow code.
+
+82
+00:06:06,200 --> 00:06:10,930
+I'm going to copy and paste this from the notes because it's a bit of a lot of code here.
+
+83
+00:06:10,940 --> 00:06:14,940
+So you can go out and feel free to copy and paste this but let's walk through what this code is actually
+
+84
+00:06:14,940 --> 00:06:15,360
+doing.
+
+85
+00:06:15,360 --> 00:06:20,760
+So we've computed the gradients and according to this cross entropy and then we make these three variables
+
+86
+00:06:20,760 --> 00:06:26,520
+here and lists the gradients themselves the Greaney and placeholders and then the gradients and variables
+
+87
+00:06:26,520 --> 00:06:27,870
+feed.
+
+88
+00:06:27,900 --> 00:06:30,330
+So then we're doing a little bit of tuple unpacking here.
+
+89
+00:06:30,330 --> 00:06:34,920
+So for the Greaney and variables that are returned when you compute the gradients off your optimizer
+
+90
+00:06:35,250 --> 00:06:38,560
+we're going to append just a gradient to our list of gradients.
+
+91
+00:06:38,670 --> 00:06:42,540
+Then we're going to create a placeholder here so say gradient placeholder.
+
+92
+00:06:42,540 --> 00:06:44,850
+Notice the singular here instead of placeholders.
+
+93
+00:06:45,000 --> 00:06:50,780
+We create a single placeholder for that specific rate and then we append that to this list of placeholders
+
+94
+00:06:50,790 --> 00:06:54,990
+and that is here we have a list of the gradients analyst the placeholders for the gradients and then
+
+95
+00:06:55,000 --> 00:06:59,040
+we're going to do here is we have this gradients and variables feed.
+
+96
+00:06:59,160 --> 00:07:03,400
+We append both the grace the gradient placeholder and the variable here.
+
+97
+00:07:03,540 --> 00:07:06,000
+Basically creating a list of tuples.
+
+98
+00:07:06,000 --> 00:07:11,580
+Then once we've done that we're going to at the end of all this say that our actual training operation
+
+99
+00:07:12,780 --> 00:07:19,390
+that we're doing here is the optimizer and we're going to then apply the gradients and that's going
+
+100
+00:07:19,390 --> 00:07:23,180
+to be that final feed we just made there.
+
+101
+00:07:23,190 --> 00:07:23,570
+All right.
+
+102
+00:07:23,610 --> 00:07:29,100
+So kind of some heavy tension flow just to make sure that we can separate out these steps of actual
+
+103
+00:07:29,100 --> 00:07:34,290
+gradients instead of the typical minimized function we did before then we're going to do here is quickly
+
+104
+00:07:34,290 --> 00:07:40,480
+create in it that we did for T.F. global variables initialiser
+
+105
+00:07:45,110 --> 00:07:50,460
+and then also say saver's equal to T.F. train saver because we're going to save our model later on.
+
+106
+00:07:52,060 --> 00:07:52,650
+OK.
+
+107
+00:07:52,870 --> 00:07:57,570
+Now we need to create some or award functions and you can also check out the resource notes there's
+
+108
+00:07:57,580 --> 00:08:04,690
+a few links or basically URLs that have hints and tips and useful links according to some of the code
+
+109
+00:08:04,690 --> 00:08:10,870
+we did specific things like how optimized can be gradients how to calculate programmatically what the
+
+110
+00:08:10,870 --> 00:08:13,690
+atom optimizer actually returns or what methods are available.
+
+111
+00:08:13,870 --> 00:08:15,750
+And then there's two functions here.
+
+112
+00:08:15,790 --> 00:08:17,580
+This helper at this count rewards function.
+
+113
+00:08:17,590 --> 00:08:19,750
+And at this can normalize rewards function.
+
+114
+00:08:19,750 --> 00:08:24,670
+So I'm going to copy and paste them again from the notes because that's a lot of code to kind of just
+
+115
+00:08:24,880 --> 00:08:26,730
+go through as far as timing is concerned.
+
+116
+00:08:26,730 --> 00:08:29,680
+So instead of just going to basically explain it.
+
+117
+00:08:30,190 --> 00:08:34,350
+So there's two helper functions here will really help her function.
+
+118
+00:08:34,360 --> 00:08:39,730
+And then one main function this helper function is going to calculate the discount rewards.
+
+119
+00:08:39,730 --> 00:08:44,560
+So let's walk through this it basically takes in the rewards and then applies the discount rate you
+
+120
+00:08:44,560 --> 00:08:46,540
+get back the discounted rewards.
+
+121
+00:08:46,570 --> 00:08:52,550
+So we create this 00 array that has the same length as the rewards that you pass in.
+
+122
+00:08:52,780 --> 00:08:57,770
+And then we've also taken a discount rate that can be 0.9 5 or 0.9 9 ET cetera.
+
+123
+00:08:58,000 --> 00:09:01,970
+And then right now we have the cumulative rewards equal to zero.
+
+124
+00:09:02,060 --> 00:09:05,990
+So we're going to say first step in reversed range.
+
+125
+00:09:05,990 --> 00:09:07,040
+Length of rewards.
+
+126
+00:09:07,160 --> 00:09:09,770
+So notice how we're basically going backwards here.
+
+127
+00:09:09,770 --> 00:09:15,770
+We're going to say that the cumulative rewards is equal to the rewards of that current step plus the
+
+128
+00:09:15,770 --> 00:09:20,750
+cumulative rewards times the discount rate then we're going to say that this kind of rewards of that
+
+129
+00:09:20,750 --> 00:09:23,380
+step is equal to the cumulative rewards.
+
+130
+00:09:23,390 --> 00:09:28,840
+So I think what makes it a little confusing here is the reversed function being used.
+
+131
+00:09:28,880 --> 00:09:33,710
+But basically the reverse allows you to go backwards starting from the length the awards all the way
+
+132
+00:09:33,710 --> 00:09:35,270
+to zero here.
+
+133
+00:09:35,270 --> 00:09:39,640
+So that's what we're doing here and basically what we end up returning is an array of the discounted
+
+134
+00:09:39,650 --> 00:09:47,030
+towards Once we have the counter awards we can end up doing is by passing in all rewards and the discount
+
+135
+00:09:47,030 --> 00:09:52,430
+rate we're going to use this help or this rewards function and then normalize them using the mean and
+
+136
+00:09:52,430 --> 00:09:54,010
+standard deviation.
+
+137
+00:09:54,020 --> 00:09:57,610
+So this is the main function that we're going to be using later on and what it's going to do is taken
+
+138
+00:09:57,620 --> 00:09:59,570
+all the rewards and the discount rate.
+
+139
+00:09:59,570 --> 00:10:03,710
+So I notice that this is going to take quite a while to actually calculate this function as we play
+
+140
+00:10:03,710 --> 00:10:09,320
+more and more games that you take in all the awards particularly at this country you're using then you
+
+141
+00:10:09,320 --> 00:10:14,270
+create this empty list called all this kind of rewards and then you going to save for every single reward
+
+142
+00:10:14,690 --> 00:10:22,680
+in this list of all rewards will you end up doing is you append the actual result of help or this rewards.
+
+143
+00:10:22,910 --> 00:10:26,900
+So the rewards and discount rate so so what's happening here.
+
+144
+00:10:27,050 --> 00:10:30,620
+We're going to have a giant list of a bunch rewards from all these games that you've played.
+
+145
+00:10:30,740 --> 00:10:36,050
+And eventually we're going to pass these in to the help her this kind of rewards which is this function
+
+146
+00:10:36,050 --> 00:10:38,570
+right here that actually calculates the discount.
+
+147
+00:10:38,570 --> 00:10:42,770
+So this calculates the discount and then once you have that well we end up doing is we flatten this
+
+148
+00:10:42,860 --> 00:10:49,130
+out using concatenate and then you calculate the mean deviation and then you perform the normalization
+
+149
+00:10:49,130 --> 00:10:54,440
+here subtracting the mean and dividing by the standard deviation for every set of counter awards in
+
+150
+00:10:54,530 --> 00:10:56,000
+all this kind of rewards.
+
+151
+00:10:56,000 --> 00:11:01,430
+So this is essentially if we scroll back to the left here this this kind of rewards that we end up creating
+
+152
+00:11:01,930 --> 00:11:07,880
+is going to be a giant list of a bunch of rewards for each of the games that we've been playing.
+
+153
+00:11:08,880 --> 00:11:09,610
+All right.
+
+154
+00:11:09,610 --> 00:11:14,710
+Once we've done that the next thing to do is to actually just code out our actual training session.
+
+155
+00:11:14,740 --> 00:11:18,520
+So we're going to do that in the next video but once you come to the training session that we can then
+
+156
+00:11:18,520 --> 00:11:22,250
+run the train model on environment and then visualize how it performed.
+
+157
+00:11:22,510 --> 00:11:24,310
+Thanks everyone and I'll see you at the next lecture.
+

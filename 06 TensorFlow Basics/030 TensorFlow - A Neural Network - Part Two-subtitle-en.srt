@@ -1,0 +1,1152 @@
+1
+00:00:05,320 --> 00:00:06,340
+Welcome back everyone.
+
+2
+00:00:06,340 --> 00:00:12,250
+I'm here in the same notebook as last time so last time we just created a really simple session graph
+
+3
+00:00:12,580 --> 00:00:18,610
+and now we're going to do is create a very simple example neural network just to kind of get the flow.
+
+4
+00:00:18,730 --> 00:00:23,350
+And then after that we're going to create a full network example we'll create some artificial data that
+
+5
+00:00:23,350 --> 00:00:27,880
+does follow some sort of linear trend and then we're going to create a neural network that can solve
+
+6
+00:00:27,880 --> 00:00:31,390
+this regression problem with a cost function and an optimizer.
+
+7
+00:00:31,510 --> 00:00:37,540
+But again I want to build this up really slowly because if you see all at once it looks a little confusing.
+
+8
+00:00:37,570 --> 00:00:42,880
+So we built up this really simple example of a graph that is just an addition operation and the multiplication
+
+9
+00:00:42,880 --> 00:00:43,780
+operation.
+
+10
+00:00:43,780 --> 00:00:46,630
+Now it's build up a really simple neural network.
+
+11
+00:00:46,990 --> 00:00:52,270
+A lot of times in your neural networks you're going to have a top level cell that has a bunch of constant
+
+12
+00:00:52,270 --> 00:00:57,880
+variable names defined for example and features your data probably won't change features as you train
+
+13
+00:00:57,880 --> 00:00:58,930
+it hopefully.
+
+14
+00:00:59,110 --> 00:01:02,060
+So Ill say lets our data has 10 features to it.
+
+15
+00:01:02,410 --> 00:01:07,580
+Then you'll do something like define how many neurons are going to be in the various layers right now.
+
+16
+00:01:07,780 --> 00:01:14,290
+We'll just pretend we have one layer of three dense neurons so we'll say.
+
+17
+00:01:14,590 --> 00:01:17,290
+And then neurons is equal to three.
+
+18
+00:01:17,290 --> 00:01:17,610
+All right.
+
+19
+00:01:17,620 --> 00:01:24,310
+Now we also know we need placeholders and variables will create a placeholder for X so T.F. placeholder
+
+20
+00:01:25,540 --> 00:01:27,330
+and we need to provide in the data type.
+
+21
+00:01:27,430 --> 00:01:33,010
+So we'll say flow 32 which is basically we're always going to be using in this course unless we specifically
+
+22
+00:01:33,010 --> 00:01:36,550
+have integers and then we also need to find the shape.
+
+23
+00:01:36,550 --> 00:01:41,920
+So it's really common to say none because that depends on how big of a batch of data you're feeding
+
+24
+00:01:41,920 --> 00:01:43,070
+into your neural network.
+
+25
+00:01:43,150 --> 00:01:46,870
+And then as the second parameter here we do know the number of features.
+
+26
+00:01:46,870 --> 00:01:53,750
+So we should expect X to be receiving an array of the number of samples by the number of features.
+
+27
+00:01:53,800 --> 00:01:58,460
+So it makes sense that the rows are the number of samples and then the columns or the number of features.
+
+28
+00:01:58,460 --> 00:02:00,940
+So typically a sort of placeholder is going to look like.
+
+29
+00:02:01,060 --> 00:02:03,210
+And then you're also going to have variables.
+
+30
+00:02:03,400 --> 00:02:06,020
+For example we have the W variable for our weights.
+
+31
+00:02:06,280 --> 00:02:13,940
+We'll just say T.F. variable and we want to initialize these weights using some sort of random unus.
+
+32
+00:02:14,200 --> 00:02:15,620
+And we'll discuss this later on.
+
+33
+00:02:15,640 --> 00:02:19,800
+What are good ways to initialize Waite's initialize the term of abayas terms.
+
+34
+00:02:19,810 --> 00:02:24,130
+But right now we're going to use brand than normal That's the random normal distribution that's built
+
+35
+00:02:24,130 --> 00:02:25,570
+into tensor flow.
+
+36
+00:02:26,580 --> 00:02:32,820
+And then we're going to find the shape of it to be the number of features by the number of neurons in
+
+37
+00:02:32,820 --> 00:02:33,300
+our layer.
+
+38
+00:02:33,330 --> 00:02:38,730
+So in this case we have one layer and it's going to just be dense neurons and we're going to do a similar
+
+39
+00:02:38,730 --> 00:02:48,410
+thing for our biased term let's say T.F. variable and we can either just have this zeros or ones that
+
+40
+00:02:48,440 --> 00:02:52,800
+really matter for example but I'll say T.F. ones.
+
+41
+00:02:53,080 --> 00:02:58,490
+And in this case the shape is just going to be number of neurons.
+
+42
+00:02:58,490 --> 00:03:04,010
+And the reason for that is because remember w is going to be multiplied by X for matrix multiplication
+
+43
+00:03:04,040 --> 00:03:09,170
+we have to make sure that this dimension of columns matches this dimension of rows when you're multiplying
+
+44
+00:03:09,170 --> 00:03:09,530
+it.
+
+45
+00:03:09,680 --> 00:03:14,330
+And then this dimension of dense neurons needs to match up well how many neurons you have as far as
+
+46
+00:03:14,330 --> 00:03:17,010
+the bias term that we're adding in or that be.
+
+47
+00:03:17,180 --> 00:03:21,250
+We're going to need to make sure that just matches the number of neurons because we're adding B but
+
+48
+00:03:21,280 --> 00:03:23,090
+we're going to multiply X by W..
+
+49
+00:03:23,390 --> 00:03:29,040
+So that's the reason we have these specific shapes so we'll run that then we're going to need some sort
+
+50
+00:03:29,040 --> 00:03:31,250
+of operation and activation function.
+
+51
+00:03:31,260 --> 00:03:36,410
+So you'll have something like X times w or W X doesn't really matter here.
+
+52
+00:03:36,570 --> 00:03:43,860
+And then all that will be a matrix multiplication between X and W then we'll have z be the output of
+
+53
+00:03:43,860 --> 00:03:51,430
+that so be T.F. add X and W B.
+
+54
+00:03:51,630 --> 00:03:56,500
+So notice here now I'm using those tensor flow operators instead of just saying Asterix or plus.
+
+55
+00:03:56,520 --> 00:04:01,950
+Because I want to make sure that tons flow understands that doing matrix multiplication and addition
+
+56
+00:04:02,280 --> 00:04:08,220
+typically actually smart enough to convert as we saw appear these pluses and Asterix but a lot of times
+
+57
+00:04:08,230 --> 00:04:12,840
+the documentation you want to make sure you specific that it's tensor flow so we'll go ahead and kind
+
+58
+00:04:12,840 --> 00:04:15,260
+of stick with this convention for now.
+
+59
+00:04:15,720 --> 00:04:18,680
+And finally we want to pass this into some sort of activation function.
+
+60
+00:04:18,690 --> 00:04:25,410
+So I'll say a is equal to T.F. dot and there's lots of activation functions available for you.
+
+61
+00:04:25,410 --> 00:04:29,820
+There's the 10 H or hyperbolic tangent activation function.
+
+62
+00:04:29,820 --> 00:04:35,510
+There's also if you do T.F. dot and n dots are e l u.
+
+63
+00:04:35,540 --> 00:04:40,350
+There's a rectified linear unit and later on we'll see kind of higher abstractions is just create an
+
+64
+00:04:40,350 --> 00:04:43,040
+entire layer of specific neuron types.
+
+65
+00:04:43,050 --> 00:04:49,300
+But for right now we'll just do a really simple activation function of sigmoid and then we pass on the
+
+66
+00:04:51,160 --> 00:04:51,720
+OK.
+
+67
+00:04:51,790 --> 00:04:57,730
+So what do we have so far we find the number of features on our data then neurons the placeholder variables.
+
+68
+00:04:57,730 --> 00:05:04,810
+Then we said OK multiply X times Y or excuse me x times w then add B to the result of that and then
+
+69
+00:05:04,810 --> 00:05:07,450
+pass the result of that into the sigmoid function.
+
+70
+00:05:07,450 --> 00:05:14,020
+Now it's time to run this in a really simple session and then we're going to say in it is equal to T.F.
+
+71
+00:05:14,710 --> 00:05:25,440
+we want to say global variables initialiser run that and then we'll say with C-f session as s s s I'm
+
+72
+00:05:25,450 --> 00:05:32,080
+going to run D in it for the initialiser and then I'm going to say the la out.
+
+73
+00:05:32,080 --> 00:05:40,030
+That is the result of each of those neurons is going to be session run a number that's that kind of
+
+74
+00:05:40,030 --> 00:05:46,690
+final operation that has the rest of those operation graphs in place or operation graph I should say.
+
+75
+00:05:46,690 --> 00:05:48,940
+And let's pass in a dictionary.
+
+76
+00:05:49,120 --> 00:05:55,670
+So we just have X as a single placeholder and it's going to fit in some random values from non-pilot
+
+77
+00:05:55,760 --> 00:06:03,340
+say random random and we'll have to have the shape of one by and of features.
+
+78
+00:06:03,700 --> 00:06:05,760
+So I'm essentially just feeding it one sample.
+
+79
+00:06:05,770 --> 00:06:09,900
+So our results are not going we just make sure we have that correct.
+
+80
+00:06:09,910 --> 00:06:11,650
+Forgot to actually make this a dictionary.
+
+81
+00:06:11,740 --> 00:06:15,350
+The Riego curly braces and curly braces.
+
+82
+00:06:15,550 --> 00:06:16,180
+OK.
+
+83
+00:06:16,370 --> 00:06:22,280
+So our result as I mentioned is almost going to be meaningless because it's just a really simple example
+
+84
+00:06:22,800 --> 00:06:23,960
+more for syntax.
+
+85
+00:06:23,960 --> 00:06:28,010
+But here we have the results later out of each of these neurons.
+
+86
+00:06:28,010 --> 00:06:30,710
+So again we had three neurons up here.
+
+87
+00:06:30,770 --> 00:06:35,420
+And when we ran this with some random data your results may be different depending on how many times
+
+88
+00:06:35,420 --> 00:06:41,180
+you ran ran them but you should see some sort of results out here and hopefully you also see that all
+
+89
+00:06:41,180 --> 00:06:47,220
+the values are between 0 and 1 because we're using the sigmoid function.
+
+90
+00:06:47,280 --> 00:06:52,980
+Now the absolute key thing to notice which is kind of stopping this from solving our problem is the
+
+91
+00:06:52,980 --> 00:06:56,440
+fact that we're not adjusting the values of W or B.
+
+92
+00:06:56,640 --> 00:07:02,700
+We basically just said OK choose some random values of W have B's all equal to 2 1 and then run this
+
+93
+00:07:02,700 --> 00:07:05,080
+one time and see what happens out.
+
+94
+00:07:05,250 --> 00:07:07,310
+That is not how we actually run a neural network.
+
+95
+00:07:07,350 --> 00:07:15,540
+We want to then go back and adjust W and B or are different variables based off some sort of cost function.
+
+96
+00:07:15,540 --> 00:07:20,530
+So we need have some cost function and some optimizer in order to adjust W and B.
+
+97
+00:07:20,550 --> 00:07:25,260
+So let's go ahead and now work through a more realistic example of some regression.
+
+98
+00:07:25,260 --> 00:07:27,700
+Just a really simple regression example.
+
+99
+00:07:28,110 --> 00:07:36,140
+So let me label this as kind of our simple regression example and this is probably going to be the most
+
+100
+00:07:36,140 --> 00:07:41,540
+realistic example we've seen so far of tensor flow everything before this have kind of been really toy
+
+101
+00:07:41,540 --> 00:07:44,570
+examples or incomplete partial examples.
+
+102
+00:07:44,570 --> 00:07:47,240
+Now it's time to actually kind of dive in.
+
+103
+00:07:47,240 --> 00:07:56,160
+So I'm going to say X data is equal to lend space 0 by 10 by 10.
+
+104
+00:07:56,210 --> 00:08:02,060
+So I want 10 linearly spaced points between 0 and 10 and then I'm going to add just a little bit of
+
+105
+00:08:02,060 --> 00:08:02,870
+noise to it.
+
+106
+00:08:02,990 --> 00:08:12,980
+So we'll say random uniform and we'll see negative 1.5 to 1.5 by 10.
+
+107
+00:08:12,990 --> 00:08:14,940
+So then what does this actually look like.
+
+108
+00:08:15,330 --> 00:08:22,350
+Well it looks like some numbers between 0 and 10 using linearly spaced except we went ahead and added
+
+109
+00:08:22,350 --> 00:08:24,710
+some noise to add or subtract that from noise to it.
+
+110
+00:08:24,720 --> 00:08:31,200
+So we have these random numbers and we're adding or subtracting them to the linearly spaced points here.
+
+111
+00:08:31,200 --> 00:08:35,880
+So let's actually now plot this out and we're going to have a label attached to it.
+
+112
+00:08:36,030 --> 00:08:45,060
+So the labels are also going to be and P will in space 0 to 10 to 10 and then I'm going to add in some
+
+113
+00:08:46,410 --> 00:08:47,930
+random uniform data here.
+
+114
+00:08:47,940 --> 00:08:48,830
+Same deal.
+
+115
+00:08:50,530 --> 00:08:51,620
+1.5.
+
+116
+00:08:51,650 --> 00:08:53,270
+And then let's say 10.
+
+117
+00:08:53,360 --> 00:08:57,960
+Now it's not a huge deal if you don't get the exact same numbers I'm getting here because we want to
+
+118
+00:08:57,960 --> 00:09:02,680
+do is have a model that can fit to just kind of some noisy data that has a linear trend.
+
+119
+00:09:02,780 --> 00:09:05,310
+So I want to plot this out to show what we actually created here.
+
+120
+00:09:07,240 --> 00:09:11,030
+So x data versus Y label and whoops I forgot the important that.
+
+121
+00:09:11,050 --> 00:09:13,480
+Let's do that now we'll say.
+
+122
+00:09:13,600 --> 00:09:15,260
+Import map plot.
+
+123
+00:09:16,840 --> 00:09:18,430
+Type plot as Piazzi.
+
+124
+00:09:18,490 --> 00:09:23,830
+And since I'm in the notebook I need to say map plotted in line remembering to say Pulte that show you're
+
+125
+00:09:23,830 --> 00:09:25,590
+not using a Jupiter note book.
+
+126
+00:09:25,600 --> 00:09:26,680
+Now let's run this.
+
+127
+00:09:26,680 --> 00:09:29,840
+And let's also make sure that we're running it with points.
+
+128
+00:09:29,880 --> 00:09:31,390
+So I'll say Asterix here.
+
+129
+00:09:32,170 --> 00:09:32,680
+OK.
+
+130
+00:09:32,960 --> 00:09:38,360
+So I have my data and it looks like some random data but there's clearly some sort of a linear trend
+
+131
+00:09:38,360 --> 00:09:44,360
+here which makes sense because technically the data is exactly the same and Piland space zero through
+
+132
+00:09:44,360 --> 00:09:46,950
+10 unpeeling nearly spaces are 310.
+
+133
+00:09:47,000 --> 00:09:48,780
+We just added a little bit of noise to it.
+
+134
+00:09:48,830 --> 00:09:55,280
+So we randomly chose a value between negative 1.5 1.5 for each of these points and then added it to
+
+135
+00:09:55,280 --> 00:09:55,590
+it.
+
+136
+00:09:55,760 --> 00:10:00,710
+So your data should be different than mine or maybe you have the exact same data.
+
+137
+00:10:00,840 --> 00:10:02,630
+Nop that's not really what matters here.
+
+138
+00:10:02,690 --> 00:10:07,000
+What matters is you have some sort of linear trend and it should be a pretty obvious linear trend which
+
+139
+00:10:07,040 --> 00:10:11,840
+is sort of similar points and higher points if you are not getting a trend which would be extremely
+
+140
+00:10:11,840 --> 00:10:15,900
+unlikely then just run these two lines again and you'll have a trend.
+
+141
+00:10:16,100 --> 00:10:16,510
+OK.
+
+142
+00:10:16,730 --> 00:10:18,000
+So we have some noisy data.
+
+143
+00:10:18,080 --> 00:10:22,360
+Let's go ahead and actually create our own your own network to start off.
+
+144
+00:10:22,430 --> 00:10:24,880
+We're going to go ahead and do the following.
+
+145
+00:10:25,190 --> 00:10:30,580
+We'll say Remember I'm trying to solve like was Amex plus be here.
+
+146
+00:10:30,650 --> 00:10:36,700
+So let me actually make this into a comment or something so there we go we have like was exposed be
+
+147
+00:10:36,910 --> 00:10:45,520
+so I'll say M is equal to T.F. variable and we can go ahead and initialize this so let's initialize
+
+148
+00:10:45,520 --> 00:10:47,600
+this with some random values.
+
+149
+00:10:47,950 --> 00:10:52,930
+I'm going to say N.P. random ran 2.
+
+150
+00:10:52,960 --> 00:10:59,410
+So this is going to give me two random values and I'm going to initialize M and B to be random values.
+
+151
+00:10:59,620 --> 00:11:03,460
+So again does it really matter if you have the same or and the values are not for this part.
+
+152
+00:11:03,580 --> 00:11:08,740
+I know I said previously for other sections or other lecturers that didn't matter here.
+
+153
+00:11:08,920 --> 00:11:12,450
+I would actually kind of prefer if it did not have the same Thalia's I did.
+
+154
+00:11:12,490 --> 00:11:16,500
+That way you can really see that the neural network is working for any random data set.
+
+155
+00:11:17,400 --> 00:11:21,950
+And we're going import this right here and pass that in.
+
+156
+00:11:22,050 --> 00:11:27,270
+So the reason I'm doing that is just to make it really obvious to you the student that can be right
+
+157
+00:11:27,270 --> 00:11:29,520
+now are just totally random numbers.
+
+158
+00:11:29,670 --> 00:11:34,060
+So I want you to get to ran the numbers and initialize these variables as random numbers.
+
+159
+00:11:34,140 --> 00:11:39,840
+It's going to be up to the neural network with the cost function and the optimizer to fix these values
+
+160
+00:11:40,020 --> 00:11:42,350
+to actually create a nice fitted line here.
+
+161
+00:11:42,810 --> 00:11:44,540
+So I'm going to run that.
+
+162
+00:11:44,830 --> 00:11:48,170
+And speaking of the cost function Let's go ahead and create it.
+
+163
+00:11:48,170 --> 00:11:52,120
+Now so I will create a variable called error.
+
+164
+00:11:52,210 --> 00:11:56,350
+And currently the error starts off as 0 then I'll do the following.
+
+165
+00:11:56,350 --> 00:12:06,730
+I'll say for x and y in Zipp which is essentially going to make a list of tuples of each point in X
+
+166
+00:12:06,730 --> 00:12:08,830
+Dedo of its corresponding y label.
+
+167
+00:12:09,310 --> 00:12:10,140
+I'll do the following.
+
+168
+00:12:10,150 --> 00:12:17,020
+I will say y hat which has my predicted value is equal to m times x plus b.
+
+169
+00:12:17,030 --> 00:12:19,400
+Again this is just our linear equation here.
+
+170
+00:12:19,420 --> 00:12:20,650
+This is my predictive value.
+
+171
+00:12:20,650 --> 00:12:27,130
+So right now my predictive value is probably going to be way off because the values of m and b are just
+
+172
+00:12:27,130 --> 00:12:28,090
+totally random.
+
+173
+00:12:28,210 --> 00:12:30,330
+So we need to fix this in order to fix this.
+
+174
+00:12:30,340 --> 00:12:31,840
+I need to have some sort of cost function.
+
+175
+00:12:31,960 --> 00:12:34,380
+Calculating the error.
+
+176
+00:12:34,750 --> 00:12:36,200
+So my error.
+
+177
+00:12:36,550 --> 00:12:40,680
+I'm going to add on the squared error.
+
+178
+00:12:40,690 --> 00:12:44,500
+So will say why is the true value member.
+
+179
+00:12:44,500 --> 00:12:45,470
+Why is that actual.
+
+180
+00:12:45,490 --> 00:12:46,290
+Why label.
+
+181
+00:12:46,300 --> 00:12:48,710
+So we're treating this Y as a true value.
+
+182
+00:12:48,910 --> 00:12:52,150
+And I'm going to subtract my predicted value which is why.
+
+183
+00:12:52,450 --> 00:12:56,950
+So when we start off this error is going to be pretty bad because these are random values.
+
+184
+00:12:56,950 --> 00:13:03,620
+So I'm going to measure my error and add on this and then I'm also going to square it to punish higher
+
+185
+00:13:03,640 --> 00:13:04,260
+errors.
+
+186
+00:13:04,420 --> 00:13:06,210
+So again this is what we want to minimize.
+
+187
+00:13:06,210 --> 00:13:09,930
+We want to minimize error which is why this is our cost function.
+
+188
+00:13:10,090 --> 00:13:16,010
+In order to minimize this we need to use some sort of optimizer which is step number two here.
+
+189
+00:13:16,190 --> 00:13:22,070
+So we'll say optimizer is equal to T.F. train and this is where we actually use grading the set.
+
+190
+00:13:22,070 --> 00:13:28,010
+Remember we discussed how grading the sent figures out how to best reduce that cost.
+
+191
+00:13:28,040 --> 00:13:35,050
+So if you say T.F. but train G.R. you should be able to tap autocomplete the Create the optimizer parameter
+
+192
+00:13:35,060 --> 00:13:39,230
+we need to provide our grading the optimizer is the learning rate.
+
+193
+00:13:39,230 --> 00:13:45,840
+Remember that the learning rate here basically defines how fast are we going to descent down on this.
+
+194
+00:13:45,920 --> 00:13:52,150
+And if we have two large learning rate then we may overshoot the actual minimum that we're looking for.
+
+195
+00:13:52,250 --> 00:13:57,200
+If we have too small of a learning rate then it's going to take us forever to actually do that gradient
+
+196
+00:13:57,200 --> 00:13:58,340
+descent.
+
+197
+00:13:58,340 --> 00:14:01,380
+Now for different problems different learning rates apply.
+
+198
+00:14:01,460 --> 00:14:07,910
+But right now let's go ahead and just use 0.00 one can check if it has a default learning rate.
+
+199
+00:14:07,910 --> 00:14:09,170
+I'm not sure if it actually does.
+
+200
+00:14:09,170 --> 00:14:14,100
+But right now 0.00 one that's a pretty common thing to start off with.
+
+201
+00:14:14,120 --> 00:14:16,000
+It really depends on your particular data set.
+
+202
+00:14:16,010 --> 00:14:16,930
+What makes sense.
+
+203
+00:14:17,060 --> 00:14:21,670
+And later on we'll also learn about things like some more advanced optimization functions.
+
+204
+00:14:21,680 --> 00:14:25,540
+But right now keeping it simple we have our optimizer.
+
+205
+00:14:25,550 --> 00:14:28,590
+We need to tell our optimizer what it actually is looking to minimize.
+
+206
+00:14:28,760 --> 00:14:33,890
+So our optimizer is going to have a method called minimize.
+
+207
+00:14:34,160 --> 00:14:39,690
+And we want to passen the variable it's trying to minimize it trying to minimize error.
+
+208
+00:14:39,700 --> 00:14:42,780
+Ok so now we have that and we're actually almost ready to go.
+
+209
+00:14:42,820 --> 00:14:51,490
+We need to do is create that global initialiser for the variables or say global variables initialiser
+
+210
+00:14:52,390 --> 00:14:56,140
+and then we're all that's left is really to create the session and run.
+
+211
+00:14:56,140 --> 00:15:02,360
+So let's briefly show everything we just did here as a quick review and then we'll run our session.
+
+212
+00:15:02,390 --> 00:15:08,010
+OK so what we actually do for the simple regression example I need some sort of data I want that data
+
+213
+00:15:08,010 --> 00:15:10,280
+to have some sort of linear form.
+
+214
+00:15:10,440 --> 00:15:16,530
+In order for me to predict a simple whitewalls mix plus B line on this.
+
+215
+00:15:16,530 --> 00:15:17,400
+So what do I do.
+
+216
+00:15:17,480 --> 00:15:21,240
+I say ex-state is linearly spaced from 0 to 10 of 10 points.
+
+217
+00:15:21,240 --> 00:15:25,170
+And then I add a little bit of noise to it also add a little bit of noise to the label.
+
+218
+00:15:25,170 --> 00:15:30,180
+So I get some sort of fit that's linear but again it's noisy that way it's not just a perfect straight
+
+219
+00:15:30,180 --> 00:15:30,680
+line.
+
+220
+00:15:30,840 --> 00:15:36,240
+So you should have some sort of noisy data say here but it does just have a general trend to be kind
+
+221
+00:15:36,240 --> 00:15:37,710
+of this line here.
+
+222
+00:15:38,700 --> 00:15:39,240
+OK.
+
+223
+00:15:39,370 --> 00:15:41,610
+So I want my neural network to solve this equation.
+
+224
+00:15:41,630 --> 00:15:43,420
+Weikel X plus B.
+
+225
+00:15:43,510 --> 00:15:48,760
+So I'm going to initialize it with a random value of M that is the slope of the line as well as a random
+
+226
+00:15:48,760 --> 00:15:49,490
+value of B.
+
+227
+00:15:49,510 --> 00:15:54,190
+That is the intercept and I show that I'm doing it randomly just by choosing the values that this random
+
+228
+00:15:54,250 --> 00:15:54,690
+output.
+
+229
+00:15:54,700 --> 00:15:58,170
+So I want to make sure that you don't think these are some special values that I'm choosing.
+
+230
+00:15:58,300 --> 00:16:03,210
+You should put just some random numbers that non-pay provides you then I need to calculate the error.
+
+231
+00:16:03,220 --> 00:16:05,240
+So I need some way to measure how off I am.
+
+232
+00:16:05,410 --> 00:16:11,580
+So I will say go ahead and predict y hat and then compare it to the true y label here.
+
+233
+00:16:11,650 --> 00:16:13,860
+Square that and that's going to be my error.
+
+234
+00:16:14,700 --> 00:16:19,130
+Then I need to perform gradient descent to attempt to minimize the error.
+
+235
+00:16:19,170 --> 00:16:23,010
+So I want to optimize this and that's going to be what the actual trainer is going to be.
+
+236
+00:16:23,100 --> 00:16:27,650
+And then we have global variables initialiser Baltz create the session and run it.
+
+237
+00:16:27,990 --> 00:16:35,830
+So say with T.F. the session as se s I'm going to say.
+
+238
+00:16:35,840 --> 00:16:42,010
+SS run in it's and then now I have to decide how many steps to take.
+
+239
+00:16:42,010 --> 00:16:44,770
+So how many training steps am I actually going to perform.
+
+240
+00:16:44,800 --> 00:16:48,640
+So let's say training steps is equal to 1 right now.
+
+241
+00:16:48,640 --> 00:16:57,500
+That's probably way too low but we'll see what happens will say for I in range of the number of training
+
+242
+00:16:57,500 --> 00:16:58,340
+steps.
+
+243
+00:16:58,520 --> 00:17:02,600
+Go ahead and say let's scroll down here session.
+
+244
+00:17:02,630 --> 00:17:04,000
+Run and run.
+
+245
+00:17:04,000 --> 00:17:08,360
+Train remember train is that optimizer is trying to minimize that error.
+
+246
+00:17:08,380 --> 00:17:17,000
+Then finally I want to fetch back my results so I don't say final slope and the final intercept was
+
+247
+00:17:19,540 --> 00:17:26,730
+is equal to session run and I'm going to grab an and B from my session.
+
+248
+00:17:26,920 --> 00:17:28,440
+So I'm going to run this.
+
+249
+00:17:28,570 --> 00:17:33,430
+I would expect this to perform a pretty bad job just off of one training step potentially just should
+
+250
+00:17:33,430 --> 00:17:35,360
+be what we started with.
+
+251
+00:17:35,470 --> 00:17:39,240
+Let's go ahead and evaluate the results and to do this I will do the following.
+
+252
+00:17:39,250 --> 00:17:50,000
+I will say X test is equal to the linear space it will go from negative 1 to 11.
+
+253
+00:17:50,000 --> 00:17:52,280
+Just this is just for the plot to look a little nicer.
+
+254
+00:17:52,350 --> 00:18:00,510
+Now we want 10 points in between that and then I wanted to say why pred for the plot is equal to Y calls
+
+255
+00:18:00,640 --> 00:18:01,880
+X plus B.
+
+256
+00:18:02,460 --> 00:18:05,400
+So you know I have y is equal to x.
+
+257
+00:18:05,400 --> 00:18:06,370
+Plus B.
+
+258
+00:18:06,480 --> 00:18:10,470
+So I'm going to choose the final slope that my model said was good.
+
+259
+00:18:10,470 --> 00:18:18,180
+After just one training session that is going to multiply by x test and then I will say plus the final
+
+260
+00:18:18,180 --> 00:18:20,980
+intercept and let's plot this out.
+
+261
+00:18:21,330 --> 00:18:24,550
+So we'll say Piazzi plot x.
+
+262
+00:18:24,550 --> 00:18:29,240
+Test data and then y plot.
+
+263
+00:18:29,650 --> 00:18:33,910
+And then I want to grab my actual real data over here.
+
+264
+00:18:34,540 --> 00:18:39,980
+So it's copy that and paste it here and let's have this be a red line.
+
+265
+00:18:40,000 --> 00:18:41,910
+So I'll say are here.
+
+266
+00:18:42,280 --> 00:18:47,860
+So I run this and you actually notice after just one training step that a pretty good job of fixing
+
+267
+00:18:47,860 --> 00:18:48,620
+those weights.
+
+268
+00:18:48,640 --> 00:18:52,450
+Let's go ahead and run it for a little say 100.
+
+269
+00:18:52,530 --> 00:18:54,030
+It's a really simple equation.
+
+270
+00:18:54,030 --> 00:18:55,310
+You can see it already had a pretty good fit.
+
+271
+00:18:55,330 --> 00:18:59,250
+But if we run it again then we can see we have a better fit.
+
+272
+00:18:59,260 --> 00:18:59,520
+OK.
+
+273
+00:18:59,530 --> 00:19:01,450
+So again let me just do one here.
+
+274
+00:19:01,450 --> 00:19:06,550
+It's hard to see the differences because the data is really easy to fit to you can see our line is probably
+
+275
+00:19:06,550 --> 00:19:07,230
+a little off.
+
+276
+00:19:07,240 --> 00:19:14,490
+But when we run it a 100 times we're able to choose better m and b values.
+
+277
+00:19:14,530 --> 00:19:15,050
+OK.
+
+278
+00:19:15,280 --> 00:19:18,190
+That's really all there is to it for this simple example.
+
+279
+00:19:18,190 --> 00:19:24,520
+Coming up next we're going to do show you an even more realistic example of a tensor regression.
+
+280
+00:19:24,520 --> 00:19:27,970
+Now we're really going to kind of hammer this in and we're going to deal with a panic state of frame
+
+281
+00:19:28,330 --> 00:19:33,250
+kind of show you what it would look like to read in some data feed it to the regression and with a lot
+
+282
+00:19:33,250 --> 00:19:35,940
+more data points will have to fit it in with batches.
+
+283
+00:19:35,970 --> 00:19:38,700
+But for now go ahead and take this step by step.
+
+284
+00:19:38,740 --> 00:19:43,660
+I would really recommend you check out the notebook and review it really understand what these last
+
+285
+00:19:43,660 --> 00:19:45,510
+couple of cells are doing here.
+
+286
+00:19:45,750 --> 00:19:46,320
+OK.
+
+287
+00:19:46,370 --> 00:19:48,700
+You have any questions post the Q&amp;A forums.
+
+288
+00:19:48,700 --> 00:19:49,720
+I'll see you at the next lecture.
+

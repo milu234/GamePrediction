@@ -1,0 +1,920 @@
+1
+00:00:05,490 --> 00:00:06,660
+Welcome back everyone.
+
+2
+00:00:06,840 --> 00:00:12,300
+So we've already seen how we can create a simple hard coded policy basically go left when the pull is
+
+3
+00:00:12,300 --> 00:00:14,910
+leaning left to go right when the pull is leaning right.
+
+4
+00:00:14,950 --> 00:00:20,550
+But how about now we create a simple neural network that takes in those for observation values those
+
+5
+00:00:20,610 --> 00:00:26,190
+angles and those velocities and then tries to output some sort of probability or indication of whether
+
+6
+00:00:26,190 --> 00:00:28,990
+you should go left or right.
+
+7
+00:00:28,990 --> 00:00:31,330
+So again we're going to design a simple neural network.
+
+8
+00:00:31,330 --> 00:00:37,100
+It takes in the observation array passes it through a hidden layer and then outputs to probabilities.
+
+9
+00:00:37,180 --> 00:00:40,630
+It's actually going to output just one probability and we're going to turn it into two.
+
+10
+00:00:40,630 --> 00:00:42,200
+We'll show you how to do that later on.
+
+11
+00:00:42,400 --> 00:00:47,430
+But essentially it's going to output the probability to the left and the probability it should go right.
+
+12
+00:00:48,570 --> 00:00:52,590
+And then we're then going to choose a random action weighted by the probability scores.
+
+13
+00:00:52,590 --> 00:00:53,850
+Our network output.
+
+14
+00:00:54,030 --> 00:00:55,560
+So let's go out and diagram this network.
+
+15
+00:00:55,560 --> 00:00:57,800
+What it actually looks like.
+
+16
+00:00:57,870 --> 00:01:03,600
+So essentially in the left hand side we accepted those four observations from that array and then we
+
+17
+00:01:03,600 --> 00:01:06,180
+can pass it in through as many hidden layers as we want.
+
+18
+00:01:06,180 --> 00:01:07,500
+This is a pretty basic problem.
+
+19
+00:01:07,500 --> 00:01:12,030
+So we could even just use one layer here but we'll go ahead and show you how to use two just so we can
+
+20
+00:01:12,030 --> 00:01:15,060
+review how to use the sensor for a layer's API.
+
+21
+00:01:15,060 --> 00:01:18,520
+And then once we have that we're going to pass it in all into one single neuron.
+
+22
+00:01:18,720 --> 00:01:23,430
+And this last single neuron is going to be a sigmoid function you're on because it's going to output
+
+23
+00:01:23,490 --> 00:01:27,310
+a single probability the probability that we should go left.
+
+24
+00:01:27,510 --> 00:01:30,330
+So that's going to be between 0 and 1.
+
+25
+00:01:30,540 --> 00:01:36,630
+And by having the probability that we should go left we can say one minus that probability is the probability
+
+26
+00:01:36,630 --> 00:01:42,380
+that we should go right because we know these two probabilities should add up to 1 or 100 percent.
+
+27
+00:01:42,390 --> 00:01:48,300
+So for instance we may get back the 30 percent probability or point three that we should go left that
+
+28
+00:01:48,300 --> 00:01:53,780
+means we know that the network is saying there's a point seven probability that we should go right.
+
+29
+00:01:53,820 --> 00:01:55,740
+So we have those two probabilities.
+
+30
+00:01:55,770 --> 00:02:00,780
+And what we're going to do is doing multinomial sampling based off those probability weights.
+
+31
+00:02:00,780 --> 00:02:06,680
+So we're going to sample to choose either the action 0 or 1 based off the probabilities.
+
+32
+00:02:06,710 --> 00:02:12,470
+Now notice this is critical here how we're not just automatically choosing the highest probability for
+
+33
+00:02:12,470 --> 00:02:13,300
+our decision.
+
+34
+00:02:13,520 --> 00:02:19,580
+So even though we make it 70 percent chance to choose right and 30 percent chance it's shoes left.
+
+35
+00:02:19,670 --> 00:02:24,140
+We're not just automatically going with the highest probability and going right and that's because we're
+
+36
+00:02:24,140 --> 00:02:30,260
+trying to balance out attempting new actions versus constantly choosing well-known actions.
+
+37
+00:02:30,260 --> 00:02:35,010
+Otherwise your network might get caught in a loop and constantly return back the same action.
+
+38
+00:02:36,380 --> 00:02:41,000
+So once we understand this network and code it out which we're about to do later on in the feature lecture
+
+39
+00:02:41,000 --> 00:02:45,980
+we're going to explore how to take into account historic actions by learning about policy gradients.
+
+40
+00:02:46,070 --> 00:02:49,590
+But right now let's go ahead and code out a very simple neural network.
+
+41
+00:02:49,610 --> 00:02:52,280
+Let's open up our text editor and get started.
+
+42
+00:02:52,280 --> 00:02:54,040
+OK here we are as a text editor.
+
+43
+00:02:54,050 --> 00:02:56,120
+Let's go ahead and get some imports in.
+
+44
+00:02:56,240 --> 00:02:58,590
+We'll say tensor flow as t.a.
+
+45
+00:02:58,880 --> 00:03:00,400
+We're also going to be using Jim.
+
+46
+00:03:00,440 --> 00:03:03,860
+And then finally we'll say important high as and P.
+
+47
+00:03:04,010 --> 00:03:06,610
+So those are imports all out of the way.
+
+48
+00:03:06,650 --> 00:03:11,990
+Now it's time to create the network variables so we know our observation space has for inputs those
+
+49
+00:03:12,080 --> 00:03:13,500
+angles and velocities.
+
+50
+00:03:13,670 --> 00:03:18,090
+So we'll create a variable called number of inputs and that's going to be equal to 4.
+
+51
+00:03:18,210 --> 00:03:20,930
+And then also create some hidden layers.
+
+52
+00:03:20,970 --> 00:03:26,310
+We'll just have them have four neurons and then the number of outputs we want at the end of all this
+
+53
+00:03:26,400 --> 00:03:27,930
+is just going to be equal to 1.
+
+54
+00:03:28,050 --> 00:03:35,670
+And that's the probability to go left so probability to go left which we then know for say 1 minus that
+
+55
+00:03:35,670 --> 00:03:39,210
+probability that's going to be equal to the probability to go right.
+
+56
+00:03:39,210 --> 00:03:44,180
+So just keep that in mind that we here that one minus probably it's got left is equal to the probability
+
+57
+00:03:44,180 --> 00:03:44,810
+to go right.
+
+58
+00:03:45,910 --> 00:03:52,300
+And then finally we're going to say initialiser and this is going to be the initialiser for the actual
+
+59
+00:03:52,300 --> 00:03:53,280
+T.F. layers.
+
+60
+00:03:53,290 --> 00:03:58,810
+And if you're feeling a little fuzzy on the T.F. layers API go ahead and visit the miscellaneous section.
+
+61
+00:03:58,860 --> 00:04:06,910
+We cover it there but we're going to call A.F. contrib layers and we're going to call in variants underscore
+
+62
+00:04:06,970 --> 00:04:14,680
+scaling underscore initialiser and we've seen this in previous lectures.
+
+63
+00:04:14,680 --> 00:04:14,960
+All right.
+
+64
+00:04:14,980 --> 00:04:16,630
+So those are network variables.
+
+65
+00:04:16,630 --> 00:04:19,900
+Now it's time to actually begin creating the network layers.
+
+66
+00:04:19,900 --> 00:04:25,000
+So we essentially have one more sort of a variable to create but it's actually a placeholder.
+
+67
+00:04:25,000 --> 00:04:29,350
+So we're going to create a placeholder for the data that's coming in the observations.
+
+68
+00:04:29,430 --> 00:04:31,420
+Going to be to float 32.
+
+69
+00:04:31,780 --> 00:04:35,750
+And the shape is going to be equal to none by the number of inputs.
+
+70
+00:04:38,340 --> 00:04:43,220
+Now let's go ahead and create a hidden layer and this is more of an input layer actually but we'll keep
+
+71
+00:04:43,220 --> 00:04:45,650
+the naming the hidden layer one.
+
+72
+00:04:46,020 --> 00:04:50,580
+And it's going to be T.F. layers we're going to have a densely connected layer here.
+
+73
+00:04:50,700 --> 00:04:55,590
+It's going to take an exit placeholder and it's going to output number of HIDDINS So we'll just have
+
+74
+00:04:55,590 --> 00:04:57,660
+that before neuron's coming out.
+
+75
+00:04:57,880 --> 00:05:03,000
+Then we need to choose an activation function so that we can choose T.F. will go in to rectify linear
+
+76
+00:05:03,000 --> 00:05:03,580
+unit.
+
+77
+00:05:03,900 --> 00:05:12,240
+And then finally we need a kernel initialiser and we'll have that be the initialiser recreated before.
+
+78
+00:05:12,260 --> 00:05:14,610
+OK let's go in and create one more layer.
+
+79
+00:05:14,650 --> 00:05:16,300
+That's essentially the exact same thing.
+
+80
+00:05:16,300 --> 00:05:22,640
+This is pretty much overkill for this problem but that's just a practice using that T.F. layers API.
+
+81
+00:05:22,740 --> 00:05:25,250
+So it's pretty easy to use once you have that one layer.
+
+82
+00:05:25,260 --> 00:05:31,230
+We can just create another one and call this hidden layer 2 and instead of taking in the actual input
+
+83
+00:05:31,320 --> 00:05:37,560
+X we can have it taken hit and layer 1 and then instead of them hidden we can actually keep that in
+
+84
+00:05:37,560 --> 00:05:42,210
+there it's going to go to four and then we have the activation function and curtainless chalets at the
+
+85
+00:05:42,210 --> 00:05:45,830
+same so then we have our output layer here.
+
+86
+00:05:47,340 --> 00:05:54,560
+So our output layer is also going to be T.F. layers thence it's going to take an hit and layer 2.
+
+87
+00:05:55,070 --> 00:06:00,940
+But then instead of outputting in other four neurons just going to be a single output number of outputs
+
+88
+00:06:00,940 --> 00:06:01,660
+is just one.
+
+89
+00:06:01,670 --> 00:06:06,500
+And that's a probability to go left so we know probabilities have to be between 0 and 1.
+
+90
+00:06:06,500 --> 00:06:13,120
+So our activation function this time is going to be the sigmoid function and the initialiser is actually
+
+91
+00:06:13,120 --> 00:06:17,080
+going to be the same we'll say Colonel initialiser is equal to initialiser
+
+92
+00:06:20,240 --> 00:06:20,670
+Okay.
+
+93
+00:06:20,720 --> 00:06:23,270
+And if you ever need to reference this code it's all available to you.
+
+94
+00:06:23,270 --> 00:06:30,150
+In the notes so we have our output layer and recall that this output layer is returning back essentially
+
+95
+00:06:30,150 --> 00:06:34,590
+a single number the probability to go left to it's going to be between 0 and 1.
+
+96
+00:06:34,590 --> 00:06:38,150
+So let's go in and say probabilities
+
+97
+00:06:40,870 --> 00:06:46,600
+probabilities is equal to.
+
+98
+00:06:46,720 --> 00:06:54,490
+And we were going to construct here is T.F. concat going to concatenate along axis is equal to 1.
+
+99
+00:06:54,750 --> 00:06:56,520
+And we're going to do two values together.
+
+100
+00:06:56,520 --> 00:06:59,970
+This is basically so we can get it in the form that we can later play around with.
+
+101
+00:06:59,970 --> 00:07:03,300
+With T.F. multinomial and that is the output layer.
+
+102
+00:07:03,360 --> 00:07:09,620
+So recall the ability to go left and the other one should then just be up 1 minus the output layer.
+
+103
+00:07:09,630 --> 00:07:12,460
+So it's a probability to go right.
+
+104
+00:07:12,470 --> 00:07:19,840
+So the reason we're doing this T.F. of concat is so that we can get the action using T.F. multinomial
+
+105
+00:07:23,430 --> 00:07:28,750
+in the past and the probabilities here and the number of samples we want out is equal to 1.
+
+106
+00:07:28,960 --> 00:07:33,610
+So basically this is just one way we can do this without having to export things into a pie and then
+
+107
+00:07:33,610 --> 00:07:38,830
+sticking them back into the tensor flow we're grabbing and creating these probabilities.
+
+108
+00:07:38,830 --> 00:07:44,260
+Essentially this tensor of probabilities going left and going right and then using that conjunction
+
+109
+00:07:44,260 --> 00:07:50,820
+of T.F. multinomial to actually bring back some single action either zero or one go left or right
+
+110
+00:07:53,810 --> 00:07:59,770
+and then finally we're going to say it is equal to T.F. global variables.
+
+111
+00:08:01,160 --> 00:08:01,960
+Initialiser
+
+112
+00:08:04,410 --> 00:08:05,020
+OK.
+
+113
+00:08:05,320 --> 00:08:07,730
+So what we need to do next is actually train.
+
+114
+00:08:07,750 --> 00:08:10,750
+The session is actually pretty straightforward.
+
+115
+00:08:10,780 --> 00:08:19,060
+We're going to do is we'll create a step limit so only allowed to do 500 steps within a training session
+
+116
+00:08:19,550 --> 00:08:28,640
+and then start creating the environment will say Ian V is gym make and then we'll pass and carpool the
+
+117
+00:08:28,730 --> 00:08:33,330
+zero and let's focus on the session here.
+
+118
+00:08:33,540 --> 00:08:42,720
+We're going to say with T.F. session as we assess I'm going to say in run.
+
+119
+00:08:42,730 --> 00:08:50,880
+Or you could also say sense that run in it the other way is fine then for every episode we'll say episode
+
+120
+00:08:53,860 --> 00:08:56,960
+in the range of epi.
+
+121
+00:08:56,980 --> 00:09:00,770
+So let's go to find epi how many times we actually want to run this.
+
+122
+00:09:00,880 --> 00:09:05,170
+So we'll say we'll run this 50 times and the step limit is the limit.
+
+123
+00:09:05,230 --> 00:09:06,960
+In each actual episode.
+
+124
+00:09:07,120 --> 00:09:12,070
+So we're going to run this to 50 episodes of the game and within each game we're only allowed to take
+
+125
+00:09:12,070 --> 00:09:13,070
+500 times steps.
+
+126
+00:09:13,080 --> 00:09:17,440
+After that we'll go ahead and just declared done if done hasn't already been declared.
+
+127
+00:09:17,480 --> 00:09:21,880
+Now it's very unlikely the way the simple near your network set up that will ever hit close to 500.
+
+128
+00:09:21,880 --> 00:09:26,580
+In fact you'll probably get much closer to something like 20.
+
+129
+00:09:26,810 --> 00:09:32,310
+And in fact let's go ahead and create some average steps here so we'll say average steps is equal to
+
+130
+00:09:32,310 --> 00:09:37,630
+an empty list for now and then later on we'll append to average steps and then take the mean of it so
+
+131
+00:09:37,630 --> 00:09:41,680
+we can see how long we were actually able to last for a neural network.
+
+132
+00:09:42,120 --> 00:09:45,450
+OK so I'll say for AI episode and range eppi.
+
+133
+00:09:45,540 --> 00:09:48,060
+So basically we're going to run this 50 times.
+
+134
+00:09:48,320 --> 00:09:56,840
+I'm going to reset my environment so say observations equal to reset and then after I've reset in my
+
+135
+00:09:56,840 --> 00:10:03,860
+environment I'm going to say force that in range up to my step limit some 500 steps for this particular
+
+136
+00:10:03,860 --> 00:10:04,570
+game.
+
+137
+00:10:04,700 --> 00:10:05,850
+I will do the following.
+
+138
+00:10:05,870 --> 00:10:15,840
+I will say action value is equal to action evaluates because remember action appear.
+
+139
+00:10:15,850 --> 00:10:21,540
+If we scroll up is this result of this multinomial right it's going to be 0 or 1.
+
+140
+00:10:21,660 --> 00:10:23,180
+It requires a feed dictionary.
+
+141
+00:10:23,220 --> 00:10:25,170
+Based on this graph we just created.
+
+142
+00:10:25,610 --> 00:10:31,610
+So we'll come over here and will say that the feed dictionary is equal to time to create Dictionnaire
+
+143
+00:10:31,620 --> 00:10:35,430
+here X and we're pass the observations here.
+
+144
+00:10:35,650 --> 00:10:42,100
+But we need to reshape these so we can't just pass in a straight array due to the way it's set up.
+
+145
+00:10:42,180 --> 00:10:49,680
+It will start complaining about the shape so we need to reshape this to be equal to one by the number
+
+146
+00:10:49,680 --> 00:10:50,960
+of inputs.
+
+147
+00:10:51,330 --> 00:10:53,600
+So needs to be a 1 by 4.
+
+148
+00:10:53,610 --> 00:10:57,930
+Recall sometimes some PI returns back something like Blink comma 4.
+
+149
+00:10:58,020 --> 00:11:03,330
+So we're reshaping this one by four so it's really a one dimensional array instead of just something
+
+150
+00:11:03,330 --> 00:11:05,310
+like a comma for array.
+
+151
+00:11:05,320 --> 00:11:06,900
+OK so we have a reshape.
+
+152
+00:11:06,900 --> 00:11:07,640
+We're feeding that in.
+
+153
+00:11:07,650 --> 00:11:09,130
+We should then get an action.
+
+154
+00:11:09,300 --> 00:11:10,910
+So then we're going to feed in the action.
+
+155
+00:11:10,920 --> 00:11:14,780
+But the way that we set up our action when you do a little bit of indexing off of it.
+
+156
+00:11:15,090 --> 00:11:23,730
+So the true action value we need to index twice suffer this because of the way we're actually calling
+
+157
+00:11:23,730 --> 00:11:24,430
+it here.
+
+158
+00:11:24,630 --> 00:11:29,700
+It's mainly due to the way T.F. multinomial returns things as far as it's tensors in order to get that
+
+159
+00:11:29,700 --> 00:11:31,700
+actual zero or one call.
+
+160
+00:11:31,800 --> 00:11:34,590
+When you do this sort of indexing.
+
+161
+00:11:34,650 --> 00:11:42,740
+So this actually returns back 0 or 1 and then we're going to pass that in to our environment step function.
+
+162
+00:11:42,880 --> 00:11:45,520
+We remember that we actually passed and the actions are one.
+
+163
+00:11:45,560 --> 00:11:51,350
+So we have our environments that passing in that action and then that's going to return back the observation
+
+164
+00:11:52,040 --> 00:11:55,070
+the reward whether or not the game is done.
+
+165
+00:11:55,130 --> 00:11:59,510
+And then some in full for debugging later in case we need it.
+
+166
+00:11:59,540 --> 00:11:59,770
+All right.
+
+167
+00:11:59,780 --> 00:12:05,130
+So finally we also want to say if done maybe we fell over got off the screen or something.
+
+168
+00:12:05,360 --> 00:12:12,830
+We're going to say average steps and I'm going to append the current step we were on because maybe it
+
+169
+00:12:12,830 --> 00:12:15,230
+declares it's done it falls over after one step.
+
+170
+00:12:15,260 --> 00:12:16,760
+Or go ahead and put that in there.
+
+171
+00:12:18,620 --> 00:12:27,790
+And I want to prints done after steps so hopefully we can see this gradually go up and then we'll probably
+
+172
+00:12:27,790 --> 00:12:33,780
+have around 20 and then we will say format's step.
+
+173
+00:12:33,780 --> 00:12:37,480
+So don't expect this neural network to perform very well.
+
+174
+00:12:37,530 --> 00:12:42,150
+The one we're going to do next will perform much better but we'll say if done average steps and then
+
+175
+00:12:42,150 --> 00:12:44,690
+we're going to break out of this for a loop here.
+
+176
+00:12:44,910 --> 00:12:46,840
+So basically we're in a run through 50 games.
+
+177
+00:12:46,890 --> 00:12:52,780
+We have a limit of per game only 500 that's unlikely to reach 500 steps ever.
+
+178
+00:12:52,800 --> 00:12:58,620
+In fact more likely that we hit done probably the poll is over and then we apan what step we were actually
+
+179
+00:12:58,620 --> 00:13:03,180
+on when that happened and we print out a little message saying Hey we're done after this many steps.
+
+180
+00:13:03,450 --> 00:13:09,960
+And then finally at the end when it prints out after blank episodes
+
+181
+00:13:13,970 --> 00:13:25,270
+average whip's after blink episodes Khama average steps per game was and let's go ahead and then format
+
+182
+00:13:25,300 --> 00:13:26,600
+these answers in.
+
+183
+00:13:26,750 --> 00:13:34,040
+So after the episodes average steps that's going to be equal to MP that means a number I mean of the
+
+184
+00:13:34,040 --> 00:13:37,540
+average stepstool list Okay.
+
+185
+00:13:37,680 --> 00:13:42,470
+And then finally we're going to close off the environment in case it keeps running.
+
+186
+00:13:42,480 --> 00:13:47,590
+Now if you wanted to you could also set a render somewhere here so you could say environment not render
+
+187
+00:13:47,850 --> 00:13:52,590
+But since we're actually treating the model essentially if you render it you're going to see the cartful
+
+188
+00:13:52,690 --> 00:13:57,330
+or the pole fall over over and over again 50 times which is not super useful and it'll basically slow
+
+189
+00:13:57,330 --> 00:14:00,510
+down your calculations so we're not going to be rendering anything.
+
+190
+00:14:00,540 --> 00:14:10,100
+And then finally let's go in and test this out we'll say Python test or my test Jim that PI enter and
+
+191
+00:14:10,100 --> 00:14:12,090
+let's see if that works.
+
+192
+00:14:12,650 --> 00:14:15,850
+No module name senseful it's because I forgot to activate my environment.
+
+193
+00:14:16,160 --> 00:14:21,240
+So make sure you activate your environment will say T.F. the learning activate that.
+
+194
+00:14:21,350 --> 00:14:23,220
+And then after this is done activating.
+
+195
+00:14:23,240 --> 00:14:25,060
+Now we're going to do a python.
+
+196
+00:14:25,370 --> 00:14:30,760
+My test Jim that pie OK let's run that make sure won't have any errors.
+
+197
+00:14:30,820 --> 00:14:34,380
+Hopefully we see a bunch of print statements coming out as it's training.
+
+198
+00:14:34,420 --> 00:14:35,740
+OK small typo here.
+
+199
+00:14:35,740 --> 00:14:38,510
+Forgot the extra I in initialiser.
+
+200
+00:14:38,530 --> 00:14:41,860
+So let's go back and get that right here.
+
+201
+00:14:41,870 --> 00:14:44,650
+Initialiser and hopefully that was the only typo.
+
+202
+00:14:44,800 --> 00:14:46,290
+Save this try again.
+
+203
+00:14:47,330 --> 00:14:50,750
+Hopefully around any more debugging.
+
+204
+00:14:50,850 --> 00:14:52,140
+And there it goes.
+
+205
+00:14:52,140 --> 00:14:55,680
+So after 50 episodes average deaths per game was 30.
+
+206
+00:14:55,710 --> 00:15:00,060
+That's kind of including the very first ones that should have performed pretty poorly like 10 and 7.
+
+207
+00:15:00,070 --> 00:15:04,210
+Big and see here were lasting an average of 30 times steps.
+
+208
+00:15:04,230 --> 00:15:06,180
+That's not actually terribly good.
+
+209
+00:15:06,450 --> 00:15:07,480
+It's actually pretty bad.
+
+210
+00:15:07,680 --> 00:15:11,190
+But this is a pretty simple neural network.
+
+211
+00:15:11,370 --> 00:15:14,820
+If you want you can try playing around with how many episodes you get trained for.
+
+212
+00:15:14,920 --> 00:15:18,140
+You can go ahead and get trained for something like 250.
+
+213
+00:15:18,150 --> 00:15:20,230
+Save that and run it again.
+
+214
+00:15:20,400 --> 00:15:22,810
+But even She'll see that you're hitting the limit here.
+
+215
+00:15:22,950 --> 00:15:27,420
+And the main limit that we're hitting is the fact that we're not really learning from our sequence of
+
+216
+00:15:27,420 --> 00:15:31,410
+actions in fact see after 250 episodes it performed worse.
+
+217
+00:15:31,410 --> 00:15:36,620
+So what we're not taking into account here is the actual history of actions.
+
+218
+00:15:36,630 --> 00:15:39,690
+Instead we're just doing is saying based off your previous action.
+
+219
+00:15:39,690 --> 00:15:41,000
+Give me the probabilities.
+
+220
+00:15:41,130 --> 00:15:45,790
+And since we're also sampling based off probabilities we may be choosing the wrong one.
+
+221
+00:15:46,020 --> 00:15:48,900
+We may maybe folks a little too much on learning new actions.
+
+222
+00:15:48,990 --> 00:15:53,500
+So a much better way to train all of this is to use a policy gradient.
+
+223
+00:15:53,520 --> 00:15:58,140
+So what we're going to do in the next lecture is explain what we mean by policy gradients and then after
+
+224
+00:15:58,140 --> 00:16:04,620
+that we'll actually code out policy gradients which is a much more sophisticated way of performing reinforcement
+
+225
+00:16:04,620 --> 00:16:05,220
+learning.
+
+226
+00:16:05,220 --> 00:16:09,920
+Right now we're kind of just feeding in the observations and kind of randomly picking out based off
+
+227
+00:16:09,930 --> 00:16:11,520
+some probability sampling.
+
+228
+00:16:11,520 --> 00:16:16,410
+We're going to learn that that's actually not a good way to solve even these simple problems.
+
+229
+00:16:16,410 --> 00:16:16,870
+OK.
+
+230
+00:16:17,010 --> 00:16:18,900
+Thanks everyone and I'll see you at the next lecture.
+

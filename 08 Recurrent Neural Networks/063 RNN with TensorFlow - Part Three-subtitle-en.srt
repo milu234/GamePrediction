@@ -1,0 +1,424 @@
+1
+00:00:05,230 --> 00:00:06,410
+Welcome back everyone.
+
+2
+00:00:06,460 --> 00:00:12,490
+In this third part of our Arnon with tensor Flo's lecture series we're going to be practicing generating
+
+3
+00:00:12,490 --> 00:00:18,040
+a new sequence So previously we created a time series sequence that shifted just one time step over.
+
+4
+00:00:18,040 --> 00:00:22,060
+Now let's go ahead and generate a completely brand new sequence.
+
+5
+00:00:22,060 --> 00:00:22,930
+So we're going do the following.
+
+6
+00:00:22,930 --> 00:00:33,630
+We'll say with T.F. session as SPSS we're going to say Savir all restore the model I say.
+
+7
+00:00:34,110 --> 00:00:37,530
+So session and then go ahead and find it.
+
+8
+00:00:37,530 --> 00:00:45,170
+So this one I believe is called R and in time series model code along and is going to pass that and
+
+9
+00:00:45,170 --> 00:00:51,780
+right there and then what I'm going to do is I'm going to first seed it with just a bunch of zeros and
+
+10
+00:00:51,780 --> 00:00:52,950
+let's see what happens.
+
+11
+00:00:53,850 --> 00:00:57,750
+So I'll say zero sequence seed.
+
+12
+00:00:58,020 --> 00:00:59,480
+Let's zoom in on level here.
+
+13
+00:00:59,490 --> 00:01:00,730
+Scroll down a little bit.
+
+14
+00:01:00,780 --> 00:01:07,370
+So zero sequence seed that's going to be equal to zero point zero.
+
+15
+00:01:07,430 --> 00:01:12,160
+For i in range I will say a number of time steps.
+
+16
+00:01:12,230 --> 00:01:13,900
+So 30 right there.
+
+17
+00:01:14,330 --> 00:01:15,320
+And then I'm going to do the following.
+
+18
+00:01:15,320 --> 00:01:26,940
+I'll say for iteration in the range of the length of TS data X data Minus the number of times that it's
+
+19
+00:01:29,410 --> 00:01:39,430
+going to perform the following will say X Bachche is equal to an array of zero sequence Seeta and only
+
+20
+00:01:39,440 --> 00:01:46,550
+go from a negative number of time steps all the way to the end and then going to reshape this to be
+
+21
+00:01:46,550 --> 00:01:54,340
+in the proper format for r r n n which is going to be one number of time loops one underscore number
+
+22
+00:01:54,340 --> 00:02:02,950
+of times steps comma 1 and then we need our Y prediction or should I say white generated and that's
+
+23
+00:02:02,950 --> 00:02:14,400
+going to be to session run and we'll run the outputs where the feed dictionary is just equal to x the
+
+24
+00:02:14,400 --> 00:02:16,040
+X that we just created there.
+
+25
+00:02:18,570 --> 00:02:20,320
+And then finally it will say zero.
+
+26
+00:02:21,960 --> 00:02:23,000
+Sequence seed.
+
+27
+00:02:23,100 --> 00:02:29,900
+And I'm going to pen those y prediction values 0 negative 1 0.
+
+28
+00:02:29,920 --> 00:02:35,740
+So I need to index that using pi indexing so I'm in zoom out here.
+
+29
+00:02:35,950 --> 00:02:39,720
+So again all we're doing is we're going to create this zero sequence scene.
+
+30
+00:02:39,730 --> 00:02:44,230
+So that's just going to be 30 zeros or however many number of times that we have.
+
+31
+00:02:44,230 --> 00:02:49,840
+And then for iteration in the range of the length of time series X data Minus the number of times steps
+
+32
+00:02:50,110 --> 00:02:52,870
+what are going to do is generate an X batch.
+
+33
+00:02:52,960 --> 00:02:59,710
+So that's going to be passing in the zero sequence array going backwards a negative number of time steps
+
+34
+00:02:59,710 --> 00:03:03,800
+then go all the way to the end that I you to reshape this for the recurrent neural network.
+
+35
+00:03:03,830 --> 00:03:06,300
+So anyone come the number of times that's one.
+
+36
+00:03:06,460 --> 00:03:07,880
+Then I have my prediction.
+
+37
+00:03:07,890 --> 00:03:12,350
+So I'm just running the outputs passing in that feed dictionary of the next batch I just created up
+
+38
+00:03:12,350 --> 00:03:13,000
+here.
+
+39
+00:03:13,120 --> 00:03:18,150
+And then finally I need to append those new values to Mizer a sequence seed.
+
+40
+00:03:18,340 --> 00:03:24,950
+So at the very end I should have 30 zeros and then the generated values so let's go ahead and run that
+
+41
+00:03:25,670 --> 00:03:26,910
+and plot it out.
+
+42
+00:03:27,080 --> 00:03:34,920
+We'll say PBT plot data X data versus zero sequence seed.
+
+43
+00:03:35,220 --> 00:03:46,000
+And we'll go ahead and have this be a blue line and then also going to plot theist data X data and this
+
+44
+00:03:46,000 --> 00:03:48,880
+is only going to be for the number of time steps.
+
+45
+00:03:48,910 --> 00:04:02,210
+So a number of times steps that are going to plot zero sequence seed number of time steps and then finally
+
+46
+00:04:02,210 --> 00:04:07,660
+will have this be a red line hopes are what make this a little thicker.
+
+47
+00:04:07,660 --> 00:04:08,980
+Just so we can see it.
+
+48
+00:04:08,980 --> 00:04:19,900
+So line with is equal to three and it's going to give this an X label of time loops and we'll have wild
+
+49
+00:04:19,900 --> 00:04:23,060
+label be just white.
+
+50
+00:04:23,550 --> 00:04:28,890
+So this first one right here that's putting in the entire time series and the second one is going to
+
+51
+00:04:28,890 --> 00:04:30,030
+be a red line in the case.
+
+52
+00:04:30,030 --> 00:04:34,100
+The first seed value OK is when we take a look at our results here.
+
+53
+00:04:34,110 --> 00:04:39,480
+We're definitely providing something that looks sinusoidal but it ends up generating from let's say
+
+54
+00:04:39,480 --> 00:04:41,360
+negative 0.5 to 1.
+
+55
+00:04:41,400 --> 00:04:46,520
+So it's not exactly generating a pure sine wave but it's definitely learned that sort of behavior.
+
+56
+00:04:46,530 --> 00:04:50,940
+So let's go ahead and seat it with something that is the true first sign value.
+
+57
+00:04:50,940 --> 00:04:52,860
+And let's see how it does with that.
+
+58
+00:04:52,860 --> 00:04:55,410
+So we'll end up doing is the following.
+
+59
+00:04:55,680 --> 00:04:58,510
+I'm going to copy this right here.
+
+60
+00:05:01,340 --> 00:05:08,270
+And paste that and then we'll say time series come along and we're going to see this with the actual
+
+61
+00:05:08,270 --> 00:05:08,960
+values.
+
+62
+00:05:09,020 --> 00:05:16,590
+So instead of a zero sequence seat what I'm going to do here is say training instance is going to be
+
+63
+00:05:16,620 --> 00:05:21,600
+equal to a list of TS data y true values.
+
+64
+00:05:21,650 --> 00:05:24,570
+And we're just going to take 30 points there.
+
+65
+00:05:24,710 --> 00:05:30,620
+So then instead of the length of test data the X data minus the number of times steps when I get in
+
+66
+00:05:30,620 --> 00:05:37,370
+that doing just say the length of the train instance that I just created that X Bache instead of being
+
+67
+00:05:37,490 --> 00:05:44,800
+zero sequence seed is going to be that training instance instance.
+
+68
+00:05:44,850 --> 00:05:45,640
+There we go.
+
+69
+00:05:45,900 --> 00:05:49,900
+And then that needs to have the same dimensions so that reshape is fine as well.
+
+70
+00:05:50,100 --> 00:05:52,310
+So this line stays the same.
+
+71
+00:05:52,380 --> 00:05:58,900
+And then instead of appending it to zero sequence c I'm going to append that to the tree instance.
+
+72
+00:05:58,900 --> 00:05:59,350
+There we go.
+
+73
+00:05:59,350 --> 00:06:00,940
+So now we're going to run that.
+
+74
+00:06:01,120 --> 00:06:06,040
+All right so let's plot this out and then scroll back up here and I'm going to copy this and replace
+
+75
+00:06:06,100 --> 00:06:07,280
+what's necessary.
+
+76
+00:06:08,420 --> 00:06:11,290
+So instead of saying X data with zero sequence seed.
+
+77
+00:06:11,300 --> 00:06:18,340
+Now since I actually have a real training instance I could just say TSC data versus Y true.
+
+78
+00:06:18,480 --> 00:06:23,910
+And then when I got to end up doing is saying the X data X data is fine but replaced this zero sequence
+
+79
+00:06:23,910 --> 00:06:27,440
+seed with the training instance OK.
+
+80
+00:06:27,700 --> 00:06:29,200
+That's going to have a saying that mentions.
+
+81
+00:06:29,230 --> 00:06:32,010
+And let's run this and we can see here.
+
+82
+00:06:32,050 --> 00:06:35,340
+Now we're predicting pretty much inexact sinusoidal wave.
+
+83
+00:06:35,410 --> 00:06:41,020
+Now these results won't be perfectly equal to sign of X but they're going to be pretty darn close because
+
+84
+00:06:41,020 --> 00:06:43,480
+our seed was much better.
+
+85
+00:06:43,480 --> 00:06:48,250
+Now keep in mind sometimes you'll get weird exponential values especially for the first one.
+
+86
+00:06:48,250 --> 00:06:51,470
+You may get something that just looks flat and then suddenly explodes.
+
+87
+00:06:51,580 --> 00:06:56,920
+If that happens to you then usually a good fix for it is just running everything again because sometimes
+
+88
+00:06:57,910 --> 00:07:01,720
+the graphs session wasn't saved properly and either reset the default graph.
+
+89
+00:07:01,720 --> 00:07:06,680
+So in that case if you ever get that urge just come over here to colonel and say restart and run all
+
+90
+00:07:07,060 --> 00:07:08,680
+and make sure you use the provided notebook.
+
+91
+00:07:08,680 --> 00:07:14,350
+It's really easy to get a typo in here or mess up a line or just mix up the graphs.
+
+92
+00:07:14,350 --> 00:07:19,630
+So again always use the provided notebook because there's lots of ways to just make small typos and
+
+93
+00:07:19,660 --> 00:07:20,790
+mess this up.
+
+94
+00:07:20,860 --> 00:07:23,310
+All right so I hope you enjoyed this lecture series.
+
+95
+00:07:23,320 --> 00:07:27,100
+I think this last part is really one of the most interesting aspects of our current neural networks
+
+96
+00:07:27,370 --> 00:07:31,920
+the ability to just completely generate new sequences based off what it's seen before.
+
+97
+00:07:32,140 --> 00:07:36,050
+And what's really cool is the pinning on the seat value you make it something unique and different.
+
+98
+00:07:36,130 --> 00:07:41,230
+So you can imagine that if we were trying to generate something like music or we had words we could
+
+99
+00:07:41,230 --> 00:07:45,920
+give it certain seeds and it would generate a unique instance that we've actually never seen before.
+
+100
+00:07:45,940 --> 00:07:50,530
+So this is the cool way you could use recurrent neural that works to maybe journey new pieces of music
+
+101
+00:07:50,530 --> 00:07:52,220
+or something similar to that.
+
+102
+00:07:52,600 --> 00:07:53,140
+All right.
+
+103
+00:07:53,140 --> 00:07:53,950
+Hope you enjoyed that.
+
+104
+00:07:53,950 --> 00:07:59,180
+Coming up next it's going to be an exercise that allows you to walk through this for a time series.
+
+105
+00:07:59,230 --> 00:07:59,700
+Thanks.
+
+106
+00:07:59,710 --> 00:08:00,820
+And I'll see you at the next lecture.
+

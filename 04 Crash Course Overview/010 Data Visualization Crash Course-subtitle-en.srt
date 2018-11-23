@@ -1,0 +1,432 @@
+1
+00:00:05,380 --> 00:00:10,270
+Welcome everyone to this lecture on a quick overview of data visualization will teach you how to use
+
+2
+00:00:10,270 --> 00:00:14,860
+Map plot lib for data is as well as Panoz built in data visualization.
+
+3
+00:00:14,860 --> 00:00:17,340
+Let's open up a new chapter notebook and get started.
+
+4
+00:00:17,350 --> 00:00:24,120
+All right we'll start off with a couple of imports here by pandas and then we'll also say import map
+
+5
+00:00:24,120 --> 00:00:31,440
+plot whipped up pipe plot as peel tea and the next thing we're going to do when working of Jupiter notebooks
+
+6
+00:00:31,530 --> 00:00:37,610
+in order to see the visualizations in line of the notebooks when you have this percent sign map plot
+
+7
+00:00:37,620 --> 00:00:41,330
+live space in line and that's known as a magic command.
+
+8
+00:00:41,550 --> 00:00:46,530
+And this magic command only works in Jupiter notebooks if you're not using a Jupiter notebook that means
+
+9
+00:00:46,590 --> 00:00:52,520
+that after you have all your plot code you need to get to type then appeal t show open and closed print
+
+10
+00:00:52,530 --> 00:00:54,550
+CS in order to actually see the plot.
+
+11
+00:00:55,680 --> 00:00:58,360
+OK we don't need to do that since we're in the Jupiter note book.
+
+12
+00:00:58,560 --> 00:01:03,300
+So let's actually show you do a really simple plot with Matt spotlit and most of the plots in this course
+
+13
+00:01:03,600 --> 00:01:08,040
+are going to be really straightforward we're either going to use that plotted to show an image or we'll
+
+14
+00:01:08,040 --> 00:01:13,670
+kind of show some sort of curvature song going to create an empire.
+
+15
+00:01:14,280 --> 00:01:15,660
+Let's say zero to 10.
+
+16
+00:01:15,660 --> 00:01:22,770
+So if I take a look at X it's just 0 9 there and then we're going to say why is equal to x squared.
+
+17
+00:01:23,520 --> 00:01:31,800
+And then in order to plot something like X versus Y you just say peel t plots and then x y enter.
+
+18
+00:01:31,830 --> 00:01:34,920
+And that creates this nice little to the line plot.
+
+19
+00:01:34,920 --> 00:01:41,250
+Now as a third argument what you can do is you can passen a string code for a marker and if you pass
+
+20
+00:01:41,250 --> 00:01:47,970
+an asterix there kind of puts some little stars if you pasan a color code such as for instance red it
+
+21
+00:01:47,970 --> 00:01:49,650
+will make that line red.
+
+22
+00:01:49,680 --> 00:01:54,030
+There is a lot more detail to this and it's not just a bunch of string codes to memorize if you shift
+
+23
+00:01:54,030 --> 00:01:54,940
+tab here.
+
+24
+00:01:55,050 --> 00:01:59,550
+There's kind of a list of arguments and if you expand on this it will tell you various things here.
+
+25
+00:01:59,560 --> 00:02:03,910
+So our Plus has read Plus's etc. and helps keep scrolling down.
+
+26
+00:02:03,910 --> 00:02:09,090
+Ill tell you the various characters description of the lifestyles as well as the colors that you can
+
+27
+00:02:09,090 --> 00:02:10,160
+add to it.
+
+28
+00:02:10,200 --> 00:02:14,510
+We really don't focus that much data visualization as course we just use really simple plots.
+
+29
+00:02:14,520 --> 00:02:19,920
+So really all you need to know is X versus Y and then some sort of string code that will allow us to
+
+30
+00:02:19,980 --> 00:02:21,710
+kind of differentiate this.
+
+31
+00:02:22,200 --> 00:02:26,030
+OK so kind of as a last example here we can do like a red dash line.
+
+32
+00:02:26,070 --> 00:02:33,120
+We have something like that something you may find yourself needing to do is to kind of edit the x axis
+
+33
+00:02:33,150 --> 00:02:37,290
+and y axis in order to do that in the same cell as replot command.
+
+34
+00:02:37,290 --> 00:02:42,840
+We need to do is say PLDT and you can passen X limits and then passing the limits.
+
+35
+00:02:42,840 --> 00:02:47,760
+So notice here that it kind of has some extra space after 0 if you want it's clear that you can kind
+
+36
+00:02:47,760 --> 00:02:51,950
+of hardcoded in set the limit at 0 and then maybe only want to go to 4.
+
+37
+00:02:52,110 --> 00:02:57,240
+So you pass that in and you can see now we have zero to for instance the y axis is still defined by
+
+38
+00:02:57,240 --> 00:02:59,280
+the original auto set Y axis.
+
+39
+00:02:59,280 --> 00:03:07,830
+What we can do here say peel t y Lim and make that go from let's say 0 to 10 and there we can see the
+
+40
+00:03:07,830 --> 00:03:09,330
+various points here.
+
+41
+00:03:09,390 --> 00:03:13,020
+And it's essentially just putting out the points and then putting a dashed line between them which is
+
+42
+00:03:13,020 --> 00:03:16,970
+why you zoom in it gets a little more jaggy.
+
+43
+00:03:17,040 --> 00:03:23,890
+And in case you ever want to put titles or X labels on your plot you can use Piazzi title to title your
+
+44
+00:03:23,890 --> 00:03:24,780
+plot.
+
+45
+00:03:24,910 --> 00:03:27,350
+So you just pass a string there and shows a title on top.
+
+46
+00:03:27,370 --> 00:03:31,650
+And I'm a little zoomed in here which is why it looks blurry or a little blurry so if I zoom out it
+
+47
+00:03:31,670 --> 00:03:38,560
+kind of starts getting a little clearer that we can say Piazzi to the X label to have some sort of X
+
+48
+00:03:38,560 --> 00:03:39,490
+label.
+
+49
+00:03:39,820 --> 00:03:43,650
+So to put an X there and then we can see now I have an X label.
+
+50
+00:03:43,690 --> 00:03:50,730
+And as you may have guessed I just kind of copy and paste this put a white label here make that label
+
+51
+00:03:51,450 --> 00:03:53,370
+I also get a white label.
+
+52
+00:03:53,370 --> 00:03:56,150
+Keep in mind all of these commands need to go in the same cell.
+
+53
+00:03:56,160 --> 00:04:00,990
+Otherwise matplotlib isn't really smart enough to know what plot you're referring to just with these
+
+54
+00:04:01,030 --> 00:04:02,640
+Piazzi commands.
+
+55
+00:04:03,090 --> 00:04:06,750
+In other plot there were going to be doing a lot especially when we work with images of convolutional
+
+56
+00:04:06,750 --> 00:04:13,780
+neural networks is in the show plot recension the kind of show and image on a to the array.
+
+57
+00:04:13,950 --> 00:04:19,990
+So I'm going to create a matrix will say derange 0 to 100.
+
+58
+00:04:20,010 --> 00:04:23,600
+And then I'm going to reshape this 10 by 10.
+
+59
+00:04:24,030 --> 00:04:29,000
+So if I look at my matrix is essentially just a bunch of values that keep getting higher and higher.
+
+60
+00:04:29,190 --> 00:04:34,920
+So if I wanted to plot this out as kind of a to the missional color scheme what I would expect is some
+
+61
+00:04:34,920 --> 00:04:38,970
+sort of color gradient that row by row it keeps getting brighter and brighter.
+
+62
+00:04:39,060 --> 00:04:43,680
+And also column by column it keeps getting brighter and brighter or darker and darker depending on how
+
+63
+00:04:43,680 --> 00:04:46,110
+you think about it in order to do that.
+
+64
+00:04:46,110 --> 00:04:54,390
+We need to say peel t show and this can take in a two dimensional array here and then define the color
+
+65
+00:04:54,420 --> 00:04:55,950
+by the actual value.
+
+66
+00:04:55,950 --> 00:05:02,160
+So if we just pass in our matrix here I can see what we expected which is a lighter and lighter color
+
+67
+00:05:02,160 --> 00:05:03,420
+mapping.
+
+68
+00:05:03,420 --> 00:05:07,090
+And you can actually declare what kind of color map you want using See map.
+
+69
+00:05:07,110 --> 00:05:08,890
+You can pass on a string code here.
+
+70
+00:05:08,890 --> 00:05:13,300
+You can check out the documentation for the various string codes but cool warm is another one here.
+
+71
+00:05:13,380 --> 00:05:18,810
+And if you accidentally spell something wrong and you scroll all the way down here eventually says hey
+
+72
+00:05:18,810 --> 00:05:21,580
+this color map wasn't recognized here are the possible values.
+
+73
+00:05:21,600 --> 00:05:23,480
+And there's tons of possible values here.
+
+74
+00:05:23,610 --> 00:05:26,600
+And you can check out the documentation see what each of these colors look like.
+
+75
+00:05:26,670 --> 00:05:31,740
+We can kind of grab one here and this one may or may not look that great with this data.
+
+76
+00:05:31,740 --> 00:05:35,940
+But here we have kind of a red yellow green so you can see stars red yellow to green.
+
+77
+00:05:35,940 --> 00:05:39,510
+So that's in show and just kind of showed again one more time.
+
+78
+00:05:39,660 --> 00:05:44,810
+Let's now create a random value here so say Ran's ants.
+
+79
+00:05:45,160 --> 00:05:50,320
+This goes to a thousand and then lets the size be 10 by 10.
+
+80
+00:05:51,030 --> 00:05:53,600
+So that's my matrix now it's just a bunch of random numbers.
+
+81
+00:05:53,590 --> 00:05:55,880
+So if I say peel T.
+
+82
+00:05:56,100 --> 00:05:57,040
+Show here.
+
+83
+00:05:58,330 --> 00:06:01,670
+On the Matrix now I can see kind of a bunch of random squares there.
+
+84
+00:06:02,760 --> 00:06:09,410
+And if you want a color bar all you have to do is say peel t the color bar offer this open close parentheses
+
+85
+00:06:09,500 --> 00:06:11,030
+and then you can see color bar in the case.
+
+86
+00:06:11,030 --> 00:06:13,230
+The range of the values themselves.
+
+87
+00:06:13,370 --> 00:06:16,160
+So that is map plot lib as far as plottings concern.
+
+88
+00:06:16,380 --> 00:06:21,710
+Pancho's actually has its own built in visualization capabilities that run on top of that plot lym kind
+
+89
+00:06:21,710 --> 00:06:25,360
+of more like a nicer API call from Appin the state of frame.
+
+90
+00:06:25,520 --> 00:06:30,230
+We don't use it a whole lot but just in case you're interested in it we can say Deia physical to PD
+
+91
+00:06:31,210 --> 00:06:34,510
+read CSFB we're gonna use that salary's file from last time as well.
+
+92
+00:06:34,850 --> 00:06:39,410
+And then if we check out that sellers file let's say we wanted to do a scatterplot of salary versus
+
+93
+00:06:39,410 --> 00:06:40,110
+age.
+
+94
+00:06:40,280 --> 00:06:48,550
+Then I can just say if plot's and then it's basically expecting an X A Y and then a kind of plot.
+
+95
+00:06:48,730 --> 00:06:53,920
+So I can do a line plot or I can do something like a scatter plot which makes more sense for three points.
+
+96
+00:06:53,980 --> 00:07:02,410
+So I'll say X and then as a string you just pass in the column name will say why is H.
+
+97
+00:07:02,520 --> 00:07:05,070
+And then finally we'll say the kind is a scatter
+
+98
+00:07:07,750 --> 00:07:08,260
+run.
+
+99
+00:07:08,340 --> 00:07:11,760
+And now we can see we have a scatterplot right off of our panel.
+
+100
+00:07:12,280 --> 00:07:14,590
+There's lots of different plot types that panned supports.
+
+101
+00:07:14,620 --> 00:07:19,030
+You can check the documentation we really won't be using that many of them but if you check out the
+
+102
+00:07:19,180 --> 00:07:23,460
+plot dot and then hit tab you'll notice the various kind of plots that panned the supports.
+
+103
+00:07:23,470 --> 00:07:28,600
+And these are all built off directly of Matt plotless which is why the styling looks so similar.
+
+104
+00:07:28,620 --> 00:07:30,490
+OK that's really all you need to know.
+
+105
+00:07:30,610 --> 00:07:36,520
+Will essentially just be using him show a lot for images and then we'll be using things like dot plot
+
+106
+00:07:36,580 --> 00:07:38,500
+for simple graphs.
+
+107
+00:07:38,780 --> 00:07:39,800
+OK thanks everyone.
+
+108
+00:07:39,820 --> 00:07:40,670
+See the next lecture.
+

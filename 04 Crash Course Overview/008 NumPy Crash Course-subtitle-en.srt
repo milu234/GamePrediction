@@ -1,0 +1,944 @@
+1
+00:00:06,550 --> 00:00:12,970
+Welcome everyone to this quick crash course overview lecture on pi which is a numerical Python library
+
+2
+00:00:13,260 --> 00:00:17,180
+and we're such it is going to show you the very basics of it and how we're going to use in this course.
+
+3
+00:00:17,200 --> 00:00:19,450
+Let's open up a Jupiter notebook and get started.
+
+4
+00:00:20,330 --> 00:00:25,910
+All right so here I am with a new Jupiter notebook and the first thing to do is important up-I as MP
+
+5
+00:00:26,450 --> 00:00:30,390
+and let's go over a couple of ways so we can create arrays.
+
+6
+00:00:30,500 --> 00:00:36,140
+So we're already familiar a python list 1 2 3 which is elements in a sequence.
+
+7
+00:00:36,170 --> 00:00:41,570
+And if I want to convert this into an empire array and I can say end dot and if hit tab here you'll
+
+8
+00:00:41,570 --> 00:00:46,130
+notice that there's a ton a ton of functions that are built into non-pay the majority of these we will
+
+9
+00:00:46,130 --> 00:00:49,400
+never use but we may be using array.
+
+10
+00:00:49,610 --> 00:00:55,750
+So you can cast a really transform a list into an array.
+
+11
+00:00:55,850 --> 00:00:58,720
+So if you run that you can see now it's an array.
+
+12
+00:00:58,970 --> 00:01:04,730
+And if you check the type of this object it's no longer just the list but instead it's a PI and D array
+
+13
+00:01:04,790 --> 00:01:06,950
+meaning and dimensional array.
+
+14
+00:01:06,980 --> 00:01:07,270
+OK.
+
+15
+00:01:07,310 --> 00:01:15,650
+So then we could also save this or assign it to a variable and then call back that variable later on.
+
+16
+00:01:15,690 --> 00:01:18,690
+And again remember it's just shift and try to run a cell.
+
+17
+00:01:18,720 --> 00:01:21,340
+Now that's the way you can cast a list into an array.
+
+18
+00:01:21,350 --> 00:01:26,550
+But lots of times we'll be using a lot of built in functions with no PI to create large arrays very
+
+19
+00:01:26,550 --> 00:01:27,540
+quickly.
+
+20
+00:01:27,540 --> 00:01:33,330
+So one way to do that is by using the arr. function that's built into non-pay again just clicking tab
+
+21
+00:01:33,330 --> 00:01:36,590
+there to auto complete and arranged the way it works.
+
+22
+00:01:36,580 --> 00:01:41,070
+If you do shift tab here will basically tell you it's essentially non-pay his version of Python's normal
+
+23
+00:01:41,070 --> 00:01:47,250
+range function where you indicate a start a stop and then as an option a step size.
+
+24
+00:01:47,250 --> 00:01:50,090
+For example I can say start at zero.
+
+25
+00:01:50,100 --> 00:01:51,930
+Whoops let me make sure I click on that.
+
+26
+00:01:52,140 --> 00:02:00,810
+Start at zero go up tube and not including 10 and then I'll see 0 through 9 here so you can see that
+
+27
+00:02:00,840 --> 00:02:05,110
+we have 10 elements in array evenly spaced by one.
+
+28
+00:02:05,130 --> 00:02:08,060
+Don't be confused by the fact that it doesn't go all the way to 10.
+
+29
+00:02:08,070 --> 00:02:11,440
+It's because it's going up to but not including that last stopping.
+
+30
+00:02:11,460 --> 00:02:17,010
+So if you actually wanted this to be 0 310 you would have to put an 11 here and then you would get back
+
+31
+00:02:17,100 --> 00:02:20,280
+0 through 10 which would be 11 elements.
+
+32
+00:02:20,280 --> 00:02:25,170
+Now if you actually want to indicate a step size for instance you all the even numbers as a third argument
+
+33
+00:02:25,200 --> 00:02:27,360
+you can indicate hey go in steps of two.
+
+34
+00:02:27,480 --> 00:02:31,700
+And then when you run this you can see have zero to four six eight 10 etc..
+
+35
+00:02:31,860 --> 00:02:32,780
+So that's a range.
+
+36
+00:02:32,800 --> 00:02:35,050
+Again a start stop and step size.
+
+37
+00:02:35,100 --> 00:02:41,910
+Very similar to pythons Bilton range function non-employee also has lots of useful tools for quickly
+
+38
+00:02:41,910 --> 00:02:45,090
+creating specific arrays such as an array of zeros.
+
+39
+00:02:45,090 --> 00:02:51,950
+So zeroes can either just take in one digit or one integer and will return back a one dimensional array.
+
+40
+00:02:52,170 --> 00:02:57,830
+You can see here it returned back five zeros or instead you can pass any tuple of dimensions.
+
+41
+00:02:57,900 --> 00:03:03,570
+Maybe you want a three by five array or matrix A two dimensional array.
+
+42
+00:03:03,570 --> 00:03:08,650
+And when you're in that you can see here I have three rows and then five columns of zeros.
+
+43
+00:03:08,670 --> 00:03:14,100
+So that's the way zeros works essentially returns back an n dimensional array pending on what you pass
+
+44
+00:03:14,100 --> 00:03:16,520
+in the dimensions of that where they're all zeros.
+
+45
+00:03:16,560 --> 00:03:21,480
+And note that it has a decimal point here in the Kading that these are actually all floating points
+
+46
+00:03:22,380 --> 00:03:27,660
+versus integers so we had over in a range and a lot of times with the operations we perform with tensor
+
+47
+00:03:27,660 --> 00:03:32,910
+flow and Python non-place going to be transforming things to floats to make sure that we don't accidentally
+
+48
+00:03:33,120 --> 00:03:34,820
+lose information.
+
+49
+00:03:34,860 --> 00:03:39,600
+OK so now let's go ahead and discuss a couple of more ways of creating arrays.
+
+50
+00:03:39,600 --> 00:03:41,360
+There is also a similar ones function.
+
+51
+00:03:41,370 --> 00:03:42,520
+Same deal here.
+
+52
+00:03:42,580 --> 00:03:46,190
+If you pass on a single integer it's going to bring back an array of ones.
+
+53
+00:03:46,190 --> 00:03:48,300
+No again that their floating point numbers.
+
+54
+00:03:48,480 --> 00:03:54,330
+And then we can do something like a 3 by 5 and pass that in as a tuple.
+
+55
+00:03:54,510 --> 00:03:57,050
+Although I believe it doesn't matter either way.
+
+56
+00:03:57,060 --> 00:04:05,370
+Here we go through by five three ones by five ones and there's ways of creating linearly spaced arrays.
+
+57
+00:04:05,850 --> 00:04:14,510
+So there's lende space and basically Lance Bass works by you providing a starting point a stopping point
+
+58
+00:04:14,600 --> 00:04:21,110
+and then the number of elements you want evenly spaced or linearly spaced between the start and the
+
+59
+00:04:21,110 --> 00:04:22,180
+stop.
+
+60
+00:04:22,190 --> 00:04:31,490
+For example if I want to start at zero and go to 11 and I wants 10 points there that are evenly spaced
+
+61
+00:04:31,550 --> 00:04:32,530
+it's going to return back.
+
+62
+00:04:32,540 --> 00:04:38,870
+This right here if I want 11 points that are evenly spaced then I can see jumping up in steps of 1.1
+
+63
+00:04:39,180 --> 00:04:45,830
+then two point two three point three etc. if I want 100 points between 0 and 11 that are evenly spaced
+
+64
+00:04:46,010 --> 00:04:49,070
+then it goes zero all the way to 11.
+
+65
+00:04:49,070 --> 00:04:56,210
+So the difference here between linearly spaced and arrange arranged takes in a start and stop and then
+
+66
+00:04:56,360 --> 00:05:02,390
+it you actually define what jump or what steps size you want to take as you go along linearly spaced
+
+67
+00:05:02,390 --> 00:05:05,900
+or space instead again start stop.
+
+68
+00:05:05,960 --> 00:05:09,170
+But then you say how many points do you want evenly spaced between that.
+
+69
+00:05:09,350 --> 00:05:13,170
+So you could ask for just five points evenly spaced between that.
+
+70
+00:05:13,280 --> 00:05:18,320
+Or you could ask for 5000 points evenly spaced between that and know here if you ask for a super large
+
+71
+00:05:18,320 --> 00:05:19,640
+array back in Jupiter.
+
+72
+00:05:19,640 --> 00:05:21,910
+It just indicates a dot dot dot.
+
+73
+00:05:23,000 --> 00:05:24,240
+So that's one space.
+
+74
+00:05:24,290 --> 00:05:25,420
+Very useful to know.
+
+75
+00:05:25,670 --> 00:05:29,230
+Let's go ahead and cover a random number hirees.
+
+76
+00:05:29,330 --> 00:05:33,940
+A lot of times we're dealing with neural networks you have to initialize things for in them values.
+
+77
+00:05:34,190 --> 00:05:36,920
+So implies a really nice random library.
+
+78
+00:05:36,920 --> 00:05:43,070
+You can say that random dots and then hit tab here and there's lots and lots of functions that are included
+
+79
+00:05:43,070 --> 00:05:44,090
+in this random Library.
+
+80
+00:05:44,090 --> 00:05:45,250
+We'll be using all of them.
+
+81
+00:05:45,530 --> 00:05:48,230
+But we'll introduce a few of the common ones.
+
+82
+00:05:48,230 --> 00:05:52,910
+One of the common ones is Rand ants which as you may have guessed returns back a random integer.
+
+83
+00:05:52,910 --> 00:05:54,490
+So we do shift tab here.
+
+84
+00:05:54,500 --> 00:05:59,870
+You basically give it a low number and a high number and then you can also indicate a size so the dimensions
+
+85
+00:05:59,870 --> 00:06:00,550
+you want.
+
+86
+00:06:00,710 --> 00:06:05,360
+And note that the low number is inclusive and the high number is exclusive.
+
+87
+00:06:05,660 --> 00:06:06,790
+So show an example of that.
+
+88
+00:06:06,800 --> 00:06:13,900
+Let's say just want one random number between 0 and 10 where 0 is inclusive tennis exclusive.
+
+89
+00:06:14,180 --> 00:06:16,030
+You run that and you get back 6.
+
+90
+00:06:16,100 --> 00:06:19,020
+If I run this again I get back zero run again.
+
+91
+00:06:19,130 --> 00:06:23,480
+So every time I run this I'm going to get back a different read that number every time.
+
+92
+00:06:23,480 --> 00:06:24,850
+And sometimes it gets repeated.
+
+93
+00:06:25,040 --> 00:06:26,860
+So there we got three zeros in a row.
+
+94
+00:06:26,960 --> 00:06:32,480
+If we make this larger we won't see as many repeated values because the likelihoods are 1 in 1000 here.
+
+95
+00:06:32,680 --> 00:06:32,890
+OK.
+
+96
+00:06:32,900 --> 00:06:34,470
+So just random integers.
+
+97
+00:06:34,490 --> 00:06:35,560
+That's how it works.
+
+98
+00:06:35,550 --> 00:06:40,290
+And if you want dimensions there I want three by three.
+
+99
+00:06:40,410 --> 00:06:44,160
+Two dimensional array or a matrix of random integers.
+
+100
+00:06:44,160 --> 00:06:46,010
+I can run that and there they are.
+
+101
+00:06:46,050 --> 00:06:47,460
+So read this again.
+
+102
+00:06:47,520 --> 00:06:49,170
+Now there's that are random integers.
+
+103
+00:06:49,170 --> 00:06:51,660
+Now there's other random ones that we're going to be using.
+
+104
+00:06:51,660 --> 00:06:56,300
+Things like random normal is another common one.
+
+105
+00:06:56,580 --> 00:06:58,680
+So you can give a location a scale.
+
+106
+00:06:58,680 --> 00:07:02,150
+It just draws random samples from a normal or Gaussian distribution.
+
+107
+00:07:02,160 --> 00:07:06,630
+There's lots of round distributions that you can choose so keep that in mind we'll introduce those throughout
+
+108
+00:07:06,630 --> 00:07:08,590
+the course as we encounter them.
+
+109
+00:07:08,820 --> 00:07:13,900
+So to finish off our discussion of Nim Pye's ran the module I want to talk about setting a random seed.
+
+110
+00:07:14,110 --> 00:07:18,000
+And that's going to be important to make sure that the random numbers I generate are the same as the
+
+111
+00:07:18,000 --> 00:07:19,450
+array and the numbers you generate.
+
+112
+00:07:20,260 --> 00:07:24,080
+So Nesle go ahead and type N.P. that random seed.
+
+113
+00:07:24,430 --> 00:07:27,270
+And then you can see the generator of the ran the numbers.
+
+114
+00:07:27,310 --> 00:07:31,290
+And typically I use the value 101 may change it up.
+
+115
+00:07:31,450 --> 00:07:39,990
+But what's important here is now if I say any random thought ran It's a let's say 0 1000.
+
+116
+00:07:40,060 --> 00:07:44,900
+Give me 10 random numbers run this I get back starting from 95.
+
+117
+00:07:44,900 --> 00:07:47,710
+A much more in numbers than in 40.
+
+118
+00:07:47,800 --> 00:07:48,590
+However no.
+
+119
+00:07:48,640 --> 00:07:54,970
+If I were to run again I constantly get back the same ran the numbers and that's because I've set this
+
+120
+00:07:55,030 --> 00:07:56,870
+random seed.
+
+121
+00:07:56,890 --> 00:08:02,500
+The important thing to note here is that this random seed is currently in the same cell as this random
+
+122
+00:08:02,500 --> 00:08:03,640
+integer command.
+
+123
+00:08:03,790 --> 00:08:10,630
+And that's important because if I were to copy and paste this into another cell I won't get back the
+
+124
+00:08:10,630 --> 00:08:14,200
+same random integers because that's the second time I run this.
+
+125
+00:08:14,200 --> 00:08:18,610
+So if I want to make sure that I constantly get back the same or intimidators I want to make sure that
+
+126
+00:08:18,610 --> 00:08:20,700
+I'm resetting that seat every time.
+
+127
+00:08:20,710 --> 00:08:27,520
+So again make sure that that seed is in the same cell as whatever operation is generating random numbers
+
+128
+00:08:27,520 --> 00:08:30,270
+to make sure that you're actually taking into account that seed.
+
+129
+00:08:30,280 --> 00:08:35,350
+Because if I keep running it outside of this then even though I set that seed it's going to keep generating
+
+130
+00:08:35,410 --> 00:08:36,560
+as I ask for them.
+
+131
+00:08:36,560 --> 00:08:43,020
+I have to reset the seed in order to get back that same sequence of random numbers.
+
+132
+00:08:43,060 --> 00:08:47,920
+OK that's basically all we need to know about creating an umpire or raise either one dimensional or
+
+133
+00:08:47,920 --> 00:08:48,580
+two dimensional.
+
+134
+00:08:48,580 --> 00:08:54,140
+Later on we'll learn about tensors which are essentially three dimensional and dimensional arrays.
+
+135
+00:08:54,410 --> 00:08:58,290
+We're going to do now is quickly cover a few useful operations.
+
+136
+00:08:58,420 --> 00:09:02,950
+So if I have an array here that's going to generate run we'll see a random rant.
+
+137
+00:09:03,010 --> 00:09:03,990
+It's 0.
+
+138
+00:09:03,990 --> 00:09:05,480
+One hundred ten.
+
+139
+00:09:05,480 --> 00:09:10,820
+And let's go ahead and grab that see just to make sure that we get the same numbers here.
+
+140
+00:09:10,990 --> 00:09:12,190
+So I ask for the survey.
+
+141
+00:09:12,220 --> 00:09:14,080
+You should have the same numbers I do.
+
+142
+00:09:14,200 --> 00:09:18,130
+If you want to find the max value of an array you can just say Max.
+
+143
+00:09:18,130 --> 00:09:20,940
+Call it like that if you want to find the minimum.
+
+144
+00:09:21,250 --> 00:09:22,720
+You can just call minimum.
+
+145
+00:09:22,750 --> 00:09:26,950
+There's lots of other functions and methods you can call here if hit tab you can see a bunch of them
+
+146
+00:09:26,950 --> 00:09:29,380
+here who definitely won't be using all of these.
+
+147
+00:09:29,470 --> 00:09:32,270
+A lot of this is happening in the background with tensor flow.
+
+148
+00:09:32,590 --> 00:09:37,390
+But you can do things like also grab the average what's also really nice is that if you want to grab
+
+149
+00:09:37,720 --> 00:09:43,870
+the index location of the max value so the max value here is ninety five bullets say this is a huge
+
+150
+00:09:43,870 --> 00:09:44,310
+array.
+
+151
+00:09:44,350 --> 00:09:50,440
+And I want to know whereas the actual index location of that max value I can use our emacs and that
+
+152
+00:09:50,440 --> 00:09:54,440
+returns back zero which is the index location of that max value.
+
+153
+00:09:54,490 --> 00:09:59,200
+And there's the same operation for Argemone or it's going to return the index position of the minimum
+
+154
+00:09:59,200 --> 00:10:02,130
+value and very quickly too.
+
+155
+00:10:02,150 --> 00:10:04,120
+And there is discussion of Empire operations.
+
+156
+00:10:04,140 --> 00:10:07,030
+I want to discuss the reshape method often IRA.
+
+157
+00:10:07,320 --> 00:10:12,480
+So if I take a look at my array right now it's one dimensional and just 10 elements but I can actually
+
+158
+00:10:12,480 --> 00:10:15,560
+reshape this using the reshape command.
+
+159
+00:10:15,750 --> 00:10:22,380
+And here I can reshape it into whatever shape I want as long as the 10 elements out evenly.
+
+160
+00:10:22,380 --> 00:10:25,950
+For example I can reshape this into a 2 by 5 array.
+
+161
+00:10:26,250 --> 00:10:32,900
+And here I have the two rows with five columns and we'll be using reshape to reshape tensors a lot.
+
+162
+00:10:32,910 --> 00:10:34,000
+So again reshape.
+
+163
+00:10:34,020 --> 00:10:34,650
+Very useful.
+
+164
+00:10:34,650 --> 00:10:36,690
+It just reshapes an array.
+
+165
+00:10:36,690 --> 00:10:39,550
+Finally let's go ahead and discuss indexing.
+
+166
+00:10:39,700 --> 00:10:41,920
+So I'm going to create a matrix.
+
+167
+00:10:42,340 --> 00:10:44,940
+We'll say in Empire range 0 to 100.
+
+168
+00:10:45,070 --> 00:10:48,320
+And then I'm going to call reshape off of this to be a 10 by 10.
+
+169
+00:10:48,520 --> 00:10:53,500
+And this sort of stacks methods on a higher rate is really common.
+
+170
+00:10:54,670 --> 00:11:01,360
+So now I have a nice numb piracy Ray 0 through 99 rubber goes up to about including 100 and it's 10
+
+171
+00:11:01,360 --> 00:11:01,910
+by 10.
+
+172
+00:11:01,930 --> 00:11:03,800
+So it includes a there.
+
+173
+00:11:04,090 --> 00:11:10,840
+So the way I can grab stuff if I just want to grab a single element let's say I wanted to grab the value
+
+174
+00:11:10,930 --> 00:11:19,500
+of the safe first row second column what I could do is say mats or whatever the name of your time to
+
+175
+00:11:19,500 --> 00:11:20,610
+the missional array is.
+
+176
+00:11:20,800 --> 00:11:26,620
+And then you passen the row you want starting at index 0 and then you can pasand the column you want.
+
+177
+00:11:26,620 --> 00:11:30,730
+So in this case I want column 1 and this should return the value 1.
+
+178
+00:11:30,760 --> 00:11:32,050
+So let's go in practice.
+
+179
+00:11:32,080 --> 00:11:34,830
+Go ahead and choose a random number here going to choose 43.
+
+180
+00:11:35,050 --> 00:11:36,890
+So let's try to index up 43.
+
+181
+00:11:37,060 --> 00:11:39,700
+That's 0 1 2 3 4.
+
+182
+00:11:39,700 --> 00:11:46,770
+So it's in the fourth row and then column wise 43 is 0 1 2 3.
+
+183
+00:11:46,780 --> 00:11:48,490
+So let's go ahead and put in 3 here.
+
+184
+00:11:48,760 --> 00:11:50,800
+Run this and then we have 43.
+
+185
+00:11:50,830 --> 00:11:56,590
+So again it's just the index location by RHO comma in the location by column.
+
+186
+00:11:56,590 --> 00:12:01,380
+So that is how you can get a single element out of a to them array.
+
+187
+00:12:01,450 --> 00:12:08,170
+You can also use slicing to grab chunks of the story and it works just like regular Python slicing.
+
+188
+00:12:08,290 --> 00:12:14,740
+So let's go ahead and say Matt let's say I want all the rows in the first column.
+
+189
+00:12:14,950 --> 00:12:20,590
+So that is I want all these rows 0 10 20 30 but just for the first column.
+
+190
+00:12:20,590 --> 00:12:23,390
+So essentially I just want 0 10 20 30 40 etc..
+
+191
+00:12:23,620 --> 00:12:28,570
+What I would do is I would use colon to indicate everything as far as Rose is concerned.
+
+192
+00:12:28,570 --> 00:12:34,280
+And then I can pass in zero to indicate that I only want that first column index 0 run that.
+
+193
+00:12:34,320 --> 00:12:38,350
+Now I can see you have an array here 0 10 20 30 etc..
+
+194
+00:12:38,360 --> 00:12:40,570
+I can also do kind of the opposite effect.
+
+195
+00:12:40,630 --> 00:12:43,340
+So grab all the columns in a particular row.
+
+196
+00:12:43,390 --> 00:12:51,080
+So if I just wanted to essentially return back a single row I could say five comma colon returns back
+
+197
+00:12:51,170 --> 00:12:54,830
+that entire row a little weird because you kind of think about it backwards.
+
+198
+00:12:54,830 --> 00:12:59,440
+The fact they are selecting all columns for one row returns back the whole row.
+
+199
+00:12:59,600 --> 00:13:01,070
+But that's the way it works.
+
+200
+00:13:01,070 --> 00:13:05,780
+Again it's fro comma column and you can use colon to indicate everything.
+
+201
+00:13:06,080 --> 00:13:07,610
+Then you can also do slices.
+
+202
+00:13:07,670 --> 00:13:16,400
+Let's take a look at our matrix again 0 through 99 and then we're going to say Matt here and let's go
+
+203
+00:13:16,400 --> 00:13:18,530
+ahead and grab just this first trunk.
+
+204
+00:13:18,590 --> 00:13:23,130
+0 1 2 10 11 12 20 21 22.
+
+205
+00:13:23,140 --> 00:13:30,660
+What I'm going to do here then is first slice off my rows so the rows I want is zero 10 20.
+
+206
+00:13:30,680 --> 00:13:36,100
+So that is starting at index 0 up to but not including three.
+
+207
+00:13:36,200 --> 00:13:41,900
+So that's 0 1 2 to get I'm up going up to bet on including that third index.
+
+208
+00:13:41,900 --> 00:13:44,530
+Or really that fourth row index three.
+
+209
+00:13:44,900 --> 00:13:48,140
+And then we're going to do essentially the same thing for 0 1 2.
+
+210
+00:13:48,320 --> 00:13:55,370
+So I'm sorry column 0 then slicing all the way and not including that index three there.
+
+211
+00:13:56,170 --> 00:14:01,310
+And that should return back 0 1 to 10 11 12 20 21 22.
+
+212
+00:14:01,310 --> 00:14:05,660
+So this is confusing to you go ahead and practice a little bit so see if you can select kind of random
+
+213
+00:14:05,660 --> 00:14:08,190
+chunks from this array and go ahead and index them.
+
+214
+00:14:08,240 --> 00:14:13,580
+The most confusing part I believe for beginners is the fact that it goes up to an not including that
+
+215
+00:14:13,730 --> 00:14:16,290
+last slice index.
+
+216
+00:14:16,470 --> 00:14:18,920
+Finally let's go ahead and discuss masking.
+
+217
+00:14:18,920 --> 00:14:22,420
+So masking is a super useful attribute of pi.
+
+218
+00:14:22,440 --> 00:14:24,050
+So I want to show it off.
+
+219
+00:14:24,120 --> 00:14:28,180
+Basically if you have a matrix here you can perform a Boolean operation on it.
+
+220
+00:14:28,200 --> 00:14:34,530
+For example I could ask Hey where is this matrix A greater than 50 and it'll return back a matrix of
+
+221
+00:14:34,530 --> 00:14:38,970
+boolean values and see the start as false and then once it becomes great and the fifth day they all
+
+222
+00:14:38,970 --> 00:14:40,340
+start returning true.
+
+223
+00:14:40,500 --> 00:14:46,530
+If I actually wanted to only select those values I don't want just this to the matrix of boolean values
+
+224
+00:14:46,560 --> 00:14:49,860
+but instead I want the actual values we can end up doing is the following.
+
+225
+00:14:49,860 --> 00:14:57,790
+We can say something like My filter is equal to this and then I'll grab my matrix again and pasan filter
+
+226
+00:14:59,210 --> 00:15:02,270
+and then it returns back all the values that have to be greater than 50.
+
+227
+00:15:02,390 --> 00:15:06,200
+And there they are typically you don't see this done in two steps.
+
+228
+00:15:06,210 --> 00:15:08,980
+So instead what you end up seeing is something like Matt.
+
+229
+00:15:09,320 --> 00:15:11,740
+And then inside of that Matt greater than 50.
+
+230
+00:15:12,140 --> 00:15:16,750
+And this is known as Boullion masking or just masking in general it's super useful.
+
+231
+00:15:16,940 --> 00:15:19,300
+And we'll be seeing it a little bit throughout this course.
+
+232
+00:15:19,560 --> 00:15:20,040
+OK.
+
+233
+00:15:20,240 --> 00:15:21,460
+That's really all there is to it.
+
+234
+00:15:21,470 --> 00:15:25,610
+You can go ahead and review the notebook in case you want any of the code I ran here.
+
+235
+00:15:25,610 --> 00:15:30,080
+Thanks everyone and I'll see you at the next lecture or we'll quickly do a crash course for pandas which
+
+236
+00:15:30,080 --> 00:15:31,460
+is built directly off of them by.
+

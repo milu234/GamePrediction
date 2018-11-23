@@ -1,0 +1,424 @@
+1
+00:00:05,570 --> 00:00:10,790
+Welcome everyone to this lecture we're actually going to construct our very first tensor float neural
+
+2
+00:00:10,790 --> 00:00:12,390
+network.
+
+3
+00:00:12,540 --> 00:00:17,520
+We've learned about all the pieces that work with tensor flow such as sessions graphs variables and
+
+4
+00:00:17,520 --> 00:00:23,070
+placeholders and with these building blocks we can now create our first neuron and our neural network.
+
+5
+00:00:23,070 --> 00:00:28,290
+We're going to create a neural network that performs a very simple linear fit to some to them internal
+
+6
+00:00:28,290 --> 00:00:34,050
+data that is we're going to have some features and then we're going to just say what is why given this
+
+7
+00:00:34,050 --> 00:00:37,360
+X source steps are the following.
+
+8
+00:00:37,410 --> 00:00:42,780
+We'll build the graph initiate the session and then feed data in and get some sort of output back and
+
+9
+00:00:42,780 --> 00:00:47,460
+we're going to use the basic components such as placeholders variables that we've learned so far to
+
+10
+00:00:47,460 --> 00:00:48,770
+accomplish this task.
+
+11
+00:00:49,770 --> 00:00:53,600
+So what does or graph actually going to look like when we designed this linear fit.
+
+12
+00:00:53,850 --> 00:00:59,370
+Well it should look like in matrix form something like W X plus B is equal to Z and you can see here
+
+13
+00:00:59,370 --> 00:01:04,290
+that it's has lots of parallels with a simple linear line of y m x plus B.
+
+14
+00:01:04,410 --> 00:01:09,630
+Except we're kind of choosing different variable terms here to line up more with kind of the classic
+
+15
+00:01:09,630 --> 00:01:10,320
+neuron.
+
+16
+00:01:10,650 --> 00:01:15,510
+So we're going to have a weight variable w and then we're going to multiply it by a placeholder object
+
+17
+00:01:15,560 --> 00:01:16,080
+x.
+
+18
+00:01:16,110 --> 00:01:19,050
+So that's what we're actually going to feed in our data.
+
+19
+00:01:19,080 --> 00:01:23,940
+We're gonna have an operation and matrix multiplication and then to that result we'll have another note
+
+20
+00:01:23,940 --> 00:01:29,370
+in the graph which is going to be another operation where we add in that be variable that we can pass
+
+21
+00:01:29,460 --> 00:01:34,530
+into an activation function such as the sigmoid function.
+
+22
+00:01:34,680 --> 00:01:39,420
+Afterwards we can add in the cost function in order to train your network to optimize the parameters
+
+23
+00:01:39,780 --> 00:01:41,280
+such as that w term.
+
+24
+00:01:41,310 --> 00:01:44,730
+And that beat her let's go ahead and build out the neural network.
+
+25
+00:01:44,730 --> 00:01:50,780
+We're going to start with just a really simple review of using placeholders variables graphs and sessions.
+
+26
+00:01:50,910 --> 00:01:55,560
+Just going to do some simple additive operations and multiplicative operations then will actually build
+
+27
+00:01:55,560 --> 00:01:58,780
+out the neural network but chip to chip it up and get started.
+
+28
+00:01:59,190 --> 00:02:01,890
+OK first thing to do in the notebook is a couple of imports.
+
+29
+00:02:01,930 --> 00:02:08,790
+I'm going to import some pies and P and sensor flow as tya and then I'm also going to be setting some
+
+30
+00:02:08,790 --> 00:02:10,890
+random seed of values here.
+
+31
+00:02:10,920 --> 00:02:13,310
+That way you can make sure you get the same random results.
+
+32
+00:02:13,350 --> 00:02:22,830
+I do and T.F. are a tensor flow also has a set random seed Suddenlink say and P that ran that seed set
+
+33
+00:02:22,830 --> 00:02:25,910
+it to 101 as well as tensor Flo's random seed.
+
+34
+00:02:26,160 --> 00:02:29,580
+And you want to make sure you run the cells in the same order I do.
+
+35
+00:02:29,610 --> 00:02:34,080
+If you run a cell more than once you may not get the same random numbers that I'm getting here.
+
+36
+00:02:34,080 --> 00:02:38,970
+So pay attention to this little encounter OPERATOR And you can always restart everything but just saying
+
+37
+00:02:38,970 --> 00:02:47,440
+kernel restart and run all or you can just go sell run all let's come over here and create some random
+
+38
+00:02:47,440 --> 00:02:48,280
+data.
+
+39
+00:02:48,310 --> 00:02:50,150
+So this is just for demonstration purposes.
+
+40
+00:02:50,200 --> 00:02:55,720
+I kind of want to show you how you could build a very simple session for simple operation such as addition
+
+41
+00:02:55,750 --> 00:02:56,830
+and multiplication.
+
+42
+00:02:56,920 --> 00:03:00,130
+Once we have that down we'll actually create our neural network.
+
+43
+00:03:00,130 --> 00:03:03,010
+Right now I'm just going to create some random data points.
+
+44
+00:03:03,190 --> 00:03:05,450
+So we'll say Ampyra in that uniform.
+
+45
+00:03:05,500 --> 00:03:11,010
+Going from zero to 100 and then let's ask it to be in the shape five by five.
+
+46
+00:03:11,850 --> 00:03:13,890
+And let's get our Random data out.
+
+47
+00:03:13,900 --> 00:03:18,210
+So here we have a random array and you should have the exact same number of values I do here.
+
+48
+00:03:19,220 --> 00:03:25,870
+Then we're going to do the same thing for a random B and P ran them uniform and the only thing that's
+
+49
+00:03:25,870 --> 00:03:32,280
+going be different here is the shape of this it's that five by five it's going to be 5 by 1.
+
+50
+00:03:32,420 --> 00:03:33,750
+And then if you want check it out.
+
+51
+00:03:33,860 --> 00:03:34,990
+It should look like this.
+
+52
+00:03:35,000 --> 00:03:38,070
+And again you should have the exact same numbers I do here.
+
+53
+00:03:38,120 --> 00:03:42,800
+If you are concerned you're not going in same numbers just run the seed in the same line or the same
+
+54
+00:03:42,800 --> 00:03:45,650
+cell as these random uniforms.
+
+55
+00:03:45,720 --> 00:03:51,060
+Up next we need to create placeholders for these random uniform objects so let's go in and create them
+
+56
+00:03:51,550 --> 00:03:56,520
+or create two variables A and B they're both going to be placeholders.
+
+57
+00:03:56,520 --> 00:04:02,750
+And the only thing I really need to provide here is what data point or what data type I expect so we'll
+
+58
+00:04:02,760 --> 00:04:05,230
+say to float 32.
+
+59
+00:04:05,240 --> 00:04:12,550
+Now we're going to say B is equal to T.F. placeholder to float 32.
+
+60
+00:04:12,610 --> 00:04:16,820
+Later on when we talk about convolutional neural networks that shape parameters going to be more important.
+
+61
+00:04:16,960 --> 00:04:22,320
+But right now a and b just default shape Nunn's fine to float through to both of them.
+
+62
+00:04:22,330 --> 00:04:23,730
+That's totally fine.
+
+63
+00:04:23,730 --> 00:04:28,990
+Now let's create some operations to really simple operations just additive and multiplicative.
+
+64
+00:04:29,290 --> 00:04:30,610
+So there's two ways I could do this.
+
+65
+00:04:30,610 --> 00:04:33,470
+One is I could call these methods off the tensor flow.
+
+66
+00:04:33,670 --> 00:04:36,430
+So there is an add operation directly up tensor flow.
+
+67
+00:04:36,460 --> 00:04:42,940
+And if you do shift enter here it says returns x plus y element wise thing to do is called Multiply
+
+68
+00:04:42,940 --> 00:04:44,150
+here.
+
+69
+00:04:44,420 --> 00:04:51,310
+Multiply tensor for has that as well and its performs X times Y element wise and then it also has a
+
+70
+00:04:51,340 --> 00:04:53,160
+matrix multiplication at all.
+
+71
+00:04:53,180 --> 00:04:56,790
+And it says multiplies matrix A matrix B cetera.
+
+72
+00:04:56,920 --> 00:05:04,310
+But what's nice about tensor flow is that it can actually understand the builtin Python operations or
+
+73
+00:05:04,310 --> 00:05:10,490
+operator symbols so we can say a plus b and it's going to understand when we actually pass that intersession
+
+74
+00:05:10,580 --> 00:05:11,910
+that I'm just asking for.
+
+75
+00:05:11,910 --> 00:05:19,320
+In addition there Cendant going to also say Moel up for multiplication operation is equal to a times
+
+76
+00:05:19,340 --> 00:05:21,440
+b.
+
+77
+00:05:21,440 --> 00:05:27,260
+Now what I'm going to do is create some sessions that they can use graphs with feed dictionaries to
+
+78
+00:05:27,260 --> 00:05:29,910
+actually get results off of these operations.
+
+79
+00:05:31,420 --> 00:05:43,890
+I'll type out with session as S S S I want to get the results of this ad and I will say session or cesse
+
+80
+00:05:43,880 --> 00:05:50,000
+thought run and then I need a passen the operation as well as a feed dictionary.
+
+81
+00:05:50,050 --> 00:05:57,130
+So we have our operation here at up and that's going to add a plus b remember a and b those are placeholder
+
+82
+00:05:57,130 --> 00:05:57,660
+objects.
+
+83
+00:05:57,700 --> 00:05:59,200
+So they still need data.
+
+84
+00:05:59,290 --> 00:06:05,950
+And the way we provide data using Tusser flow is with a feed dictionary our feed dictionary is going
+
+85
+00:06:05,950 --> 00:06:12,130
+to be a dictionary where the keys are the actual placeholders and then the values corresponding to those
+
+86
+00:06:12,130 --> 00:06:16,030
+keys is the data that has to be filled into those placeholders.
+
+87
+00:06:16,030 --> 00:06:25,000
+For example I can say a is going to be the value 10 and B is going to be the value 20.
+
+88
+00:06:25,540 --> 00:06:36,160
+So I can say print ad results and when I run this I should see 30 because 10 plus 20 is 30.
+
+89
+00:06:36,200 --> 00:06:42,000
+Now we can go ahead and it's it's just 10 we're going to add in our random data here.
+
+90
+00:06:44,330 --> 00:06:50,660
+And now when I run this I see the results of adding those together and this is Matrix addition because
+
+91
+00:06:50,660 --> 00:06:53,800
+member had a 5 by 5 and 8 5 by 1 here.
+
+92
+00:06:53,810 --> 00:06:59,150
+But you get the idea that essentially you're just having a field dictionary have a placeholder and then
+
+93
+00:06:59,150 --> 00:07:01,180
+that data you're going to feed it.
+
+94
+00:07:01,180 --> 00:07:03,990
+Let's do the same thing for our multiplication result.
+
+95
+00:07:04,100 --> 00:07:08,360
+So say multiply result is equal to session run.
+
+96
+00:07:08,570 --> 00:07:15,950
+And then our location OPERATOR We have a feed dictionary here and then same thing we can say Rande a
+
+97
+00:07:16,820 --> 00:07:25,410
+and then B is brand the B and then we're just going to print those results or say multiply results run
+
+98
+00:07:25,410 --> 00:07:25,760
+that.
+
+99
+00:07:25,800 --> 00:07:27,180
+And now we should see two results here.
+
+100
+00:07:27,180 --> 00:07:31,020
+So we see two matrices and if you want you can add a print new line.
+
+101
+00:07:31,300 --> 00:07:35,180
+So they're a little more space than there you have it.
+
+102
+00:07:35,360 --> 00:07:35,650
+OK.
+
+103
+00:07:35,680 --> 00:07:40,240
+So that's a really simple example of running a session to create a graph with a feed dictionary.
+
+104
+00:07:40,240 --> 00:07:44,650
+Up next in the next lecture we're actually going to create the example neural that work that we discussed
+
+105
+00:07:44,860 --> 00:07:46,120
+in the sleights.
+
+106
+00:07:46,120 --> 00:07:46,810
+I'll see you there.
+

@@ -1,0 +1,668 @@
+1
+00:00:05,360 --> 00:00:10,610
+Welcome everyone to the solution lecture for the free Russian exercise let's go to the Jupiter notebook
+
+2
+00:00:10,700 --> 00:00:12,740
+and code along with the solutions.
+
+3
+00:00:12,740 --> 00:00:14,260
+OK here we are at the notebook.
+
+4
+00:00:14,270 --> 00:00:16,430
+Let's go ahead and start off.
+
+5
+00:00:16,490 --> 00:00:18,440
+First thing I want to do is actually get the data.
+
+6
+00:00:18,470 --> 00:00:24,170
+So I'm going to import pandas as PD and I'm hitting alt enter there it's Create a couple of more cells
+
+7
+00:00:24,610 --> 00:00:31,840
+and I will read in the data so that housing is equal to PD ritziest we obviously can call the data frame
+
+8
+00:00:31,850 --> 00:00:32,730
+whatever you want.
+
+9
+00:00:32,900 --> 00:00:34,940
+And then we say how housing clean.
+
+10
+00:00:34,950 --> 00:00:40,720
+See the file read that in and we can check out the head of the data frame.
+
+11
+00:00:41,010 --> 00:00:44,390
+So I see here I have housing median age total rooms total bedrooms.
+
+12
+00:00:44,390 --> 00:00:46,190
+Population households et cetera.
+
+13
+00:00:46,470 --> 00:00:50,010
+Now we're going to go ahead and do is do the train test split.
+
+14
+00:00:50,330 --> 00:00:56,520
+So in order to do that it's come at this out and let's just describe here showing the school information
+
+15
+00:00:56,520 --> 00:00:57,830
+in case you're interested in that.
+
+16
+00:00:58,020 --> 00:00:59,800
+But we need to do the train to split.
+
+17
+00:00:59,820 --> 00:01:03,130
+So I want to grab all the features and then the white label.
+
+18
+00:01:03,330 --> 00:01:07,480
+So say the y value is equal to that housing data frame.
+
+19
+00:01:07,800 --> 00:01:09,960
+And I just want the median house value.
+
+20
+00:01:09,960 --> 00:01:11,850
+Remember that's what I'm trying to predict.
+
+21
+00:01:11,850 --> 00:01:13,650
+And let's grab the rest of those features.
+
+22
+00:01:13,710 --> 00:01:24,870
+So we'll say X data is equal to housing drop and then I'm going to drop the median house value column
+
+23
+00:01:27,930 --> 00:01:34,710
+and remembered to do that along X equal to 1 then we're going to say from Let's zoom in one more level
+
+24
+00:01:34,710 --> 00:01:40,530
+here so we can see this clearly from S-K learn model selection.
+
+25
+00:01:40,870 --> 00:01:46,460
+Import train split run that then train to split.
+
+26
+00:01:46,460 --> 00:01:50,970
+Go ahead and do shift enter there which is a nice little convenient way of scrolling down through the
+
+27
+00:01:50,970 --> 00:01:55,110
+docstring until you find this line so you can easily just copy and paste it here.
+
+28
+00:01:56,540 --> 00:02:04,310
+All right so now I have X train x test Y train Y test at test size to be 30 percent and then we want
+
+29
+00:02:04,310 --> 00:02:09,990
+to make sure this x is x data and this Y is why y.
+
+30
+00:02:10,220 --> 00:02:15,640
+And if I scroll over to the right I always say random stay as one to one because I always remember that.
+
+31
+00:02:15,650 --> 00:02:17,940
+But again that doesn't really matter here.
+
+32
+00:02:17,960 --> 00:02:19,330
+You can set it to whatever you want.
+
+33
+00:02:19,430 --> 00:02:22,100
+Your results just may be a little different than mine.
+
+34
+00:02:22,100 --> 00:02:24,040
+Up next we want to scale the feature data.
+
+35
+00:02:24,050 --> 00:02:30,730
+So we're going to use as Kaylor and pre-processing in order to create minimax scalar for saying it is
+
+36
+00:02:30,730 --> 00:02:32,280
+actually important.
+
+37
+00:02:32,290 --> 00:02:40,870
+So from a scalar and pre-processing import minimax scalar that I'm going to say scalar is equal to an
+
+38
+00:02:40,870 --> 00:02:43,260
+instance of minimax scalar.
+
+39
+00:02:43,270 --> 00:02:45,330
+And then we want to fit our scalar.
+
+40
+00:02:45,390 --> 00:02:49,900
+And we're only going to fit it on the training data otherwise it would kind of be cheating because we
+
+41
+00:02:49,910 --> 00:02:54,860
+want to assume that we have prior knowledge of test sets.
+
+42
+00:02:55,000 --> 00:03:00,720
+So we fit onto the training data and then whoops we'll say X train.
+
+43
+00:03:00,800 --> 00:03:05,000
+Is that equal to Peetie data frame.
+
+44
+00:03:05,440 --> 00:03:13,520
+And I'm going to have the data here be equal to scalar transform extreme.
+
+45
+00:03:14,410 --> 00:03:19,560
+And I'm doing this all in one line once that you could kind of separate this out to multiple steps than
+
+46
+00:03:19,570 --> 00:03:20,590
+the columns here.
+
+47
+00:03:20,590 --> 00:03:29,290
+This puts us on a new line is going to be called to X train columns and then the index here is going
+
+48
+00:03:29,290 --> 00:03:32,040
+to be equal to x train dot index.
+
+49
+00:03:32,050 --> 00:03:38,560
+So this is just a way to basically reset X train to be the scaled version of the data because the fight
+
+50
+00:03:38,810 --> 00:03:40,610
+were to transform this just by itself.
+
+51
+00:03:40,610 --> 00:03:46,810
+So if I were to grab this line just by itself let me show you what would happen if I run just this line.
+
+52
+00:03:46,930 --> 00:03:48,590
+I get back a pie array.
+
+53
+00:03:48,610 --> 00:03:53,930
+But instead what I want is a panel data frame like I had appear of just the features.
+
+54
+00:03:53,980 --> 00:04:00,670
+So to make sure that happens I'm going to pass this array in as data to PD that data frame and then
+
+55
+00:04:00,670 --> 00:04:06,100
+to make sure the columns and the index are the same and with say column 0 to X train that columns and
+
+56
+00:04:06,170 --> 00:04:08,410
+index is equal to x train the index.
+
+57
+00:04:08,530 --> 00:04:13,730
+And if you wanted to you could call this X train something like scaled X train et cetera but for unmelted
+
+58
+00:04:13,750 --> 00:04:19,440
+kind of overwrite it with X train and then we're going to do the same thing for X test.
+
+59
+00:04:19,540 --> 00:04:30,380
+So we're only doing this for the features data frame and then we just copy and paste this here except
+
+60
+00:04:30,510 --> 00:04:31,520
+that a train.
+
+61
+00:04:31,550 --> 00:04:38,620
+Going to be test overhears well and then over here as well.
+
+62
+00:04:39,880 --> 00:04:40,180
+All right.
+
+63
+00:04:40,210 --> 00:04:46,300
+So we successfully split our data using a train to split and now the feature data is scaled as well.
+
+64
+00:04:46,570 --> 00:04:49,680
+So once we have that will scroll down and create the feature columns.
+
+65
+00:04:49,690 --> 00:04:51,910
+So we want to create the necessary feature columns.
+
+66
+00:04:51,910 --> 00:04:58,060
+So again I can do that easily just by saying housing columns to get a list of the columns themselves
+
+67
+00:04:58,440 --> 00:05:04,590
+then going to import tensor flow as T.F..
+
+68
+00:05:04,930 --> 00:05:06,610
+And then I want to create those feature columns.
+
+69
+00:05:06,610 --> 00:05:10,060
+So I'll just do one of them and then copy the rest from the solutions.
+
+70
+00:05:10,060 --> 00:05:15,100
+So if you want to get to the age column so that's the housing median age I'll say a variable called
+
+71
+00:05:15,130 --> 00:05:20,110
+Age is equal to T.F. feature column numeric column.
+
+72
+00:05:20,140 --> 00:05:21,490
+And then I'll pass in the list there.
+
+73
+00:05:21,490 --> 00:05:26,070
+So housing median age.
+
+74
+00:05:26,250 --> 00:05:28,870
+All right so that's one example you want to do that for the rest of them.
+
+75
+00:05:29,040 --> 00:05:33,480
+So you want it could set this up for a loop that's kind of looping through these columns and then setting
+
+76
+00:05:33,480 --> 00:05:38,130
+them up through some sort of variable dictionary but instead we're just going to do them all individually
+
+77
+00:05:38,250 --> 00:05:42,610
+by copying and pasting and then run that.
+
+78
+00:05:42,710 --> 00:05:48,260
+All right so we have a feature column and they also want to make sure to aggregate these all into some
+
+79
+00:05:48,260 --> 00:05:56,930
+sort of variable so of say feet calls for the feature columns is equal to age rooms bedrooms pop for
+
+80
+00:05:56,930 --> 00:06:00,700
+population household income.
+
+81
+00:06:00,700 --> 00:06:04,160
+All right so I have my list of feature columns where these are tense full of feature columns.
+
+82
+00:06:04,310 --> 00:06:08,600
+They're all continuous values and just using numeric column for all of them that I want to create an
+
+83
+00:06:08,660 --> 00:06:10,460
+input function for the estimator object.
+
+84
+00:06:10,480 --> 00:06:22,400
+Let's go ahead and do that say input func is equal to T.F. estimator inputs and I'm using panderers
+
+85
+00:06:22,400 --> 00:06:31,050
+as my input impiously used panderers input function and then I set X as equal to x train will say Y
+
+86
+00:06:31,050 --> 00:06:41,920
+is equal to y train and then I'll choose a batch size of 10 and let's say a number of POCs is equal
+
+87
+00:06:41,920 --> 00:06:43,290
+to 1000.
+
+88
+00:06:43,330 --> 00:06:49,750
+And you can play around with these values and we'll say shuffle is equal to true here because this is
+
+89
+00:06:49,750 --> 00:06:54,640
+our training function that we want to create the estimator model and we're going to use a dense neural
+
+90
+00:06:54,640 --> 00:06:57,970
+network Tresor you can go out and play around the hidden units.
+
+91
+00:06:58,030 --> 00:07:02,760
+I'm going to set it to be three layers of six neurons.
+
+92
+00:07:03,020 --> 00:07:12,660
+So say ATF estimator that's neural network repressor and I will say it in units and then we just pass
+
+93
+00:07:12,660 --> 00:07:13,740
+in a list here.
+
+94
+00:07:13,810 --> 00:07:18,630
+So I'm choosing six because the inputs I have are six features essentially.
+
+95
+00:07:18,770 --> 00:07:23,590
+Again there's no real right or wrong answer you can really play around with these units as much as you
+
+96
+00:07:23,590 --> 00:07:26,400
+want as we've seen in sensor flow playground.
+
+97
+00:07:26,590 --> 00:07:32,150
+But right now we'll keep it simple just three layers six units each and then I also need to pass in
+
+98
+00:07:32,150 --> 00:07:37,670
+the feature columns which we've already defined as fit calls so run that that should then create your
+
+99
+00:07:37,670 --> 00:07:41,420
+model and then you going to train the model for a thousand steps.
+
+100
+00:07:41,640 --> 00:07:44,190
+And then later you can come back to it and train it for more.
+
+101
+00:07:44,250 --> 00:07:53,430
+I'll go ahead and just say model train pass in our input functions or that was that input funk we created
+
+102
+00:07:54,180 --> 00:08:02,800
+and let's say steps that steps equal to just 20000 for it now since I it's a pretty fast computer so
+
+103
+00:08:02,800 --> 00:08:06,200
+while that's training we're also going to do is create a prediction.
+
+104
+00:08:06,200 --> 00:08:09,400
+So let that train let me scroll down.
+
+105
+00:08:09,420 --> 00:08:12,920
+I'll probably end up hopping forward here as it continues.
+
+106
+00:08:12,920 --> 00:08:13,200
+All right.
+
+107
+00:08:13,210 --> 00:08:14,120
+Jump forward in time.
+
+108
+00:08:14,120 --> 00:08:17,680
+My model is now finished training for 20000 steps on my computer.
+
+109
+00:08:17,680 --> 00:08:20,950
+That took about 30 seconds and I'm a pretty fast computer.
+
+110
+00:08:21,020 --> 00:08:26,840
+So we're going to do now it's create a prediction input function that I can use the Predict method with.
+
+111
+00:08:26,890 --> 00:08:34,820
+So let's go ahead and do that will say predict underscore input underscore phunk is equal to T.F. estimator
+
+112
+00:08:36,170 --> 00:08:44,840
+inputs and we're still using Pansy's input function that we're going to say x is equal to x test then
+
+113
+00:08:44,860 --> 00:08:50,440
+we'll say the batch size is equal to what we chose before which is 10.
+
+114
+00:08:50,770 --> 00:08:52,600
+Here I'm only using this for predict.
+
+115
+00:08:52,600 --> 00:09:00,250
+So I'm not going to have a Y value you'd use that for evaluation then we'll say number of the POCs since
+
+116
+00:09:00,250 --> 00:09:03,680
+I only want to run this one just to get one set of predictions I'll say one.
+
+117
+00:09:03,880 --> 00:09:07,240
+And then I want to make sure shuffle is equal to false because I'm using this for predictions.
+
+118
+00:09:07,240 --> 00:09:09,040
+I don't want the shuffling to occur.
+
+119
+00:09:09,450 --> 00:09:11,280
+So predict input function.
+
+120
+00:09:11,560 --> 00:09:13,600
+So let's get a prediction generator.
+
+121
+00:09:13,630 --> 00:09:18,730
+Remember the return generator objects will need to cast them to a list so we'll same model and then
+
+122
+00:09:18,730 --> 00:09:21,230
+we'll call that predict off of.
+
+123
+00:09:21,240 --> 00:09:29,700
+So we say that predict and then I'm going to passen that predict input function so that we have that
+
+124
+00:09:29,780 --> 00:09:37,670
+that predict generator and then we'll say predictions is equal to a list or cast that to a list.
+
+125
+00:09:37,710 --> 00:09:38,420
+There we go.
+
+126
+00:09:38,640 --> 00:09:41,960
+So now I ran that generator I have these predictions here.
+
+127
+00:09:42,060 --> 00:09:47,150
+So if I check those out let me insert a cell below so to insert itself below.
+
+128
+00:09:47,400 --> 00:09:53,490
+If I check our predictions it's essentially this list of dictionary items where we have a prediction
+
+129
+00:09:53,850 --> 00:09:59,650
+and then some sort of array value indicating the predicted housing price.
+
+130
+00:09:59,660 --> 00:10:03,100
+So now it's time to calculate the mean squared error.
+
+131
+00:10:03,160 --> 00:10:04,190
+There's different ways to do this.
+
+132
+00:10:04,190 --> 00:10:09,400
+You can use manual coding but as you learn metric metrics is really useful.
+
+133
+00:10:09,530 --> 00:10:11,380
+So I'll show you how to do that.
+
+134
+00:10:11,420 --> 00:10:16,880
+First off I'm going to make some final predictions here will say final Pretz is an empty list and I'll
+
+135
+00:10:16,880 --> 00:10:26,830
+say for Fred in the predictions list that I just showed you I'm going to say final Freda's and I'm going
+
+136
+00:10:26,830 --> 00:10:28,950
+to append this dictionary value.
+
+137
+00:10:28,960 --> 00:10:34,330
+So essentially just grabbing all this array information instead of having a list that dictionaries will
+
+138
+00:10:34,390 --> 00:10:41,720
+say Fred for the actions and we could have also done this with Philos. comprehension.
+
+139
+00:10:43,220 --> 00:10:48,940
+Will say from a scalar metrics import mean squared error.
+
+140
+00:10:49,060 --> 00:10:53,380
+And that's basically what this link takes you to if you go to click on it I'll take you to the documentation
+
+141
+00:10:53,380 --> 00:10:54,140
+for that.
+
+142
+00:10:54,190 --> 00:10:59,270
+But S-K learn has means square error built into it which means if you want root mean squared.
+
+143
+00:10:59,320 --> 00:11:01,530
+You just take the square root of that.
+
+144
+00:11:01,570 --> 00:11:03,540
+So if you take a look at it mean squared error takes.
+
+145
+00:11:03,550 --> 00:11:07,030
+It just takes in the true values and the predictive values.
+
+146
+00:11:07,030 --> 00:11:08,630
+So let's pass those in.
+
+147
+00:11:08,800 --> 00:11:13,900
+We know we have Y test wups we know we have y underscore it test.
+
+148
+00:11:14,140 --> 00:11:18,610
+And we also know we have our final predictions and then we want the square root of that.
+
+149
+00:11:18,700 --> 00:11:21,580
+So we'll say the power of 0.5.
+
+150
+00:11:21,700 --> 00:11:24,580
+We run that and we should get around 100000.
+
+151
+00:11:24,580 --> 00:11:28,420
+So that means or mean squirt air is around hundred thousand dollars.
+
+152
+00:11:28,420 --> 00:11:30,220
+If you take a look at the median price.
+
+153
+00:11:30,220 --> 00:11:35,450
+So if we come back here and take a look at some of this the school information of our dataset so let's
+
+154
+00:11:35,500 --> 00:11:38,590
+say housing.
+
+155
+00:11:39,490 --> 00:11:47,290
+Describe Let's transpose that and we run that if we take a look here median house value it looks like
+
+156
+00:11:47,440 --> 00:11:49,980
+the mean is around 200000.
+
+157
+00:11:50,260 --> 00:11:57,100
+So we're not doing super great for our model if our mean square error is 100000 So we're not really
+
+158
+00:11:57,100 --> 00:11:59,040
+doing quite a great fit here.
+
+159
+00:11:59,050 --> 00:12:04,870
+So something you may want to do is trade training for more steps maybe shoot this up to 100000 or try
+
+160
+00:12:04,900 --> 00:12:11,140
+editing your model more hidden units and we can also do is play around with a linear repressor not a
+
+161
+00:12:11,140 --> 00:12:14,500
+dense neural network regressors and see if that performs better.
+
+162
+00:12:14,500 --> 00:12:20,400
+But hopefully through this exercise we're able to understand the basics of the T.F. estimator API.
+
+163
+00:12:20,620 --> 00:12:26,080
+So the main goal of this exercise was not to actually create the best model ever but it was to understand
+
+164
+00:12:26,320 --> 00:12:29,380
+the general process using TFT estimator.
+
+165
+00:12:29,410 --> 00:12:29,780
+OK.
+
+166
+00:12:29,800 --> 00:12:32,600
+If you have any questions please feel free to post the Q&amp;A forms.
+
+167
+00:12:32,770 --> 00:12:33,970
+I'll see you at the next lecture.
+

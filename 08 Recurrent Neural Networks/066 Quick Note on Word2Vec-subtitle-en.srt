@@ -1,0 +1,188 @@
+1
+00:00:05,870 --> 00:00:12,470
+Hello everyone this lecture is going to serve as a quick note on the word to VAK lectures.
+
+2
+00:00:12,500 --> 00:00:16,440
+So there's going to be an optional series of lectures describing how you could implement the words of
+
+3
+00:00:16,450 --> 00:00:22,550
+ECK model which is a model that those embeddings in a vector space for individual words with tensor
+
+4
+00:00:22,550 --> 00:00:23,330
+flow.
+
+5
+00:00:23,330 --> 00:00:28,220
+Now if you actually want to practically implement word to VEC I would personally not recommend you use
+
+6
+00:00:28,220 --> 00:00:28,840
+tensor flow.
+
+7
+00:00:28,850 --> 00:00:34,580
+In fact lots of people have already done a lot of work to create nice API libraries that quickly and
+
+8
+00:00:34,580 --> 00:00:40,310
+easily create word to Veck models doing what we do in the series of lectures that you're about to see.
+
+9
+00:00:40,310 --> 00:00:44,510
+Basically it does all the hard work over again and you're gonna end up reinventing the wheel.
+
+10
+00:00:44,570 --> 00:00:49,880
+So if you actually want to do a practical implementation of sorts of EQ on your own datasets I highly
+
+11
+00:00:49,880 --> 00:00:52,500
+recommend you check out the gensym library instead.
+
+12
+00:00:52,610 --> 00:00:56,870
+If you're further interested in words HVAC and I'll mention it again later on during the lectures.
+
+13
+00:00:56,870 --> 00:01:02,300
+So keep in mind that this series of lectures is basically going to be a full manual implementation of
+
+14
+00:01:02,360 --> 00:01:04,680
+using tenderfoots create the words of model.
+
+15
+00:01:04,820 --> 00:01:09,380
+But if you actually want to do it in real life I would recommend that you avoid tensor flow and use
+
+16
+00:01:09,380 --> 00:01:10,700
+gensym instead.
+
+17
+00:01:10,700 --> 00:01:14,650
+In fact let's hop over to the gensym Web site so I can give you just a quick tour of it.
+
+18
+00:01:14,660 --> 00:01:18,710
+We don't cover this course because it's technically not related to sensor flow but I do want you to
+
+19
+00:01:18,710 --> 00:01:23,700
+be aware of it as a practical solution for applying or its effect to your own problems.
+
+20
+00:01:24,170 --> 00:01:26,600
+OK so here I am at the gensym Web site.
+
+21
+00:01:26,590 --> 00:01:30,510
+If you just google search Python plus gensym you'll end up finding it.
+
+22
+00:01:30,710 --> 00:01:36,080
+And basically this is topic modeling and natural language processing but it uses a really nice simple
+
+23
+00:01:36,080 --> 00:01:41,810
+to use API so you can click here on tutorials and it basically has full tutorials and everything you
+
+24
+00:01:41,810 --> 00:01:42,320
+need to do.
+
+25
+00:01:42,380 --> 00:01:46,670
+If you want to go from strings to vectors you can click on this here and it basically shows you how
+
+26
+00:01:46,670 --> 00:01:49,150
+you can end up representing strings as vectors.
+
+27
+00:01:49,190 --> 00:01:54,470
+Otherwise known as word to VEC so shows you how to do it and you'll notice here that the code is really
+
+28
+00:01:54,470 --> 00:01:55,260
+quite short.
+
+29
+00:01:55,460 --> 00:02:00,890
+So it's a lot simpler to use than the full implementation will see with tensor flow later on in this
+
+30
+00:02:00,890 --> 00:02:01,360
+course.
+
+31
+00:02:01,430 --> 00:02:03,510
+So I recommend if you want to use words of Eq.
+
+32
+00:02:03,530 --> 00:02:04,740
+Check out gensym.
+
+33
+00:02:04,760 --> 00:02:08,690
+It also has a lot more additional functionality and methods you can call once you've already trained
+
+34
+00:02:08,690 --> 00:02:09,480
+your model.
+
+35
+00:02:09,560 --> 00:02:13,190
+If you need instructions on how to install it you click here on install and it basically tells you you
+
+36
+00:02:13,190 --> 00:02:15,510
+can just use Pipp install or an easy install.
+
+37
+00:02:15,650 --> 00:02:17,170
+Or you can just download it directly.
+
+38
+00:02:17,450 --> 00:02:18,840
+And then there's also support.
+
+39
+00:02:18,920 --> 00:02:21,380
+There's API so you have full references here.
+
+40
+00:02:21,560 --> 00:02:25,230
+So again I really recommend if you're going to dive deep into Word.
+
+41
+00:02:25,400 --> 00:02:27,590
+Or even just natural language processing in general.
+
+42
+00:02:27,590 --> 00:02:30,170
+You definitely give gensym a try.
+
+43
+00:02:30,200 --> 00:02:32,480
+OK so that's my little plug here.
+
+44
+00:02:32,540 --> 00:02:37,200
+Again for practical implementation of word to use this library don't use tensor flow.
+
+45
+00:02:37,490 --> 00:02:43,040
+But since this is a curse on tensor flow and words of x is a pretty famous example of using deep learning
+
+46
+00:02:43,160 --> 00:02:46,670
+will go ahead and show you how it's done in the next series of lectures.
+
+47
+00:02:46,860 --> 00:02:49,250
+OK thanks everyone and I'll see you at the next lecture.
+

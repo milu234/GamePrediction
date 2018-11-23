@@ -1,0 +1,256 @@
+1
+00:00:05,300 --> 00:00:08,080
+Well everyone welcome to this quick overview of pandas.
+
+2
+00:00:08,110 --> 00:00:12,670
+We're actually going to be using pi a lot more than pandas so we're going to show you here how you can
+
+3
+00:00:12,670 --> 00:00:18,250
+use pandas to read in a sci fi file which will be our main use for pandas and then how to access things
+
+4
+00:00:18,250 --> 00:00:20,710
+from the data frame which Pandurs creates.
+
+5
+00:00:20,800 --> 00:00:22,870
+Let's hop over to Jupiter notebook.
+
+6
+00:00:22,930 --> 00:00:29,860
+OK here I am in the Juber notebook and Lynsay import Pandurs as PD shift enter to run that and we're
+
+7
+00:00:29,860 --> 00:00:36,650
+going to be mainly using panels to read in files so you can use PD read underscore and hit tab here.
+
+8
+00:00:36,670 --> 00:00:41,110
+You'll notice that Pindar's can read from a variety of formats are mainly just going to be using C as
+
+9
+00:00:41,120 --> 00:00:42,110
+V files.
+
+10
+00:00:42,400 --> 00:00:49,060
+So then what you do here is you passen as a string the entire file path to the CSP file or if the CC
+
+11
+00:00:49,090 --> 00:00:54,440
+file is located in the same directory as this particular notebook which is the case for the zip file
+
+12
+00:00:54,440 --> 00:00:55,580
+that comes with this course.
+
+13
+00:00:55,680 --> 00:00:57,970
+And if you ever wondering what directory you're in.
+
+14
+00:00:58,090 --> 00:01:03,280
+Just type in P.W. the shift enter and I'll report back what directory you're in.
+
+15
+00:01:03,280 --> 00:01:08,740
+So again all you need to do is passen the location of the CFE file.
+
+16
+00:01:08,830 --> 00:01:14,920
+So I have the CC file located in this character right here so I'll have to do is type it in this file
+
+17
+00:01:14,980 --> 00:01:16,800
+called salaries CXVII.
+
+18
+00:01:16,810 --> 00:01:22,060
+Keep in mind every CACP file has the extension that cxxviii sometimes it's just salary's in the name
+
+19
+00:01:22,060 --> 00:01:22,630
+of the file.
+
+20
+00:01:22,630 --> 00:01:25,300
+So you can always use tab autocomplete to help you there.
+
+21
+00:01:25,300 --> 00:01:26,690
+So those here a hit tab.
+
+22
+00:01:26,830 --> 00:01:29,050
+It will auto complete if the files actually there.
+
+23
+00:01:29,140 --> 00:01:33,280
+If you're not getting the auto complete that's probably a good sign or indicator that the file is not
+
+24
+00:01:33,280 --> 00:01:36,220
+actually in the same directory that your notebooks in.
+
+25
+00:01:36,310 --> 00:01:40,200
+So we do as we set this equal to a variable and then the variable is a data frame.
+
+26
+00:01:40,210 --> 00:01:44,490
+So I just put in DFA there and a data frame essentially kind of looks like an Excel spreadsheet.
+
+27
+00:01:44,500 --> 00:01:48,250
+You have column names and you have an index and then you have data points.
+
+28
+00:01:48,310 --> 00:01:52,350
+And we're going to be using this for our various features in machine learning datasets.
+
+29
+00:01:52,480 --> 00:01:57,180
+If you ever want to grab an entire column of information we end up doing it you will type in the name
+
+30
+00:01:57,180 --> 00:02:01,360
+of your data frame square brackets and then pass in the name of the column.
+
+31
+00:02:01,360 --> 00:02:07,600
+So for instance if I wanted the salary column I can run this and it returns back the salary column with
+
+32
+00:02:07,600 --> 00:02:08,920
+the index location of it.
+
+33
+00:02:09,070 --> 00:02:15,990
+If you want multiple columns back you end up doing is you can just type in a list of column names.
+
+34
+00:02:16,030 --> 00:02:18,780
+For example I want salary and name.
+
+35
+00:02:19,000 --> 00:02:20,620
+And then I get both of them back.
+
+36
+00:02:20,620 --> 00:02:26,830
+Notice the difference here and passing in a list which is why I get those two sets of brackets.
+
+37
+00:02:26,930 --> 00:02:30,360
+Remember I mentioned that panderers is directly built off of pi.
+
+38
+00:02:30,380 --> 00:02:33,430
+So just like Num. pie has lots of the same features.
+
+39
+00:02:33,470 --> 00:02:41,000
+For example if we say salary we can do things such as Max run that in order to turn back the max salary
+
+40
+00:02:41,010 --> 00:02:43,390
+if you want to see a bunch of information.
+
+41
+00:02:43,580 --> 00:02:49,580
+Statistically speaking about your data frame you can use the described method and it will take in the
+
+42
+00:02:49,580 --> 00:02:51,280
+numerical columns and describe them.
+
+43
+00:02:51,320 --> 00:02:55,860
+Count means standard deviation minimum portal's etc..
+
+44
+00:02:56,270 --> 00:03:00,830
+Then finally what else also want to mention is just like them we can do boolean filters.
+
+45
+00:03:01,040 --> 00:03:11,120
+So for example if I ask K where is the salary greater then let's see let's say 60000.
+
+46
+00:03:11,130 --> 00:03:16,590
+So if I say back here in the cell where is a salary greater than 60000 run that I see.
+
+47
+00:03:16,590 --> 00:03:17,180
+False.
+
+48
+00:03:17,190 --> 00:03:17,940
+True true.
+
+49
+00:03:17,970 --> 00:03:22,440
+So taking a look at my original data frame looks like Sally and Alyssa have salaries that are greater
+
+50
+00:03:22,440 --> 00:03:27,840
+than 60000 if actually want the entries themselves and not just the boolean values.
+
+51
+00:03:27,840 --> 00:03:35,370
+What I ended up doing is I can say my filter here run that and then pass in that filter.
+
+52
+00:03:35,590 --> 00:03:39,740
+So my filter run that heresie Sally and Oliseh.
+
+53
+00:03:39,880 --> 00:03:42,010
+Now again usually you don't do this in two steps.
+
+54
+00:03:42,010 --> 00:03:47,470
+Instead we end up doing just copy and paste this here and you see something like this which looks a
+
+55
+00:03:47,470 --> 00:03:51,540
+little weird at first but this is kind of a very common thing in Pandurs.
+
+56
+00:03:51,760 --> 00:03:53,110
+That's really all we need to know.
+
+57
+00:03:53,110 --> 00:03:55,050
+Again pandas can do a lot more to this.
+
+58
+00:03:55,060 --> 00:03:59,980
+And I covered that in my Python for data science in machine learning boot camp but really won't encounter
+
+59
+00:03:59,980 --> 00:04:04,930
+Python or excuse me pand those that much because we're sensory is going to be using it to read and to
+
+60
+00:04:04,930 --> 00:04:13,710
+see as we file an offer that you can then say something like as Matrix you know return back a non-primary.
+
+61
+00:04:13,760 --> 00:04:15,070
+That's what we're going to be doing a lot.
+
+62
+00:04:15,170 --> 00:04:19,760
+Going to see as we file and then pass it off as a non PI matrix and then we're going to it work if not
+
+63
+00:04:19,760 --> 00:04:20,330
+pay.
+
+64
+00:04:20,690 --> 00:04:23,110
+OK thanks everyone and I'll see you at the next lecture.
+

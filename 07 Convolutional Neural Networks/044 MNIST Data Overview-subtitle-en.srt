@@ -1,0 +1,236 @@
+1
+00:00:05,290 --> 00:00:12,250
+Welcome everyone to this lecture on the dataset this is a classic data set in deep learning and machine
+
+2
+00:00:12,250 --> 00:00:13,480
+learning in general.
+
+3
+00:00:13,510 --> 00:00:17,710
+So we're going to do as quickly cover some of the basics about it since we're going to be using it quite
+
+4
+00:00:17,710 --> 00:00:22,840
+frequently during this section of the course where we discuss convolutional neural networks and a big
+
+5
+00:00:22,840 --> 00:00:27,860
+part of neural networks with tensor flow in general is really understanding your data.
+
+6
+00:00:27,880 --> 00:00:33,340
+That way you understand how you're feeding it in the reshaping that occurs either you flatten it out
+
+7
+00:00:33,400 --> 00:00:37,870
+or maybe you add in some padding etc. as you feed it into neural networks.
+
+8
+00:00:37,870 --> 00:00:43,520
+So since it's such a classic dataset we're going to cover it in a little more detail.
+
+9
+00:00:43,580 --> 00:00:49,580
+Luckily as far as acquiring the data itself tensor flow has methods to automatically retrieve it from
+
+10
+00:00:49,580 --> 00:00:50,790
+the Internet for you.
+
+11
+00:00:50,930 --> 00:00:55,250
+We've already ran those for you so if you downloaded the zip file for this course you actually already
+
+12
+00:00:55,250 --> 00:00:57,450
+have a folder of the data set.
+
+13
+00:00:57,680 --> 00:01:05,120
+So the tensor flow downloaded version has 55000 training images 10000 test images and then 5000 validation
+
+14
+00:01:05,120 --> 00:01:05,830
+images.
+
+15
+00:01:05,870 --> 00:01:10,720
+So you can see here it's already split for you in a train test and validation or train test.
+
+16
+00:01:10,730 --> 00:01:13,590
+Hold out for you.
+
+17
+00:01:13,640 --> 00:01:15,760
+So what is the actual data set.
+
+18
+00:01:15,830 --> 00:01:19,470
+Well it contains handwritten single digits from 0 to 9.
+
+19
+00:01:19,490 --> 00:01:25,370
+And here you can see a couple of examples and a single digit image can be represented as an array.
+
+20
+00:01:25,370 --> 00:01:31,790
+So if we look at one of these digits a little more closely we can represent it as an array on a to the
+
+21
+00:01:31,790 --> 00:01:40,070
+plane and specifically we can represent it as a to the array of 28 pixels by 28 pixels.
+
+22
+00:01:40,070 --> 00:01:47,120
+So here we can see that this handwritten digit of a 1 is represented by values on this to the plane
+
+23
+00:01:47,120 --> 00:01:51,100
+where zeros are white and then one is black and values in between.
+
+24
+00:01:51,090 --> 00:01:54,300
+Aren't some sort of grayscale.
+
+25
+00:01:54,360 --> 00:02:00,580
+So again values represent the greyscale image so now we have a numeric representation of these images.
+
+26
+00:02:01,590 --> 00:02:06,940
+We can then flatten the cerate to be a one dimensional vector of 784 numbers.
+
+27
+00:02:06,960 --> 00:02:09,250
+So that's just 28 times 28.
+
+28
+00:02:09,480 --> 00:02:14,460
+And we can set it up as 781 by one or one by 781.
+
+29
+00:02:14,610 --> 00:02:19,890
+Either is fine as long as you keep consistent mentions throughout your training so you can see here
+
+30
+00:02:20,190 --> 00:02:27,770
+does a flattened representation of this previous array so flattening out the image ends up removing
+
+31
+00:02:27,800 --> 00:02:33,580
+some of that to the information such as the relationship of a pixel to its neighboring pixels.
+
+32
+00:02:33,590 --> 00:02:38,690
+For now we're going to ignore that side effect of flattening out that array but we're going to come
+
+33
+00:02:38,690 --> 00:02:43,850
+back to it later when we discuss convolutional neural networks in that because come illusional neural
+
+34
+00:02:43,890 --> 00:02:49,790
+networks when working with images actually take into account the relationship of a pixel next to its
+
+35
+00:02:49,850 --> 00:02:51,210
+neighboring pixels.
+
+36
+00:02:51,220 --> 00:02:56,510
+For now we're going to do when we have a basic approach to this data and classifying it into the various
+
+37
+00:02:56,510 --> 00:03:03,230
+digits we're just going to flatten it out into a single one dimensional array and we can actually think
+
+38
+00:03:03,230 --> 00:03:10,670
+of the entire group of 55000 images as a tensor or an end dimensional array where we have a total of
+
+39
+00:03:10,720 --> 00:03:19,490
+784 pixels on one axis and then 55000 training images on another axis.
+
+40
+00:03:19,710 --> 00:03:24,250
+And it's important to note that for the labels we're going to be using is one hot encoding.
+
+41
+00:03:24,510 --> 00:03:30,210
+And this means that instead of having labels such as strings that say one two or three etc. We're going
+
+42
+00:03:30,210 --> 00:03:37,920
+to have it's just a single array for each image the labels represented based off the index position
+
+43
+00:03:37,980 --> 00:03:39,250
+in the label array.
+
+44
+00:03:39,450 --> 00:03:41,570
+And this is where one encoding comes in.
+
+45
+00:03:41,760 --> 00:03:48,180
+So the corresponding label will be a one at the index location of its true label it is zero everywhere
+
+46
+00:03:48,210 --> 00:03:49,080
+else.
+
+47
+00:03:49,080 --> 00:03:56,250
+So for example if we have a picture of a hand written for then using one hot encoding we're going to
+
+48
+00:03:56,250 --> 00:04:03,060
+say that the label is the following list where if you go along and you find an explanation for that
+
+49
+00:04:03,060 --> 00:04:06,590
+is 0 1 2 3 4 you can see that there's a 1 there.
+
+50
+00:04:06,660 --> 00:04:15,310
+And that's the label that would be fed into our algorithm for the number for as a result the labels
+
+51
+00:04:15,310 --> 00:04:16,570
+for the training data.
+
+52
+00:04:16,570 --> 00:04:21,130
+It just ends up being a large two that mentionable array where we have 10.
+
+53
+00:04:21,130 --> 00:04:22,780
+Remember those are 10 possible labels.
+
+54
+00:04:22,810 --> 00:04:27,450
+Zura through nine by 55000 which are the training images.
+
+55
+00:04:27,510 --> 00:04:29,140
+Okay that's all we need to know for now.
+
+56
+00:04:29,140 --> 00:04:34,950
+Up next we're going to describe first a basic approach to classifying the dataset.
+
+57
+00:04:35,170 --> 00:04:39,430
+And then after that we're going to have a convolutional neural network approach.
+
+58
+00:04:39,550 --> 00:04:44,380
+Let's discuss in the next lecture a basic approach to trying to classify these images.
+
+59
+00:04:44,470 --> 00:04:45,270
+Neural Network.
+

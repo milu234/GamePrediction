@@ -1,0 +1,440 @@
+1
+00:00:05,320 --> 00:00:09,940
+Welcome back everyone to part two of this manual neural network lecture series where we're going to
+
+2
+00:00:09,940 --> 00:00:15,300
+focus on the operation plus we'll be building so the operation class we create.
+
+3
+00:00:15,330 --> 00:00:21,870
+It's going to have two main attributes that is input nodes and output nodes so the input notes as you
+
+4
+00:00:21,870 --> 00:00:26,970
+may have guessed is just the list of input notes that are going into this operation and output nodes
+
+5
+00:00:27,060 --> 00:00:31,220
+is a list of nodes that are consuming this particular operations output.
+
+6
+00:00:31,350 --> 00:00:37,080
+Then inside this operation class will also have a global default graph variable which will explain in
+
+7
+00:00:37,080 --> 00:00:42,780
+a second and then we'll have a compute method and this compute method is going to be essentially overwritten
+
+8
+00:00:42,780 --> 00:00:46,160
+by an extended class that inherits this operation class.
+
+9
+00:00:46,170 --> 00:00:50,370
+So let's discuss a little bit about what a graph looks like and then what's going to happen with this
+
+10
+00:00:50,370 --> 00:00:52,900
+compute method.
+
+11
+00:00:52,920 --> 00:00:56,150
+So a graph is essentially going to be a global variable.
+
+12
+00:00:56,160 --> 00:01:01,230
+And the reason we were using this term graph is because tensor flow runs off graphs and we'll kind of
+
+13
+00:01:01,230 --> 00:01:04,890
+reiterate this when we learn about the tensor flow basics in the next section.
+
+14
+00:01:05,100 --> 00:01:07,680
+You can imagine a graph as kind of this list of nodes.
+
+15
+00:01:07,710 --> 00:01:12,330
+And in this case we have this sort of really simple graph where we have two constants are two nodes
+
+16
+00:01:12,570 --> 00:01:17,200
+and one and two and each of those is a constant one and two respectively.
+
+17
+00:01:17,280 --> 00:01:19,860
+And then those are feeding into some sort of operation.
+
+18
+00:01:19,920 --> 00:01:21,260
+And three.
+
+19
+00:01:21,330 --> 00:01:27,240
+So in our case we have kind of this skeleton operation class and then this operation class is going
+
+20
+00:01:27,240 --> 00:01:30,510
+to be inherited by other classes.
+
+21
+00:01:30,510 --> 00:01:36,360
+So for example we can have an add a class that inherits operation class and in that case it takes in
+
+22
+00:01:36,360 --> 00:01:40,960
+those two inputs 1 and 2 and then outputs 3 because one plus two is three.
+
+23
+00:01:41,070 --> 00:01:46,950
+Or maybe we have a multiply operation so that multiply operation is this going to say 1 times 2 and
+
+24
+00:01:46,950 --> 00:01:48,500
+output 2 etc..
+
+25
+00:01:48,540 --> 00:01:51,280
+So that's the very basics of what a graph would look like.
+
+26
+00:01:51,300 --> 00:01:56,100
+Obviously when we work in a tensor flow we'll have to deal with this so manually but there will be a
+
+27
+00:01:56,100 --> 00:02:00,580
+really complex graph in the background that tense flows kind of constructing everything.
+
+28
+00:02:00,810 --> 00:02:04,680
+So now that we understand the very basics of what we're going to create Let's jump the printer notebook
+
+29
+00:02:04,920 --> 00:02:10,320
+create this operation class and then also create a couple of operations such as addition multiplication
+
+30
+00:02:10,380 --> 00:02:12,110
+and matrix multiplication.
+
+31
+00:02:12,280 --> 00:02:16,910
+What's up over to the notebook Okay here I am at the notebook.
+
+32
+00:02:16,920 --> 00:02:21,560
+Previously we kind of discussed this really basic O.P. and then the superfunction.
+
+33
+00:02:21,900 --> 00:02:26,100
+Let's go ahead and put in our operation class.
+
+34
+00:02:26,100 --> 00:02:32,280
+So our first class going to be operations is just a mark down so we'll start with class and we'll say
+
+35
+00:02:32,280 --> 00:02:37,080
+Operation we'll start a fire in that method.
+
+36
+00:02:37,130 --> 00:02:42,730
+What's going to happen when we actually create an operation that takes himself by default.
+
+37
+00:02:42,780 --> 00:02:49,890
+And then we'll have input notes as a parameter and we'll initialize it with no input nodes by default.
+
+38
+00:02:50,220 --> 00:02:58,990
+But then we can also pass and whoops self and say input nodes is equal to input nodes and then we're
+
+39
+00:02:58,990 --> 00:03:03,680
+also going to have output nodes will say output nodes is equal to.
+
+40
+00:03:03,790 --> 00:03:09,190
+And in this case we'll just have an empty list so that list about Panos is later going to be overwritten
+
+41
+00:03:09,490 --> 00:03:11,190
+by the actual class.
+
+42
+00:03:11,410 --> 00:03:13,430
+That is the operation that inherits from it.
+
+43
+00:03:13,900 --> 00:03:19,570
+OK so we have our input nodes and our output nodes are going to do is we're going to say for every node
+
+44
+00:03:19,630 --> 00:03:25,390
+in the input we're going to append this particular operation this self operation to the list of the
+
+45
+00:03:25,390 --> 00:03:28,340
+consumers of the notes that is the output nodes.
+
+46
+00:03:28,780 --> 00:03:39,660
+So that's a little for loop so inside of this in its method I say for every node in my input nodes What
+
+47
+00:03:39,800 --> 00:03:48,190
+are you going to do is say grab that node grab the output nodes for that particular node and then append
+
+48
+00:03:49,120 --> 00:03:53,200
+self which is essentially just a reference to this current operation.
+
+49
+00:03:53,200 --> 00:03:58,870
+So again for every node in the input notes that are going into the operation I'm going to append this
+
+50
+00:03:58,870 --> 00:04:04,000
+operation to the output nodes for that node since saying hey once you dump this operation you're going
+
+51
+00:04:04,000 --> 00:04:08,990
+to output it to whatever output nodes are related to this particular note.
+
+52
+00:04:09,010 --> 00:04:15,390
+Then finally I'm going to have this compute method self and I'm just going to put a pass in there because
+
+53
+00:04:15,450 --> 00:04:19,530
+essentially this is just a placeholder method and it's going to be overwritten by the actual specific
+
+54
+00:04:19,530 --> 00:04:22,860
+operation that inherits from the operation class.
+
+55
+00:04:22,860 --> 00:04:24,510
+So I know it's a little confusing right now.
+
+56
+00:04:24,510 --> 00:04:28,470
+These three lines are kind of little mysterious but once you see the whole thing at scale of the other
+
+57
+00:04:28,470 --> 00:04:31,200
+operations placeholders variables and graphs.
+
+58
+00:04:31,200 --> 00:04:32,800
+I think it's going to make a lot more sense.
+
+59
+00:04:33,920 --> 00:04:37,850
+OK so let's go ahead and create some example operations such as.
+
+60
+00:04:39,530 --> 00:04:53,410
+So to do that we'll have ADD operation then I will say the wups in its going to take itself and then
+
+61
+00:04:53,470 --> 00:04:56,650
+the two things that we're going to add together are x and y.
+
+62
+00:04:57,310 --> 00:05:01,250
+So because we're adding these two things together those are essentially inputs.
+
+63
+00:05:01,270 --> 00:05:05,410
+So those are going to be our input notes for operation.
+
+64
+00:05:05,430 --> 00:05:07,170
+So let's go out and say super
+
+65
+00:05:10,360 --> 00:05:16,750
+in its and initialize or operationally passing in a list of those input nodes kind of following along
+
+66
+00:05:16,780 --> 00:05:18,940
+that graph that we just saw previously.
+
+67
+00:05:20,320 --> 00:05:25,880
+They're were to say the math computes and that's going to overwrite the compute function here.
+
+68
+00:05:26,050 --> 00:05:30,430
+And this is essentially going to perform the actual computation operation of addition.
+
+69
+00:05:30,430 --> 00:05:36,810
+So we're going to say self and is going to be whatever x variable we have whatever y variable you have.
+
+70
+00:05:36,850 --> 00:05:40,590
+And technically you could use X and Y instead of X underscore VTR.
+
+71
+00:05:40,780 --> 00:05:43,070
+But this is just so it's a little less confusing.
+
+72
+00:05:45,080 --> 00:05:45,800
+Least for me.
+
+73
+00:05:45,860 --> 00:05:52,790
+And then we'll say self input's is equal to whatever X we're able we have whatever y variable we have.
+
+74
+00:05:52,790 --> 00:05:56,110
+And then we're just going to return x.
+
+75
+00:05:56,110 --> 00:05:59,290
+V r plus white variable.
+
+76
+00:05:59,470 --> 00:06:03,740
+OK and again since it's kind of self-contained it's up to you whatever these variables are called.
+
+77
+00:06:03,820 --> 00:06:07,750
+But it's kind of make a separate that these are computations.
+
+78
+00:06:07,770 --> 00:06:08,120
+All right.
+
+79
+00:06:08,120 --> 00:06:11,600
+So that's the very basics of a operation.
+
+80
+00:06:11,600 --> 00:06:15,890
+So again all we're doing here is we're setting up the input notes this operation where it's going to
+
+81
+00:06:15,890 --> 00:06:20,180
+be output to so the output nodes then we initialize that per operation.
+
+82
+00:06:20,180 --> 00:06:21,350
+This case really simple one.
+
+83
+00:06:21,410 --> 00:06:28,310
+X and Y are inputting X and Y and then these inputs are going to when their computers return there are
+
+84
+00:06:28,310 --> 00:06:29,290
+some.
+
+85
+00:06:29,310 --> 00:06:32,030
+So let's go ahead and make two more here.
+
+86
+00:06:32,030 --> 00:06:36,290
+So instead of add we're going to make one called Multiply.
+
+87
+00:06:36,520 --> 00:06:39,970
+And typically for classes these would actually be uppercase.
+
+88
+00:06:40,090 --> 00:06:45,310
+But to follow along with tensor Flo's naming convention of having them be lower case right now because
+
+89
+00:06:45,310 --> 00:06:50,620
+when we use them and for these function operations like add a multiply matrix multiplication they're
+
+90
+00:06:50,620 --> 00:06:55,090
+actually lower case so this kind of such as follows along more with tensor flow that we'll see in the
+
+91
+00:06:55,090 --> 00:06:56,170
+future.
+
+92
+00:06:56,170 --> 00:06:56,490
+All right.
+
+93
+00:06:56,530 --> 00:06:59,640
+So multiply going to be the same thing because that's done here.
+
+94
+00:06:59,650 --> 00:07:03,950
+We're going to say times and boom that was pretty easy.
+
+95
+00:07:03,970 --> 00:07:06,480
+And finally let's do a matrix multiplication.
+
+96
+00:07:06,730 --> 00:07:10,120
+So they'll be Matt M U L matrix multiplication.
+
+97
+00:07:10,300 --> 00:07:17,760
+And this one is going to be the x variable and then we're going to say Dot Y variable.
+
+98
+00:07:17,760 --> 00:07:24,120
+We're going to basically assume that it's a PI matrix or num PI array and that can then have a dot method
+
+99
+00:07:24,120 --> 00:07:24,460
+off of it.
+
+100
+00:07:24,510 --> 00:07:28,400
+So the dot product here for matrix multiplication.
+
+101
+00:07:28,420 --> 00:07:30,890
+OK so those are our operations.
+
+102
+00:07:30,890 --> 00:07:36,650
+So again we have this base operation class and then off of that we can kind of write this compute method
+
+103
+00:07:36,680 --> 00:07:39,810
+for adding multiplying in matrix multiplication.
+
+104
+00:07:39,830 --> 00:07:43,520
+There's a lot more we could do here things like reduce mean that kind of thing that we'll see later
+
+105
+00:07:43,520 --> 00:07:43,880
+on.
+
+106
+00:07:44,030 --> 00:07:48,260
+Intenser flow but for a very basic example this is essentially all we need.
+
+107
+00:07:48,260 --> 00:07:48,700
+OK.
+
+108
+00:07:48,860 --> 00:07:53,510
+Coming up next we're going to discuss placeholders and variables and then finish out our actual graph
+
+109
+00:07:53,510 --> 00:07:54,200
+class.
+
+110
+00:07:54,200 --> 00:07:55,130
+I'll see you at the next lecture.
+

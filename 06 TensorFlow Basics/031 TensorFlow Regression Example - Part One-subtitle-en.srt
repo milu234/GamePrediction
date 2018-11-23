@@ -1,0 +1,1156 @@
+1
+00:00:05,300 --> 00:00:11,590
+Welcome everyone to this lecture on a sensor flow regression example we're going to code along for more
+
+2
+00:00:11,590 --> 00:00:18,310
+realistic regression example and will also introduce tensor Flo's TFT estimator API which is a much
+
+3
+00:00:18,310 --> 00:00:22,720
+simpler API for basic tasks like regression and classification.
+
+4
+00:00:22,870 --> 00:00:28,690
+There are already lots of machine learning algorithms that can perform regression tasks and classification
+
+5
+00:00:28,690 --> 00:00:30,440
+tasks very well.
+
+6
+00:00:30,610 --> 00:00:35,980
+And the purpose of tensor flow really is to try to solve problems that typical machine learning algorithms
+
+7
+00:00:36,010 --> 00:00:42,130
+can't solve things like image classification or later on we'll see how we can use tensor flow for things
+
+8
+00:00:42,130 --> 00:00:47,180
+like word embeddings or even using her current neural networks for time series analysis.
+
+9
+00:00:47,200 --> 00:00:52,900
+Those are problems that are really hard to solve without the use of a deep neural network or specialized
+
+10
+00:00:52,900 --> 00:00:59,050
+neural networks using tensor flow simpler examples like typical regression tasks and classification
+
+11
+00:00:59,050 --> 00:01:01,150
+tasks are pretty easy to solve.
+
+12
+00:01:01,180 --> 00:01:05,980
+Well depending on your dataset with other machine learning algorithms and because of that sensor flow
+
+13
+00:01:05,980 --> 00:01:11,140
+has a nice estimator API that's going to make your life a lot easier if you decide to use tensor flow
+
+14
+00:01:11,350 --> 00:01:14,170
+for some of these more basic supervised learning problems.
+
+15
+00:01:14,320 --> 00:01:19,750
+So let's go ahead hop over to Jupiter notebook and show you how to perform a regression task on a more
+
+16
+00:01:19,750 --> 00:01:20,870
+realistic data set.
+
+17
+00:01:21,940 --> 00:01:22,290
+All right.
+
+18
+00:01:22,300 --> 00:01:24,480
+I'm going to start off with a couple of imports.
+
+19
+00:01:24,490 --> 00:01:26,340
+I'll do some PI SNP.
+
+20
+00:01:26,380 --> 00:01:34,090
+Most also going to be using Pandurs and I will import that plot lib pipe plot as Piazzi and then set
+
+21
+00:01:34,160 --> 00:01:39,760
+map plot live in line and then later on we're also going to need to use tensor flow of course.
+
+22
+00:01:39,760 --> 00:01:41,250
+Let's do that as well.
+
+23
+00:01:41,480 --> 00:01:46,580
+Import tensor flow as T.F..
+
+24
+00:01:46,770 --> 00:01:50,790
+But we're going to do for this regression task is do a huge dataset.
+
+25
+00:01:50,940 --> 00:01:57,240
+So we can actually create a very large data set and in the next lectures when we actually cover classification
+
+26
+00:01:57,480 --> 00:01:59,140
+we'll use a real data set for that.
+
+27
+00:01:59,160 --> 00:02:03,090
+But right now I still want to do a gradual progression from the last lecture.
+
+28
+00:02:03,180 --> 00:02:05,570
+So we'll create our own data set.
+
+29
+00:02:05,610 --> 00:02:11,780
+So I'm going to say linearly spaced from one Sezer point zero to 10.
+
+30
+00:02:12,420 --> 00:02:16,380
+And instead of just 10 points we're now going to do a million points.
+
+31
+00:02:16,380 --> 00:02:17,650
+So this is a huge dataset.
+
+32
+00:02:17,650 --> 00:02:21,060
+So we're not going to be all to do exactly what we did before.
+
+33
+00:02:21,060 --> 00:02:23,970
+And then I'm also going to add some noise to it just like we did last time.
+
+34
+00:02:23,970 --> 00:02:31,090
+So when I say noise is random random and and we need to pass in length with data.
+
+35
+00:02:31,100 --> 00:02:32,900
+So you know how many noise points to have.
+
+36
+00:02:32,990 --> 00:02:39,080
+So if I take a look at my x data it's essentially just these evenly spaced values and see there's a
+
+37
+00:02:39,080 --> 00:02:39,800
+million of them.
+
+38
+00:02:39,800 --> 00:02:42,160
+So the step size is really small.
+
+39
+00:02:42,200 --> 00:02:47,720
+It's like POINT ZERO 0 or users are one step size and then if I take a look at my noise at least the
+
+40
+00:02:47,720 --> 00:02:53,570
+shape of it I can see I essentially have a million random points from this normal distribution.
+
+41
+00:02:53,570 --> 00:02:56,060
+So just a bunch of random points that I'm going to add onto that.
+
+42
+00:02:56,300 --> 00:02:58,540
+Let's go ahead and create those.
+
+43
+00:02:58,550 --> 00:03:02,440
+So I will have the following function.
+
+44
+00:03:02,480 --> 00:03:07,910
+My line is going to be modeled by Y is equal to a mix plus B.
+
+45
+00:03:07,910 --> 00:03:14,420
+And I'm going to set B equal to 5 for this model and then I'm also going to add in some noise.
+
+46
+00:03:14,420 --> 00:03:16,790
+So I'm going to add in the noise levels.
+
+47
+00:03:17,360 --> 00:03:18,980
+So let's actually do this.
+
+48
+00:03:19,010 --> 00:03:21,600
+We'll say that Y true.
+
+49
+00:03:22,650 --> 00:03:29,400
+Is equal to choose a slope of 0.5 and then I'm going to multiply that by my X data.
+
+50
+00:03:30,530 --> 00:03:33,500
+And then I'm going to do plus five here.
+
+51
+00:03:33,620 --> 00:03:39,500
+So I have m equal to zero point five and that's something that we're going to try to figure out using
+
+52
+00:03:39,500 --> 00:03:43,890
+our model and then I'm also going to have be equal to plus five.
+
+53
+00:03:44,330 --> 00:03:48,690
+And to make it a little harder for our model I'm going to put in some noise here.
+
+54
+00:03:48,770 --> 00:03:50,680
+So now we have our y true values.
+
+55
+00:03:50,680 --> 00:03:55,360
+Again just following week X plus B we're slope is 0.5.
+
+56
+00:03:55,460 --> 00:03:58,560
+Our intercept value is 5 and I've added some noise to it.
+
+57
+00:03:58,700 --> 00:04:01,160
+So it's not just a perfectly fitted line.
+
+58
+00:04:01,190 --> 00:04:05,570
+Now it's actually create this data and I get these panderers to kind of concatenate some stuff together
+
+59
+00:04:06,440 --> 00:04:08,640
+and also make plotting a little easier.
+
+60
+00:04:08,660 --> 00:04:16,040
+So I will say My data is equal to and it won't say PD that concat which is short for concatenate and
+
+61
+00:04:16,040 --> 00:04:17,340
+we'll see how we use that in a second.
+
+62
+00:04:17,360 --> 00:04:22,100
+But before we do that over here I'm going to create a data frame.
+
+63
+00:04:22,100 --> 00:04:30,530
+So let's first make our data Frank so say X the f is equal to the data frame and the data is going to
+
+64
+00:04:30,530 --> 00:04:37,980
+be equal to my x data and the columns are just going to be equal to x data.
+
+65
+00:04:38,210 --> 00:04:44,780
+So there's my X data frame and then I'm going to also create my y data frame so of say white is equal
+
+66
+00:04:44,780 --> 00:04:52,970
+to PD data frame data as you may have guessed is equal to white true and the columns are going to be
+
+67
+00:04:52,970 --> 00:04:54,400
+equal to.
+
+68
+00:04:54,740 --> 00:04:56,810
+Let's just say why.
+
+69
+00:04:56,820 --> 00:05:02,400
+All right so I have my two data frames and if I check them out right now I can say x d.
+
+70
+00:05:02,420 --> 00:05:05,130
+Let's just check the head of that data frame the first five rows.
+
+71
+00:05:05,150 --> 00:05:06,880
+So there's my X data.
+
+72
+00:05:06,890 --> 00:05:09,050
+I can see it's going along very slowly.
+
+73
+00:05:09,110 --> 00:05:10,090
+Step size.
+
+74
+00:05:10,090 --> 00:05:15,260
+And then if I take a look at why if there are my values and you can see here the noise has definitely
+
+75
+00:05:15,260 --> 00:05:16,670
+been added in there.
+
+76
+00:05:16,670 --> 00:05:20,800
+Let's go ahead and concatenate these two so that I have these two columns together.
+
+77
+00:05:20,810 --> 00:05:23,910
+So the way you concatenate two data frames is quite simple.
+
+78
+00:05:23,960 --> 00:05:25,580
+Just say PD that Concat.
+
+79
+00:05:25,850 --> 00:05:29,950
+And then I'm going to pass in a list of the data frames I want to concatenate together.
+
+80
+00:05:30,020 --> 00:05:32,750
+So we have white F and then I also want to do X data.
+
+81
+00:05:32,750 --> 00:05:37,200
+So let's actually do X for so x the f y d.
+
+82
+00:05:37,370 --> 00:05:42,460
+And I want to concatenate them along x is equal to 1 because I want to do it along the columns.
+
+83
+00:05:42,560 --> 00:05:46,050
+So as the second problem here I will say x is equal to 1.
+
+84
+00:05:46,130 --> 00:05:51,000
+If I didn't have that access argument it would kind of stack them like pancakes if that makes sense.
+
+85
+00:05:52,270 --> 00:05:55,650
+And if I take a look at my data there it is x and y.
+
+86
+00:05:55,680 --> 00:05:58,930
+So a lot of that there let's just get the head of it.
+
+87
+00:05:58,940 --> 00:06:03,350
+So the reason I did that is because it's going to make it a lot easier to actually plot this out.
+
+88
+00:06:03,350 --> 00:06:11,120
+If I were to try to say my data dot plot that's going to take a really long time and it may actually
+
+89
+00:06:11,210 --> 00:06:16,520
+cause the kernel to crash because it's going to try to plot a million points instead of just plot a
+
+90
+00:06:16,520 --> 00:06:22,070
+small sample of that and what we can do that is really easy with a Pandurs data frame which is kind
+
+91
+00:06:22,070 --> 00:06:29,330
+of whole point that all I need to say is my data sample and equals let's say 250 and then that's going
+
+92
+00:06:29,330 --> 00:06:35,660
+to return back 250 random samples you can see here by the index that these are just random samples of
+
+93
+00:06:35,660 --> 00:06:36,220
+the data frame.
+
+94
+00:06:36,260 --> 00:06:38,620
+So here you have 250 random samples.
+
+95
+00:06:38,630 --> 00:06:41,360
+This is a small enough thing that I can plot out.
+
+96
+00:06:41,390 --> 00:06:47,690
+So now I'm going to call plot off this and I'm going to say that the kind of plot I want is a scatter
+
+97
+00:06:47,690 --> 00:06:55,660
+plot and let's say x is equal to x data and Y is equal to Y.
+
+98
+00:06:55,670 --> 00:06:56,770
+So now let's run that.
+
+99
+00:06:57,080 --> 00:07:04,280
+And here's my plot so I can see here my data is going from zero to 10 and the x axis also from 0 to
+
+100
+00:07:04,310 --> 00:07:10,710
+around 11 ish on the y true label and that's because we added in some noise and some of these points.
+
+101
+00:07:10,730 --> 00:07:15,980
+So you can see here definitely a linear trend and you can see that we've added some points off of that
+
+102
+00:07:15,980 --> 00:07:16,670
+line.
+
+103
+00:07:16,760 --> 00:07:23,300
+So the true line right here number y true is defined as a slope of 0.5 multiplied by the x data.
+
+104
+00:07:23,300 --> 00:07:24,560
+The Intercept is at five.
+
+105
+00:07:24,560 --> 00:07:30,380
+So if we scroll down here we can see that it would intercept around 5 if there's kind of a linear fit
+
+106
+00:07:30,380 --> 00:07:30,850
+here.
+
+107
+00:07:30,950 --> 00:07:33,180
+And then there's some noise up and down off of that.
+
+108
+00:07:33,200 --> 00:07:36,750
+So we want tensor float to try to fit a line here.
+
+109
+00:07:36,830 --> 00:07:42,860
+And we should see it kind of go very close to five as the intercept and have a slope of 0.5.
+
+110
+00:07:42,860 --> 00:07:45,700
+Let's go ahead and see how much flow can make this happen.
+
+111
+00:07:46,160 --> 00:07:51,500
+The first thing we have to realize is that a million points is a huge amount of points to pass it at
+
+112
+00:07:51,500 --> 00:07:52,150
+once.
+
+113
+00:07:52,190 --> 00:07:56,510
+And a lot of times when you're dealing with deep learning and just neural networks in general you're
+
+114
+00:07:56,510 --> 00:08:02,330
+going to have humongous data sets because the more data the better usually for training a lot of these
+
+115
+00:08:02,330 --> 00:08:03,510
+complex models.
+
+116
+00:08:03,650 --> 00:08:07,970
+But the problem is you can't just feed in a million points into your neural network at once.
+
+117
+00:08:07,970 --> 00:08:13,880
+So you do instead is you create batches of data you feed in batches of the data for training batch by
+
+118
+00:08:13,880 --> 00:08:14,760
+batch.
+
+119
+00:08:14,810 --> 00:08:16,780
+Let's go ahead and show you how to do that.
+
+120
+00:08:16,910 --> 00:08:22,080
+So I'm going to say my batch size create a variable is equal to 8.
+
+121
+00:08:22,110 --> 00:08:26,720
+So going to grab 8 points at a time and you can also change this around so maybe 10 points of a time
+
+122
+00:08:26,730 --> 00:08:27,920
+it'll points at a time.
+
+123
+00:08:28,010 --> 00:08:33,500
+There's no true right or wrong answer for batch sizes certain batch sizes really depend on your data.
+
+124
+00:08:33,830 --> 00:08:39,350
+Obviously if I only had 8 data points and patches would it really make sense if I have you know a trillion
+
+125
+00:08:39,350 --> 00:08:41,260
+data points maybe do larger batches.
+
+126
+00:08:41,270 --> 00:08:45,110
+Otherwise you'll be waiting all day and you won't use all your data.
+
+127
+00:08:45,110 --> 00:08:48,090
+So right now batch size 8 that's fine.
+
+128
+00:08:48,260 --> 00:08:51,690
+And we're going to create our variable just like we did last time.
+
+129
+00:08:52,010 --> 00:08:53,930
+So that's the slope remember.
+
+130
+00:08:54,140 --> 00:09:01,350
+And let's go ahead and just started off as a 0.5 and we'll say B is equal to T.F. variable.
+
+131
+00:09:01,610 --> 00:09:03,870
+And that's going to be one point 1.0.
+
+132
+00:09:03,950 --> 00:09:07,940
+Let's actually make these random numbers again just so we show that the network is actually working.
+
+133
+00:09:08,240 --> 00:09:15,280
+So I'll say any random rant and rant and then give me two of these guys.
+
+134
+00:09:15,480 --> 00:09:17,350
+OK so there are my two random numbers.
+
+135
+00:09:17,360 --> 00:09:24,080
+We're going to grab these and insert them the Rigaud and we'll grab this one as well and insert that.
+
+136
+00:09:24,260 --> 00:09:24,810
+OK.
+
+137
+00:09:25,040 --> 00:09:27,780
+So now I have my two round numbers we could have also initiated that as negative.
+
+138
+00:09:27,800 --> 00:09:28,650
+Not a big deal.
+
+139
+00:09:28,800 --> 00:09:33,410
+You can see here I'm choosing just two random numbers to initiate my slope and my intercept just like
+
+140
+00:09:33,420 --> 00:09:34,940
+I did in the last lecture.
+
+141
+00:09:34,940 --> 00:09:36,340
+So how many variables here.
+
+142
+00:09:36,410 --> 00:09:38,090
+Now let's create our placeholders.
+
+143
+00:09:38,360 --> 00:09:44,460
+And now we're going to have two placeholders one for the X and one for the Y so I have my X placeholder
+
+144
+00:09:45,730 --> 00:09:51,040
+T.F. placeholder and it should be a 32 bit flow.
+
+145
+00:09:52,430 --> 00:09:55,070
+And the size we're just going to say batch size.
+
+146
+00:09:55,230 --> 00:10:00,230
+So we're going to fit it in in batches so feet in eight points at a time and it's going to be the exact
+
+147
+00:10:00,230 --> 00:10:02,990
+same thing for the White ph.
+
+148
+00:10:02,990 --> 00:10:04,690
+So I can actually just copy and paste this here.
+
+149
+00:10:08,790 --> 00:10:09,480
+OK.
+
+150
+00:10:09,600 --> 00:10:13,830
+So I want you to kind of get used to this workflow of first creating the variables then creating the
+
+151
+00:10:13,830 --> 00:10:17,920
+placeholders then the next thing to do is actually define our graph.
+
+152
+00:10:17,940 --> 00:10:20,750
+In other words the actual operations that are taking place.
+
+153
+00:10:20,820 --> 00:10:22,400
+So what are we trying to do here.
+
+154
+00:10:22,410 --> 00:10:28,470
+Remember we're trying to build a Y model that models out that y equals x plus B.
+
+155
+00:10:28,500 --> 00:10:34,950
+So I have m as my placeholder I'm going to multiply it by or excuse me I have as my variable then I'm
+
+156
+00:10:34,950 --> 00:10:36,540
+trying to adjust number.
+
+157
+00:10:36,540 --> 00:10:38,900
+That's kind of a weight slope that you're trying to adjust.
+
+158
+00:10:39,030 --> 00:10:43,950
+And I have X as my placeholder that's going to be fed in data through a feed dictionary and then I'm
+
+159
+00:10:43,950 --> 00:10:47,150
+going to say plus be in another variable.
+
+160
+00:10:47,160 --> 00:10:54,510
+So right now my model is right here Y model and this is essentially my Grath that I'm trying to compute.
+
+161
+00:10:54,710 --> 00:11:01,210
+Then we need a last function and we're going to use some T.F. tools to kind of make this into one nice
+
+162
+00:11:01,450 --> 00:11:02,890
+one liner.
+
+163
+00:11:02,890 --> 00:11:11,770
+So we have to reduce some and say T.F. square of white placeholder.
+
+164
+00:11:11,770 --> 00:11:18,060
+Remember that is the true white value subtracts our actual prediction.
+
+165
+00:11:18,280 --> 00:11:21,310
+Whoops Y model Y underscore model.
+
+166
+00:11:21,440 --> 00:11:22,430
+OK there we go.
+
+167
+00:11:22,430 --> 00:11:24,240
+So this is our last function again.
+
+168
+00:11:24,260 --> 00:11:30,440
+Essentially the same thing we did last time except now I'm using T.F. Square for these kind of convenience
+
+169
+00:11:30,440 --> 00:11:31,340
+functions here.
+
+170
+00:11:31,340 --> 00:11:36,410
+Now I could also sort of s.c.s square something like Asterix Asterix too but to kind of match up in
+
+171
+00:11:36,400 --> 00:11:37,250
+the documentation.
+
+172
+00:11:37,250 --> 00:11:41,400
+It's nice to use these tensor flow optimize function calls.
+
+173
+00:11:41,420 --> 00:11:44,930
+Up next once we ever lost function it's time for the optimizer.
+
+174
+00:11:44,960 --> 00:11:46,600
+So let's put it in.
+
+175
+00:11:46,880 --> 00:11:52,430
+We're going to say optimizer is equal to T.F. train and we're going to use the same thing we did last
+
+176
+00:11:52,430 --> 00:11:55,690
+time which is call a gradient descent optimizer.
+
+177
+00:11:55,730 --> 00:11:57,980
+Later on we'll discover other optimizers.
+
+178
+00:11:58,190 --> 00:12:04,680
+But we're going to set a learning rate and let's go ahead and just set it to zero point zero or 1 and
+
+179
+00:12:04,680 --> 00:12:09,360
+then we actually want to tell the optimizer what to minimize and make sure I put this one in there so
+
+180
+00:12:09,360 --> 00:12:15,570
+I don't get any spelling errors and they'll say optimizer minimize the error we just made
+
+181
+00:12:18,460 --> 00:12:18,860
+OK.
+
+182
+00:12:18,990 --> 00:12:26,400
+So I have done the key steps here created my variables create in my placeholders define my graph essentially
+
+183
+00:12:26,430 --> 00:12:29,950
+defining the operations I've defined my last function here.
+
+184
+00:12:30,120 --> 00:12:35,870
+And then I have my optimizer which is trained to use gradient descent to minimize that loss function
+
+185
+00:12:35,880 --> 00:12:37,230
+or that error.
+
+186
+00:12:37,230 --> 00:12:43,470
+Now let's go ahead and create our in its variable for initializing the variable so I'll say it is equal
+
+187
+00:12:43,470 --> 00:12:49,670
+to T.F. global variables initialiser and let's run the session.
+
+188
+00:12:49,910 --> 00:12:58,940
+So we're going to do the following we'll say with T.F. session as s s s.
+
+189
+00:12:59,040 --> 00:13:01,150
+First thing need to do is run that in it.
+
+190
+00:13:01,150 --> 00:13:05,760
+So actually initialises those variables and then now I have to decide how many batches I'm actually
+
+191
+00:13:05,760 --> 00:13:08,210
+going to run through this.
+
+192
+00:13:08,250 --> 00:13:09,890
+So let's do 1000 batches.
+
+193
+00:13:09,900 --> 00:13:12,120
+See we'll see kind of play around with this.
+
+194
+00:13:12,120 --> 00:13:17,360
+You can play around with this number right here batches and this number right here that size.
+
+195
+00:13:17,400 --> 00:13:21,930
+So I'm going to run this through 8000 samples and see if that's enough for it to fit a nice linear fit
+
+196
+00:13:21,930 --> 00:13:22,520
+here.
+
+197
+00:13:22,620 --> 00:13:25,760
+And it really should be enough because we're not adding that much noise.
+
+198
+00:13:25,800 --> 00:13:29,760
+And even with kind of our eyeballs we can see here that there's clearly a linear trend.
+
+199
+00:13:29,760 --> 00:13:33,180
+So the models should be able to pick it up quite clearly even of 8000 samples.
+
+200
+00:13:33,170 --> 00:13:34,050
+It should be enough.
+
+201
+00:13:34,110 --> 00:13:39,480
+We don't need to feed it in a million samples although we could get you know maybe overfit toward trained
+
+202
+00:13:39,480 --> 00:13:41,750
+data but we'll discuss that later.
+
+203
+00:13:41,750 --> 00:13:49,660
+We'll say for I in range batches are going to send the thousand batches in then we'll do the following.
+
+204
+00:13:49,690 --> 00:14:01,990
+We'll say some random index is equal to any random thought Rand I.A. length of X data the size is to
+
+205
+00:14:03,060 --> 00:14:08,200
+that size and that I'm going to create my feet dictionary.
+
+206
+00:14:09,680 --> 00:14:11,650
+So that's going to be X placeholder.
+
+207
+00:14:11,650 --> 00:14:15,110
+I'm going to send x data Rand I.
+
+208
+00:14:16,850 --> 00:14:30,190
+Well say why placeholder amble to y true random index and then filing a say session run train where
+
+209
+00:14:30,190 --> 00:14:31,720
+I find the feed dictionary
+
+210
+00:14:36,040 --> 00:14:41,780
+as feet OK before we actually execute this cell and get the results back.
+
+211
+00:14:41,790 --> 00:14:44,850
+I want to go line by line what's actually happening here.
+
+212
+00:14:44,880 --> 00:14:52,200
+First thing we need to realize is I'm going to feed in 1000 batches of data where each batch is a corresponding
+
+213
+00:14:52,200 --> 00:14:56,160
+data points where we have an x data points and the y label.
+
+214
+00:14:56,160 --> 00:15:00,540
+Remember this is supervised learning to make sure that these batches are useful.
+
+215
+00:15:00,570 --> 00:15:03,310
+I don't want to just send eight by eight by eight.
+
+216
+00:15:03,330 --> 00:15:07,670
+Instead what I want to do is grab a random data points from my dataset.
+
+217
+00:15:07,740 --> 00:15:13,770
+The way I can assure that is by creating this variable right here and the reason it's called Rande underscore
+
+218
+00:15:13,900 --> 00:15:17,670
+A&amp;E is because this is going to correspond to a random index.
+
+219
+00:15:17,670 --> 00:15:24,180
+So I'm going to use that random Rand integer number that just returns a random integer and grab a random
+
+220
+00:15:24,180 --> 00:15:30,720
+integer from 0 up to the length of X data and kind of a shorthand you can just pasand length of X data
+
+221
+00:15:31,050 --> 00:15:35,450
+and then I want to make sure I grab 8 of those and those are going to be my index points.
+
+222
+00:15:35,490 --> 00:15:42,350
+Then I'm going to use those random index points past them into my X data and the corresponding y true.
+
+223
+00:15:42,400 --> 00:15:44,060
+And now I have my feed dictionary.
+
+224
+00:15:44,190 --> 00:15:47,610
+Then I run that into this training optimizer.
+
+225
+00:15:47,670 --> 00:15:48,510
+And there you have it.
+
+226
+00:15:48,510 --> 00:15:51,020
+So that's the reason of these two lines right here.
+
+227
+00:15:51,060 --> 00:15:57,270
+This random index actually chooses the 8 index points that are going to be part of that random batch.
+
+228
+00:15:57,270 --> 00:16:02,790
+So you want to make sure that these matches are basically just a batch size number of random points
+
+229
+00:16:02,850 --> 00:16:03,880
+from your data.
+
+230
+00:16:04,050 --> 00:16:08,730
+So we're going to train this model on thousand data points and hopefully that should be enough for a
+
+231
+00:16:08,730 --> 00:16:09,480
+good fit.
+
+232
+00:16:09,750 --> 00:16:16,650
+So once that is done I'm going to grab the actual predicted a model M and model B So that's the slope
+
+233
+00:16:16,740 --> 00:16:18,020
+and the intercept.
+
+234
+00:16:18,220 --> 00:16:25,570
+And when I say session run and go ahead and grab those placeholders so am and be OK.
+
+235
+00:16:25,580 --> 00:16:29,840
+Let's run this should be relatively fast depending on your computer.
+
+236
+00:16:29,840 --> 00:16:34,430
+I'm running this on a pretty fast computer so it may take a little bit of time for you if it's taking
+
+237
+00:16:34,430 --> 00:16:34,820
+too long.
+
+238
+00:16:34,820 --> 00:16:36,610
+Just reduce the number of batches.
+
+239
+00:16:36,620 --> 00:16:38,960
+Let's go ahead and check out our model.
+
+240
+00:16:38,990 --> 00:16:44,480
+But before I run this I want to show you what we initially started off member model M was a variable
+
+241
+00:16:44,480 --> 00:16:50,860
+that started off as a random 0.8 one the true slope should be pretty close to 0.5.
+
+242
+00:16:50,860 --> 00:16:55,280
+So if we come back up here the true slope I said was 0.5.
+
+243
+00:16:55,280 --> 00:16:57,250
+So let's see how he did down here.
+
+244
+00:16:57,290 --> 00:16:58,500
+I run a model M.
+
+245
+00:16:58,700 --> 00:17:00,830
+So there it goes 0.5 2.
+
+246
+00:17:00,920 --> 00:17:04,530
+And remember we added noise in there so that pretty much makes sense.
+
+247
+00:17:04,760 --> 00:17:08,270
+And again the bias that we initiated with should be fine.
+
+248
+00:17:08,420 --> 00:17:10,960
+The variable started with 0.1 7.
+
+249
+00:17:10,970 --> 00:17:14,940
+Let's see how it that will say Model B.
+
+250
+00:17:15,140 --> 00:17:17,470
+And there we go very close to five as well.
+
+251
+00:17:17,630 --> 00:17:22,260
+So essentially we're doing extremely well given that we added noise to the data set.
+
+252
+00:17:22,310 --> 00:17:24,890
+We can actually visualize these results quite easily.
+
+253
+00:17:25,070 --> 00:17:38,640
+I can just say y hat is equal to my x data times my model B or C ME model M Plus my model B and then
+
+254
+00:17:38,640 --> 00:17:43,850
+I'm going to say my data sample 250 points again.
+
+255
+00:17:43,920 --> 00:17:51,240
+Plot this out as a scatterplot where x is my X data column.
+
+256
+00:17:51,580 --> 00:17:57,710
+And why is my y column.
+
+257
+00:17:57,870 --> 00:18:06,580
+And then I'm also going to say Piazzi up plot x data versus Y hats.
+
+258
+00:18:06,580 --> 00:18:08,710
+And then let's make that a red line.
+
+259
+00:18:08,710 --> 00:18:12,540
+So I run this and I can see I have a pretty nice linear fit there.
+
+260
+00:18:12,760 --> 00:18:16,480
+And what it can also do is then kind of player of the batch sizes Let's see what happens if we run this
+
+261
+00:18:16,480 --> 00:18:18,250
+for 10000.
+
+262
+00:18:18,250 --> 00:18:20,460
+How much difference it makes.
+
+263
+00:18:20,470 --> 00:18:23,400
+Number we add noises data so it may not make a whole lot of difference.
+
+264
+00:18:23,560 --> 00:18:25,960
+You can see here now it's pretty much five.
+
+265
+00:18:25,960 --> 00:18:26,850
+Exactly.
+
+266
+00:18:26,860 --> 00:18:28,420
+Now we're getting a little closer to 0.5.
+
+267
+00:18:28,420 --> 00:18:31,690
+They're not going to be a huge difference in the actual plot.
+
+268
+00:18:31,690 --> 00:18:33,450
+Maybe you notice that a tiny bit at a drop.
+
+269
+00:18:33,460 --> 00:18:36,140
+But certainly we're getting a good linear model of it.
+
+270
+00:18:36,230 --> 00:18:40,630
+And remember we have noise toward data so we can expect that to be absolutely perfect.
+
+271
+00:18:40,660 --> 00:18:41,090
+All right.
+
+272
+00:18:41,230 --> 00:18:43,030
+So definitely go line by line on this.
+
+273
+00:18:43,030 --> 00:18:44,890
+Make sure you understand each step.
+
+274
+00:18:44,890 --> 00:18:46,520
+The main ideas are to.
+
+275
+00:18:46,660 --> 00:18:51,880
+Once you have your data create the variables create the placeholders define the operations in your graph
+
+276
+00:18:52,180 --> 00:18:54,410
+define some sort of error or last function.
+
+277
+00:18:54,460 --> 00:18:55,510
+Set up the optimizer.
+
+278
+00:18:55,540 --> 00:19:00,940
+Set up the trainer initialize those global variables and then if you have a huge data set you also want
+
+279
+00:19:00,940 --> 00:19:06,340
+to somehow feed the data in batches that are basically ran the batches from your large dataset.
+
+280
+00:19:06,520 --> 00:19:11,800
+And a lot of times that's the hard part actually figure out how to grab those batches of data as you'll
+
+281
+00:19:11,800 --> 00:19:14,210
+see later on in future lectures.
+
+282
+00:19:14,230 --> 00:19:19,000
+It's kind of challenging sometimes to work on a new dataset and fitted in batches.
+
+283
+00:19:19,000 --> 00:19:23,110
+All right that's it for this kind of Part One and Part Two we're going to jump right back into that
+
+284
+00:19:23,110 --> 00:19:27,760
+notebook where we left off here and show you how you could do this whole thing with the TFT estimator
+
+285
+00:19:27,790 --> 00:19:30,370
+API which is going to make your life a lot easier.
+
+286
+00:19:30,550 --> 00:19:33,700
+And we're also going to show you how to perform a train test split.
+
+287
+00:19:33,700 --> 00:19:35,740
+Technically we've been doing this kind of wrong.
+
+288
+00:19:35,740 --> 00:19:39,340
+We haven't been doing the train test blip so let's go ahead and do that as well.
+
+289
+00:19:39,340 --> 00:19:42,610
+Once we have the estimator API in place I'll see you at the next video.
+

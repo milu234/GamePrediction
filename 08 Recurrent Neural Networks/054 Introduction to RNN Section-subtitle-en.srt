@@ -1,0 +1,64 @@
+1
+00:00:05,330 --> 00:00:10,070
+Hello everyone and welcome to the section on recurrent neural networks.
+
+2
+00:00:10,180 --> 00:00:14,770
+We've used neural networks to solve classification and regression problems and we've also learned how
+
+3
+00:00:14,770 --> 00:00:19,570
+to use convolutional neural networks to solve image classification problems but we still haven't seen
+
+4
+00:00:19,600 --> 00:00:23,880
+how neural networks can deal with sequence information such as a time series.
+
+5
+00:00:24,130 --> 00:00:27,920
+So for this we need to learn how to use recurrent neural networks.
+
+6
+00:00:28,000 --> 00:00:30,900
+There's lots of interesting stuff are going to learn about the sex for the course.
+
+7
+00:00:30,940 --> 00:00:35,710
+We'll start off with a basic overview of our current year old that work theory that we're going to manually
+
+8
+00:00:35,740 --> 00:00:41,020
+implement a very basic recurrent neural network they will learn about some specific subtopics such as
+
+9
+00:00:41,290 --> 00:00:45,910
+vanishing gradients and specialized units such as a long short term memory unit.
+
+10
+00:00:46,180 --> 00:00:51,040
+Then we'll show you how to do a time series analysis with a current year that works trying to predict
+
+11
+00:00:51,100 --> 00:00:54,030
+a time series shifted one step into the future.
+
+12
+00:00:54,250 --> 00:00:59,290
+Then you'll have your own time series exercise along phase solutions lecture and then we'll also discuss
+
+13
+00:00:59,340 --> 00:01:02,850
+worts of VEC algorithm for word embedding.
+
+14
+00:01:02,860 --> 00:01:03,400
+All right.
+
+15
+00:01:03,400 --> 00:01:05,410
+There's lots to talk about so let's get started.
+
+16
+00:01:05,410 --> 00:01:06,330
+I'll see at the next lecture.
+

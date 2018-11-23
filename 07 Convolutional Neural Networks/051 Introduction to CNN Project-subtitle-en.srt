@@ -1,0 +1,376 @@
+1
+00:00:05,290 --> 00:00:09,520
+Hello everyone and welcome to your exercise for this section of the course where you're going to be
+
+2
+00:00:09,520 --> 00:00:15,520
+using convolutional neural networks to classify the famous see far 10 dataset.
+
+3
+00:00:15,550 --> 00:00:22,110
+So this is an optional exercise to see far 10 data set to see a certain data set consists of sixty thousand
+
+4
+00:00:22,130 --> 00:00:29,830
+32 by 32 color images in 10 classes with 6000 images per class where there are 50000 training images
+
+5
+00:00:29,920 --> 00:00:34,210
+and 10000 test images to make a total of 60000 images.
+
+6
+00:00:34,210 --> 00:00:39,040
+Now the reason this is optional is because it is actually quite challenging especially given what we
+
+7
+00:00:39,040 --> 00:00:43,630
+know so far about convolutional neural networks and the main challenge is actually dealing with the
+
+8
+00:00:43,630 --> 00:00:50,050
+data and creating tensor batches and making sure everything has the right dimensions and size actually
+
+9
+00:00:50,050 --> 00:00:53,580
+creating that convolutional layers and creating the pulling layers.
+
+10
+00:00:53,590 --> 00:00:56,050
+Given what we've already covered is pretty straightforward.
+
+11
+00:00:56,050 --> 00:00:59,570
+In fact it's almost the exact same process as what we've just heard before.
+
+12
+00:00:59,740 --> 00:01:01,930
+And you can actually vary some of the parameters.
+
+13
+00:01:01,930 --> 00:01:09,490
+The real hard part is getting this data as an image and then creating that next batch function or actually
+
+14
+00:01:09,490 --> 00:01:10,600
+sizing it correctly.
+
+15
+00:01:10,630 --> 00:01:15,440
+Because remember with the data set all of that was taken care of for us under the hood.
+
+16
+00:01:15,640 --> 00:01:20,200
+When you're dealing with real data sets your own images or images that don't have these convenience
+
+17
+00:01:20,200 --> 00:01:24,660
+functions you're going to spend a lot of time actually creating those convenience functions.
+
+18
+00:01:24,730 --> 00:01:29,650
+And in the exercise notebook a lot of that's already been pre-filled out for you because it is a quite
+
+19
+00:01:29,650 --> 00:01:32,020
+challenging and time consuming.
+
+20
+00:01:32,020 --> 00:01:35,950
+So we're going to go through the exercise notebook and then you can decide whether or not you feel like
+
+21
+00:01:35,950 --> 00:01:41,080
+just treating this as a code along lecturer so you'll skip to the solutions lecture and code along or
+
+22
+00:01:41,080 --> 00:01:45,640
+feeling a little more ambitious just try your best and see how far you can get on your own through the
+
+23
+00:01:45,640 --> 00:01:47,020
+exercise notebook.
+
+24
+00:01:47,020 --> 00:01:51,560
+So let's open up that exercise notebook and show you where you can find the data.
+
+25
+00:01:51,560 --> 00:01:54,750
+Ok so here I am under the convolutional neural networks folder.
+
+26
+00:01:54,860 --> 00:01:59,480
+You should notice that there is a CNN project exercise notebook file go ahead and click on that one
+
+27
+00:01:59,900 --> 00:02:03,890
+and you'll also notice that there's a folder here called See four batches dash pi.
+
+28
+00:02:03,950 --> 00:02:08,150
+That's where the actual data is contain and it comes in five little batches here.
+
+29
+00:02:08,150 --> 00:02:13,520
+So keep that in mind and when you open up the exercise notebook you'll notice that there is a description
+
+30
+00:02:13,520 --> 00:02:14,810
+of what you're going to end up doing.
+
+31
+00:02:14,810 --> 00:02:20,210
+You're essentially going to be classifying between 10 classes or color images and you're going to follow
+
+32
+00:02:20,210 --> 00:02:22,650
+along with the instructions in bold.
+
+33
+00:02:22,700 --> 00:02:29,150
+Now step 0 called get the data actually already has all of this essentially filled out for you.
+
+34
+00:02:29,150 --> 00:02:31,750
+So you're going to load the data and you're going to use the code here.
+
+35
+00:02:31,850 --> 00:02:34,210
+That's already been made for you.
+
+36
+00:02:34,370 --> 00:02:40,160
+And the reason for this is it is really time consuming process and you're basically going to have to
+
+37
+00:02:40,220 --> 00:02:45,020
+manually convert these images and create these next batch convenience functions.
+
+38
+00:02:45,020 --> 00:02:49,370
+And because that's really time consuming and it doesn't actually have a lot to do of convolutional neural
+
+39
+00:02:49,370 --> 00:02:53,120
+networks it's more just kind of the dirty work of working in a python.
+
+40
+00:02:53,240 --> 00:02:57,900
+It's already been filled out for you so you can focus on learning about convolutional neural networks.
+
+41
+00:02:57,950 --> 00:03:02,750
+So if you scroll down here there's a lot of explanation about the data how it's formatted.
+
+42
+00:03:02,750 --> 00:03:03,720
+So there's tons of text.
+
+43
+00:03:03,730 --> 00:03:07,850
+You're free to read through then displaying a single image using that plot lib.
+
+44
+00:03:07,850 --> 00:03:14,720
+There's also little examples of showing that so there's some code here that says you need to fill this
+
+45
+00:03:14,720 --> 00:03:15,010
+out.
+
+46
+00:03:15,080 --> 00:03:18,170
+Put the code here that transforms the X array etc..
+
+47
+00:03:18,260 --> 00:03:23,300
+And once you're done kind of dealing with the data there is a little helper functions here such as the
+
+48
+00:03:23,300 --> 00:03:24,430
+one high end coding.
+
+49
+00:03:24,480 --> 00:03:29,390
+Then there's also a class that I made for you to set up the images of training setting them up and then
+
+50
+00:03:29,390 --> 00:03:30,850
+grabbing that next batch.
+
+51
+00:03:30,850 --> 00:03:34,770
+And it shows you how you can use the above code then you'll get to the create model.
+
+52
+00:03:34,820 --> 00:03:38,130
+And that's where you end up having a bunch of empty cells free to fill out.
+
+53
+00:03:38,210 --> 00:03:43,220
+And then she wants you to recreate those helper functions that we did earlier basically going to look
+
+54
+00:03:43,220 --> 00:03:46,260
+really similar to the ones we did in the dataset.
+
+55
+00:03:46,300 --> 00:03:50,630
+And if you want you can just kind of copy and paste if you forget what they look like then you'll create
+
+56
+00:03:50,630 --> 00:03:51,610
+the layers again.
+
+57
+00:03:51,650 --> 00:03:55,040
+And there's hints here on what shapes and what sizes to use.
+
+58
+00:03:55,160 --> 00:03:59,170
+So you can scroll down loss function optimizer graph session etc..
+
+59
+00:03:59,180 --> 00:04:02,020
+Now keep in mind this is going to take a long time to run.
+
+60
+00:04:02,030 --> 00:04:08,090
+I have a really fast computer so I ran it for let's see River 5000 steps and got 17 percent accuracy.
+
+61
+00:04:08,210 --> 00:04:14,780
+So we should kind of aim for around that and again kind of the whole half our first half of dealing
+
+62
+00:04:14,780 --> 00:04:15,650
+with the data.
+
+63
+00:04:15,650 --> 00:04:17,800
+It's been technically fill that for you.
+
+64
+00:04:17,810 --> 00:04:23,060
+But what I really want you to do is if you try to do this as an exercise go line by line and make sure
+
+65
+00:04:23,060 --> 00:04:26,520
+you understand a lot of this code actually that even write it.
+
+66
+00:04:26,520 --> 00:04:28,840
+It comes with the data set itself.
+
+67
+00:04:28,850 --> 00:04:34,010
+So for instance is an pickling function that actually if you go to the link of where to download the
+
+68
+00:04:34,010 --> 00:04:34,790
+data.
+
+69
+00:04:34,820 --> 00:04:40,530
+So if you come over here to download data and click on this link they'll take you to the data source
+
+70
+00:04:40,940 --> 00:04:45,700
+and then if you scroll down here the providers of the data actually kind of have instructions here of
+
+71
+00:04:45,710 --> 00:04:48,610
+how to open the data and pickle it etc..
+
+72
+00:04:48,620 --> 00:04:51,880
+So this is actually the code that's directly here in the notebook.
+
+73
+00:04:51,890 --> 00:04:56,360
+So if you're an independent researcher and trying to work this data you would've already had this code
+
+74
+00:04:56,360 --> 00:04:57,980
+available for you anyways.
+
+75
+00:04:57,980 --> 00:05:02,000
+And this is just kind of some convenience functions to working the code.
+
+76
+00:05:02,000 --> 00:05:02,620
+OK.
+
+77
+00:05:02,900 --> 00:05:05,840
+So take your time with this project.
+
+78
+00:05:05,840 --> 00:05:11,000
+It's a it's pretty challenging to be perfectly honest as it should be convolutional neural networks
+
+79
+00:05:11,360 --> 00:05:13,330
+are not the easiest thing in the world.
+
+80
+00:05:13,520 --> 00:05:16,120
+So take your time with this see how far you can get.
+
+81
+00:05:16,140 --> 00:05:22,100
+Again if you're going to do it as an exercise please make sure to read and go step by step through what
+
+82
+00:05:22,100 --> 00:05:28,320
+is the step zero of getting the data before you jump forward to actually creating the network.
+
+83
+00:05:28,340 --> 00:05:30,110
+So all of these cells need to be run.
+
+84
+00:05:30,140 --> 00:05:34,840
+You should be understanding every line as part of the exercise and will be going through that throughout
+
+85
+00:05:34,850 --> 00:05:37,620
+the solutions before you actually end up creating the model.
+
+86
+00:05:37,620 --> 00:05:39,470
+So don't just skip to create the model.
+
+87
+00:05:39,530 --> 00:05:41,670
+Make sure you understand all the code before it.
+
+88
+00:05:42,050 --> 00:05:42,510
+All right.
+
+89
+00:05:42,770 --> 00:05:47,420
+So coming up next we're gonna have a series of lectures going through this project and treating it as
+
+90
+00:05:47,420 --> 00:05:48,950
+a code along solution.
+
+91
+00:05:48,950 --> 00:05:51,830
+Again it's optional it's up to you whether you want to treat it as a code along.
+
+92
+00:05:51,830 --> 00:05:55,910
+If you ever get stuck during the exercise please check over to the solutions video where we'll have
+
+93
+00:05:55,910 --> 00:05:58,360
+full explanations for all the steps.
+
+94
+00:05:58,370 --> 00:06:00,320
+Thanks and I'll see you at the next lecture.
+

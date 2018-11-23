@@ -1,0 +1,596 @@
+1
+00:00:05,470 --> 00:00:09,500
+Welcome back everyone to this lecture on the tensor flow playground.
+
+2
+00:00:09,620 --> 00:00:14,630
+So we're going to be able to actually visualize and play around a lot of the topics we've been discussing.
+
+3
+00:00:14,630 --> 00:00:20,060
+Go ahead and open your browser and go to playground tensor float dot org and hop over to my browser
+
+4
+00:00:20,090 --> 00:00:21,430
+and explain what we're looking at.
+
+5
+00:00:21,670 --> 00:00:21,920
+OK.
+
+6
+00:00:21,920 --> 00:00:24,180
+Here in that playground that sensor float.
+
+7
+00:00:24,260 --> 00:00:29,300
+And it's this really awesome site that allows you to really visualize a lot of the topics we've been
+
+8
+00:00:29,300 --> 00:00:31,120
+discussing about neural networks.
+
+9
+00:00:31,400 --> 00:00:34,650
+Let me explain a couple of the aspects that are on this Web site.
+
+10
+00:00:34,940 --> 00:00:38,340
+So you start off over here on the left hand side with the data you want to use.
+
+11
+00:00:38,360 --> 00:00:40,340
+You have various data sets in right now.
+
+12
+00:00:40,460 --> 00:00:43,140
+If you go over here you can select classification or regression.
+
+13
+00:00:43,280 --> 00:00:45,260
+We'll go ahead and just do classification for now.
+
+14
+00:00:46,040 --> 00:00:50,450
+You'll notice that you have various datasets you can choose or you're trying to classify between orange
+
+15
+00:00:50,450 --> 00:00:55,760
+points and blue points so you can click here to get it that it looks like this or more complicated spiral
+
+16
+00:00:55,850 --> 00:00:58,600
+dataset or just two clusters etc..
+
+17
+00:00:58,640 --> 00:01:05,000
+So let's go ahead and choose this default dataset which is kind of a rim or a ring of orange points.
+
+18
+00:01:05,000 --> 00:01:07,000
+And then in the center we have these blue points.
+
+19
+00:01:07,090 --> 00:01:10,250
+You can also affect the ratio training to test data.
+
+20
+00:01:10,240 --> 00:01:11,760
+We're going to keep a 50/50.
+
+21
+00:01:11,930 --> 00:01:15,220
+And you can also make the test data or training data and noisier.
+
+22
+00:01:15,230 --> 00:01:16,450
+So you can add some noise to this.
+
+23
+00:01:16,580 --> 00:01:20,900
+You can see there are more mixed up but I'll go ahead and bring this down to zero.
+
+24
+00:01:20,900 --> 00:01:23,570
+Basically what it was and you can also play out the batch size.
+
+25
+00:01:23,570 --> 00:01:27,860
+So the actual batches that are going to fit in then once you've done it the data you can move on to
+
+26
+00:01:27,860 --> 00:01:30,380
+the features that you want to actually fit in.
+
+27
+00:01:30,410 --> 00:01:33,230
+They see the properties they want to fit into your neural network.
+
+28
+00:01:33,290 --> 00:01:37,610
+Here we can just see that we have the X1 which is kind of this horizontal separation between Orange
+
+29
+00:01:37,610 --> 00:01:38,020
+and Blue.
+
+30
+00:01:38,020 --> 00:01:42,590
+And if you hover over it you can see it on the right hand side towards the output and then X2 kind of
+
+31
+00:01:42,590 --> 00:01:44,630
+this vertical separation etc..
+
+32
+00:01:44,680 --> 00:01:49,500
+Just trying to use these two features and let the neurons learn how to use those features on your dataset
+
+33
+00:01:49,520 --> 00:01:51,790
+to separate out into two classes.
+
+34
+00:01:51,800 --> 00:01:56,480
+Let's go ahead and make this just a really simple neural network it's going to have one hidden layer
+
+35
+00:01:56,900 --> 00:01:59,030
+and we're going to have this be just one simple neuron.
+
+36
+00:01:59,030 --> 00:02:01,220
+In fact let's go ahead or just feet in one feature.
+
+37
+00:02:01,220 --> 00:02:06,110
+So refeeding and one feature this kind of horizontal separator and then it goes into one neuron so let's
+
+38
+00:02:06,110 --> 00:02:10,810
+go ahead and train on the simple singular feature into just a single neuron to see or output.
+
+39
+00:02:11,180 --> 00:02:15,350
+And as you may likely predict that this isn't going to be such a great classifier because we have a
+
+40
+00:02:15,350 --> 00:02:19,880
+single neuron and a single input but we can see a lot of the stuff that we've been discussing over here
+
+41
+00:02:19,880 --> 00:02:20,760
+on the output.
+
+42
+00:02:20,810 --> 00:02:26,700
+You can see in black you have the test lost so lost is kind of just another word for that cost or costs
+
+43
+00:02:26,700 --> 00:02:31,490
+function that we discussed zero Test loss and then you can also see a loss on the training data in great
+
+44
+00:02:31,940 --> 00:02:33,690
+can kind of see how they compared to each other.
+
+45
+00:02:33,890 --> 00:02:38,690
+And then over here on the top let's go it imposes epoxies just the number of times we kind of feed in
+
+46
+00:02:38,690 --> 00:02:40,620
+this data through on your own network.
+
+47
+00:02:40,760 --> 00:02:44,840
+You can see our learning rate or activation functions you can kind of play around these.
+
+48
+00:02:44,840 --> 00:02:47,150
+So we have different activation functions that we've discussed.
+
+49
+00:02:47,150 --> 00:02:49,270
+Right now we're using hyperbolic tangent.
+
+50
+00:02:49,370 --> 00:02:52,730
+Then we also have regularization we haven't really talked about that yet so I kind of leave them as
+
+51
+00:02:52,740 --> 00:02:53,890
+none and zero.
+
+52
+00:02:54,020 --> 00:02:57,190
+And you can also clarify the problem type.
+
+53
+00:02:57,230 --> 00:03:01,560
+So let's go ahead and play around with this and try to make a more complicated neural network.
+
+54
+00:03:01,570 --> 00:03:08,480
+Well go ahead and take in two features and then let's say we'll go from three neurons and then two neurons
+
+55
+00:03:08,540 --> 00:03:09,990
+and see how this performs.
+
+56
+00:03:10,010 --> 00:03:14,330
+So we're going to then run this and hopefully now we're going to see a much better performance.
+
+57
+00:03:14,360 --> 00:03:19,870
+And you can see here we are just visually almost getting to the point where we're correctly classifying
+
+58
+00:03:19,870 --> 00:03:22,530
+and of all these blue points and those orange points.
+
+59
+00:03:22,550 --> 00:03:27,850
+So in order to fix this well we can do is try adding some more neurons or play around the hidden layers.
+
+60
+00:03:27,980 --> 00:03:32,010
+But let me go out and posit here to show you what these lines represent.
+
+61
+00:03:32,240 --> 00:03:39,260
+So right here these lines represent the outputs from either the features or a neuron into the next year
+
+62
+00:03:39,260 --> 00:03:39,400
+on.
+
+63
+00:03:39,410 --> 00:03:44,090
+So here we have a kind of dense network because every neuron is connected to every other neuron the
+
+64
+00:03:44,090 --> 00:03:45,120
+next layer.
+
+65
+00:03:45,170 --> 00:03:47,870
+And if you hover over these you can see that they have weights to them.
+
+66
+00:03:48,140 --> 00:03:50,720
+So you can actually click on this and then adjust the weights yourself.
+
+67
+00:03:50,730 --> 00:03:51,880
+You can play around with that.
+
+68
+00:03:51,980 --> 00:03:56,740
+It is here I can adjust weights to maybe like 0.8 one and see how that performs etc..
+
+69
+00:03:57,110 --> 00:03:58,880
+But also remember we discuss bias.
+
+70
+00:03:59,030 --> 00:04:04,190
+And if you click on a neuron here there's a little tiny square and that's actually the biased term.
+
+71
+00:04:04,190 --> 00:04:09,830
+So everything that we've been discussing so far is actually visualised here we can see the weights these
+
+72
+00:04:09,860 --> 00:04:11,450
+inputs from one you're on to another.
+
+73
+00:04:11,480 --> 00:04:16,200
+The biases and the thicker the line that means the higher the weight.
+
+74
+00:04:16,220 --> 00:04:19,380
+So really great visualization a really fun tool to work with.
+
+75
+00:04:19,400 --> 00:04:20,990
+Let's go in and see if we can improve on this.
+
+76
+00:04:20,990 --> 00:04:26,030
+I'm going to add in one more hidden layer and let's add in kind of three neurons on these guys.
+
+77
+00:04:26,030 --> 00:04:28,710
+Let's see if we run this if we get better results.
+
+78
+00:04:28,760 --> 00:04:30,120
+Slimmy reset this.
+
+79
+00:04:30,340 --> 00:04:31,570
+And let's run this again.
+
+80
+00:04:33,370 --> 00:04:33,690
+OK.
+
+81
+00:04:33,720 --> 00:04:35,120
+We can kind of begin to see that.
+
+82
+00:04:35,140 --> 00:04:40,260
+Yeah really fitting the data well in our test losses essentially zero and are trading losses 0.
+
+83
+00:04:40,410 --> 00:04:42,790
+So essentially now we have kind of this perfect classifier.
+
+84
+00:04:42,960 --> 00:04:47,940
+And what's really cool is if we pause this we can kind of see individually each of the neurons are doing
+
+85
+00:04:48,390 --> 00:04:53,190
+and notice as we continue on through our network we get higher and higher levels of abstraction until
+
+86
+00:04:53,190 --> 00:04:54,350
+the final.
+
+87
+00:04:54,600 --> 00:04:58,500
+And you can see here that essentially one of these neurons is doing all the work and we really get the
+
+88
+00:04:58,500 --> 00:05:04,040
+shape of the Heisler abstraction which are essentially that circle in the middle versus kind of that
+
+89
+00:05:04,170 --> 00:05:06,040
+spiral on the outside.
+
+90
+00:05:06,060 --> 00:05:11,910
+So let's go ahead and test this on a much more complicated dataset such as this spiral data set.
+
+91
+00:05:11,910 --> 00:05:18,800
+So if we run this notice here that even though we performed really well on that previous dataset with
+
+92
+00:05:18,800 --> 00:05:24,440
+this much more complicated dataset it's not able to really classify it that well you can see here it's
+
+93
+00:05:24,440 --> 00:05:27,300
+kind of struggling to get in that spiral shape.
+
+94
+00:05:27,470 --> 00:05:31,960
+So it's trying to really learn and test it against the training data.
+
+95
+00:05:31,970 --> 00:05:34,730
+But notice here we're still really not there.
+
+96
+00:05:34,730 --> 00:05:37,550
+So let's go ahead and see what we can do to improve this.
+
+97
+00:05:37,580 --> 00:05:42,500
+So I will pause this is something we may need to do is just add and more hidden layers.
+
+98
+00:05:42,590 --> 00:05:44,950
+Remember we can also change or activation function.
+
+99
+00:05:45,140 --> 00:05:49,220
+So we're going to change this to kind of that rectified linear unit and let's go ahead and just kind
+
+100
+00:05:49,220 --> 00:05:51,420
+of go crazy here at a bunch of more neurons.
+
+101
+00:05:51,450 --> 00:05:54,180
+This something can really play around with.
+
+102
+00:05:54,240 --> 00:05:56,250
+So let's get in five hidden layers.
+
+103
+00:05:56,260 --> 00:05:57,780
+Why not.
+
+104
+00:05:57,880 --> 00:06:01,100
+I'm really kind of choosing these arbitrarily to see how this works.
+
+105
+00:06:01,100 --> 00:06:03,700
+I remember the more nuance more layers.
+
+106
+00:06:03,710 --> 00:06:09,170
+The longest is going to take so I'm going to add in kind of four Sogo 6 6 6 6 4 you can really play
+
+107
+00:06:09,170 --> 00:06:12,400
+around with this however you want but let's go ahead and run this now.
+
+108
+00:06:12,630 --> 00:06:13,790
+Again more hidden layers.
+
+109
+00:06:13,790 --> 00:06:16,670
+It's going to take a lot more as far as training time.
+
+110
+00:06:16,760 --> 00:06:20,410
+You can kind of see here Test loss is slowly decreasing.
+
+111
+00:06:20,450 --> 00:06:21,750
+Seems like it's plateauing.
+
+112
+00:06:21,860 --> 00:06:26,210
+And then we kind of get a breakthrough here and it's kind of struggling but you can see here it's really
+
+113
+00:06:26,210 --> 00:06:28,850
+trying its best to make out that spiral shape.
+
+114
+00:06:28,880 --> 00:06:35,120
+So even with the rectified linear unit activation and all these hidden layers we can sell that still
+
+115
+00:06:35,120 --> 00:06:40,010
+a really hard problem to solve but is trying its best to get into that spiral shape.
+
+116
+00:06:40,040 --> 00:06:42,930
+So I'm going to kind of go to the max here.
+
+117
+00:06:43,160 --> 00:06:47,940
+So let me pause this and let me add in it neurons.
+
+118
+00:06:47,960 --> 00:06:52,840
+Each of these layers can see how that kind of affects performance.
+
+119
+00:06:53,920 --> 00:06:57,590
+You know when even at six hit in layers maximum.
+
+120
+00:06:57,590 --> 00:07:01,600
+So let's go kind of all out on this and see how this works.
+
+121
+00:07:01,610 --> 00:07:07,180
+So that's not to say as a general problem solving strategy you should just go crazy if neurons and hit
+
+122
+00:07:07,180 --> 00:07:07,660
+players.
+
+123
+00:07:07,670 --> 00:07:12,000
+But I kind of want you to see the effects of adding a lot of stuff here.
+
+124
+00:07:12,020 --> 00:07:17,340
+So again rectified linear you get tons of neurons 6 hit in layer so we have a deep network here.
+
+125
+00:07:17,480 --> 00:07:20,120
+Let's go ahead and run this and see how it performs.
+
+126
+00:07:20,120 --> 00:07:27,020
+So again the more neurons more players the more time it's going to take to actually learn on this data
+
+127
+00:07:27,590 --> 00:07:31,880
+and what's really cool is you can see the higher level abstractions as you kind of visit these neurons
+
+128
+00:07:31,880 --> 00:07:36,980
+see see the visualizations here and kind of towards the end you can see spiral shape really begin to
+
+129
+00:07:37,490 --> 00:07:38,700
+come out.
+
+130
+00:07:38,720 --> 00:07:44,450
+So I jump forward in time a bit but you can see here that we have kind of a much lower test loss than
+
+131
+00:07:44,450 --> 00:07:48,650
+what we initially started with and then a training loss we can see that we're definitely making out
+
+132
+00:07:48,650 --> 00:07:53,840
+the spiral shape a lot more clearly than our first neural network.
+
+133
+00:07:53,840 --> 00:07:56,580
+So I encourage you to really play around with this we can go in and pause this.
+
+134
+00:07:56,580 --> 00:07:58,420
+Now a player of the learning rate.
+
+135
+00:07:58,430 --> 00:08:03,650
+So obviously the lower the learning rate that means the longer this is going to take to train.
+
+136
+00:08:03,650 --> 00:08:05,150
+But you may get more accurate results.
+
+137
+00:08:05,150 --> 00:08:09,410
+I can kind of refresh this and see here that it's going to take a lot longer to train this.
+
+138
+00:08:09,410 --> 00:08:13,940
+If you have a much slower learning rate or if you refresh this and go to a much higher learning rate
+
+139
+00:08:14,240 --> 00:08:15,800
+this is going to learn kind of a lot faster.
+
+140
+00:08:15,800 --> 00:08:17,920
+You can see here really high learning rate.
+
+141
+00:08:17,960 --> 00:08:21,350
+Kind of ruins the whole thing and says OK I'm going to classify everything as blue.
+
+142
+00:08:21,350 --> 00:08:23,300
+So lots of things to play around with here.
+
+143
+00:08:23,430 --> 00:08:28,500
+Hopefully you can now have a really good visualization of all the topics we've been learning about.
+
+144
+00:08:28,700 --> 00:08:33,050
+So again playground that senseful the or really fun web site really awesome Web site to play around
+
+145
+00:08:33,050 --> 00:08:33,750
+with.
+
+146
+00:08:33,830 --> 00:08:37,640
+I really encourage you to check it out and visualize everything we've been talking about.
+
+147
+00:08:37,670 --> 00:08:41,900
+Coming up next we're going to discuss in full detail the mathematics behind the neural network theory
+
+148
+00:08:41,900 --> 00:08:46,280
+that we've been talking about and then show you how to manually compute all that in Python.
+
+149
+00:08:46,280 --> 00:08:47,810
+Thanks and I'll see you at the next lecture.
+

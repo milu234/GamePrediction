@@ -1,0 +1,480 @@
+1
+00:00:05,320 --> 00:00:11,710
+Welcome everyone to this lecture where we take a basic or normal approach to the dataset for classifying
+
+2
+00:00:11,740 --> 00:00:17,290
+digits and this sort of approach is a lot of times the very first approach you see in deep learning
+
+3
+00:00:17,290 --> 00:00:18,160
+tutorials.
+
+4
+00:00:18,160 --> 00:00:22,810
+So it's always a good idea to go through it because pretty much every major framework will have some
+
+5
+00:00:22,810 --> 00:00:28,750
+sort of data set analysis or classification as far as a tutorial on how to use a framework.
+
+6
+00:00:28,780 --> 00:00:31,950
+So it's really important to understand this particular problem in a framework.
+
+7
+00:00:31,960 --> 00:00:35,520
+That way you can easily use it as an analogy for other frameworks.
+
+8
+00:00:35,650 --> 00:00:41,530
+So we're going to use what we know so far about neural networks theory and using tensor flow to solve
+
+9
+00:00:41,530 --> 00:00:43,150
+the endless classification.
+
+10
+00:00:43,300 --> 00:00:47,530
+Then after that we get to learn about convolutional neuron that works and see just how much of a performance
+
+11
+00:00:47,530 --> 00:00:53,740
+improvement CNN's can give you for image classification tasks something CNN's and general are really
+
+12
+00:00:53,740 --> 00:00:55,490
+well suited for.
+
+13
+00:00:55,640 --> 00:00:58,360
+The First off we're going to use this more basic approach.
+
+14
+00:00:58,490 --> 00:01:04,010
+Specifically a soft Max regression approach which is a really common layer and approach you're going
+
+15
+00:01:04,010 --> 00:01:06,980
+to see throughout more advanced neural networks as well.
+
+16
+00:01:06,980 --> 00:01:08,340
+So it's important that we go over it.
+
+17
+00:01:08,390 --> 00:01:13,500
+Now that's actually really similar to the methods we've already used in previous sections of the course.
+
+18
+00:01:14,570 --> 00:01:20,720
+So let's discuss what the soft Max regression is basically a soft Max regression returns a list of values
+
+19
+00:01:20,720 --> 00:01:26,060
+between 0 and 1 that when you some of them up or add them up they all add up to just 1.
+
+20
+00:01:26,210 --> 00:01:28,660
+And we can treat that as a list of probabilities.
+
+21
+00:01:28,730 --> 00:01:35,180
+So you can imagine that if we have a list of 10 potential labels that is zero through nine we could
+
+22
+00:01:35,180 --> 00:01:40,030
+then when we apply Sotha Max regression get a list of 10 probabilities.
+
+23
+00:01:40,130 --> 00:01:42,760
+And when you add up those probabilities that equal 1.
+
+24
+00:01:42,770 --> 00:01:48,560
+So that means that basically will choose whichever label has the highest probability or likelihood of
+
+25
+00:01:48,560 --> 00:01:49,730
+being correct.
+
+26
+00:01:49,730 --> 00:01:55,250
+Now you usually won't get 100 percent for one probability instead you'll get the relatively high probability
+
+27
+00:01:55,250 --> 00:02:00,260
+for one label then maybe second highest probability for a similar looking number and then everything
+
+28
+00:02:00,260 --> 00:02:04,970
+else will have not zero but something very close to it just because it's never 100 percent sure for
+
+29
+00:02:04,970 --> 00:02:11,640
+any one number and we're going to apply the basic soft max function as an activation function.
+
+30
+00:02:11,640 --> 00:02:13,150
+So let's go through that as well.
+
+31
+00:02:14,390 --> 00:02:17,280
+So if we use soft Max as our activation function.
+
+32
+00:02:17,330 --> 00:02:23,210
+The basic idea of soft Max is to define a new type of output layer for our neural networks and we'll
+
+33
+00:02:23,210 --> 00:02:25,120
+see a diagram of this coming up next.
+
+34
+00:02:25,190 --> 00:02:29,810
+But it essentially begins the exact same way as if the sigmoid layer something we've already worked
+
+35
+00:02:29,810 --> 00:02:30,470
+with.
+
+36
+00:02:30,530 --> 00:02:38,110
+So we form the output Z by having the weights multiplied by an input X plus a biased term.
+
+37
+00:02:38,300 --> 00:02:44,590
+However once we have that Z the activation function we pass it through is not the sigmoid function but
+
+38
+00:02:44,600 --> 00:02:50,870
+it's that it's this soft max function and according to this function it's just the exponential of that
+
+39
+00:02:51,080 --> 00:02:59,650
+output Z divided by the denominator the sum over all the output neurons and that's the soft Max.
+
+40
+00:02:59,710 --> 00:03:04,480
+And if we were to imagine this in a network format we basically get something that looks similar to
+
+41
+00:03:04,480 --> 00:03:06,880
+this except they would have a lot more x's.
+
+42
+00:03:07,060 --> 00:03:13,450
+And basically for each output we compute a weighted sum of X's add a bias and then apply the soft Max
+
+43
+00:03:13,620 --> 00:03:17,470
+and we can actually then write this out as an equation.
+
+44
+00:03:17,470 --> 00:03:23,530
+So you would get something like this where you have that output y equal to soft Max applied to the weights
+
+45
+00:03:23,800 --> 00:03:27,060
+multiplied by each of the inputs plus a biased term.
+
+46
+00:03:27,130 --> 00:03:31,600
+And then of course we're going to vectorize this procedure which would then look something like this
+
+47
+00:03:31,720 --> 00:03:34,840
+turning it into matrix multiplication and Vector addition.
+
+48
+00:03:34,900 --> 00:03:38,210
+And this makes it computationally a lot more efficient.
+
+49
+00:03:40,000 --> 00:03:45,130
+All right let's go ahead and open up a Jupiter note book and implement this with Python and Tancer flow
+
+50
+00:03:46,210 --> 00:03:46,530
+OK.
+
+51
+00:03:46,530 --> 00:03:48,300
+Here I am at the Jupiter notebook.
+
+52
+00:03:48,330 --> 00:03:50,100
+Let's go ahead and get started.
+
+53
+00:03:50,100 --> 00:03:54,360
+The first thing you need to do is importance and flow of course and then the next thing we need to do
+
+54
+00:03:54,360 --> 00:03:55,760
+is actually get the data.
+
+55
+00:03:56,010 --> 00:04:00,660
+Keep in mind I've already downloaded the data and it's included in the zip file for this course underneath
+
+56
+00:04:00,660 --> 00:04:02,940
+the convolutional neural networks folder.
+
+57
+00:04:02,940 --> 00:04:06,730
+There is a folder called data in case you need to download it again.
+
+58
+00:04:06,750 --> 00:04:11,910
+You can either check out the links in the basic approach notebook to download it manually or you can
+
+59
+00:04:11,910 --> 00:04:15,100
+use the sensor for commands to download it automatically for you.
+
+60
+00:04:15,600 --> 00:04:20,270
+And keep in mind if this doesn't work for you you most likely have some sort of firewall problem and
+
+61
+00:04:20,280 --> 00:04:25,530
+in which case you can always use the links in the basic approach notebook that download this stuff manually
+
+62
+00:04:26,310 --> 00:04:30,470
+some way or another you will need to have permissions on your computer to download stuff from the Internet.
+
+63
+00:04:30,480 --> 00:04:33,950
+So if you're on a work computer that may be an issue for you.
+
+64
+00:04:34,080 --> 00:04:40,140
+So I have it from sensor fluid that examples that's Tauriel and this import input data input data is
+
+65
+00:04:40,140 --> 00:04:43,560
+going to allow us to download the data set.
+
+66
+00:04:43,590 --> 00:04:45,940
+So I will say input data.
+
+67
+00:04:45,950 --> 00:04:50,530
+The read data sets it could just have auto complete that.
+
+68
+00:04:50,590 --> 00:04:54,690
+And then I will say this underscore data forward slash.
+
+69
+00:04:54,730 --> 00:05:01,450
+That's going to create a new folder for me with the data and then you also want to say one hot is equal
+
+70
+00:05:01,450 --> 00:05:05,640
+to true so that the labels are one and coded already for you.
+
+71
+00:05:05,710 --> 00:05:11,470
+So if you run this inside the neural networks for there which are highly recommended Do you should basically
+
+72
+00:05:11,500 --> 00:05:14,480
+automatically get something that says extracting the data.
+
+73
+00:05:14,590 --> 00:05:21,220
+If you do not run this in that folder you'll get some some output that says hey it's downloading a couple
+
+74
+00:05:21,220 --> 00:05:22,900
+of bytes downloading downloading.
+
+75
+00:05:22,900 --> 00:05:24,520
+So that depends on your internet connection.
+
+76
+00:05:24,520 --> 00:05:28,540
+But again if you're running this from another folder you will be downloading the data instead of just
+
+77
+00:05:28,540 --> 00:05:30,970
+extracting the data that I've already downloaded for you.
+
+78
+00:05:30,970 --> 00:05:31,880
+Keep that in mind.
+
+79
+00:05:31,960 --> 00:05:37,230
+I really recommend just run this notebook directly from where it is in the zip file.
+
+80
+00:05:37,300 --> 00:05:43,880
+So if we take a look at the type of what this is it's basically this kind of specialized tensor flow
+
+81
+00:05:43,930 --> 00:05:50,050
+data set than it already has a lot of convenient methods built into it later on when we deal with other
+
+82
+00:05:50,050 --> 00:05:54,310
+data sets we're going to have to basically make our own classes to create these kind of methods.
+
+83
+00:05:54,310 --> 00:05:57,620
+But for now we're going to take advantage of these convenience methods.
+
+84
+00:05:58,830 --> 00:06:03,120
+So I can say this and if you do that tap here there's a test train and validation.
+
+85
+00:06:03,360 --> 00:06:08,910
+So if you choose one of those sets such as train and then hit tab here you can see there's images labels.
+
+86
+00:06:08,910 --> 00:06:14,000
+There's also a next batch function which is nice basically feeds in batches number of examples epochs
+
+87
+00:06:14,100 --> 00:06:15,410
+completed etcetera.
+
+88
+00:06:15,600 --> 00:06:19,710
+So if we take a look at the images themselves you get the output of a bunch of arrays.
+
+89
+00:06:19,980 --> 00:06:26,400
+So then you can actually ask for how many examples there are as we discussed there's 55000 training
+
+90
+00:06:26,400 --> 00:06:29,500
+examples and you can check out the other ones as well.
+
+91
+00:06:29,700 --> 00:06:34,410
+If you want to know how many test examples are those 10000 and there's 5000 validation examples as we've
+
+92
+00:06:34,410 --> 00:06:35,490
+already discussed.
+
+93
+00:06:35,490 --> 00:06:37,400
+So let's quickly visualize the data.
+
+94
+00:06:38,660 --> 00:06:48,150
+Also import map plot lib pipe plot as PBT and Alson is say some time in the notebook that lib inline
+
+95
+00:06:49,810 --> 00:06:58,160
+Sugoi say this train images and if I check out the shape of this this is 55000 images by 784 pixels
+
+96
+00:06:58,170 --> 00:07:00,150
+remember that's just 28 times 28.
+
+97
+00:07:00,260 --> 00:07:01,840
+So I'm going to grab one of these
+
+98
+00:07:04,680 --> 00:07:08,130
+and this is an image so we can see here it's an image.
+
+99
+00:07:08,130 --> 00:07:09,000
+So what did you do.
+
+100
+00:07:09,030 --> 00:07:18,600
+Since it's flattened out I need to reshape this to be 28 by 28 and now I can see that it's been reshaped
+
+101
+00:07:18,600 --> 00:07:21,930
+and others brackets in here which means I can actually show this.
+
+102
+00:07:21,930 --> 00:07:32,370
+So I will say this is a single image is equal to that result that I'll say P.L. see him show that single
+
+103
+00:07:32,370 --> 00:07:34,130
+image run that.
+
+104
+00:07:34,230 --> 00:07:36,420
+And there we can see it's a handwritten three.
+
+105
+00:07:36,450 --> 00:07:37,250
+Pretty cool.
+
+106
+00:07:37,500 --> 00:07:42,180
+Now we're actually not going to be using color instead we're going to be using just a greyscale.
+
+107
+00:07:42,180 --> 00:07:46,310
+So to kind of show what that would look like you just say one of the color maps.
+
+108
+00:07:46,320 --> 00:07:53,840
+See map JSE underscore Gray and this is kind of what we're going to be training on.
+
+109
+00:07:53,850 --> 00:07:54,540
+All right.
+
+110
+00:07:54,540 --> 00:07:58,300
+So the other thing to note is that the data has already been normalized for you.
+
+111
+00:07:58,530 --> 00:08:05,700
+So if you take a look at single image and ask for the minimum value it's zero.
+
+112
+00:08:05,710 --> 00:08:08,230
+And if you ask for the maximum value it's 1.
+
+113
+00:08:08,230 --> 00:08:11,440
+So this is already normalized for us which is pretty nice.
+
+114
+00:08:11,470 --> 00:08:16,540
+So now that we understand our data again it's just an array of images that are all flattened out and
+
+115
+00:08:16,540 --> 00:08:18,520
+you could reshape that to visualize it.
+
+116
+00:08:18,520 --> 00:08:20,990
+However we won't be reshaping for training purposes.
+
+117
+00:08:21,100 --> 00:08:24,080
+We're going to do in the very next lecture is actually create the model.
+
+118
+00:08:24,250 --> 00:08:25,560
+So I will see at the next lecture.
+
+119
+00:08:25,570 --> 00:08:28,350
+We're going to take off right where we left off here.
+
+120
+00:08:28,360 --> 00:08:28,990
+I'll see you there.
+

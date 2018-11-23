@@ -1,0 +1,2 @@
+- b'RNN-Slides'
+- b'https://docs.google.com/presentation/d/1mStr4BbqtU521CUnQvtZUHp8LBJmBYyY9rE_9VFfzyA/edit?usp=sharing'

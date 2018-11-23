@@ -1,0 +1,2 @@
+- b'Autoencoder-Slides'
+- b'https://docs.google.com/presentation/d/1FTCcCp-nNOJL_IuITqWuqTily9AUWVfoj_aGTbJ4yhY/edit?usp=sharing'

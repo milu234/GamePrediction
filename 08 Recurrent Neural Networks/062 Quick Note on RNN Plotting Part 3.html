@@ -1,0 +1,23 @@
+<html>
+                        <head>
+                        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                        <title>062 Quick Note on RNN Plotting Part 3</title>
+                        </head>
+                        <body>
+                        <div class="container">
+                        <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="lead"><div class="asset-container">
+    <div class="asset-container__padding article-view">
+        <div class="w3c-default">
+            <p>Hello everyone,</p><p>Just wanted to point out a typo/mistake in this last part of the videos, we accidentally plotted the wrong thing and got a perfect sine wave.</p><p>There are two main issues/typos that we can fix.</p><p>1. The first one is that<strong>len(training_instance) - num_time_steps = 0,</strong> so the model is not going through any iteration at all. This should be replaced with <strong>len(ts_data.x_data)-num_timesteps .</strong><br></p><p>2. Also we accidentally plotted<strong>ts.data.y_true</strong>which is the real data instead of the prediction, it should have been<strong>training_instance</strong>instead (after fixing the above point).</p><p>Here is a screenshot that displays the differences:</p><figure><img src="https://udemy-images.s3.amazonaws.com:443/redactor/raw/2017-12-20_18-32-38-f086606804ce1dd02b60051fa28c8bf0.png"></figure>
+        </div>
+    </div>
+</div>
+</p>
+                        </div>
+                        </div>
+                        </div>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                        </body>
+                        </html>

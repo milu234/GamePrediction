@@ -1,0 +1,348 @@
+1
+00:00:05,210 --> 00:00:12,480
+Welcome everyone to this lecture on tensor float graphs so tensor flow makes heavy use of graphs and
+
+2
+00:00:12,480 --> 00:00:17,020
+a lot of this actually happens behind your code basically behind the scenes or under the hood.
+
+3
+00:00:17,130 --> 00:00:22,700
+But let's go and discuss the basic idea behind graphs graphs are sets of connected nodes.
+
+4
+00:00:22,710 --> 00:00:27,690
+And sometimes these are called vertices and the connections themselves between nodes are referred to
+
+5
+00:00:27,720 --> 00:00:28,830
+as edges.
+
+6
+00:00:28,830 --> 00:00:33,160
+So if you have two notes that are connected the connection itself is an edge between those two nodes
+
+7
+00:00:33,570 --> 00:00:34,870
+and intenser flow.
+
+8
+00:00:34,920 --> 00:00:41,010
+Each node is an operation with possible inputs that can supply some sort of output and hopefully this
+
+9
+00:00:41,010 --> 00:00:44,730
+feels familiar from our previous section.
+
+10
+00:00:44,740 --> 00:00:49,600
+So in general with tent's flow we're going to construct a graph and then execute it.
+
+11
+00:00:49,600 --> 00:00:53,920
+We're going to start by showing a very simple example in Python and then we're also going to discuss
+
+12
+00:00:53,920 --> 00:00:56,830
+how tensor flow uses a default graph.
+
+13
+00:00:56,860 --> 00:01:00,760
+So the very first graph that we're going to create is this one right here where essentially it's going
+
+14
+00:01:00,760 --> 00:01:03,450
+to have two nodes each of them a constant.
+
+15
+00:01:03,580 --> 00:01:08,800
+So and one and two are the two nodes and the respectively the constant that these two notes hold are
+
+16
+00:01:08,800 --> 00:01:14,530
+one and two that we're going to put them into an operation node and three which is going to be an add
+
+17
+00:01:14,530 --> 00:01:17,390
+operation and then they'll output three.
+
+18
+00:01:17,470 --> 00:01:19,990
+Let's open the Jupiter notebook and code this out.
+
+19
+00:01:21,040 --> 00:01:26,230
+Or it's already imported tensor flow as T.F. And let's start by creating our first two notes which are
+
+20
+00:01:26,230 --> 00:01:27,700
+just those constants.
+
+21
+00:01:28,120 --> 00:01:34,000
+So say T.F. constants We'll have that one here and then into to that second node is also going to be
+
+22
+00:01:34,000 --> 00:01:37,290
+a constant and we'll have that beat too.
+
+23
+00:01:37,300 --> 00:01:40,640
+So then our third node and three is just going to be.
+
+24
+00:01:40,650 --> 00:01:42,780
+And one plus and two.
+
+25
+00:01:43,090 --> 00:01:48,520
+And now we've essentially created a graph where we have two nodes and then the operation noter and three
+
+26
+00:01:48,580 --> 00:01:51,190
+is just that adding them together.
+
+27
+00:01:51,280 --> 00:02:01,930
+So then we're going to say with CEF session as SPSS go ahead and set the results as sess that run that
+
+28
+00:02:01,930 --> 00:02:05,610
+third node for us and then let's go ahead and print that result.
+
+29
+00:02:06,700 --> 00:02:08,090
+And here we have three.
+
+30
+00:02:08,110 --> 00:02:13,230
+So if I had just asked to print the third node I would have gotten Hey tensor and this add six.
+
+31
+00:02:13,240 --> 00:02:19,000
+Just because I've been calling code before and then it reset the kernel but again here we have the actual
+
+32
+00:02:19,000 --> 00:02:21,100
+result after running it in a session.
+
+33
+00:02:21,430 --> 00:02:24,710
+So I want to briefly talk about default graphs with tensor flow.
+
+34
+00:02:24,850 --> 00:02:30,040
+When you start tensor flow a default graph is created and you can actually create additional graphs
+
+35
+00:02:30,040 --> 00:02:30,970
+pretty easily.
+
+36
+00:02:31,210 --> 00:02:38,640
+So for example if I say Prince T.F. dot get and then there's going to be a default graph.
+
+37
+00:02:38,650 --> 00:02:39,690
+It's also a default session.
+
+38
+00:02:39,700 --> 00:02:41,430
+But let's just talk about graphs for now.
+
+39
+00:02:41,680 --> 00:02:46,300
+So if I run this it says TFK default graph and it returns back the graph object.
+
+40
+00:02:46,300 --> 00:02:50,430
+I currently have operating at this point in memory on my computer.
+
+41
+00:02:50,440 --> 00:02:53,650
+Obviously you're going to have a different point here when you print this out.
+
+42
+00:02:54,160 --> 00:02:59,920
+So then I can say G is equal to dot graph.
+
+43
+00:03:00,170 --> 00:03:07,340
+And then if I check out print G I can see it's grabbing a different graph here that I just created.
+
+44
+00:03:07,490 --> 00:03:11,990
+So now I have my default graph and then this variable g which is another graph.
+
+45
+00:03:11,990 --> 00:03:16,770
+So if I want to set this new graph as a default what I can do is the following.
+
+46
+00:03:17,960 --> 00:03:20,420
+I'm going to recreate two graphs again.
+
+47
+00:03:20,540 --> 00:03:25,770
+One is going to be graph one which is going to be the current default graph.
+
+48
+00:03:25,820 --> 00:03:29,710
+So I have graph 1 is the current the build that wrong graph 1.
+
+49
+00:03:29,850 --> 00:03:32,040
+The real is the current default graph.
+
+50
+00:03:32,060 --> 00:03:37,590
+So if I say print graph 1 that memory does Lineup with my default graph.
+
+51
+00:03:37,600 --> 00:03:39,190
+So look at CCS are at the end.
+
+52
+00:03:39,200 --> 00:03:40,550
+Here we have CCPs 0.
+
+53
+00:03:40,760 --> 00:03:50,270
+So graph 1 is currently my default graph I'm going to say graph 2 is equal to some graph run that prints
+
+54
+00:03:50,390 --> 00:03:52,030
+graph 2.
+
+55
+00:03:52,430 --> 00:03:54,830
+So now currently I technically have three graphs.
+
+56
+00:03:54,830 --> 00:03:57,130
+I have my default graph in graph 1.
+
+57
+00:03:57,170 --> 00:04:00,680
+I have this letter which we won't really be using but that's also a graph.
+
+58
+00:04:00,830 --> 00:04:02,410
+And then I have graph 2 over here.
+
+59
+00:04:02,630 --> 00:04:06,560
+So what would happen if I wanted to set graph 2 as my default graph.
+
+60
+00:04:06,560 --> 00:04:15,940
+Well all I can do is the following I can say with graph to dot and then each graph has a as default
+
+61
+00:04:15,940 --> 00:04:16,810
+command.
+
+62
+00:04:16,840 --> 00:04:21,070
+So then I can say with Graph 2 as a default then I can do something.
+
+63
+00:04:21,070 --> 00:04:26,090
+So let's go in and say print and anoints say graph 2.
+
+64
+00:04:26,480 --> 00:04:34,870
+We use the is operator in Python to say is gets default graph.
+
+65
+00:04:34,870 --> 00:04:36,240
+So now that prints true.
+
+66
+00:04:36,280 --> 00:04:41,600
+So I can say with Graph 2 as a default print graph too is the fault graph.
+
+67
+00:04:42,010 --> 00:04:47,950
+And if I try to print this line outside of this with statements and you can copy and paste this.
+
+68
+00:04:47,960 --> 00:04:53,690
+Notice that it's going to be false because currently outside of this at a global scale graph one is
+
+69
+00:04:53,690 --> 00:04:55,010
+currently the default graph.
+
+70
+00:04:55,190 --> 00:04:59,870
+But if I ever have multiple graphs and I want to set one of them as the default I can say with this
+
+71
+00:04:59,870 --> 00:05:01,490
+one as the default.
+
+72
+00:05:01,490 --> 00:05:06,800
+Now typically for pretty much all or use cases throughout the course this sort of definition of setting
+
+73
+00:05:06,800 --> 00:05:10,170
+something as a default graph isn't going to be too important for us.
+
+74
+00:05:10,190 --> 00:05:14,960
+It mainly comes into play as far as our notebooks are concerned when we kind of need to reset things
+
+75
+00:05:14,990 --> 00:05:17,090
+and make sure that we're dealing with one graph.
+
+76
+00:05:17,150 --> 00:05:21,500
+As we get multiple variables in multiple graphs sometimes towards the end of a cell we want to make
+
+77
+00:05:21,500 --> 00:05:25,300
+sure hey we have one graph here and it's one thing run one operation.
+
+78
+00:05:25,310 --> 00:05:27,470
+So we'll reset it as the default.
+
+79
+00:05:27,740 --> 00:05:30,360
+But you won't really see this command that often throughout the course.
+
+80
+00:05:30,380 --> 00:05:34,640
+I just want you to be aware of it so that when you do see it it's not kind of a total mystery.
+
+81
+00:05:34,660 --> 00:05:34,990
+OK.
+
+82
+00:05:35,030 --> 00:05:36,450
+So that's basically it.
+
+83
+00:05:36,470 --> 00:05:40,820
+Hopefully this first part felt really familiar to you because we've already done it kind of like three
+
+84
+00:05:40,820 --> 00:05:41,970
+times.
+
+85
+00:05:41,990 --> 00:05:42,470
+All right.
+
+86
+00:05:42,470 --> 00:05:46,780
+Coming up next we're going to begin discussing variables in placeholders with tensor flow.
+
+87
+00:05:46,790 --> 00:05:47,570
+I'll see you there.
+

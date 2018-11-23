@@ -1,0 +1,100 @@
+1
+00:00:05,270 --> 00:00:10,270
+Welcome everyone to this lecture we're going to go over the exercise we're going to perform them and
+
+2
+00:00:10,300 --> 00:00:12,910
+anality reduction with a linear audio encoder.
+
+3
+00:00:12,980 --> 00:00:15,400
+Let's walk through Jupiter notebook and see if we have to do.
+
+4
+00:00:15,410 --> 00:00:20,510
+All right so here we are at the linear auto encoder for PC exercise and for this what you're going to
+
+5
+00:00:20,510 --> 00:00:25,370
+end up doing is basically very similar to what we just did in the lecture where you going to do just
+
+6
+00:00:25,370 --> 00:00:29,430
+follow along here get the data and the data is this anonymize data.
+
+7
+00:00:29,440 --> 00:00:33,400
+C s v file and it's included underneath the auto encoder folder.
+
+8
+00:00:33,530 --> 00:00:38,660
+And then notice that it's basically just a bunch of columns that have anonymised column names so just
+
+9
+00:00:38,660 --> 00:00:42,650
+for letters and then there are some values and each of the columns and if you go all the way to the
+
+10
+00:00:42,650 --> 00:00:44,990
+right you also have a label column.
+
+11
+00:00:44,990 --> 00:00:49,310
+Now remember we're not doing any sort of classification task we're just using that label to see if we
+
+12
+00:00:49,310 --> 00:00:54,630
+can maintain that class separation even if we reduced down to just two mentions.
+
+13
+00:00:54,650 --> 00:00:58,670
+Believe it or not you're going to take this 30 of them internal data set and you're going to reduce
+
+14
+00:00:58,670 --> 00:01:03,530
+down to two that mentions and you'll be able to clearly see that the cluster are still separated.
+
+15
+00:01:04,280 --> 00:01:09,070
+So you'll scroll down here you'll skil the data and then build that the linear auto encoder and a lot
+
+16
+00:01:09,070 --> 00:01:11,870
+of these steps match very closely to what we did in the lectures.
+
+17
+00:01:11,890 --> 00:01:16,690
+You can always check the lecture for more details of the placeholder layers loss function optimizer
+
+18
+00:01:16,960 --> 00:01:21,280
+then you'll go ahead and run your session and hopefully at the end you still see that even with just
+
+19
+00:01:21,280 --> 00:01:26,110
+to them mentions this theory then mentionable original data set will reduce down to two mentions with
+
+20
+00:01:26,110 --> 00:01:27,410
+the linear auto encoder.
+
+21
+00:01:27,520 --> 00:01:33,370
+The auto encoders hidden layer has learned enough of the real combination of features to create two
+
+22
+00:01:33,370 --> 00:01:38,560
+new feature planes that allow it to still maintain class severability with just two mentions worth of
+
+23
+00:01:38,560 --> 00:01:39,410
+data.
+
+24
+00:01:39,430 --> 00:01:39,940
+OK.
+
+25
+00:01:40,120 --> 00:01:43,510
+Best of luck on this and I'll see you at the next lecture where we go through the solutions.
+

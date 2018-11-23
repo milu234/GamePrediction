@@ -1,0 +1,140 @@
+1
+00:00:05,710 --> 00:00:10,330
+Welcome everyone to this quick review lecture in this lecture we're just going to quickly review what
+
+2
+00:00:10,330 --> 00:00:15,150
+we've covered so far particularly pertaining to neural networks.
+
+3
+00:00:15,260 --> 00:00:19,310
+So we already understand how to perform calculations within a single neuron.
+
+4
+00:00:19,520 --> 00:00:25,670
+What we do is we have some data input X and we end up learning weights and multiply them by X and then
+
+5
+00:00:25,670 --> 00:00:29,230
+we add in some biased term and the sum of the results in Z.
+
+6
+00:00:29,300 --> 00:00:32,910
+And then we pass Z through some sort of activation function.
+
+7
+00:00:32,960 --> 00:00:37,400
+We have also learned that there's various activation functions or simple ones like percept trons where
+
+8
+00:00:37,400 --> 00:00:40,410
+they just look to see if the input is positive or negative.
+
+9
+00:00:40,550 --> 00:00:45,590
+Then there's also the sigmoid activation function as well as hyperbolic tension and then rectified linear
+
+10
+00:00:45,590 --> 00:00:46,400
+units.
+
+11
+00:00:46,400 --> 00:00:52,110
+We're also going to discuss some other functions later on then we understand that we can connect these
+
+12
+00:00:52,110 --> 00:00:58,940
+single neurons together to create a neural network in your own network that has an input layer has hidden
+
+13
+00:00:58,940 --> 00:01:00,460
+layers and an output layer.
+
+14
+00:01:00,620 --> 00:01:05,250
+And we understand that if we add more layers we end up getting higher levels of abstraction and that
+
+15
+00:01:05,240 --> 00:01:09,560
+will be even more clear when we begin to work with data types such as images.
+
+16
+00:01:09,560 --> 00:01:15,610
+As you have more layers each layer will then have a higher abstraction some layers will no edges layers
+
+17
+00:01:15,620 --> 00:01:19,510
+will know if you're doing facial recognition things like eyebrows etc..
+
+18
+00:01:21,340 --> 00:01:26,800
+So in order to learn what we need is some sort of measurement of error and that's where that cost and
+
+19
+00:01:26,800 --> 00:01:28,660
+loss function came into play.
+
+20
+00:01:28,660 --> 00:01:35,140
+And we learned that there's quadratic loss functions as well as cross entropy loss functions once we
+
+21
+00:01:35,140 --> 00:01:40,370
+have the measurement of error we need to do is minimize it by choosing the correct way and bias values.
+
+22
+00:01:40,540 --> 00:01:44,170
+And what we do is we use grading the scent to find the optimal values.
+
+23
+00:01:44,170 --> 00:01:46,200
+So that's basically our learning process.
+
+24
+00:01:46,210 --> 00:01:52,210
+We have some sort of measurement of error through the cost function and then we perform a gradient descent.
+
+25
+00:01:52,300 --> 00:01:57,400
+We can then back propagate the and descent through the multiple layers from the output layer back to
+
+26
+00:01:57,400 --> 00:01:58,710
+the input layer.
+
+27
+00:01:58,720 --> 00:02:04,150
+We also know of dense layers which are layers that are fully connected to every other neuron in the
+
+28
+00:02:04,150 --> 00:02:04,910
+next layer.
+
+29
+00:02:05,200 --> 00:02:11,280
+And later on we're also going to be introducing a soft Max layer's OK so that's just a very quick overview
+
+30
+00:02:11,280 --> 00:02:13,040
+of what we know so far.
+
+31
+00:02:13,050 --> 00:02:18,450
+However we still need to learn a little bit more theory before diving into convolutional neural networks.
+
+32
+00:02:18,510 --> 00:02:22,230
+So the next lecture we're going to do is cover some new theory aspects.
+
+33
+00:02:22,230 --> 00:02:26,730
+Some of them we've actually already introduced before that we haven't given any sort of reasoning for
+
+34
+00:02:26,730 --> 00:02:30,810
+them so let's go ahead and discuss these new theory topics in the next lecture.
+
+35
+00:02:30,840 --> 00:02:31,600
+I'll see there.
+

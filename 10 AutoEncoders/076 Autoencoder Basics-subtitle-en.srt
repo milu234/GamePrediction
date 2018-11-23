@@ -1,0 +1,472 @@
+1
+00:00:05,520 --> 00:00:11,230
+Welcome everyone to this lecture on the basics of an auto encoder the auto encoder is actually a very
+
+2
+00:00:11,230 --> 00:00:15,610
+simple neural network and it's going to feel pretty similar to the multi-layer preceptress models we
+
+3
+00:00:15,610 --> 00:00:21,380
+saw in the very beginning of the course and it's designed to reproduce this input at the output layer.
+
+4
+00:00:22,440 --> 00:00:28,680
+So that idea of reproducing your input at the output layer causes a key difference between an auto encoder
+
+5
+00:00:28,770 --> 00:00:34,260
+and a typical multilayer perception model network and that's because the number of input neurons is
+
+6
+00:00:34,320 --> 00:00:40,050
+equal to the number of output neurons versus previously we were seeing models that had maybe a lot of
+
+7
+00:00:40,050 --> 00:00:46,350
+input neurons maybe one for every pixel in a picture and then the actual output neurons were just 10
+
+8
+00:00:46,410 --> 00:00:49,440
+such as a one output neuron for each class.
+
+9
+00:00:49,500 --> 00:00:53,400
+But in this case for the auto encoder we're actually going to have the number of input neurons equal
+
+10
+00:00:53,400 --> 00:00:54,570
+to the number of output neurons.
+
+11
+00:00:54,570 --> 00:00:59,050
+So let's explore what this looks like in a diagram and why we would actually use it.
+
+12
+00:00:59,700 --> 00:01:04,470
+So this is a diagram of a simple auto encoder and you can see here it's actually stacked so there's
+
+13
+00:01:04,800 --> 00:01:06,410
+more than one hidden layer.
+
+14
+00:01:06,420 --> 00:01:08,000
+There's three hidden layers here.
+
+15
+00:01:08,100 --> 00:01:12,600
+And the important thing to note here is what's happening over on the left hand side with these inputs.
+
+16
+00:01:12,600 --> 00:01:17,940
+We have five input neurons and then that gets reduced to three neurons in the next hidden layer the
+
+17
+00:01:17,940 --> 00:01:20,250
+two neurons in that center hit the layer.
+
+18
+00:01:20,250 --> 00:01:26,250
+Then it gets gradually increased until the output layer again has the same number of neurons as the
+
+19
+00:01:26,250 --> 00:01:27,150
+input layer.
+
+20
+00:01:27,890 --> 00:01:31,940
+So we're going to do is we're going to walk through the layers and explain the basic idea of an auto
+
+21
+00:01:31,940 --> 00:01:37,240
+encoder and to simplify this even further we're just going to have one single hidden layer.
+
+22
+00:01:37,490 --> 00:01:40,130
+And this is a very simple basic auto encoder.
+
+23
+00:01:40,130 --> 00:01:44,040
+The other one we just saw with more hidden layers is known as a stacked auto encoder.
+
+24
+00:01:44,150 --> 00:01:46,950
+And we'll explore that later on in a future lecture.
+
+25
+00:01:46,970 --> 00:01:52,110
+But now let's just go ahead and try to get the most simple auto encoder possible.
+
+26
+00:01:52,160 --> 00:01:56,120
+So in order simplify this further we're just going to have this diagram here where we have inputs that
+
+27
+00:01:56,120 --> 00:01:57,480
+hidden layer and outputs.
+
+28
+00:01:57,500 --> 00:02:01,790
+And keep in mind when we talk about these layers we're just talking about these actual neurons here.
+
+29
+00:02:01,820 --> 00:02:06,740
+So we have an input layer of five neurons that goes to a hidden layer which is smaller than the input
+
+30
+00:02:06,740 --> 00:02:12,080
+layer and then it gets expanded back out to our player which has the exact same number of neurons as
+
+31
+00:02:12,080 --> 00:02:13,540
+that input layer.
+
+32
+00:02:13,970 --> 00:02:15,720
+So that's what we're modeling here.
+
+33
+00:02:16,550 --> 00:02:21,380
+And keep in mind it's just a feedforward network that's trained to reproduce it's input at the output
+
+34
+00:02:21,380 --> 00:02:22,010
+layer.
+
+35
+00:02:22,040 --> 00:02:27,230
+So all these auto encoders trying to do is directly mimic its input at the output layer.
+
+36
+00:02:28,190 --> 00:02:31,180
+So that means the output size is the same as the input layer.
+
+37
+00:02:32,210 --> 00:02:39,050
+So what does it look like mathematically Well let's say we have inputs X and then that gets fed into
+
+38
+00:02:39,080 --> 00:02:40,210
+some hidden layer.
+
+39
+00:02:40,400 --> 00:02:46,880
+So we have that result B H of x so hidden takes an X and then we have a biased term in the hidden layer
+
+40
+00:02:46,940 --> 00:02:50,830
+along some weights attached to the inputs going into the hidden layer.
+
+41
+00:02:51,020 --> 00:02:55,490
+And then from that hidden layer we have another set of weights going out and then another set of biased
+
+42
+00:02:55,490 --> 00:02:57,060
+terms which we can call see.
+
+43
+00:02:57,110 --> 00:02:59,770
+So the space is just moving along the alphabet.
+
+44
+00:02:59,770 --> 00:03:00,340
+All right.
+
+45
+00:03:00,620 --> 00:03:05,840
+So there's two main parts to an auto encoder and that is the first part the encoder and the second part
+
+46
+00:03:05,840 --> 00:03:06,980
+the decoder.
+
+47
+00:03:06,980 --> 00:03:10,850
+So let's start from the bottom and work our way to the top.
+
+48
+00:03:10,850 --> 00:03:13,240
+So at the bottom here we have the inputs.
+
+49
+00:03:13,310 --> 00:03:18,680
+So we have some input and we'll call that input X and then we're going to do the exact same process
+
+50
+00:03:18,680 --> 00:03:22,430
+we did back when we're dealing with the very basic neural network models.
+
+51
+00:03:22,430 --> 00:03:27,440
+We just take her input X we're gonna multiply it by some weights and at a biased term we'll just call
+
+52
+00:03:27,440 --> 00:03:32,390
+that a linear transformation and then we can pass that through some sort of activation function such
+
+53
+00:03:32,390 --> 00:03:36,740
+as a sigmoid activation function or many other activation functions that we talked about.
+
+54
+00:03:36,760 --> 00:03:39,260
+But keep things simple We'll just keep the sigmoid.
+
+55
+00:03:39,260 --> 00:03:42,050
+And then that results in that hit layer.
+
+56
+00:03:42,050 --> 00:03:47,840
+So again the hidden layer is just taking in the inputs and applying that linear transformation and then
+
+57
+00:03:47,840 --> 00:03:49,680
+passing it through an activation function.
+
+58
+00:03:49,910 --> 00:03:54,950
+And that's the first half of going from the input to that sensor hidden layer that's called the encoder
+
+59
+00:03:55,490 --> 00:03:58,210
+and then that second half is the decoder.
+
+60
+00:03:58,250 --> 00:04:02,450
+So what it does is it takes the result of that hidden layer we'll call it a bunch of Acts.
+
+61
+00:04:02,660 --> 00:04:08,300
+Multiply it by another set of weights w out and then again applies a linear transformation with its
+
+62
+00:04:08,300 --> 00:04:09,950
+own biased terms that see.
+
+63
+00:04:10,100 --> 00:04:14,630
+And then we can pass it through an activation function and then we get back what we call X hat or X
+
+64
+00:04:14,630 --> 00:04:21,890
+bar and that X bar is basically this auto encoders reproduction of the inputs.
+
+65
+00:04:21,920 --> 00:04:27,350
+Now a really common practice when dealing with auto encoders since you're trying to basically reproduce
+
+66
+00:04:27,350 --> 00:04:28,960
+your input at the output.
+
+67
+00:04:29,120 --> 00:04:31,290
+Often you will tire weights.
+
+68
+00:04:31,370 --> 00:04:37,910
+So all that means is that your weights from the input to the hidden layer are going to be the same as
+
+69
+00:04:37,910 --> 00:04:41,340
+your weight's coming from out of the Hilarie to your outputs.
+
+70
+00:04:41,360 --> 00:04:46,940
+So all you end up doing you see your weights coming out is equal to the transpose weights coming in
+
+71
+00:04:47,360 --> 00:04:50,180
+and we'll show you how to do that later on with their actual code.
+
+72
+00:04:50,180 --> 00:04:54,680
+It's actually quite easy of tensor flow but keep in mind if you ever reading a paper about encoders
+
+73
+00:04:54,680 --> 00:04:58,940
+and they say they're using tight weights that's all that means that we're actually not figuring out
+
+74
+00:04:59,150 --> 00:05:00,830
+another set of weights at the output.
+
+75
+00:05:00,840 --> 00:05:04,940
+Instead we're just tying that to the set of weights that's being figured out from the input to the hidden
+
+76
+00:05:04,940 --> 00:05:05,600
+layer.
+
+77
+00:05:05,600 --> 00:05:08,420
+Now keep in mind you're not going to tie the biased terms together.
+
+78
+00:05:08,420 --> 00:05:09,540
+Those are going to be separate.
+
+79
+00:05:09,560 --> 00:05:12,970
+All you're tying are the weights.
+
+80
+00:05:12,980 --> 00:05:18,650
+So the key idea here is really occurring at that hidden layer so that hidden layer is typically going
+
+81
+00:05:18,650 --> 00:05:23,360
+to be smaller than the inputs and that's called an under complete auto encoder.
+
+82
+00:05:23,360 --> 00:05:28,550
+Technically you can also have that hidden layer be larger the inputs but that's called an over complete
+
+83
+00:05:28,780 --> 00:05:29,470
+autem coder.
+
+84
+00:05:29,600 --> 00:05:31,160
+And we're not going to focus on that right now.
+
+85
+00:05:31,160 --> 00:05:36,560
+Instead we'll focus on the typical auto encoder structure which has a smaller number of neurons in that
+
+86
+00:05:36,560 --> 00:05:37,730
+hidden layer.
+
+87
+00:05:37,730 --> 00:05:42,790
+So again that's called an under complete auto encoder because we have less neurons in that hidden layer.
+
+88
+00:05:43,010 --> 00:05:48,620
+And the idea is if you're taking a bunch of inputs and then having to reduce them to that smaller hidden
+
+89
+00:05:48,620 --> 00:05:54,320
+layer that hidden layer is going to have some sort of internal representation that tries its best to
+
+90
+00:05:54,320 --> 00:05:56,760
+maintain all the information of the input.
+
+91
+00:05:56,790 --> 00:05:59,760
+However it has less neurons to do it with.
+
+92
+00:05:59,780 --> 00:06:05,630
+Now the really interesting aspect of this hidden layer and a big part of using auto encoders is that
+
+93
+00:06:05,630 --> 00:06:08,970
+we can use this hidden layer to extract meaningful features.
+
+94
+00:06:09,050 --> 00:06:13,850
+And we'll also explore later on in the next lecture how we can use principal component analysis with
+
+95
+00:06:13,850 --> 00:06:14,720
+auto encoders.
+
+96
+00:06:14,960 --> 00:06:20,870
+But the main idea here being that if we have a large number of input neurons and then we essentially
+
+97
+00:06:20,870 --> 00:06:27,410
+force them to go down into a smaller number of hidden neurons and then ask for the representation back
+
+98
+00:06:27,410 --> 00:06:28,720
+at the outputs.
+
+99
+00:06:28,790 --> 00:06:34,670
+Then what we're doing is we're training this hidden layer to try to get some sort of compressed representation
+
+100
+00:06:34,790 --> 00:06:40,280
+of our input data and you can easily imagine that if you think back to the original diagram you're taking
+
+101
+00:06:40,280 --> 00:06:46,430
+something like 10 inputs and then feeding it into a hidden layer of only two neurons than those two
+
+102
+00:06:46,430 --> 00:06:51,620
+neurons are going to have to try their best to figure out how they can essentially compress that information
+
+103
+00:06:51,950 --> 00:06:57,050
+of ten features into just two using some sort of combination of all those features multiplied by those
+
+104
+00:06:57,050 --> 00:06:57,640
+weights.
+
+105
+00:06:57,770 --> 00:06:59,360
+And then with those biased terms.
+
+106
+00:06:59,600 --> 00:07:04,070
+So again you can kind of think about this almost as a compression capability.
+
+107
+00:07:04,740 --> 00:07:08,850
+So later on we're going explore stacked auto scooters with more hidden layers so it's not just a quick
+
+108
+00:07:08,880 --> 00:07:13,850
+jump from the inputs all the way to a small hidden layer so that's known as a stack of encoder and we'll
+
+109
+00:07:13,860 --> 00:07:19,080
+explore that in a future lecture for now you should understand a very basic auto encoder.
+
+110
+00:07:19,100 --> 00:07:24,110
+Again the principle is really simple you just have the encoder going from that number of input neurons
+
+111
+00:07:24,110 --> 00:07:28,760
+to the hidden layer and then you have the decoder go in from the hidden layer that the output where
+
+112
+00:07:28,760 --> 00:07:33,530
+the input neurons equals the same amount as the output neurons and all the auto code is trying to do
+
+113
+00:07:34,010 --> 00:07:37,420
+is get some sort of reproduction of its input at its output.
+
+114
+00:07:37,550 --> 00:07:43,220
+And through that process you end up training that hidden layer to try to compress the information available
+
+115
+00:07:43,520 --> 00:07:44,900
+from the input.
+
+116
+00:07:44,900 --> 00:07:49,460
+So up next we're going to discuss a little more about this compression and dimensionality reduction
+
+117
+00:07:49,790 --> 00:07:54,850
+by exploring how we can use auto encoders to basically mimic principal component analysis.
+
+118
+00:07:54,890 --> 00:07:56,690
+Thanks everyone and I'll see you at the next lecture.
+

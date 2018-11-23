@@ -1,0 +1,672 @@
+1
+00:00:05,500 --> 00:00:05,800
+All right.
+
+2
+00:00:05,800 --> 00:00:10,720
+So here we are where we left off last time it's now time to actually begin creating our session.
+
+3
+00:00:10,720 --> 00:00:13,380
+So the first thing I want to do is create our environment.
+
+4
+00:00:13,460 --> 00:00:20,030
+Say Jim go ahead and make carpool version 0 which is just the shorter version of carpool.
+
+5
+00:00:20,200 --> 00:00:23,550
+And we want to specified the few more variables for this training session.
+
+6
+00:00:23,560 --> 00:00:26,710
+One is the actual number of game rounds we're going to go ahead and do.
+
+7
+00:00:27,160 --> 00:00:32,330
+So say number of game rounds is equal to 10.
+
+8
+00:00:32,390 --> 00:00:36,110
+Then we also wanted to find the maximum of game steps will allow.
+
+9
+00:00:36,350 --> 00:00:37,910
+We'll just set that as 1000.
+
+10
+00:00:37,940 --> 00:00:40,270
+Even though it's probably unlikely that we reach a thousand steps.
+
+11
+00:00:40,280 --> 00:00:45,740
+Basically how many times steps in a single session of the game will we allow the model to do before
+
+12
+00:00:45,740 --> 00:00:51,830
+we actually manually say it's done and the number of iterations and the number of training or excuse
+
+13
+00:00:51,830 --> 00:00:56,190
+me a number of times we actually run this it's going to be let's say 650.
+
+14
+00:00:56,480 --> 00:01:01,480
+You can go ahead and run something lower around 100 to actually get a model to perform well it has to
+
+15
+00:01:01,470 --> 00:01:07,650
+be probably above 600 but obviously it's going to take longer training time and then we also need to
+
+16
+00:01:07,650 --> 00:01:09,580
+actually say where our discount rate is.
+
+17
+00:01:09,780 --> 00:01:14,290
+We will choose 0.9 0.9 for now you can play around with that as well.
+
+18
+00:01:15,810 --> 00:01:25,920
+So let's say with T.F. session as SPSS will say the session run the initialiser to initialiser actual
+
+19
+00:01:25,920 --> 00:01:29,100
+variables and then we're going to have several four loops in here.
+
+20
+00:01:29,100 --> 00:01:34,300
+So the first we're going to do is for the number of actual iterations.
+
+21
+00:01:34,430 --> 00:01:44,590
+So for every iteration in the range of the number of iterations with this number of iterations we're
+
+22
+00:01:44,590 --> 00:01:47,290
+going to print what iteration we're currently on.
+
+23
+00:01:47,290 --> 00:01:50,540
+So on iteration.
+
+24
+00:01:50,950 --> 00:01:55,100
+And then let's go out and save format and passen iteration there.
+
+25
+00:01:57,650 --> 00:02:03,350
+Then we're going to create a list called all rewards and analysts called all gradients
+
+26
+00:02:05,970 --> 00:02:10,460
+then for every iteration we're going to do is we're going to play an amount of game rounds.
+
+27
+00:02:10,460 --> 00:02:14,920
+So essentially since we said 10 game rounds four for every single iteration.
+
+28
+00:02:14,930 --> 00:02:18,860
+So six hundred fifty times we're going to play ten rounds at this game.
+
+29
+00:02:18,860 --> 00:02:25,040
+So we'll save for game in range number of game rounds.
+
+30
+00:02:25,050 --> 00:02:35,170
+So it's one of these We're going to say the current Warde's and the current gradients.
+
+31
+00:02:35,530 --> 00:02:39,400
+So notice the difference here we have all the records and all the gradients that we're keeping track
+
+32
+00:02:39,400 --> 00:02:41,260
+of on an iteration scale.
+
+33
+00:02:41,260 --> 00:02:45,910
+But then for the actual game rounds we have the current wards and ingredients for that particular round
+
+34
+00:02:45,960 --> 00:02:46,600
+games.
+
+35
+00:02:48,750 --> 00:02:55,560
+Let's go ahead and create our observations for our environment so we get those initial four observations
+
+36
+00:02:55,620 --> 00:03:04,300
+in that array and then we'll say for step in range and this is the max game steps.
+
+37
+00:03:04,300 --> 00:03:09,670
+Technically this isn't necessary you could just let it go until it finishes or says done but we'll go
+
+38
+00:03:09,670 --> 00:03:12,890
+ahead and have a cutoff like 1000 steps.
+
+39
+00:03:13,000 --> 00:03:15,910
+Like I mentioned it's unlikely I would ever actually reach 1000 steps.
+
+40
+00:03:15,910 --> 00:03:18,930
+That's quite a long running of that game.
+
+41
+00:03:19,210 --> 00:03:19,990
+Then we'll do the following.
+
+42
+00:03:19,990 --> 00:03:23,050
+We'll say grab the action value.
+
+43
+00:03:24,420 --> 00:03:34,010
+And the gradients value basing session run and we'll grab action and gradients from what we find before.
+
+44
+00:03:34,380 --> 00:03:36,180
+And then we're going to pass in a feed dictionary
+
+45
+00:03:39,200 --> 00:03:42,040
+Let's go in and zoom out just a little bit so we can see how this whole thing.
+
+46
+00:03:42,050 --> 00:03:51,280
+So say feed dictionary is equal to x and we're passing in observations now remember observations sometimes
+
+47
+00:03:51,280 --> 00:03:56,100
+it gets returned back as something like comma four instead of one comma for as far as shape.
+
+48
+00:03:56,120 --> 00:04:01,930
+So we will reshape this so will reshape this to be one by the number of inputs which is essentially
+
+49
+00:04:01,930 --> 00:04:04,790
+just one by four as we expected.
+
+50
+00:04:05,260 --> 00:04:08,200
+OK so we get Becher action value in her gradients values.
+
+51
+00:04:08,330 --> 00:04:18,150
+So then we want to perform that action so will say operations reward done and info is equal to just
+
+52
+00:04:18,150 --> 00:04:21,730
+like we did before passing into the step function.
+
+53
+00:04:21,780 --> 00:04:22,980
+Grab the action value.
+
+54
+00:04:22,990 --> 00:04:27,040
+But because of the way it's handled in intenser we need to do some indexing here.
+
+55
+00:04:28,340 --> 00:04:34,550
+So we need to grab it using two sets of indexing then we're going to get the current reward and current
+
+56
+00:04:34,550 --> 00:04:36,150
+gradients.
+
+57
+00:04:36,330 --> 00:04:47,390
+So the current rewards we're going to append reward here and then we'll say the current's gradients
+
+58
+00:04:47,720 --> 00:04:55,740
+we're going to pen gradients value here and then if the game is done.
+
+59
+00:04:55,800 --> 00:04:58,460
+So let's say we fail the game the pool fell over.
+
+60
+00:04:58,530 --> 00:04:59,880
+We'll just go ahead and break
+
+61
+00:05:02,730 --> 00:05:03,090
+OK.
+
+62
+00:05:03,210 --> 00:05:06,110
+So that's all we're going to do basically play that game 10 times.
+
+63
+00:05:06,240 --> 00:05:11,100
+And then once you've done that we're going to take our list of all the rewards that we've been earning
+
+64
+00:05:11,100 --> 00:05:18,030
+so far and append the list of the current gradients and the current rewards so current rewards loops
+
+65
+00:05:18,060 --> 00:05:28,830
+make sure we do append here and do the same thing for all of gradings append currents gradients
+
+66
+00:05:31,940 --> 00:05:32,810
+OK.
+
+67
+00:05:32,920 --> 00:05:33,930
+There we go.
+
+68
+00:05:33,940 --> 00:05:39,580
+So we just appended the list to our rewards and then the next part is basically going to be multiplying
+
+69
+00:05:40,030 --> 00:05:44,820
+those adjusted scores with the discounts against the gradients.
+
+70
+00:05:44,860 --> 00:05:52,370
+So the next step then is to apply that discount and normalized rewards function so let's do that here.
+
+71
+00:05:53,430 --> 00:06:04,030
+We'll say all rewards isn't equal to calling this count and it normalized rewards all rewards.
+
+72
+00:06:04,280 --> 00:06:08,710
+Discount rate and take note about the indentation here.
+
+73
+00:06:08,900 --> 00:06:13,110
+We're doing this in line with this for loop here.
+
+74
+00:06:14,110 --> 00:06:19,390
+So take careful note of that can be very easy to mess that up.
+
+75
+00:06:19,450 --> 00:06:24,880
+Ok sweet and normalize the rewards and then we'll also create an empty feed dictionary that we're going
+
+76
+00:06:24,880 --> 00:06:26,210
+to use in just a second.
+
+77
+00:06:26,530 --> 00:06:34,090
+So say the dictionary is then equal to an empty dictionary which you can just say by having some empty
+
+78
+00:06:34,090 --> 00:06:36,150
+curly braces they're.
+
+79
+00:06:36,570 --> 00:06:43,050
+And then the next set of instructions is actually going to be applying the scores that we just calculated
+
+80
+00:06:43,380 --> 00:06:44,680
+to the gradients.
+
+81
+00:06:44,680 --> 00:06:49,560
+So this is actually probably the most complicated part of this and it's really easy to get a typo in
+
+82
+00:06:49,560 --> 00:06:50,750
+here and mess this up.
+
+83
+00:06:50,820 --> 00:06:58,070
+So I'm going to copy this from the notes get a copy and paste this and then kind of explain we're going
+
+84
+00:06:58,070 --> 00:06:58,770
+on here.
+
+85
+00:06:59,030 --> 00:07:05,400
+And the reason it's easy to mess up is because it's a lot cleaner if you use it to list comprehensions
+
+86
+00:07:05,420 --> 00:07:11,000
+really just one list comprehensions but has to form statements inside of it which is why it's condensed
+
+87
+00:07:11,030 --> 00:07:12,480
+and there's a lot going on here.
+
+88
+00:07:12,700 --> 00:07:17,110
+But it's a little cleaner this way than having a bunch of nested for loops.
+
+89
+00:07:17,150 --> 00:07:18,820
+So let's take a look at we're doing here.
+
+90
+00:07:19,040 --> 00:07:25,670
+We're going to say for every variable index and every gradient placeholder in the enumerated version
+
+91
+00:07:25,670 --> 00:07:29,700
+the gradient placeholders are more numerate just gives you back and index location.
+
+92
+00:07:29,780 --> 00:07:32,330
+We're going to grab the mean gradients.
+
+93
+00:07:32,330 --> 00:07:37,210
+So that's going to be taking the average of the result of this list comprehension.
+
+94
+00:07:37,430 --> 00:07:43,520
+So here you are doing is you're multiplying the reward times all gradients except it's just a single
+
+95
+00:07:43,570 --> 00:07:48,070
+gradient because you take it at the game index for that step at the variable index.
+
+96
+00:07:48,230 --> 00:07:54,500
+And essentially these two for loops are for you to grab these index locations so you multiply the correct
+
+97
+00:07:54,500 --> 00:07:56,460
+reward by the correct gradient.
+
+98
+00:07:56,540 --> 00:08:00,030
+And that's probably what causes the complexity here.
+
+99
+00:08:00,380 --> 00:08:05,600
+The fact that you need to grab the correct game index at the correct step at the correct variable index
+
+100
+00:08:05,600 --> 00:08:10,610
+because remember now when you take a look at all the rewards you have a bunch of them and you have a
+
+101
+00:08:10,610 --> 00:08:13,480
+bunch of them for each game and a bunch more for each iteration.
+
+102
+00:08:13,490 --> 00:08:19,100
+So this sort of miscomprehension just makes sure that you multiply the correct award by the correct
+
+103
+00:08:19,100 --> 00:08:19,910
+gradient.
+
+104
+00:08:19,910 --> 00:08:24,050
+Then once you've done that in your feed dictionary what you're saying is for this particular gradient
+
+105
+00:08:24,050 --> 00:08:29,660
+placeholder now you have the ingredients there and then once you have that you can actually run your
+
+106
+00:08:29,660 --> 00:08:37,590
+session so we can say in-session run the training operation where the feed dictionary is going to be
+
+107
+00:08:37,590 --> 00:08:42,710
+called to the feed dictionary we just created and then we can see the following.
+
+108
+00:08:42,710 --> 00:08:51,650
+You'll say Prince saving graph and session so that after each time we perform this we'll go in and say
+
+109
+00:08:51,650 --> 00:09:00,270
+the grafting session and we'll say Savir that save save the session and save this somewhere and we'll
+
+110
+00:09:00,270 --> 00:09:06,760
+say models slash my mom my let's see policy model.
+
+111
+00:09:09,600 --> 00:09:12,110
+And then we can also do that just saves the actual session.
+
+112
+00:09:12,180 --> 00:09:16,720
+We can also export the graph if we want to run this in another file so we can show you how to do that
+
+113
+00:09:16,720 --> 00:09:18,320
+as well.
+
+114
+00:09:18,510 --> 00:09:28,560
+We can say Medhat graph the F equals T.F. train export Medich RAF Flip's.
+
+115
+00:09:28,730 --> 00:09:30,240
+And then you give it a file name.
+
+116
+00:09:31,320 --> 00:09:41,040
+So you could say file is equal to models and let's go ahead and have this be my policy model.
+
+117
+00:09:42,510 --> 00:09:44,180
+And it's a metafile here.
+
+118
+00:09:44,370 --> 00:09:48,660
+We'll go ahead and add these two forward slashes here.
+
+119
+00:09:48,680 --> 00:09:52,600
+So we actually create that their victory OK.
+
+120
+00:09:52,870 --> 00:09:57,790
+So then we're going to save that and then we'll will the model and we'll go ahead and run it on the
+
+121
+00:09:57,790 --> 00:09:58,670
+environment.
+
+122
+00:09:58,690 --> 00:10:04,030
+So I'm going to copy and paste this code from the notes as well because essentially the exact same code
+
+123
+00:10:04,030 --> 00:10:08,680
+here except we're going to render it so we create the carpool environment.
+
+124
+00:10:08,970 --> 00:10:10,430
+So the observations.
+
+125
+00:10:10,450 --> 00:10:15,790
+And then we load up the models that we just trained up here and then we say just do a single run except
+
+126
+00:10:15,790 --> 00:10:18,070
+we're going to actually render the environment this time.
+
+127
+00:10:18,070 --> 00:10:20,980
+So we can actually see visually how it performed.
+
+128
+00:10:21,040 --> 00:10:22,830
+So let's come up here.
+
+129
+00:10:23,140 --> 00:10:24,240
+Let's go ahead and run this.
+
+130
+00:10:24,250 --> 00:10:29,690
+We'll go ahead and run this for let's say 750 steps going to save that.
+
+131
+00:10:29,720 --> 00:10:34,910
+Let's expand the terminal here and let's call this we'll say Python and right now I wrote this all into
+
+132
+00:10:34,940 --> 00:10:36,710
+my test Jim.
+
+133
+00:10:36,750 --> 00:10:41,840
+Pi will hit enter and let's make sure we don't get any typos or errors here.
+
+134
+00:10:41,840 --> 00:10:43,450
+Hopefully we didn't get any.
+
+135
+00:10:43,460 --> 00:10:45,380
+Make sure you actually check.
+
+136
+00:10:45,380 --> 00:10:50,840
+So let's see module's flow has a variance scalar initialiser looks like a forgotten extra either.
+
+137
+00:10:50,850 --> 00:10:52,630
+Let's go to 11 and fix that.
+
+138
+00:10:52,660 --> 00:10:54,990
+That seems to be a common mistake for me.
+
+139
+00:10:55,000 --> 00:11:02,110
+So to fix it they're come up to 11 and fix their Hopefully that's it.
+
+140
+00:11:02,120 --> 00:11:05,510
+Let's go to make sure we don't actually miss an eye somewhere else.
+
+141
+00:11:05,510 --> 00:11:12,220
+So Python might touch him up by running the one more a typo one or 5.
+
+142
+00:11:12,440 --> 00:11:14,420
+Come down here fix that as well.
+
+143
+00:11:16,570 --> 00:11:22,320
+Save it one last time and hopefully that took care of all the typos.
+
+144
+00:11:23,200 --> 00:11:23,660
+OK.
+
+145
+00:11:23,830 --> 00:11:28,390
+So here you can see we're saving it off every iteration and then we're going to be running through this
+
+146
+00:11:28,390 --> 00:11:29,260
+over and over again.
+
+147
+00:11:29,500 --> 00:11:30,080
+If you want.
+
+148
+00:11:30,100 --> 00:11:32,440
+You don't have to be saving each iteration.
+
+149
+00:11:32,720 --> 00:11:34,740
+That is a little bit of extra time to keep saving it.
+
+150
+00:11:34,750 --> 00:11:40,150
+But just in case there's a crash somewhere it might be nice to have it save on like the 500 run instead
+
+151
+00:11:40,150 --> 00:11:43,320
+of having it crash on five of one and then not having it at the very end.
+
+152
+00:11:43,510 --> 00:11:44,800
+So just keep that in mind.
+
+153
+00:11:44,860 --> 00:11:47,590
+I'm going to fast forward in time until this is done training.
+
+154
+00:11:47,590 --> 00:11:47,850
+All right.
+
+155
+00:11:47,860 --> 00:11:49,720
+So we're getting close to the very end.
+
+156
+00:11:49,720 --> 00:11:51,060
+Hopping forward in time here.
+
+157
+00:11:51,060 --> 00:11:52,330
+Once to hit 750.
+
+158
+00:11:52,330 --> 00:11:54,850
+We should see it run that train the model on the environment.
+
+159
+00:11:54,850 --> 00:11:56,530
+So you should see the run there pop up.
+
+160
+00:11:56,530 --> 00:11:57,050
+There it is.
+
+161
+00:11:57,090 --> 00:12:01,750
+You can see here it's bouncing quite much a lot better than what we saw earlier.
+
+162
+00:12:01,750 --> 00:12:05,880
+Keep in mind it's supposed to cancel once it leaves screen.
+
+163
+00:12:05,890 --> 00:12:07,480
+So that's where we see it close.
+
+164
+00:12:07,600 --> 00:12:12,430
+Once the cart leaves that little section of the screen but you could see there it was able to actually
+
+165
+00:12:12,490 --> 00:12:15,870
+balance the pole thanks to this policy gradient.
+
+166
+00:12:15,880 --> 00:12:16,210
+OK.
+
+167
+00:12:16,270 --> 00:12:17,030
+Thanks everyone.
+
+168
+00:12:17,050 --> 00:12:21,240
+Make sure to check out the notes in case you need to reference any of the code you saw here.
+

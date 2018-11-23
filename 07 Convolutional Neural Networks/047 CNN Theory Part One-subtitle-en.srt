@@ -1,0 +1,1000 @@
+1
+00:00:05,230 --> 00:00:09,180
+Hello everyone and welcome to the lecture on convolutional neural networks.
+
+2
+00:00:10,120 --> 00:00:16,000
+We just solved the feminist Digic classification task with three very simple linear approach using soft
+
+3
+00:00:16,060 --> 00:00:20,890
+Max regression and we got pretty good results around 90 percent accuracy.
+
+4
+00:00:20,890 --> 00:00:26,230
+But to get closer to that state of the art results closer to almost 100 percent accuracy we need to
+
+5
+00:00:26,230 --> 00:00:30,820
+explore a much better approach using convolutional neural networks.
+
+6
+00:00:30,840 --> 00:00:35,670
+Now it's really cool but convolutional neural networks is just like the simple perception model.
+
+7
+00:00:35,760 --> 00:00:39,420
+They have their origins directly linked in biological research.
+
+8
+00:00:39,420 --> 00:00:45,930
+Recall that when we were designing our perception model we directly converted a biological neuron into
+
+9
+00:00:45,930 --> 00:00:48,060
+our own artificial representation.
+
+10
+00:00:48,390 --> 00:00:52,950
+And we're going to do a similar idea with convolutional neural networks and the biological research.
+
+11
+00:00:52,950 --> 00:00:58,740
+We base this off of is from a pair of scientists David Heibel and Torsen Weisel who were studying the
+
+12
+00:00:58,740 --> 00:01:06,000
+structure of the visual cortex in mammals and their research is actually so fundamental to the field
+
+13
+00:01:06,000 --> 00:01:12,620
+of biological vision that actually won them a Nobel Prize in 1981.
+
+14
+00:01:12,820 --> 00:01:17,590
+One of the key components that their research revealed was that neurons in the visual cortex had what
+
+15
+00:01:17,590 --> 00:01:21,440
+they call a small local receptive field that is the same.
+
+16
+00:01:21,490 --> 00:01:29,170
+These neurons are actually only looking at a local a smaller subsection of the entire image that the
+
+17
+00:01:29,170 --> 00:01:36,820
+person is viewing and then these local subsections can then later on overlap and create a larger image
+
+18
+00:01:36,880 --> 00:01:38,740
+and visual field.
+
+19
+00:01:38,740 --> 00:01:44,410
+What's also important to note is that these certain neurons in the visual cortex are only activated
+
+20
+00:01:44,410 --> 00:01:46,240
+when they detect certain things.
+
+21
+00:01:46,240 --> 00:01:51,340
+They realize that neurons may be only active when they detect the horizontal line or a black circle
+
+22
+00:01:51,340 --> 00:01:52,170
+etc..
+
+23
+00:01:52,420 --> 00:01:58,670
+So we can see here we already have this idea of local portions of the entire image.
+
+24
+00:01:58,810 --> 00:02:04,780
+This idea of these local subsets directly inspired the artificial neural network architecture that would
+
+25
+00:02:04,780 --> 00:02:11,770
+become the convolutional neural network and it was famously implemented in the 1998 paper by John McCain
+
+26
+00:02:11,830 --> 00:02:17,590
+who is actually now the director of AI research at Facebook and they created what they call the Linette
+
+27
+00:02:17,590 --> 00:02:23,890
+5 architecture that was first used to classify that dataset.
+
+28
+00:02:23,890 --> 00:02:28,240
+So when you're learning about convolutional networks maybe you're Googling around you often see a diagram
+
+29
+00:02:28,270 --> 00:02:29,820
+that looks something like this.
+
+30
+00:02:29,920 --> 00:02:34,180
+And when you're reading papers on different convolutional neural network architectures you see a lot
+
+31
+00:02:34,180 --> 00:02:35,640
+of images that look like this.
+
+32
+00:02:35,650 --> 00:02:40,720
+And I remember when I was first learning about convolutional neural networks this basically looks like
+
+33
+00:02:40,720 --> 00:02:42,040
+a foreign language to me.
+
+34
+00:02:42,040 --> 00:02:45,010
+It was pretty hard for me to understand what was actually going on.
+
+35
+00:02:45,010 --> 00:02:50,500
+Each of these steps so worked to break down the various aspects of the convolutional neural network
+
+36
+00:02:50,500 --> 00:02:55,950
+seen here and the two main aspects we haven't really seen before are these ideas of these convolutions
+
+37
+00:02:56,040 --> 00:02:58,040
+and subsampling or pooling.
+
+38
+00:02:58,070 --> 00:03:02,760
+So that entire feature extraction portion is we're really going to focus our attention to and learn
+
+39
+00:03:02,760 --> 00:03:05,530
+about in this come illusional neural network lecture.
+
+40
+00:03:05,640 --> 00:03:10,080
+That second half of classification is actually stuff we've already covered before basically fully connected
+
+41
+00:03:10,080 --> 00:03:13,570
+networks and soft Max regression for multiple outputs.
+
+42
+00:03:13,620 --> 00:03:18,960
+Well we're going to focus on is this idea of convolutions and subsampling or pooling.
+
+43
+00:03:18,990 --> 00:03:22,560
+So in order to learn about that we need to break down into various topics.
+
+44
+00:03:22,560 --> 00:03:27,510
+So first I have to review what are its sensors then we'll compare a densely connect a neural network
+
+45
+00:03:27,540 --> 00:03:33,000
+to convolutional neural network then we'll dive deeper into convolutions and filters we'll learn about
+
+46
+00:03:33,000 --> 00:03:39,700
+padding as well as pooling layers or subsampling and then we'll also review dropout.
+
+47
+00:03:39,750 --> 00:03:42,390
+So let's get started by talking about tensors.
+
+48
+00:03:42,390 --> 00:03:49,450
+Recall that tensors are just and dimensional arrays that we build up to as we increase levels of dimension.
+
+49
+00:03:49,500 --> 00:03:51,270
+So we start off with just scalar numbers.
+
+50
+00:03:51,270 --> 00:03:55,010
+Those are just individual digits or floating point numbers.
+
+51
+00:03:55,050 --> 00:04:00,570
+Then we can have a vector of numbers essentially just a one dimensional array of various scalar numbers
+
+52
+00:04:00,880 --> 00:04:05,220
+that we can actually have a matrix when they mentioned higher up for that which is then basically a
+
+53
+00:04:05,220 --> 00:04:06,530
+list of vectors.
+
+54
+00:04:06,630 --> 00:04:10,950
+And beyond that we have tensors Where are just higher than missional arrays.
+
+55
+00:04:12,270 --> 00:04:17,970
+So tensors make it really convenient to feed in sets of images into our model which is why it's really
+
+56
+00:04:17,970 --> 00:04:22,740
+vital that we understand tensors and their shapes when we end up building these models.
+
+57
+00:04:22,740 --> 00:04:30,490
+Intenser flow so we can imagine that if we have a group of training images such as those 55000 training
+
+58
+00:04:30,490 --> 00:04:36,610
+images and the data set that we can have for them missional tensor where one dimension are the images
+
+59
+00:04:36,610 --> 00:04:42,580
+themselves along another dimension we have the height of the image in pixels so that pixel representation
+
+60
+00:04:42,880 --> 00:04:48,010
+in the height along another dimension we can have the width of the images and then if we want we can
+
+61
+00:04:48,010 --> 00:04:52,900
+have the four of them mentioned for the color channels where right now for em the digits were only dealing
+
+62
+00:04:52,900 --> 00:04:53,720
+of grayscale.
+
+63
+00:04:53,800 --> 00:04:59,630
+But later on for color images will have three channels red green and blue.
+
+64
+00:04:59,640 --> 00:05:05,280
+So let's explore now the difference between a densely connected neural network those CNN's any convolutional
+
+65
+00:05:05,280 --> 00:05:06,060
+neural network.
+
+66
+00:05:06,150 --> 00:05:11,020
+And recall that we actually already been able to create densely connected neural networks easily with
+
+67
+00:05:11,040 --> 00:05:14,350
+the T.F. estimator API.
+
+68
+00:05:14,570 --> 00:05:19,940
+So remember densely connected layer basically just looks like this where every neuron in one layer is
+
+69
+00:05:19,940 --> 00:05:22,960
+directly connected to every other neuron in the next layer.
+
+70
+00:05:24,070 --> 00:05:27,970
+Then free convolutional air we have a different approach.
+
+71
+00:05:28,150 --> 00:05:35,170
+Each unit is connected to a smaller number of nearby units in the next layer basically directly inspired
+
+72
+00:05:35,170 --> 00:05:43,280
+by that idea of the biological visual cortex where you're only looking at local receptive fields.
+
+73
+00:05:43,310 --> 00:05:47,870
+So now the question arises why bother if it convolutional neural network instead of a densely connected
+
+74
+00:05:47,870 --> 00:05:48,790
+neural network.
+
+75
+00:05:50,240 --> 00:05:54,110
+Well the this dataset was 28 by 28 pixels.
+
+76
+00:05:54,140 --> 00:05:56,490
+So that's 784 total pixels.
+
+77
+00:05:56,570 --> 00:06:03,620
+When you feed it in but most images are going to be much larger at least 256 by 256 pixels and that
+
+78
+00:06:03,620 --> 00:06:10,640
+would be 56000 total pixels and that's just for a relatively small image of 256 by 256.
+
+79
+00:06:10,640 --> 00:06:15,980
+So as your images get larger and larger if you were to have a densely connected neural network that
+
+80
+00:06:15,980 --> 00:06:21,410
+would lead to way too many parameters and it would just be unscalable to new image images because you'd
+
+81
+00:06:21,410 --> 00:06:25,700
+have so many parameters that you already fit.
+
+82
+00:06:25,720 --> 00:06:33,070
+So instead of convolutions and convolutions also have a major advantage for image processing that are
+
+83
+00:06:33,070 --> 00:06:36,010
+directly inspired by that biological research.
+
+84
+00:06:36,010 --> 00:06:41,800
+We can know intuitively that if we're looking at an image pixels that are nearby each other they're
+
+85
+00:06:41,800 --> 00:06:47,080
+much more correlated to each other for image detection which is directly related to this idea of those
+
+86
+00:06:47,080 --> 00:06:51,280
+convolutional layers only being connected to those local neurons.
+
+87
+00:06:53,300 --> 00:06:59,300
+So each convolutional neural network layer looks at an increasingly larger part of the image and having
+
+88
+00:06:59,300 --> 00:07:03,710
+units only connected to nearby units also aids in invariance.
+
+89
+00:07:03,770 --> 00:07:08,360
+So convolutional neural networks help with regularisation and they also limit the search of weights
+
+90
+00:07:08,600 --> 00:07:12,120
+to the size of the convolution.
+
+91
+00:07:12,130 --> 00:07:16,840
+Let's go ahead and explore just as a very high level overview what the convolutional neural network
+
+92
+00:07:16,840 --> 00:07:19,800
+would look like as it relates to image recognition.
+
+93
+00:07:19,870 --> 00:07:25,580
+You would basically just start with some input layer which is the image itself then come layers are
+
+94
+00:07:25,610 --> 00:07:28,450
+only connected to pixels in their respective fields.
+
+95
+00:07:28,460 --> 00:07:33,710
+So if we kind of think about this on a to the plane we can see that become illusional errors only have
+
+96
+00:07:33,710 --> 00:07:39,980
+those local connections and then another higher level of convolution is again only connected to the
+
+97
+00:07:39,980 --> 00:07:42,260
+local connections of that first convolutional layer.
+
+98
+00:07:43,820 --> 00:07:49,790
+Now there is an issue here as you get towards the edge of the image there may not be any input neurons
+
+99
+00:07:50,120 --> 00:07:57,050
+from the actual input data so we can fix this by adding a padding of zeros around the image.
+
+100
+00:07:57,060 --> 00:08:01,530
+Then this is just generally known as padding OK.
+
+101
+00:08:01,580 --> 00:08:06,170
+Let's now walk through a one dimensional convolution in more detail and then we're going to expand this
+
+102
+00:08:06,170 --> 00:08:08,570
+to the idea of a two dimensional convolution.
+
+103
+00:08:08,810 --> 00:08:14,030
+And this is going to begin to look like some of those images we first saw describing the architecture
+
+104
+00:08:14,150 --> 00:08:16,470
+the convolutional neural network.
+
+105
+00:08:16,490 --> 00:08:21,380
+So again let's take that back revisit then really connect in your own networks and convert that to a
+
+106
+00:08:21,380 --> 00:08:24,860
+one dimensional convolution.
+
+107
+00:08:24,870 --> 00:08:27,930
+So here we have an example of how densely connected neural network.
+
+108
+00:08:27,930 --> 00:08:29,060
+Again same idea.
+
+109
+00:08:29,220 --> 00:08:35,010
+We have one dimension of neurons densely connected to every neuron in the next layer that's the blue
+
+110
+00:08:35,010 --> 00:08:35,540
+layer.
+
+111
+00:08:35,640 --> 00:08:38,630
+And again densely connected to everything in the output layer.
+
+112
+00:08:39,590 --> 00:08:45,850
+However let's cover that first input layer to a one deconvolution.
+
+113
+00:08:45,900 --> 00:08:52,140
+So what we see here is just local connections to that next layer of neurons and what's really interesting
+
+114
+00:08:52,320 --> 00:08:59,410
+is we can then treat these weights of these local edges as what we call a filter.
+
+115
+00:08:59,430 --> 00:09:07,890
+So let's take an example of one filter we can see here on that bottom we have y is equal to w one or
+
+116
+00:09:07,890 --> 00:09:16,320
+wait 1 times the input X plus W2 or wait two times the input x 2 and that will be the output Y which
+
+117
+00:09:16,320 --> 00:09:18,520
+is then fed into that next neuron.
+
+118
+00:09:19,640 --> 00:09:25,660
+So if w 1 and 2 are equal to 1 a negative 1 respectively then we have the equation.
+
+119
+00:09:25,700 --> 00:09:29,300
+Why is equal to x 1 minus x 2.
+
+120
+00:09:29,300 --> 00:09:31,420
+So I kind of chose these arbitrary weights here.
+
+121
+00:09:31,760 --> 00:09:34,310
+And given that they've chosen one a negative one.
+
+122
+00:09:34,310 --> 00:09:40,970
+We ask ourselves Well one is why at a maximum so one is that maximum activation there and that occurs
+
+123
+00:09:41,050 --> 00:09:44,850
+at x 1 equal to 1 and x 2 equal to zero.
+
+124
+00:09:44,990 --> 00:09:51,440
+And that is basically an example of a filter that is specifically designed for edge detection because
+
+125
+00:09:51,440 --> 00:09:56,930
+remember edges when we represent them as pixels are essentially just a large difference in the actual
+
+126
+00:09:56,930 --> 00:10:00,840
+darkness darkness of two pixels that are right next to each other.
+
+127
+00:10:00,860 --> 00:10:04,580
+So if we have one pixel one right next to it we have a pixel zero.
+
+128
+00:10:04,670 --> 00:10:09,410
+Then we're essentially describing an edge of really dark pixel versus the really light pixel and we
+
+129
+00:10:09,410 --> 00:10:15,340
+can see here if we describe these weights as one common negative one then when why is that a maximum
+
+130
+00:10:15,350 --> 00:10:19,720
+we have an edge so we have a filter here that's essentially now an edge detector.
+
+131
+00:10:20,370 --> 00:10:23,880
+So then we can apply that to the rest of these edges.
+
+132
+00:10:25,170 --> 00:10:30,000
+So we have a set of weights that can act as a filter for detection and we can then expand this idea
+
+133
+00:10:30,000 --> 00:10:32,680
+to multiple filters.
+
+134
+00:10:32,710 --> 00:10:35,310
+So here's an example of having just one filter.
+
+135
+00:10:35,320 --> 00:10:40,290
+So that's the same way across where the filter size is too because I have two weights there.
+
+136
+00:10:40,480 --> 00:10:42,140
+And the stride is two.
+
+137
+00:10:42,160 --> 00:10:44,150
+So let's talk about this stride term.
+
+138
+00:10:44,380 --> 00:10:49,360
+You can see here in this first layer of pink neurons moving up.
+
+139
+00:10:49,360 --> 00:10:51,940
+These weights two neurons at a time.
+
+140
+00:10:51,940 --> 00:10:58,060
+So if we start from the bottom I have w one and w 2 I repeat them every two neurons along the input
+
+141
+00:10:58,480 --> 00:11:02,120
+and that's known as a stride of this filter.
+
+142
+00:11:02,260 --> 00:11:07,290
+And if this visualization doesn't make a whole lot of sense to you don't worry we'll later on show you.
+
+143
+00:11:07,310 --> 00:11:13,340
+In other visualization representations of filters that might make more sense.
+
+144
+00:11:13,390 --> 00:11:15,670
+So really lock in on this idea of stride.
+
+145
+00:11:15,700 --> 00:11:18,650
+Let's fix this so now we have a stride of one.
+
+146
+00:11:18,820 --> 00:11:22,470
+So if we're going up one unit at a time then we have something that looks like this.
+
+147
+00:11:22,600 --> 00:11:24,200
+We can see they'll be gone and they'll be too.
+
+148
+00:11:24,220 --> 00:11:26,520
+But now we're only moving up one year on at a time.
+
+149
+00:11:26,680 --> 00:11:29,130
+So we have blue than orange than red.
+
+150
+00:11:29,380 --> 00:11:33,750
+So you can see here this is a stripe of two moving up to neurons at a time.
+
+151
+00:11:33,790 --> 00:11:38,790
+This is a streite of one moving up one neuron out of time.
+
+152
+00:11:38,790 --> 00:11:42,170
+Now remember we can see here that we have some neurons that aren't connected.
+
+153
+00:11:42,180 --> 00:11:47,640
+That is where we could have added in some zero padding to include more edge pixels so I could add in
+
+154
+00:11:47,640 --> 00:11:51,730
+a top neuron above my top peak neuron and just have that be zero.
+
+155
+00:11:51,780 --> 00:11:57,020
+So I can kind of finish off that stride count.
+
+156
+00:11:57,050 --> 00:12:02,810
+So that was just showing one filter we can actually then expand to multiple filters or multiple sets
+
+157
+00:12:02,810 --> 00:12:03,790
+of weights.
+
+158
+00:12:03,800 --> 00:12:08,950
+So here I can see this is a representation of two filters where my stride is still one.
+
+159
+00:12:08,960 --> 00:12:14,360
+But now my filter size is two seconds here and added another set of neurons ready to accept another
+
+160
+00:12:14,360 --> 00:12:16,140
+set of weights for another filter.
+
+161
+00:12:16,790 --> 00:12:20,210
+And we can expand this idea to any number of filters we want.
+
+162
+00:12:20,210 --> 00:12:21,840
+So here I have now four filters.
+
+163
+00:12:22,010 --> 00:12:29,690
+So now four different sets of weights filter sizes now two and streite is still one so each filter is
+
+164
+00:12:29,710 --> 00:12:36,680
+affecting a different feature and realistically the representation would kind of get a little messy
+
+165
+00:12:36,680 --> 00:12:43,060
+as we begin to draw arrows to every feature as we are every filter as we come in through the input.
+
+166
+00:12:43,070 --> 00:12:48,140
+So instead of trying to represent it like this you'll often see it represented as sets of blocks.
+
+167
+00:12:48,140 --> 00:12:52,760
+So for simplicity simplicity we're going to begin to describe this and visualize all this as a set of
+
+168
+00:12:52,760 --> 00:12:55,530
+blocks instead.
+
+169
+00:12:55,570 --> 00:13:01,390
+So we're going to convert our input to just be one by L. this one dimensional convolution we just have
+
+170
+00:13:01,480 --> 00:13:09,310
+one set by a length L of pixels and then we describe that set of filters as just this tensor which is
+
+171
+00:13:09,580 --> 00:13:13,750
+the number of filters by the number of units in that actual layer.
+
+172
+00:13:15,290 --> 00:13:21,110
+So we now have these concepts of these neurons converted to these block images for to the convolution
+
+173
+00:13:21,200 --> 00:13:23,080
+we're mainly going to be dealing with images.
+
+174
+00:13:23,910 --> 00:13:25,560
+So it's a really similar structure.
+
+175
+00:13:25,560 --> 00:13:31,500
+We have our input image but now instead of being one D it's to D where we have a height and width to
+
+176
+00:13:31,500 --> 00:13:32,610
+the image itself.
+
+177
+00:13:32,880 --> 00:13:39,000
+And then for that next layer we have this tensor of the number of filters and the number of units for
+
+178
+00:13:39,000 --> 00:13:41,370
+the width by the number of units for the height.
+
+179
+00:13:41,370 --> 00:13:48,590
+So now we have this theory that missional tensor object and we can see that subsections are going to
+
+180
+00:13:48,590 --> 00:13:51,540
+directly be related to this tensor.
+
+181
+00:13:51,590 --> 00:13:57,680
+So if we're looking at a local section of the input image of a height and width then it actually directly
+
+182
+00:13:57,680 --> 00:14:01,640
+belongs to a local section of that next tensor.
+
+183
+00:14:01,640 --> 00:14:09,320
+So again height by with my number filters if we're working color images it's basically a really similar
+
+184
+00:14:09,320 --> 00:14:13,360
+concept except we add in one dimension for the number of color channels.
+
+185
+00:14:13,370 --> 00:14:18,530
+So for a grayscale images which have one color channel but for color images we typically have three
+
+186
+00:14:18,860 --> 00:14:20,030
+red green and blue
+
+187
+00:14:22,890 --> 00:14:27,660
+and it's the same idea here you have height width and then color and actually then corresponds to number
+
+188
+00:14:27,660 --> 00:14:29,150
+filter's number of units.
+
+189
+00:14:29,150 --> 00:14:36,310
+The number of units for height now convolution filters are commonly visualized with a grid system.
+
+190
+00:14:36,310 --> 00:14:40,620
+So in case the last explanation of convolution filters wasn't clear enough.
+
+191
+00:14:40,660 --> 00:14:46,520
+Let's go ahead and walk through how they work with grids on a to the input here on the left hand side.
+
+192
+00:14:46,540 --> 00:14:49,870
+I have an input that's already been padded with zeros.
+
+193
+00:14:49,870 --> 00:14:56,140
+So my original input was just that inner four by four grid where ones represent the darkest pixels and
+
+194
+00:14:56,140 --> 00:14:58,390
+negative ones represent the lightest pixels.
+
+195
+00:14:58,390 --> 00:15:01,890
+So if we pretend this is a handwritten digit it's basically a zero.
+
+196
+00:15:02,020 --> 00:15:08,060
+And then I've padded it with an edge of zeroes as far as pixel values around that I take a three by
+
+197
+00:15:08,060 --> 00:15:09,150
+three filter.
+
+198
+00:15:09,230 --> 00:15:14,660
+So I have weights inside this three by three filter and I'm going to apply it to the image and then
+
+199
+00:15:14,660 --> 00:15:21,740
+one I'm going to do is multiply the pixels in the image by the basically weight values in the filter.
+
+200
+00:15:21,770 --> 00:15:26,420
+Then once I multiply by those filter weights I'll get some result and then I'll take the some of that
+
+201
+00:15:26,720 --> 00:15:30,280
+and I'll end up with whatever value in this case it was 0.
+
+202
+00:15:30,290 --> 00:15:35,960
+So this is a way people commonly visualize filter's with a grid system where you have the filter of
+
+203
+00:15:35,990 --> 00:15:37,250
+weights on a grid.
+
+204
+00:15:37,320 --> 00:15:43,280
+Then you multiply the input by the filter weights and then you take that result take the sum and then
+
+205
+00:15:43,280 --> 00:15:48,530
+that's going to be your output value for your convoluted image.
+
+206
+00:15:49,820 --> 00:15:56,300
+Now stride distance also takes into account how fast you're going to move across image with your filters.
+
+207
+00:15:56,300 --> 00:15:59,270
+Here we see a stride distance of one as an example.
+
+208
+00:15:59,420 --> 00:16:04,380
+So I'm basically taking the filter moving over by one pixel and then applying all those changes.
+
+209
+00:16:04,430 --> 00:16:06,150
+Or I could do it right.
+
+210
+00:16:06,170 --> 00:16:10,250
+So here I'm moving over by two pixels and then applying those changes.
+
+211
+00:16:10,640 --> 00:16:16,700
+Let's go ahead and jump to a really cool visualization Web site that again shows this process in even
+
+212
+00:16:16,700 --> 00:16:17,530
+more detail.
+
+213
+00:16:17,560 --> 00:16:18,720
+I'm going to jump to it now.
+
+214
+00:16:18,950 --> 00:16:23,930
+So here I am at Sentosa the I O which is a really awesome visualization Web site and they have this
+
+215
+00:16:23,930 --> 00:16:28,430
+really interesting visualization for convolution kernels which is basically what we've been explaining
+
+216
+00:16:28,430 --> 00:16:33,650
+here and on the left hand side you can see I have this little red cursor that's highlighting a pixel
+
+217
+00:16:33,650 --> 00:16:38,910
+value and then it highlights the corresponding pixel in the actual representation of the image.
+
+218
+00:16:38,910 --> 00:16:43,350
+He can kind of move around and play with this and then all we're gonna do is walk through applying A-340
+
+219
+00:16:43,390 --> 00:16:47,600
+three sharpened kernel to the image of the face from above.
+
+220
+00:16:47,600 --> 00:16:50,750
+So here we have our filter or a kernel with those weights.
+
+221
+00:16:50,750 --> 00:16:56,140
+Here we have zero negative 1 5 etc. and then what we end up doing is the following.
+
+222
+00:16:56,150 --> 00:16:57,380
+So here's our input image.
+
+223
+00:16:57,380 --> 00:17:00,770
+You can see my little convolution filter moving across.
+
+224
+00:17:00,770 --> 00:17:08,480
+So I have those pixel values I multiply them by the filter or kernel waits and then that ends up representing
+
+225
+00:17:08,660 --> 00:17:14,470
+once I sum them the output of that actual location in the output image.
+
+226
+00:17:14,510 --> 00:17:16,980
+So you can kind of move along and see how this is working.
+
+227
+00:17:17,000 --> 00:17:18,800
+So we kind of hover above this.
+
+228
+00:17:18,810 --> 00:17:26,090
+I then I have nine values that I'm going to multiply by my filter weights and then take that sum and
+
+229
+00:17:26,090 --> 00:17:29,570
+then that's going to be in the output image at that location.
+
+230
+00:17:29,570 --> 00:17:31,550
+So this is a sharpened filter.
+
+231
+00:17:31,550 --> 00:17:35,430
+We can also see other convolution kernels such as a blur.
+
+232
+00:17:35,570 --> 00:17:38,840
+So this is the result of this blur filter.
+
+233
+00:17:38,840 --> 00:17:40,270
+You can see the weights there.
+
+234
+00:17:40,460 --> 00:17:44,570
+And I encourage you to check out the resources and the only play around of this but hopefully this gives
+
+235
+00:17:44,570 --> 00:17:46,910
+you a good idea of the actual process.
+
+236
+00:17:46,910 --> 00:17:51,110
+So again we're just passing along this filter and then getting out the output so you can see here as
+
+237
+00:17:51,110 --> 00:17:56,690
+I go along the edge as the stride distance of one there is my actual value of the output as I multiply
+
+238
+00:17:56,690 --> 00:17:59,560
+by those filter weights and then take the sum.
+
+239
+00:17:59,570 --> 00:18:01,410
+OK let's go back to the presentation.
+
+240
+00:18:01,490 --> 00:18:06,740
+So we just covered those convolution filters and if you have multiple filters you could visually represent
+
+241
+00:18:06,740 --> 00:18:07,500
+them like this.
+
+242
+00:18:07,520 --> 00:18:12,980
+Here we can see we have multiple by convolution filters and this is the sort of representation that
+
+243
+00:18:12,980 --> 00:18:17,030
+is actually being shown in that original convolutional neural network diagram.
+
+244
+00:18:17,030 --> 00:18:19,100
+So here's that five by five convolution.
+
+245
+00:18:19,100 --> 00:18:23,160
+So earlier we were using three by three but here they're using five by five.
+
+246
+00:18:23,630 --> 00:18:28,980
+So that's exactly what we saw here and now we have an understanding of what convolution is and how a
+
+247
+00:18:28,980 --> 00:18:30,680
+convolution filters work.
+
+248
+00:18:31,010 --> 00:18:34,380
+But we still have to discuss subsampling or pooling.
+
+249
+00:18:34,400 --> 00:18:39,050
+So in the very next lecture we're going to continue right where we left off here and talk about pooling
+
+250
+00:18:39,050 --> 00:18:41,210
+and subsampling I'll see you at the next lecture.
+

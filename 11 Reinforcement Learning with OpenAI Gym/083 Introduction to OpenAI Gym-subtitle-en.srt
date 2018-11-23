@@ -1,0 +1,352 @@
+1
+00:00:05,420 --> 00:00:07,150
+Hello everyone and welcome to this lecture.
+
+2
+00:00:07,150 --> 00:00:08,990
+We're going to be discussing open aiight.
+
+3
+00:00:08,990 --> 00:00:11,570
+Jim what is the toolkit open.
+
+4
+00:00:11,570 --> 00:00:16,280
+AI is the basic nonprofit organization that's behind this tool kit.
+
+5
+00:00:16,400 --> 00:00:19,810
+And then we'll also discover the documentation behind open eyes.
+
+6
+00:00:19,820 --> 00:00:26,660
+So first off let's discuss what is open A-I open and it is a nonprofit AI research company.
+
+7
+00:00:26,690 --> 00:00:32,330
+You may have heard of opening before due to its ties with people like Elon Musk or Sam Altman and their
+
+8
+00:00:32,330 --> 00:00:38,750
+basic motivation is to help discover and enact a path to safe artificial general intelligence.
+
+9
+00:00:38,780 --> 00:00:44,510
+If you follow the mosque and his comments on the dangers of artificial intelligence you may already
+
+10
+00:00:44,510 --> 00:00:52,010
+have some familiarity of this but basically open he is trying to bring a path forward where the basic
+
+11
+00:00:52,010 --> 00:00:58,670
+research of artificial intelligence is more shared more collaborative more open in hopes of enacting
+
+12
+00:00:58,670 --> 00:01:03,490
+a safe path for the general development of artificial intelligence.
+
+13
+00:01:03,500 --> 00:01:07,710
+So what ends up happening is that they released this toolkit called Jim.
+
+14
+00:01:07,940 --> 00:01:11,410
+So that's what we're actually going to be working with open aiight Jim.
+
+15
+00:01:11,600 --> 00:01:17,370
+And that's a tool kit the AIDS in developing and comparing reinforcement learning algorithms.
+
+16
+00:01:17,400 --> 00:01:23,220
+There's two parts to open AI Jim and the part we're really going to be dealing with is the open AGM
+
+17
+00:01:23,310 --> 00:01:25,710
+library and the Python library.
+
+18
+00:01:25,740 --> 00:01:30,250
+That means we're actually going to directly import it will say import Jim and you can use pipin knowledge
+
+19
+00:01:30,250 --> 00:01:31,220
+him to install it.
+
+20
+00:01:31,500 --> 00:01:36,270
+But it's a python library with a collection of environments that you can use with your reinforcement
+
+21
+00:01:36,270 --> 00:01:37,560
+learning algorithms.
+
+22
+00:01:37,680 --> 00:01:43,950
+And basically before opening I Jim it was quite difficult to try to get some sort of general environment
+
+23
+00:01:43,950 --> 00:01:46,220
+for your reinforcement learning algorithms.
+
+24
+00:01:46,290 --> 00:01:52,740
+But now with opening gym it becomes a lot easier to test reinforcement algorithms on the same environment
+
+25
+00:01:52,800 --> 00:01:54,700
+as someone else on a computer.
+
+26
+00:01:54,780 --> 00:01:56,340
+Maybe half the world away.
+
+27
+00:01:56,430 --> 00:02:01,230
+So it makes it really convenient to build models and compare models.
+
+28
+00:02:01,230 --> 00:02:03,650
+So we'll be using the Python library.
+
+29
+00:02:03,660 --> 00:02:07,170
+There is another aspect of open the gym that I want to talk about.
+
+30
+00:02:07,230 --> 00:02:13,290
+We won't really be using it but it's the open gym service and it's a site in API we can compare algorithm
+
+31
+00:02:13,290 --> 00:02:19,320
+performance on the environments the opening gym provides So what we're going to do is we're going to
+
+32
+00:02:19,320 --> 00:02:22,200
+explore the official documentation before diving into work.
+
+33
+00:02:22,240 --> 00:02:24,080
+Opening gym with Python.
+
+34
+00:02:24,120 --> 00:02:28,950
+Just seeing it a little bit more familiar with what the actual documentation pages look like.
+
+35
+00:02:28,980 --> 00:02:30,830
+So open up your browser and go to gym.
+
+36
+00:02:30,870 --> 00:02:34,960
+Open AAE dot com or just do a quick Google search for open gym.
+
+37
+00:02:34,980 --> 00:02:37,240
+And so probably the first page that pops up.
+
+38
+00:02:37,260 --> 00:02:39,450
+So let's open up our browser and head to that.
+
+39
+00:02:39,570 --> 00:02:39,810
+OK.
+
+40
+00:02:39,810 --> 00:02:41,450
+Here I am in my browser.
+
+41
+00:02:41,610 --> 00:02:47,870
+If you go to gym opening dot com it should automatically link you back to the page.
+
+42
+00:02:47,910 --> 00:02:51,510
+So here you can see the open aiight gym is totally open source.
+
+43
+00:02:51,510 --> 00:02:56,220
+You can check out all the code all the examples et cetera as well as the documentation page.
+
+44
+00:02:56,370 --> 00:03:00,600
+But in case you're having trouble finding this one I want to do show you how you can get this just from
+
+45
+00:03:00,600 --> 00:03:02,950
+going from opening his official Web site.
+
+46
+00:03:03,180 --> 00:03:04,920
+So let's hop over to that here am.
+
+47
+00:03:04,960 --> 00:03:06,450
+Opening night dot com.
+
+48
+00:03:06,630 --> 00:03:11,340
+A lot of times it changes what the actual home page looks like but you should see some sort of link
+
+49
+00:03:11,340 --> 00:03:16,340
+to their systems either down here or over the top navigation bar.
+
+50
+00:03:16,410 --> 00:03:20,330
+So you click on systems and eventually somewhere along this page you should see.
+
+51
+00:03:20,360 --> 00:03:22,690
+Jim says Jim the open air that.
+
+52
+00:03:22,860 --> 00:03:24,090
+You'll go ahead and click on that.
+
+53
+00:03:24,150 --> 00:03:29,300
+It'll take you to Jim the opening column which currently links to this page.
+
+54
+00:03:29,310 --> 00:03:35,180
+So if you scroll down on this page eventually you should see that it has some link for the documentation.
+
+55
+00:03:35,400 --> 00:03:40,590
+So you click on that and it will take you to the more documentation like page and then you can hit here
+
+56
+00:03:40,590 --> 00:03:42,440
+on view documentation.
+
+57
+00:03:42,450 --> 00:03:45,350
+And here is the official documentation for opening night Jim.
+
+58
+00:03:45,360 --> 00:03:47,460
+So this is what we're going to be learning about.
+
+59
+00:03:47,730 --> 00:03:51,850
+And as I just mentioned it consists of two parts the open source library which is mainly what we're
+
+60
+00:03:51,900 --> 00:03:55,100
+going to be dealing with and this is basically a collection of environments.
+
+61
+00:03:55,100 --> 00:04:00,360
+So that's the really hard part that Jim has basically taken care of for you if it's providing you with
+
+62
+00:04:00,360 --> 00:04:07,500
+environments that you can have your agent interact with take actions upon etc. to try to find some sort
+
+63
+00:04:07,500 --> 00:04:08,570
+of reward.
+
+64
+00:04:08,580 --> 00:04:13,610
+So if you click here on environments you can check out the various environments are.
+
+65
+00:04:13,650 --> 00:04:17,610
+So there's a bunch of the free environments right now and depending on when you're viewing this page
+
+66
+00:04:17,610 --> 00:04:19,410
+sometimes those pictures don't load.
+
+67
+00:04:19,410 --> 00:04:22,920
+But there is a cart pulling environment which that's the main thing we're actually going to be messing
+
+68
+00:04:22,920 --> 00:04:23,710
+around with.
+
+69
+00:04:23,760 --> 00:04:26,520
+But there's also a boardgame environment such as go.
+
+70
+00:04:26,700 --> 00:04:30,060
+So if you ever heard of Google's deep mind you're probably familiar go there.
+
+71
+00:04:30,060 --> 00:04:34,970
+And then there's also Atari games such as aere Pac-Man alien cetera.
+
+72
+00:04:35,010 --> 00:04:41,190
+Keep in mind some of these environments such as Atari require additional libraries to install such as
+
+73
+00:04:41,190 --> 00:04:42,690
+an Atari emulator.
+
+74
+00:04:42,690 --> 00:04:47,520
+So we're only going to be dealing with these classic control problems that don't require any additional
+
+75
+00:04:47,520 --> 00:04:48,420
+libraries.
+
+76
+00:04:48,420 --> 00:04:53,740
+If you do require other environments go ahead and read the official documentation and additional libraries
+
+77
+00:04:53,740 --> 00:04:55,540
+you need to install for this course.
+
+78
+00:04:55,560 --> 00:04:59,820
+We're going to try to keep things as simple as possible for our reinforcement learning lecturers so
+
+79
+00:04:59,820 --> 00:05:04,460
+we'll only deal with things that don't require an additional library beyond Jim.
+
+80
+00:05:04,560 --> 00:05:07,860
+So we have a Tory board games Toltecs safety.
+
+81
+00:05:07,860 --> 00:05:14,460
+There's even Minecraft there's soccer there's doom etc. So lots of stuff here on these environments
+
+82
+00:05:14,640 --> 00:05:16,810
+and you can check the documentation as well.
+
+83
+00:05:16,860 --> 00:05:20,660
+And there's also even a forum they can click around and play around with.
+
+84
+00:05:20,980 --> 00:05:21,570
+OK.
+
+85
+00:05:21,780 --> 00:05:23,290
+So that's all I wanted to show you.
+
+86
+00:05:23,340 --> 00:05:28,290
+As far as opening night Jim is concerned we're going to do in the next series of lectures is actually
+
+87
+00:05:28,290 --> 00:05:34,430
+show you how upon installing opening a gym how you can interact with it as a Python library.
+
+88
+00:05:34,440 --> 00:05:36,300
+Thanks everyone and I'll see you at the next lecture.
+

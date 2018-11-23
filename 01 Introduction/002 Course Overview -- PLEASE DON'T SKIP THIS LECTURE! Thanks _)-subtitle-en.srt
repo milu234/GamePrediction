@@ -1,0 +1,640 @@
+1
+00:00:05,820 --> 00:00:08,920
+Hello everyone and welcome to the course overview lecture.
+
+2
+00:00:09,150 --> 00:00:10,820
+I have a quick favor to ask of you.
+
+3
+00:00:10,820 --> 00:00:14,530
+Please don't skip this lecture even if you've already taken one of my courses before.
+
+4
+00:00:14,580 --> 00:00:19,050
+This is just going to be a really useful quick lecture on where to find a lot of important things for
+
+5
+00:00:19,050 --> 00:00:20,040
+the course.
+
+6
+00:00:20,900 --> 00:00:22,010
+So welcome to the course.
+
+7
+00:00:22,030 --> 00:00:26,790
+I'm going to cover the best practices for taking this course where you can find the notes for this course.
+
+8
+00:00:26,840 --> 00:00:31,250
+How to ask questions to quickly get help and then a little bit of certification and then I'm also going
+
+9
+00:00:31,250 --> 00:00:37,540
+to talk about the curriculum for the course Ok far first best practices for the course are concerned.
+
+10
+00:00:37,570 --> 00:00:41,040
+Keep in mind that videos can be sped up up to speed.
+
+11
+00:00:41,050 --> 00:00:44,980
+They can also be slowed down so I tend to talk at a pretty steady pace.
+
+12
+00:00:44,980 --> 00:00:50,110
+So me personally I would actually probably speed up the videos the way I consume information.
+
+13
+00:00:50,200 --> 00:00:54,610
+But maybe if English isn't your first language or you want to slow things down you can also slow the
+
+14
+00:00:54,610 --> 00:00:55,930
+speed of the videos.
+
+15
+00:00:55,930 --> 00:00:57,860
+You can also check the video playback quality.
+
+16
+00:00:57,880 --> 00:00:59,410
+So there's a little gear setting.
+
+17
+00:00:59,410 --> 00:01:00,840
+If you notice the videos are blurry.
+
+18
+00:01:00,850 --> 00:01:02,320
+Are you having any trouble with them.
+
+19
+00:01:02,320 --> 00:01:03,880
+You can always up the quality.
+
+20
+00:01:03,880 --> 00:01:06,810
+All the videos are uploaded in 10 ADP.
+
+21
+00:01:06,820 --> 00:01:12,280
+Also you can use the curriculum tab to quickly navigate between lectures and if you have any other problems
+
+22
+00:01:12,460 --> 00:01:17,190
+with the platform maybe the videos are taking too long or they're buffering.
+
+23
+00:01:17,200 --> 00:01:22,180
+You can always email a question to support you to me dot com and they they're happy to help you out.
+
+24
+00:01:22,300 --> 00:01:26,080
+Or you can submit a request directly at the U to me support page.
+
+25
+00:01:26,110 --> 00:01:29,260
+Again I only make the lectures and the notes and content.
+
+26
+00:01:29,320 --> 00:01:31,150
+I don't actually control the platform.
+
+27
+00:01:31,300 --> 00:01:35,330
+So for platform issues please go ahead and send an email to support UMT dot com.
+
+28
+00:01:35,410 --> 00:01:38,270
+Lot of great folks there and they're happy to help you out.
+
+29
+00:01:38,290 --> 00:01:39,300
+Two more quick notes.
+
+30
+00:01:39,340 --> 00:01:44,680
+As far as best practices for taking the course I would recommend you always watch the videos and reference
+
+31
+00:01:44,680 --> 00:01:48,970
+the notebook's tensor fluid deep learning can be quite a complicated subject.
+
+32
+00:01:48,970 --> 00:01:53,740
+So I tried my best to really clarify things during the videos and then you can always reference the
+
+33
+00:01:53,740 --> 00:01:56,530
+notebooks because the code itself is pretty complex.
+
+34
+00:01:56,650 --> 00:02:01,900
+So you want to make sure that the code you're writing matches the notebooks Exactly.
+
+35
+00:02:01,900 --> 00:02:07,540
+Also I recommend you always use the Course environment file with the provided notebooks and when I say
+
+36
+00:02:07,540 --> 00:02:11,500
+with the provided notebooks I don't just mean just copying and paste code from the notebooks.
+
+37
+00:02:11,500 --> 00:02:13,640
+Try running the notebook files directly.
+
+38
+00:02:13,660 --> 00:02:19,720
+It's really really easy to make a typo and a lot of this code goes for many lines and it's quite complicated
+
+39
+00:02:19,960 --> 00:02:25,330
+because it's a pretty complex topic so the notes are there for you so you can always reference them.
+
+40
+00:02:27,190 --> 00:02:29,740
+OK so speaking of the notes where can you find them.
+
+41
+00:02:29,890 --> 00:02:35,470
+Well the notebooks and all the data files we use are available as a large zip file and it's a resource
+
+42
+00:02:35,470 --> 00:02:36,840
+link in this lecture.
+
+43
+00:02:36,850 --> 00:02:40,510
+It's also available for you in the very next lecture as a resource link.
+
+44
+00:02:40,510 --> 00:02:43,950
+It's the same file so whichever one you want go ahead and download it.
+
+45
+00:02:43,990 --> 00:02:48,310
+It's a pretty large zip file because it includes some larger data sets so it may take a little bit of
+
+46
+00:02:48,310 --> 00:02:49,470
+time to download.
+
+47
+00:02:49,780 --> 00:02:54,430
+As far as the slides that you're going to see throughout the course these are all Google slides and
+
+48
+00:02:54,430 --> 00:02:57,950
+they're linked to in the first lecture of their respective section.
+
+49
+00:02:57,970 --> 00:02:58,870
+So what I mean by that.
+
+50
+00:02:58,900 --> 00:03:03,310
+If you're looking for the slides for the convolutional in your own networks section you just go to that
+
+51
+00:03:03,550 --> 00:03:08,390
+sections first lecture and you should see as a resource link the link to the Google slides.
+
+52
+00:03:08,410 --> 00:03:10,220
+Again why you're watching this video.
+
+53
+00:03:10,240 --> 00:03:14,830
+You should see like a little blue or some sort of pop up a little link and it should take you to the
+
+54
+00:03:14,830 --> 00:03:19,890
+resources Okay now how to ask questions and quickly get help.
+
+55
+00:03:19,910 --> 00:03:21,030
+During the course.
+
+56
+00:03:21,290 --> 00:03:26,530
+So the first thing you should do is verify that you ran the provided notebook file from that zip file
+
+57
+00:03:26,900 --> 00:03:32,320
+and you did it inside the provided environment file that we'll talk about during the installation lecture.
+
+58
+00:03:32,510 --> 00:03:38,000
+All the Knope the code has been checked against this provided environment file so it should all run
+
+59
+00:03:38,120 --> 00:03:43,060
+if you're running that exact notebook in the environment file with no other edits.
+
+60
+00:03:43,160 --> 00:03:46,130
+So keep that in mind if you're getting any syntax errors.
+
+61
+00:03:46,160 --> 00:03:51,020
+It's probably because you copied and pasted something wrong or you have a small typo or you're not running
+
+62
+00:03:51,020 --> 00:03:52,490
+it in the provided environment.
+
+63
+00:03:52,490 --> 00:03:55,650
+So always make sure that you're doing that.
+
+64
+00:03:55,850 --> 00:04:01,600
+All right so let's quickly go over some steps for getting answers to your questions in a quick and reliable
+
+65
+00:04:01,600 --> 00:04:02,460
+manner.
+
+66
+00:04:02,470 --> 00:04:06,700
+The first thing I would always suggest is that you check that you actually ran the notebook and that
+
+67
+00:04:06,700 --> 00:04:07,750
+you also check the videos.
+
+68
+00:04:07,750 --> 00:04:12,790
+A lot of times the videos I make some comments trying to preemptively answer questions that I may think
+
+69
+00:04:12,820 --> 00:04:13,620
+arise.
+
+70
+00:04:13,630 --> 00:04:18,190
+So if you're concerned about a particular section of the notebook go ahead and see if you can find that
+
+71
+00:04:18,190 --> 00:04:18,730
+in the video.
+
+72
+00:04:18,730 --> 00:04:21,930
+When I go over that I usually make some comments about it.
+
+73
+00:04:22,030 --> 00:04:27,160
+If not what I would recommend doing is just a quick Google search of whatever area are getting or whatever
+
+74
+00:04:27,160 --> 00:04:28,200
+question you have.
+
+75
+00:04:28,360 --> 00:04:34,270
+There's usually lots of useful pre asked questions on stack overflow that will cover the same topics
+
+76
+00:04:34,270 --> 00:04:36,350
+or same errors that you're experiencing.
+
+77
+00:04:36,430 --> 00:04:40,420
+And that way you can answer your questions in just a few seconds through a quick Google search.
+
+78
+00:04:40,420 --> 00:04:45,940
+So again with such a complex topic Google is your friend and stack overflow is a great resource and
+
+79
+00:04:45,940 --> 00:04:49,780
+I highly recommend that the first thing you do whenever you have a question is just do a quick Google
+
+80
+00:04:49,780 --> 00:04:52,030
+search or do a search on stack overflow.
+
+81
+00:04:52,330 --> 00:04:54,350
+OK let's say you still can't find your answer.
+
+82
+00:04:54,460 --> 00:04:57,710
+Well you can always search the Frequently Asked Questions lexer.
+
+83
+00:04:57,730 --> 00:04:59,440
+That's the very next lecture.
+
+84
+00:04:59,440 --> 00:05:00,850
+Now those are just general questions.
+
+85
+00:05:00,850 --> 00:05:05,890
+They usually have to do more if the course or getting certified or where you can find the notes that
+
+86
+00:05:05,890 --> 00:05:06,560
+sort of thing.
+
+87
+00:05:06,610 --> 00:05:08,700
+Or maybe even the installation process.
+
+88
+00:05:08,800 --> 00:05:14,830
+If you have a question that's more specific to maybe how a line in the notebook works and you didn't
+
+89
+00:05:15,040 --> 00:05:19,390
+get your answer either through stack overflow or through the videos that I would recommend the search
+
+90
+00:05:19,420 --> 00:05:21,350
+previous question and answer post.
+
+91
+00:05:21,580 --> 00:05:25,690
+We're going to end up having thousands of students in this course and in the getter channel as well.
+
+92
+00:05:25,810 --> 00:05:31,030
+So you want to search those question answer forums to see if your questions are already answered there.
+
+93
+00:05:31,030 --> 00:05:33,710
+All right so let's say you tried all that you did a google search.
+
+94
+00:05:33,730 --> 00:05:35,490
+Try looking on stack overflow.
+
+95
+00:05:35,590 --> 00:05:39,970
+You search the Frequently Asked Questions lecture you search the Q&amp;A forums and still can't find an
+
+96
+00:05:39,970 --> 00:05:40,610
+answer.
+
+97
+00:05:40,630 --> 00:05:41,310
+No problem.
+
+98
+00:05:41,320 --> 00:05:43,250
+That's the point of the Q&amp;A forms.
+
+99
+00:05:43,300 --> 00:05:48,190
+So make sure that when you're posting to the Q&amp;A forums you include your main error or your main point
+
+100
+00:05:48,190 --> 00:05:48,780
+in confusion.
+
+101
+00:05:48,790 --> 00:05:50,780
+Try to make this as clear as possible.
+
+102
+00:05:51,010 --> 00:05:56,380
+And also it's really helpful if you link to resources or Stack Overflow links that you've already seen.
+
+103
+00:05:56,380 --> 00:06:00,760
+That way you don't accidentally just get a reply to a stack overflow link that you've already seen and
+
+104
+00:06:00,760 --> 00:06:02,260
+maybe they didn't understand.
+
+105
+00:06:02,260 --> 00:06:06,940
+I would also really recommend that if you're stuck on a particular point in the lecture that you include
+
+106
+00:06:06,940 --> 00:06:08,190
+a video time stamp.
+
+107
+00:06:08,230 --> 00:06:11,260
+So let's say minute 12 of lecture 45.
+
+108
+00:06:11,260 --> 00:06:15,970
+That way we know what you're referencing and if necessary include a screenshot.
+
+109
+00:06:16,120 --> 00:06:20,490
+If your errors are pretty strange or it's more of a visual thing that's hard to describe screenshots
+
+110
+00:06:20,500 --> 00:06:21,830
+really help out a lot.
+
+111
+00:06:22,090 --> 00:06:26,830
+If you have a particular installation issue make sure you include information about your operating system
+
+112
+00:06:27,070 --> 00:06:30,660
+and the particular procedure you followed OK.
+
+113
+00:06:30,670 --> 00:06:32,170
+Quick note on certification.
+
+114
+00:06:32,220 --> 00:06:35,280
+You can check out the resource link for the support page details.
+
+115
+00:06:35,360 --> 00:06:39,150
+Me has a support page that goes through the full details of how to get certified.
+
+116
+00:06:39,150 --> 00:06:44,370
+If you take the course and as a quick note if you have any issues with your certificate maybe it's taking
+
+117
+00:06:44,370 --> 00:06:46,450
+too long or you just want to change the name.
+
+118
+00:06:46,470 --> 00:06:49,900
+Go get an email support you to me that again they're happy to help you out.
+
+119
+00:06:50,010 --> 00:06:52,760
+I don't actually control anything about certification.
+
+120
+00:06:52,770 --> 00:06:54,800
+It's all done automatically through to me.
+
+121
+00:06:54,840 --> 00:06:59,500
+So support me dot com can always help and they're happy to answer any questions about your certification
+
+122
+00:07:01,000 --> 00:07:01,250
+OK.
+
+123
+00:07:01,260 --> 00:07:04,740
+Let's quickly describe the course curriculum right after this.
+
+124
+00:07:04,740 --> 00:07:10,260
+We're going to talk about the installation and setup of python and flow and your environment.
+
+125
+00:07:10,710 --> 00:07:15,330
+Then after that we're going to do a very quick overview of machine learning just a little quick refresher
+
+126
+00:07:15,600 --> 00:07:18,400
+so you can get your mindset ready for the course.
+
+127
+00:07:18,450 --> 00:07:22,320
+Then we have what we call a crash course section in that section of the course.
+
+128
+00:07:22,320 --> 00:07:25,850
+We're going to go over things like pi Panchos and sikat learn.
+
+129
+00:07:25,860 --> 00:07:30,080
+If you've already taken one of my courses such as the Python for data science and machine learning boot
+
+130
+00:07:30,080 --> 00:07:34,740
+camp you may already be familiar of those libraries so you don't actually need to do the crash course
+
+131
+00:07:34,740 --> 00:07:37,030
+in which case you can skip it completely.
+
+132
+00:07:37,110 --> 00:07:39,040
+Or if you want to make sure you understand.
+
+133
+00:07:39,120 --> 00:07:42,540
+Go ahead and check out the crash course exercises and the solutions.
+
+134
+00:07:42,540 --> 00:07:44,370
+Just so you can check your understanding.
+
+135
+00:07:44,370 --> 00:07:45,730
+Again that crash course.
+
+136
+00:07:45,840 --> 00:07:49,760
+A little bit optional depending on what your prior experiences with those libraries.
+
+137
+00:07:49,980 --> 00:07:54,390
+OK so you did the crash course then we're going to move on to an introduction to neural networks.
+
+138
+00:07:54,510 --> 00:07:58,130
+So in that section of the Course we actually don't touch tensor flow.
+
+139
+00:07:58,280 --> 00:08:02,290
+Well we end up doing as we go through the very basics of neural networks.
+
+140
+00:08:02,340 --> 00:08:04,600
+We have a very shallow learning curve there.
+
+141
+00:08:04,710 --> 00:08:09,030
+I don't want to just like rev up the engines and then have you be lost at the very first sight of a
+
+142
+00:08:09,030 --> 00:08:09,660
+neural network.
+
+143
+00:08:09,660 --> 00:08:14,580
+So instead what we do is we have a very slow general introduction to neural networks and then what's
+
+144
+00:08:14,580 --> 00:08:21,000
+really cool is we manually create a neural network framework using python that sort of mimics the tensor
+
+145
+00:08:21,000 --> 00:08:21,990
+flow framework.
+
+146
+00:08:21,990 --> 00:08:24,710
+So actually in that intersection we don't touch tensor flow.
+
+147
+00:08:24,720 --> 00:08:30,090
+Instead we try to build out a little copy of tensor flow manually that way once we actually reach sensor
+
+148
+00:08:30,090 --> 00:08:32,890
+flow you have a full and complete understanding.
+
+149
+00:08:33,060 --> 00:08:38,010
+After that section is complete we then have what I refer to as the tensor flow sections.
+
+150
+00:08:38,010 --> 00:08:42,660
+And these are the sections of the course that really tackle a particular network topic and show you
+
+151
+00:08:42,660 --> 00:08:45,060
+how you can work with tensor flow.
+
+152
+00:08:45,240 --> 00:08:51,510
+So they typically include a theory lecture then an implementation example intenser flow and then some
+
+153
+00:08:51,510 --> 00:08:54,230
+sort of exercise free to follow intenser flow.
+
+154
+00:08:54,240 --> 00:08:59,290
+So those are all going to be dependent on whatever topic we're discussing so you'll have a tensor flow
+
+155
+00:08:59,290 --> 00:09:03,890
+section on recurrent and that works convolutional neural networks auto encoders etc..
+
+156
+00:09:03,960 --> 00:09:09,300
+Everything we talked about in the previous video and last but not least I just want to give a HUGE THANK
+
+157
+00:09:09,300 --> 00:09:14,040
+YOU to all the students who have rolled not just in this course but all my courses it really means a
+
+158
+00:09:14,040 --> 00:09:18,100
+lot to me and I'm so grateful to have the opportunity to teach you.
+
+159
+00:09:18,210 --> 00:09:18,730
+All right.
+
+160
+00:09:18,990 --> 00:09:22,850
+So without any further ado let's go continue on with the rest of the course.
+

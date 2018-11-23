@@ -1,0 +1,780 @@
+1
+00:00:05,420 --> 00:00:06,520
+Welcome back everyone.
+
+2
+00:00:06,530 --> 00:00:12,110
+The course installation and setup lecture in this lecture will be showing you how to download Anaconda
+
+3
+00:00:12,530 --> 00:00:16,730
+how to restore the environment file that's included with the zip download for this course and then a
+
+4
+00:00:16,730 --> 00:00:20,020
+quick overview of Jupiter in case you haven't used that before.
+
+5
+00:00:20,180 --> 00:00:22,510
+Let's go to our browser and go to Anaconda.
+
+6
+00:00:22,530 --> 00:00:24,740
+Com slash download.
+
+7
+00:00:24,910 --> 00:00:26,070
+OK so here's the.
+
+8
+00:00:26,150 --> 00:00:28,620
+Anaconda dot com slash download.
+
+9
+00:00:28,780 --> 00:00:34,600
+And keep in mind sometimes Anaconda changes the look or styling of the site but the content should be
+
+10
+00:00:34,600 --> 00:00:35,420
+the same.
+
+11
+00:00:35,440 --> 00:00:38,010
+It's where you can download the Anaconda distribution.
+
+12
+00:00:38,080 --> 00:00:44,280
+The distribution is just a high performance distribution of a lot of data science packages for Python.
+
+13
+00:00:44,290 --> 00:00:48,770
+It's extremely popular in the data science space which is why we're going to be using it here.
+
+14
+00:00:48,820 --> 00:00:53,650
+So the first thing we need to do is actually download the Anaconda distribution and it comes for the
+
+15
+00:00:53,650 --> 00:00:59,710
+Windows Mac OS or Linux or a boon to systems and windows a Mac OS pretty straightforward.
+
+16
+00:01:00,120 --> 00:01:05,260
+You just click on whatever your operating system is and then download and then it's going to be a graphical
+
+17
+00:01:05,260 --> 00:01:05,990
+installer.
+
+18
+00:01:06,010 --> 00:01:09,580
+Basically just follow the steps that it says on the graphical installer.
+
+19
+00:01:09,760 --> 00:01:12,000
+The Mac OS is essentially the same deal.
+
+20
+00:01:12,100 --> 00:01:15,150
+Graphical installer click download and then follow the steps.
+
+21
+00:01:15,260 --> 00:01:20,050
+Linux if you click on that link it's going to be an installer for you which you'll have to download
+
+22
+00:01:20,410 --> 00:01:22,140
+and run at the command line.
+
+23
+00:01:22,150 --> 00:01:26,230
+So again you ever get stuck on either Windows Mac or us or Linux.
+
+24
+00:01:26,230 --> 00:01:29,570
+There's a really nice helpful links here that says how to install Anaconda.
+
+25
+00:01:29,770 --> 00:01:35,490
+You can go ahead and click on that and if you run Linux it will take you to direct commands for Linux.
+
+26
+00:01:35,620 --> 00:01:41,440
+So essentially you just in your browser download Yianna installer for Linux and then 2 is optional so
+
+27
+00:01:41,440 --> 00:01:47,230
+you can basically skip that and then three is the following to install an account for her Python 3.6.
+
+28
+00:01:47,230 --> 00:01:53,320
+So basically you just say bash and then wherever the location is of that SH file that you just downloaded
+
+29
+00:01:53,320 --> 00:01:54,430
+from Anaconda.
+
+30
+00:01:54,570 --> 00:01:58,710
+They can continue on the rest of these steps so that is for Linux.
+
+31
+00:01:58,750 --> 00:02:03,490
+If you come over here where it says installation it will then take you to the more detailed information
+
+32
+00:02:03,790 --> 00:02:05,340
+for Windows and Mac OS users.
+
+33
+00:02:05,350 --> 00:02:10,150
+You can click here on Windows and they'll say the Nikon installer and you can basically follow along
+
+34
+00:02:10,150 --> 00:02:10,900
+here.
+
+35
+00:02:10,930 --> 00:02:12,500
+Now there is a quick notes.
+
+36
+00:02:12,550 --> 00:02:19,510
+I want to make about installing with anaconda to your path variable to Lotus here.
+
+37
+00:02:19,540 --> 00:02:25,090
+One of the very first things you do as you're installing is to decide whether you want to add anaconda
+
+38
+00:02:25,150 --> 00:02:30,940
+to your path environment variable and Akala themselves recommend that you don't do this because it can
+
+39
+00:02:30,940 --> 00:02:34,600
+interfere with prior distributions of Python in your computer.
+
+40
+00:02:34,600 --> 00:02:39,170
+We're going to assume that if your Delanie anaconda you want this to be your main distribution of Python.
+
+41
+00:02:39,400 --> 00:02:43,610
+So make sure you click to add anaconda to your path environment variable.
+
+42
+00:02:43,670 --> 00:02:44,980
+That's a really important step.
+
+43
+00:02:45,070 --> 00:02:50,230
+If you don't end up clicking that what's going to happen is you have to add the PAF manually and if
+
+44
+00:02:50,230 --> 00:02:51,390
+you want you can do that as well.
+
+45
+00:02:51,400 --> 00:02:53,080
+But you might as well do it since the beginning.
+
+46
+00:02:53,260 --> 00:02:57,830
+So again to make sure you click on this word says add anaconda to my path environment variable.
+
+47
+00:02:58,000 --> 00:03:01,400
+Even though it says not recommended we recommend that for this course.
+
+48
+00:03:01,480 --> 00:03:03,160
+All right so that's it.
+
+49
+00:03:03,160 --> 00:03:08,410
+Go ahead and install Anaconda and then we'll show you how you can restore the environment file.
+
+50
+00:03:08,410 --> 00:03:12,310
+Let's jump back to our desktop.
+
+51
+00:03:12,320 --> 00:03:17,540
+OK so by now you should have downloaded installed Anaconda onto your computer so it's time to restore
+
+52
+00:03:17,540 --> 00:03:19,130
+the environment file.
+
+53
+00:03:19,130 --> 00:03:23,660
+Remember that you should have downloaded the zip file by now from either the fakey lecture or the Course
+
+54
+00:03:23,720 --> 00:03:25,610
+overview lecture if you haven't done so.
+
+55
+00:03:25,700 --> 00:03:27,760
+Go back and view the course overview lecture.
+
+56
+00:03:27,800 --> 00:03:32,600
+Download the zip file that's a resource there and then unzip it somewhere on your computer.
+
+57
+00:03:32,600 --> 00:03:34,770
+Then the next step if you're a Mac OS or Linux.
+
+58
+00:03:34,790 --> 00:03:39,050
+Open up your terminal so that you can just do a search for terminal in your computer and you should
+
+59
+00:03:39,050 --> 00:03:39,770
+find it.
+
+60
+00:03:39,860 --> 00:03:43,820
+If you're a Windows user go ahead and open up the command prompt or CNID.
+
+61
+00:03:43,880 --> 00:03:48,260
+In other alternative is to open up the Anaconda prompt and that's especially useful if in case you ever
+
+62
+00:03:48,260 --> 00:03:53,000
+get errors like Konda not recognized as you go throughout this installation process.
+
+63
+00:03:53,000 --> 00:03:55,210
+So again Windows users either use CMD.
+
+64
+00:03:55,400 --> 00:03:56,720
+Or if that's giving you trouble.
+
+65
+00:03:56,720 --> 00:04:02,690
+Use the Anaconda prompt again just search your computer for it or so once you're in your terminal or
+
+66
+00:04:02,690 --> 00:04:08,510
+command line where you're going to do is use CD to change directory to where ever the unzips course
+
+67
+00:04:08,510 --> 00:04:09,500
+notes are.
+
+68
+00:04:09,620 --> 00:04:16,100
+Then you're going to run the following command Kano's space Ian EMV space create space dash f space
+
+69
+00:04:16,450 --> 00:04:19,550
+FDL underscore Ian V Y and L.
+
+70
+00:04:19,790 --> 00:04:24,110
+So that's going to then use the environment file that's provided for you and create an environment that
+
+71
+00:04:24,110 --> 00:04:28,140
+we're using all the same versions of all the libraries we use while making this course.
+
+72
+00:04:29,280 --> 00:04:32,130
+Once you've created the environment file you can that activate it.
+
+73
+00:04:32,130 --> 00:04:34,810
+If you're on a Mac OS or Linux you're going to use source.
+
+74
+00:04:34,860 --> 00:04:38,050
+Activate T.F. deep learning that's the name of the environment.
+
+75
+00:04:38,130 --> 00:04:42,100
+If you're on a Windows computer then you're going to use just activate T.F. deep learning.
+
+76
+00:04:42,350 --> 00:04:45,510
+Ok so I'm going to actually walk through these steps on a computer.
+
+77
+00:04:45,570 --> 00:04:47,880
+So let's hop over to my command line.
+
+78
+00:04:48,760 --> 00:04:50,820
+OK so real quick I want to make the note again.
+
+79
+00:04:50,860 --> 00:04:55,990
+You should have already unzipped the tensor flow bootcamp file that zip file that comes from the resource
+
+80
+00:04:55,990 --> 00:04:58,090
+notes and have something that looks like this.
+
+81
+00:04:58,120 --> 00:04:59,200
+You'll see a bunch of folders.
+
+82
+00:04:59,200 --> 00:05:03,670
+If you click on one of these folders you'll notice that there's these IPY in the files so there's the
+
+83
+00:05:03,670 --> 00:05:05,810
+notebook files we'll be using throughout the course.
+
+84
+00:05:05,810 --> 00:05:11,410
+So again here you can see the IPY and B files and then also you'll sometimes see some data files.
+
+85
+00:05:11,410 --> 00:05:15,110
+So the other important thing to note is that you have the dot y m l file.
+
+86
+00:05:15,250 --> 00:05:18,690
+That's going to be the environment file that we'll be using for this course.
+
+87
+00:05:18,820 --> 00:05:23,710
+So we need to somehow get to this tensor flow bootcamp in order to do that we'll come over to our command
+
+88
+00:05:23,710 --> 00:05:25,060
+prompt.
+
+89
+00:05:25,060 --> 00:05:27,250
+So here I am now at my command prompt.
+
+90
+00:05:27,430 --> 00:05:31,590
+So all we're gonna do is use CD to get there.
+
+91
+00:05:31,600 --> 00:05:33,810
+Notice that I'm actually already here.
+
+92
+00:05:33,970 --> 00:05:40,520
+So in case you need to move around you can you see the dot dot and that will go back up a directory.
+
+93
+00:05:40,540 --> 00:05:46,180
+So if I did it again I would say CD that thought and now that my user directory if I need to go into
+
+94
+00:05:46,180 --> 00:05:51,700
+a directory I just say CD and then begin to type the directory's name and you should be able to then
+
+95
+00:05:51,700 --> 00:05:56,030
+tab autocomplete and it will auto complete the next directory over.
+
+96
+00:05:56,260 --> 00:06:01,930
+So then this has changed directory into the data courses and then it can change directory again into
+
+97
+00:06:02,130 --> 00:06:03,240
+tents or float bootcamp.
+
+98
+00:06:03,250 --> 00:06:09,190
+So again see the dot to go back up 1 and then see the dot and then her CD and then whatever the name
+
+99
+00:06:09,220 --> 00:06:11,530
+of your directory is to get there.
+
+100
+00:06:11,860 --> 00:06:14,890
+Once you're actually located in the tents flow bootcamp folder.
+
+101
+00:06:14,890 --> 00:06:17,620
+It's time to create the environment file.
+
+102
+00:06:17,770 --> 00:06:22,450
+So you're going to run the line you're going to say Konda space into the space.
+
+103
+00:06:22,600 --> 00:06:29,230
+Create dash F and then you'll say T.F. DL underscore E and V.
+
+104
+00:06:29,380 --> 00:06:30,810
+Y M L.
+
+105
+00:06:30,910 --> 00:06:35,680
+So this is basically telling conver to create this environment file and to double check that you're
+
+106
+00:06:35,710 --> 00:06:37,160
+in the correct directory.
+
+107
+00:06:37,360 --> 00:06:38,490
+You should be able to.
+
+108
+00:06:38,500 --> 00:06:44,200
+Once you start typing T.F. d hit tab and it should autocomplete for you.
+
+109
+00:06:44,210 --> 00:06:48,490
+If this is if it does not autocomplete that's probably an indicator that you're not in the right directory
+
+110
+00:06:48,940 --> 00:06:50,590
+so go ahead and then run this line.
+
+111
+00:06:50,590 --> 00:06:54,340
+Can the environment create FDL environment that why m-L.
+
+112
+00:06:54,460 --> 00:06:55,790
+So I've already run that.
+
+113
+00:06:56,050 --> 00:07:00,340
+Once you've done that and you've created the file it should be kind of a bunch of pop ups asking you
+
+114
+00:07:00,340 --> 00:07:02,660
+to create stuff or install stuff.
+
+115
+00:07:02,710 --> 00:07:06,350
+You may need to click y on your keyboard to give it permission to do stuff.
+
+116
+00:07:06,520 --> 00:07:10,710
+The next step is to actually activate the environment so that should have created an environment called
+
+117
+00:07:11,050 --> 00:07:12,370
+deep learning.
+
+118
+00:07:12,520 --> 00:07:16,720
+So then you're going to say activates or remember if you're a Mac or Linux you'll see source activate
+
+119
+00:07:17,890 --> 00:07:26,710
+T.F. deep learning enter and then you'll eventually see the falling imprint you'll see TFT learning
+
+120
+00:07:27,070 --> 00:07:32,140
+that's basically indicating that right now you're in this virtual environment of TFT learning if you
+
+121
+00:07:32,140 --> 00:07:34,250
+ever want to escape out of this environment.
+
+122
+00:07:34,270 --> 00:07:42,780
+You'll just say de-activate deactivates actually you just need to say de-activate.
+
+123
+00:07:42,990 --> 00:07:44,070
+There you go.
+
+124
+00:07:44,070 --> 00:07:49,680
+So again if you want to go into the virtual environment you'll say activate the learning or activate
+
+125
+00:07:49,680 --> 00:07:50,780
+TFT learning.
+
+126
+00:07:51,300 --> 00:07:55,250
+If you're on a Mac or Linux you'll see a source activate or source deactivate.
+
+127
+00:07:55,620 --> 00:08:00,700
+OK once you've done that what you're going to do is type Jupiter notebook and hit enter.
+
+128
+00:08:00,840 --> 00:08:03,630
+This should automatically open up a browser for you.
+
+129
+00:08:03,660 --> 00:08:08,760
+If it does not go ahead and copy this you are along with the token link if especially if it's your first
+
+130
+00:08:08,760 --> 00:08:10,160
+time ever using Jupiter.
+
+131
+00:08:10,410 --> 00:08:14,070
+So if you don't see your browser automatically pop up there should be a nice link here.
+
+132
+00:08:14,100 --> 00:08:16,140
+They can just copy and paste into your browser.
+
+133
+00:08:16,170 --> 00:08:18,170
+And remember to copy along with that token.
+
+134
+00:08:18,450 --> 00:08:18,710
+OK.
+
+135
+00:08:18,730 --> 00:08:21,110
+Let's hop over to the browser.
+
+136
+00:08:21,190 --> 00:08:25,250
+OK so your browser should look something like this in order to start a new notebook.
+
+137
+00:08:25,250 --> 00:08:26,850
+We're going to end up doing is say new.
+
+138
+00:08:27,040 --> 00:08:30,690
+And then underneath notebook you'll see Python 3 go ahead and click on it.
+
+139
+00:08:30,700 --> 00:08:34,650
+This may say something like Can the router default it should say Python 3.
+
+140
+00:08:34,660 --> 00:08:36,560
+But whatever is underneath this notebook.
+
+141
+00:08:36,640 --> 00:08:38,500
+Go ahead and click on it.
+
+142
+00:08:38,520 --> 00:08:39,750
+So here I have Python 3.
+
+143
+00:08:39,820 --> 00:08:42,530
+And then we're going to make sure that everything's working for you.
+
+144
+00:08:42,700 --> 00:08:49,960
+So we'll say import tents or flow as T.F. do shift enter to run a cell that you put Jupiter notebook
+
+145
+00:08:49,960 --> 00:08:57,380
+system uses cells and then we'll say hello is equal to T.F..
+
+146
+00:08:57,410 --> 00:09:06,520
+Constance you'll type the the string hello world do shift enter there and then you'll say S E S S is
+
+147
+00:09:06,520 --> 00:09:11,830
+equal to T.F. session and the way we'll will go over this code a lot more detail in the future.
+
+148
+00:09:11,830 --> 00:09:14,200
+This is just the check that senseful is working for you.
+
+149
+00:09:14,440 --> 00:09:21,330
+And then you're going to do the following you'll say Prince as Iesous that run an imprint c.s.
+
+150
+00:09:21,390 --> 00:09:22,240
+Hello.
+
+151
+00:09:22,990 --> 00:09:27,850
+So just passing in that hello variable you made do shift and try to run this you should get out a string
+
+152
+00:09:27,850 --> 00:09:29,740
+that says Hello world.
+
+153
+00:09:29,740 --> 00:09:34,970
+And that shows you successfully ran tensor flow on your computer and you are all ready to go.
+
+154
+00:09:35,350 --> 00:09:35,780
+OK.
+
+155
+00:09:35,830 --> 00:09:36,820
+So that's it.
+
+156
+00:09:37,000 --> 00:09:41,260
+If you already know how to use Jupiter you can go ahead and skip to the next lecture just now for one
+
+157
+00:09:41,260 --> 00:09:41,850
+or two minutes.
+
+158
+00:09:41,860 --> 00:09:45,340
+I'm going to go over a couple of things to know about the Jupiter note book.
+
+159
+00:09:45,460 --> 00:09:50,290
+So in the Jupiter note book you have this cell structure and the cell structure is really useful because
+
+160
+00:09:50,290 --> 00:09:57,070
+it allows you to basically segment portions of your code something else you can do is write Mark down
+
+161
+00:09:57,070 --> 00:09:58,310
+text into this.
+
+162
+00:09:58,480 --> 00:10:02,150
+So I going say View toggle header you toggle toolbar.
+
+163
+00:10:02,170 --> 00:10:06,490
+You may have already seen these I toggle it automatically if you want to change the name is no book
+
+164
+00:10:06,490 --> 00:10:12,520
+just click here on untitled and say something like my new notebook that hit rename that renames your
+
+165
+00:10:12,520 --> 00:10:12,970
+notebook.
+
+166
+00:10:12,980 --> 00:10:16,090
+So if you come back out tome you'll notice it's my new notebook now.
+
+167
+00:10:17,030 --> 00:10:21,710
+The thing is you can do is create markdown text so right now this is a code cell that I can change just
+
+168
+00:10:21,710 --> 00:10:22,610
+to be marked down.
+
+169
+00:10:22,820 --> 00:10:24,910
+And then I can write myself little notes here.
+
+170
+00:10:24,950 --> 00:10:30,420
+So here are some notes and then do shift enter to have those little notes.
+
+171
+00:10:30,440 --> 00:10:35,540
+And this also copies marked down commands so if you're familiar with Mark down you can do sizing or
+
+172
+00:10:35,600 --> 00:10:40,630
+italics those kind of things with those marked on commands in the notebook.
+
+173
+00:10:40,640 --> 00:10:44,600
+The next thing I want to show you is really useful and it's just tab and tab.
+
+174
+00:10:44,600 --> 00:10:51,570
+So if you create a string so say as is a string do shift enter to run that cell.
+
+175
+00:10:52,190 --> 00:10:57,890
+And then if you do as Dot and then hit tab you'll find a list of all the methods available for that
+
+176
+00:10:57,890 --> 00:10:58,510
+string.
+
+177
+00:10:58,730 --> 00:11:03,680
+Now keep in mind this string has to already be defined in a cell above.
+
+178
+00:11:03,740 --> 00:11:09,620
+If I try to do this in the same cell so I say x is equal to string and then within the same cell I say
+
+179
+00:11:09,650 --> 00:11:11,430
+X dots and hit tab.
+
+180
+00:11:11,460 --> 00:11:15,530
+Nothing's going to happen because technically the Jupiter note book doesn't know that this is already
+
+181
+00:11:15,530 --> 00:11:16,650
+a global variable.
+
+182
+00:11:16,670 --> 00:11:20,120
+You need to run the cell in order for that to work.
+
+183
+00:11:20,140 --> 00:11:24,610
+So then if I run this do X that tab then I can see everything.
+
+184
+00:11:24,610 --> 00:11:29,620
+Once you have that ready to go you can do shift tab off methods to see the doc strings and you can also
+
+185
+00:11:29,620 --> 00:11:31,260
+do this off functions.
+
+186
+00:11:31,300 --> 00:11:36,700
+So again you can do something like T.F. session and the new shift tab here and you should be able to
+
+187
+00:11:36,700 --> 00:11:40,710
+see the documentation string for any classes or functions or methods.
+
+188
+00:11:40,720 --> 00:11:44,450
+Remember these need to be defined before you can see anything.
+
+189
+00:11:44,530 --> 00:11:44,830
+All right.
+
+190
+00:11:44,830 --> 00:11:45,840
+That's really all we need to know.
+
+191
+00:11:45,850 --> 00:11:51,220
+But that Jupiter notebook again it's shift enter to run a cell if you want to input a cell.
+
+192
+00:11:51,220 --> 00:11:56,850
+You could just go to sell it or insert and then say insert cell above or insert cell below.
+
+193
+00:11:57,010 --> 00:11:58,400
+And that's really all you need to do.
+
+194
+00:11:58,510 --> 00:11:59,680
+All right thanks everyone.
+
+195
+00:11:59,740 --> 00:12:00,670
+I'll see you at the next lecture.
+

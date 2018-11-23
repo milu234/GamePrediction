@@ -1,0 +1,232 @@
+1
+00:00:05,400 --> 00:00:06,960
+Welcome back everyone.
+
+2
+00:00:06,990 --> 00:00:13,500
+Before we actually dive into using tensor Flo's nice API functionality to build recurrent your own that
+
+3
+00:00:13,500 --> 00:00:15,270
+works for time series analysis.
+
+4
+00:00:15,300 --> 00:00:21,180
+I want to discuss a few key challenges for analyzing larger time series data sets with recurrent neural
+
+5
+00:00:21,180 --> 00:00:25,150
+networks and one of those key problems is the vanishing gradients issue.
+
+6
+00:00:26,860 --> 00:00:33,760
+Back propagation recall goes backwards from the output layer to the input layer and it propagates back
+
+7
+00:00:33,790 --> 00:00:36,790
+that error gradient for deeper networks.
+
+8
+00:00:36,790 --> 00:00:43,480
+Issues can arise from back propagation sometimes called vanishing or exploding gradients.
+
+9
+00:00:43,510 --> 00:00:49,270
+So as you go back to these lower level layers or these front layers closer to the input gradients often
+
+10
+00:00:49,270 --> 00:00:54,250
+get smaller and eventually causing whites to never change at these lower levels.
+
+11
+00:00:54,250 --> 00:01:00,260
+The opposite problem can also occur for activation functions who used to rivet that take on larger values.
+
+12
+00:01:00,310 --> 00:01:02,990
+So that's an exploding gradient problem.
+
+13
+00:01:03,010 --> 00:01:04,540
+So that can also cause issues.
+
+14
+00:01:04,570 --> 00:01:11,420
+However it's not as common as the Vanish Ingredion problem so discuss why this problem occurs especially
+
+15
+00:01:11,420 --> 00:01:14,740
+how it relates to activation functions and how we can fix it.
+
+16
+00:01:14,870 --> 00:01:19,670
+Then the next lecture will discuss these issues specifically to recurrent neural networks and how we
+
+17
+00:01:19,670 --> 00:01:24,600
+can use specialized neuron units such as Ellis T.M. and gear you to fix these problems.
+
+18
+00:01:24,600 --> 00:01:30,140
+But for now let's look at activation functions as the source of this problem and see different activation
+
+19
+00:01:30,140 --> 00:01:31,620
+functions that can help solve it.
+
+20
+00:01:32,550 --> 00:01:38,490
+So why do these vanish ingredients actually happen in relation to the activation function choice.
+
+21
+00:01:38,490 --> 00:01:42,630
+Well if we take a look at some of the typical activation functions the traditional ones that we've been
+
+22
+00:01:42,630 --> 00:01:48,310
+looking at such as sigmoid activation we have this sort of curvature that goes from 0 to 1.
+
+23
+00:01:48,360 --> 00:01:53,900
+Remember that the Cygwin activation is just 1 over 1 plus E to the negative x or negative input.
+
+24
+00:01:54,150 --> 00:01:58,470
+And then there's also a traditional activation function such as the hyperbolic tangent that we've seen
+
+25
+00:01:58,470 --> 00:02:03,240
+before which essentially has the same shape except it goes from negative one to one and sort of from
+
+26
+00:02:03,240 --> 00:02:04,410
+zero to 1.
+
+27
+00:02:04,410 --> 00:02:09,480
+So we have these traditional activation functions and recall that back propagation computes the grievance
+
+28
+00:02:09,480 --> 00:02:11,520
+by the chain rule.
+
+29
+00:02:11,540 --> 00:02:17,940
+Now if you have an input going into the sigmoid function or this hyperbolic tangent function and it's
+
+30
+00:02:17,940 --> 00:02:23,310
+quite a large input then your gradient or your slope coming out of this activation function ends up
+
+31
+00:02:23,310 --> 00:02:24,870
+being very close to zero.
+
+32
+00:02:24,930 --> 00:02:28,850
+And it's the same deal if you have really large negative numbers.
+
+33
+00:02:29,250 --> 00:02:36,720
+So this chain rule of back propagation computed the gradients has the effect of multiplying n of these
+
+34
+00:02:36,720 --> 00:02:42,290
+small numbers to compute gradients of these lower or front layers in an analyser network.
+
+35
+00:02:42,300 --> 00:02:49,230
+And basically what that means is the gradients is going to decrease exponentially with N as you get
+
+36
+00:02:49,230 --> 00:02:54,540
+more and more layers while the front layers train very slowly because you're multiplying these small
+
+37
+00:02:54,540 --> 00:02:59,200
+numbers over and over again which is just going to lead to smaller smaller numbers.
+
+38
+00:03:00,540 --> 00:03:04,830
+So one way to solve this is attempting to use different activation functions.
+
+39
+00:03:04,830 --> 00:03:09,720
+So we've already heard of that activation function that says the rectified linear unit and that's what
+
+40
+00:03:09,720 --> 00:03:10,720
+it looks like.
+
+41
+00:03:10,780 --> 00:03:15,870
+Every call here that the rectified linear unit is then not going to saturate positive values.
+
+42
+00:03:15,870 --> 00:03:20,880
+So unlike the sigmoid function you can see here that even if we have large positive values we don't
+
+43
+00:03:20,880 --> 00:03:25,030
+end up saturating them with any gradient that's coming close to zero.
+
+44
+00:03:25,050 --> 00:03:30,090
+Now an issue with this rectified linear unit is that for negative numbers it's always going to output
+
+45
+00:03:30,180 --> 00:03:32,070
+zero or they're.
+
+46
+00:03:32,090 --> 00:03:37,430
+So there's another activation function called a leaky rectified linear unit which then has sort of a
+
+47
+00:03:37,430 --> 00:03:42,890
+negative slope for negative numbers in the input.
+
+48
+00:03:42,900 --> 00:03:48,300
+There's also other activation functions such as an exponential linear unit which also attempts to solve
+
+49
+00:03:48,300 --> 00:03:51,070
+some of the problems that lead to vanishing gradients.
+
+50
+00:03:51,180 --> 00:03:55,500
+So hopefully you get this idea that we can use different activation functions to try to solve this problem
+
+51
+00:03:56,970 --> 00:04:03,240
+and other solution is to perform batch normalization where your model normalize each batch using the
+
+52
+00:04:03,240 --> 00:04:09,080
+batched mean and the standard deviation so apart from rational realization Researchers have also used
+
+53
+00:04:09,260 --> 00:04:14,660
+what they call a gradient clipping where gradients are cut off before reaching a predetermined limit.
+
+54
+00:04:14,660 --> 00:04:21,090
+So for example you would cut off gradients to always be between negative 1 and 1 so recurrent neural
+
+55
+00:04:21,090 --> 00:04:24,610
+networks for time series analysis present their own gradient challenges.
+
+56
+00:04:24,630 --> 00:04:29,670
+So we're going to explore special neuron units specially designed for recurrent neural that works especially
+
+57
+00:04:29,670 --> 00:04:32,880
+for time series analysis with them to help fix these issues.
+
+58
+00:04:32,880 --> 00:04:36,600
+So you'll see that the next lecture where we discuss these specialized neuron units.
+

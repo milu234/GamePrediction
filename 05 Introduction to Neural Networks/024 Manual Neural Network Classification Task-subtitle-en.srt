@@ -1,0 +1,956 @@
+1
+00:00:05,660 --> 00:00:08,690
+Welcome back everyone to this final piece of our Emmanual neural network.
+
+2
+00:00:08,690 --> 00:00:14,090
+We're actually going to perform a very simple classification problem essentially just kind of a linear
+
+3
+00:00:14,090 --> 00:00:15,140
+classification.
+
+4
+00:00:15,170 --> 00:00:18,170
+Let's hop over to the Jupiter note book and show you how it's done.
+
+5
+00:00:18,230 --> 00:00:18,530
+All right.
+
+6
+00:00:18,530 --> 00:00:22,100
+So we're going to scroll down here past what we've done before already.
+
+7
+00:00:22,230 --> 00:00:29,330
+And let's go ahead and define this as our kind of classification section so classification and the first
+
+8
+00:00:29,330 --> 00:00:32,330
+thing you need to do is create an activation function.
+
+9
+00:00:33,910 --> 00:00:35,790
+All right so let's have that going now.
+
+10
+00:00:35,810 --> 00:00:39,000
+So actually show you the activation function I want to plot it out.
+
+11
+00:00:39,000 --> 00:00:48,030
+So we'll say that plotted that PI plot as POPC and then English to say map plot live in line and then
+
+12
+00:00:48,060 --> 00:00:55,450
+I'm going to create the sigmoid function here which is a very simple activation function takes in Z
+
+13
+00:00:55,540 --> 00:01:05,860
+and then it's going to return 1 over 1 plus E to the power of negative Z.
+
+14
+00:01:06,000 --> 00:01:07,530
+So let's actually plot this out.
+
+15
+00:01:07,710 --> 00:01:14,200
+So we'll make a sample's z using some pie's Lynn space.
+
+16
+00:01:14,210 --> 00:01:17,900
+Let's go from I don't know negative tend to turn 100 points.
+
+17
+00:01:19,960 --> 00:01:23,560
+And then the result of the X activation function we'll say sample A.
+
+18
+00:01:23,590 --> 00:01:34,090
+It's just sigmoid called on samples the check and then say peel t that plot sample Z versus sampling
+
+19
+00:01:35,620 --> 00:01:37,330
+and then I get the sigmoid function.
+
+20
+00:01:37,330 --> 00:01:38,580
+So it looks like this.
+
+21
+00:01:38,710 --> 00:01:43,660
+You can see here that has that inflection point around 0 and that eventually as you go higher and higher
+
+22
+00:01:43,960 --> 00:01:47,000
+in your input it kind of peaks out to one point zero.
+
+23
+00:01:47,020 --> 00:01:49,950
+And as you go lower and lower it goes down to just zero.
+
+24
+00:01:49,960 --> 00:01:55,230
+So all values that are put it into this function have to be between 0 and 1.
+
+25
+00:01:55,240 --> 00:02:01,770
+So let's go ahead and make this into an operation because technically we can think of an activation
+
+26
+00:02:01,800 --> 00:02:12,390
+as an operations or say sigmoid inherit from the operation we'll say if in it self and will say Z we'll
+
+27
+00:02:12,390 --> 00:02:20,430
+use that super command to then call in it off the operation and we'll just pasand the input as z number
+
+28
+00:02:20,430 --> 00:02:22,010
+operation takes in those input nodes.
+
+29
+00:02:22,020 --> 00:02:27,150
+In that case whatever is going to sigmoid is just going to be Z there and then we'll have our compute
+
+30
+00:02:27,150 --> 00:02:32,110
+method which is just self takes and some's the value there.
+
+31
+00:02:32,140 --> 00:02:36,630
+And then we're Centrica to return the exact same thing we did up here so just copy and paste this will
+
+32
+00:02:36,640 --> 00:02:38,180
+see a return.
+
+33
+00:02:38,410 --> 00:02:41,600
+This right here there we go.
+
+34
+00:02:41,670 --> 00:02:45,150
+So now we have sigmoid as an actual operation that we can use.
+
+35
+00:02:45,180 --> 00:02:52,590
+So let's do a classification example and sikat learn actually has a really nice function and capabilities
+
+36
+00:02:52,590 --> 00:02:54,320
+to create data sets for us.
+
+37
+00:02:55,150 --> 00:03:03,160
+So I'll say from Aski learnt that they import and we'll say make Blob's and whoops mixture that should
+
+38
+00:03:03,160 --> 00:03:04,410
+be data sets.
+
+39
+00:03:05,370 --> 00:03:06,130
+There we go.
+
+40
+00:03:06,510 --> 00:03:11,500
+And then I'm going to say my data is equal to make Blob's.
+
+41
+00:03:11,580 --> 00:03:16,160
+And as you may have guessed this basically just creates a couple of blobs there that you can classify.
+
+42
+00:03:16,200 --> 00:03:20,310
+So if you take a look at shift enter it tells you the various parameters were going to be doing most
+
+43
+00:03:20,310 --> 00:03:22,080
+of them are self-explanatory.
+
+44
+00:03:22,080 --> 00:03:28,160
+So I'm going to be creating 50 samples and the number of features to status that's going to have is
+
+45
+00:03:28,160 --> 00:03:32,910
+just two features and centers essentially how many blobs are going gonna make.
+
+46
+00:03:32,930 --> 00:03:36,710
+We're going to make two blobs So this is just a binary classification problem.
+
+47
+00:03:37,010 --> 00:03:40,730
+And then let's go ahead and give it a random states and make sure you give it the same random state
+
+48
+00:03:40,730 --> 00:03:42,260
+number I do.
+
+49
+00:03:42,260 --> 00:03:45,340
+We'll show you later on Bill we'll go ahead and give it 75.
+
+50
+00:03:45,740 --> 00:03:51,860
+So if we take a look at our data now we have these two sets of features and if you scroll down here
+
+51
+00:03:51,980 --> 00:03:54,170
+you have the actual labels.
+
+52
+00:03:54,170 --> 00:04:00,980
+So if you take a look at the type that data is it's a tuple where the first entry in the tuple is the
+
+53
+00:04:00,980 --> 00:04:05,910
+actual essentially features itself and then the second entry or the actual label.
+
+54
+00:04:05,910 --> 00:04:07,620
+So what classes they belong to.
+
+55
+00:04:07,700 --> 00:04:11,870
+Let's go in and plot this out so we can get kind of a better idea of what actually looks like we'll
+
+56
+00:04:11,870 --> 00:04:19,970
+say features is equal to the first entry in that data and they will say labels is equal to data one
+
+57
+00:04:21,320 --> 00:04:33,540
+Xand I'm going to create a scatterplot of features all the rows in column 0 and then all the rows in
+
+58
+00:04:33,540 --> 00:04:34,660
+column one.
+
+59
+00:04:34,740 --> 00:04:40,980
+So if I do scatterplot of that I see here that I have two distinctive blobs So really easily able to
+
+60
+00:04:40,980 --> 00:04:44,010
+classify this and these two classes are highly separable.
+
+61
+00:04:44,160 --> 00:04:48,200
+And on the x axis as feature one on the y axis is feature two.
+
+62
+00:04:48,240 --> 00:04:54,570
+So essentially column 0 versus column 1 so we have two feature columns and we have clearly two blobs
+
+63
+00:04:54,570 --> 00:04:55,140
+here.
+
+64
+00:04:55,140 --> 00:05:01,450
+And then we can actually color them by the labels so I can say See for coloring is equal to labels.
+
+65
+00:05:01,740 --> 00:05:04,280
+And then I run that and I can see now they're colored.
+
+66
+00:05:04,410 --> 00:05:08,640
+And if you don't really like this coloring choice yellow versus purple if you want.
+
+67
+00:05:08,640 --> 00:05:12,660
+You can also add an see map here and then add in a color argument.
+
+68
+00:05:12,660 --> 00:05:17,180
+For example corm probably a little better of a choice here to the sewing classes.
+
+69
+00:05:17,190 --> 00:05:21,600
+So now we're going to do is use our neural network to actually separate these classes.
+
+70
+00:05:21,610 --> 00:05:23,120
+We're going to have a really simpler idea.
+
+71
+00:05:23,190 --> 00:05:26,870
+Everything we've been doing so far as kind of this week was EMCs plus B type of thing.
+
+72
+00:05:27,060 --> 00:05:31,590
+So we're going to be doing this same idea trying to draw a line that separates these classes.
+
+73
+00:05:31,590 --> 00:05:34,990
+So let's first do this manually going to say the following.
+
+74
+00:05:35,300 --> 00:05:43,620
+I will say x is equal to and P when space and it looks like we're going from around 0 to a little past
+
+75
+00:05:43,620 --> 00:05:46,110
+that so we can say zero to 11.
+
+76
+00:05:47,360 --> 00:05:51,180
+And if you want it can go negative 10:59 it doesn't matter a whole lot and they will create 10 points
+
+77
+00:05:51,180 --> 00:05:56,640
+between that and then let's try to see what kind of line would separate these classes nicely.
+
+78
+00:05:56,640 --> 00:06:02,520
+It looks like if we have whites the power of negative x that would kind of go from zero here to zero
+
+79
+00:06:02,550 --> 00:06:03,100
+there.
+
+80
+00:06:03,270 --> 00:06:08,590
+So let's go ahead and say Whyte's the negative x but then raise it up by about five.
+
+81
+00:06:08,610 --> 00:06:14,370
+So that should give us kind of this nice clear distinctive line we'll see if that works or say Y is
+
+82
+00:06:14,370 --> 00:06:15,950
+equal to negative X..
+
+83
+00:06:16,170 --> 00:06:19,470
+Well first if we just say Y is equal to negative x Let's see what that looks like.
+
+84
+00:06:19,710 --> 00:06:21,570
+And then we kind of see how we need to raise it.
+
+85
+00:06:21,570 --> 00:06:28,900
+So going to copy this same scatterplot and then on top of that I'm going to plot x versus Y.
+
+86
+00:06:28,940 --> 00:06:35,990
+So if I just do this plot right now the separator probably isn't really high enough so let's add 5 to
+
+87
+00:06:35,990 --> 00:06:36,590
+it.
+
+88
+00:06:36,950 --> 00:06:38,300
+Essentially an intercept.
+
+89
+00:06:38,300 --> 00:06:38,870
+Right.
+
+90
+00:06:39,080 --> 00:06:41,350
+And this looks like a pretty good line to separate it.
+
+91
+00:06:41,360 --> 00:06:47,240
+And what we can say here is that anything above this line belongs to the red class and anything below
+
+92
+00:06:47,240 --> 00:06:49,470
+this line belongs to the blue class.
+
+93
+00:06:49,490 --> 00:06:53,090
+In our case these two classes are really easy to separate.
+
+94
+00:06:53,090 --> 00:06:58,050
+So we're going to be using this sort of logic to say hey anything above this line that works and classify
+
+95
+00:06:58,040 --> 00:07:00,200
+it to be read blow to blue.
+
+96
+00:07:00,200 --> 00:07:05,720
+Now the next step is to actually define the perception of to model using a matrix representation of
+
+97
+00:07:05,720 --> 00:07:06,710
+the features.
+
+98
+00:07:06,740 --> 00:07:10,970
+So I going to kind of show a quick slide here to explain the process for doing that.
+
+99
+00:07:11,000 --> 00:07:14,270
+But before we go to Slide I need you to remember one key thing here.
+
+100
+00:07:14,510 --> 00:07:18,860
+Right now we're kind of formulating this as a y equals unmix plus b.
+
+101
+00:07:19,040 --> 00:07:25,620
+Remember that this Y and X are essentially just features we replace them here with the first column
+
+102
+00:07:25,620 --> 00:07:27,890
+the features and the second column of features.
+
+103
+00:07:27,890 --> 00:07:34,340
+So another way to think of this equation could be something like EF 2 is equal to negative EF 1 plus
+
+104
+00:07:34,340 --> 00:07:34,900
+5.
+
+105
+00:07:35,060 --> 00:07:41,120
+So the main thing I want you to remember here is that this X-axis is a feature so X is EF 1 and then
+
+106
+00:07:41,120 --> 00:07:43,470
+Y here is also a feature F 2.
+
+107
+00:07:43,490 --> 00:07:47,400
+Now let me show you a quick slide to show you how we can convert something that looks like this white
+
+108
+00:07:47,400 --> 00:07:53,990
+ghouls negative x plus 5 into some sort of matrix representation that we can adjust of our perception.
+
+109
+00:07:54,130 --> 00:07:55,720
+Let me hop over to a slide.
+
+110
+00:07:56,180 --> 00:07:58,970
+OK so here you have a slide kind of detailing the steps out.
+
+111
+00:07:59,120 --> 00:08:04,140
+We first start off with a basic equation for a line that is that Wike was emic plus B.
+
+112
+00:08:04,310 --> 00:08:07,490
+And then we fill out the actual intercept and the slope.
+
+113
+00:08:07,550 --> 00:08:08,840
+We get something that looks like this.
+
+114
+00:08:08,840 --> 00:08:11,080
+Y equals negative one x time.
+
+115
+00:08:11,090 --> 00:08:13,720
+Or excuse me negative 1 times x plus 5.
+
+116
+00:08:14,010 --> 00:08:17,620
+OK so that was the equation we just had that y equals negative x plus 5.
+
+117
+00:08:17,660 --> 00:08:20,950
+And as I mentioned remember that both line xx are actually features.
+
+118
+00:08:21,110 --> 00:08:23,860
+So we're filling that in with features from our data set.
+
+119
+00:08:23,960 --> 00:08:25,300
+Blob data sets.
+
+120
+00:08:25,310 --> 00:08:30,290
+So if we actually coded out with the features it'll probably look something like this the fourth bullet
+
+121
+00:08:30,290 --> 00:08:35,190
+point feature two is equal to negative 1 Times feature 1 plus 5.
+
+122
+00:08:35,270 --> 00:08:39,680
+And if we set this entire thing to be equal to zero then we get something that looks like this feature
+
+123
+00:08:39,690 --> 00:08:43,950
+two plus feature 1 minus 5 is equal to zero.
+
+124
+00:08:44,060 --> 00:08:49,700
+And if we were to write that in the form of a matrix we would say whatever feature matrix is.
+
+125
+00:08:49,700 --> 00:08:52,740
+So all those feature values to an EF 1.
+
+126
+00:08:52,790 --> 00:08:59,810
+Multiply that by one comma 1 Matrix because essentially feature 2 and feature 1 just have both multipliers
+
+127
+00:08:59,810 --> 00:09:04,640
+of one one Serb are from the same side of the equal sign then subtract five and you get zero.
+
+128
+00:09:04,640 --> 00:09:09,430
+So again this is converting that line into a matrix representation.
+
+129
+00:09:09,550 --> 00:09:11,970
+So we can then input features too.
+
+130
+00:09:11,990 --> 00:09:17,140
+So what would be nice is if we could have a placeholder ready to fit in those features too.
+
+131
+00:09:17,410 --> 00:09:20,060
+OK let's hop back over the notebook.
+
+132
+00:09:20,090 --> 00:09:20,440
+All right.
+
+133
+00:09:20,440 --> 00:09:24,120
+Back here in the notebook I want to quickly type out what we just described.
+
+134
+00:09:24,290 --> 00:09:27,110
+So essentially our equation needs to look something like this.
+
+135
+00:09:27,110 --> 00:09:32,840
+We're going to do a matrix of one one that's a one by two Matrix.
+
+136
+00:09:32,850 --> 00:09:35,530
+Now we're going to multiply that by our feature matrix.
+
+137
+00:09:35,540 --> 00:09:37,040
+And to make sure we can multiply it.
+
+138
+00:09:37,160 --> 00:09:42,530
+This feature makes tricks needs to have a shape of 2 1 and then we're going to say subtract 5 from that
+
+139
+00:09:42,680 --> 00:09:44,470
+and set it equal to zero.
+
+140
+00:09:44,720 --> 00:09:48,040
+So essentially the equation we're trying to fill out looks something like this.
+
+141
+00:09:48,050 --> 00:09:55,550
+So a matrix of 1 come a 1 and then multiply that by our feature matrix which is going to be in the shape
+
+142
+00:09:56,240 --> 00:10:01,650
+to buy one to make sure it can easily matrix multiply here then subtract five equal to zero.
+
+143
+00:10:01,850 --> 00:10:08,570
+So now we have a nice matrix representation of this line and we know that if this value as a result
+
+144
+00:10:08,660 --> 00:10:12,670
+is above zero then you're on this side of the line or the red side.
+
+145
+00:10:12,710 --> 00:10:16,060
+And if you're below zero then you're on the blue side of the line.
+
+146
+00:10:16,610 --> 00:10:20,200
+So the way this would look like in pi is the following.
+
+147
+00:10:20,200 --> 00:10:29,540
+We'll say umpiring 1 come a one then say dot products or matrix multiplication with any array.
+
+148
+00:10:29,690 --> 00:10:31,490
+And in this case we'll just choose a point.
+
+149
+00:10:31,490 --> 00:10:35,950
+So she's a point that's pretty visibly going to be in one of the classes.
+
+150
+00:10:35,950 --> 00:10:42,440
+So for example if I choose a point at 8 10 that's right in the middle of that red cluster that should
+
+151
+00:10:42,440 --> 00:10:45,140
+have a positive value as an output.
+
+152
+00:10:45,140 --> 00:10:50,670
+So here we'll say it's 10 and notice the shape here.
+
+153
+00:10:50,670 --> 00:10:52,290
+It's a one by two.
+
+154
+00:10:52,500 --> 00:10:57,860
+And then after all that we're going to say minus five and there we get a positive value back 13.
+
+155
+00:10:57,870 --> 00:11:04,800
+So we know it belongs to this class right here then we're going to do the opposite for another pointless
+
+156
+00:11:04,810 --> 00:11:07,500
+she's a point that should obviously be in the blue class.
+
+157
+00:11:07,500 --> 00:11:10,830
+That should give us a value below zero or below that line.
+
+158
+00:11:10,830 --> 00:11:14,160
+So let's use something like four and negative 10.
+
+159
+00:11:14,160 --> 00:11:15,580
+That should clearly be.
+
+160
+00:11:15,630 --> 00:11:17,180
+Or let's just say two negative 10.
+
+161
+00:11:17,220 --> 00:11:18,660
+That's really obvious.
+
+162
+00:11:18,690 --> 00:11:31,350
+So say pre-Reagan 1 1 dot product with MP array and then we're going to say what do we say to for feature
+
+163
+00:11:31,360 --> 00:11:37,380
+1 and then on feature to all say negative 10 minus five.
+
+164
+00:11:37,500 --> 00:11:38,940
+And that's definitely negative.
+
+165
+00:11:38,940 --> 00:11:39,870
+Negative 13 here.
+
+166
+00:11:39,870 --> 00:11:41,430
+So it's below this line.
+
+167
+00:11:41,430 --> 00:11:42,780
+It belongs to a blue class.
+
+168
+00:11:42,780 --> 00:11:44,580
+So that's the where perceptions are going to work.
+
+169
+00:11:44,640 --> 00:11:45,550
+It's going to just take in.
+
+170
+00:11:45,550 --> 00:11:47,790
+Hey is the output positive or negative.
+
+171
+00:11:47,910 --> 00:11:50,210
+And then it's going to assign the classes in that manner.
+
+172
+00:11:50,220 --> 00:11:53,060
+So very simple kind of linear classifier here.
+
+173
+00:11:53,310 --> 00:12:00,250
+So let's actually make an example session graph that can run this will say G is equal to graph.
+
+174
+00:12:00,440 --> 00:12:04,430
+We're going to set this as the default graph.
+
+175
+00:12:04,610 --> 00:12:10,430
+Then we're going to create a placeholder for X will say X are the actual features so we expect X to
+
+176
+00:12:10,430 --> 00:12:20,770
+be a feature array then we'll say w kind of as our weight is a variable here one one and they'll say
+
+177
+00:12:20,770 --> 00:12:28,860
+B is equal to a variable and this is negative five and then we'll say Z is equal to.
+
+178
+00:12:29,270 --> 00:12:38,360
+And the result of a matrix multiplication between W and X and then add to it.
+
+179
+00:12:38,380 --> 00:12:40,810
+And if you want you could do this in two steps as we've done before.
+
+180
+00:12:40,810 --> 00:12:42,600
+But that's what we need to figure out.
+
+181
+00:12:42,610 --> 00:12:51,610
+And then finally we're going to pass that into our sigmoid function say sigmoid Z because that's essentially
+
+182
+00:12:51,610 --> 00:12:55,590
+going to output a zero or one for us as we go along.
+
+183
+00:12:55,600 --> 00:13:00,450
+So remember right now we're classifying based on whether it's positive or negative.
+
+184
+00:13:00,460 --> 00:13:03,960
+And luckily the sigmoid function that we did earlier lines up with that.
+
+185
+00:13:04,120 --> 00:13:05,880
+So we'll come all the way back up here.
+
+186
+00:13:06,040 --> 00:13:08,140
+So we're going to say the following.
+
+187
+00:13:08,140 --> 00:13:12,970
+We're going to input the result of that into the sigmoid function and the sigmoid function is going
+
+188
+00:13:12,970 --> 00:13:17,860
+to give us a result that's going to be between 0 and 1.
+
+189
+00:13:18,040 --> 00:13:24,910
+And as we input this the further negative we input the more sure our model is going to be that it belongs
+
+190
+00:13:24,910 --> 00:13:26,240
+to the 0 class.
+
+191
+00:13:26,470 --> 00:13:33,430
+The more positive input the more sure our model is going to be that it belongs to the one class.
+
+192
+00:13:33,430 --> 00:13:39,580
+Now if it's something closer to zero that means kind of by definition that we're getting closer to this
+
+193
+00:13:39,580 --> 00:13:40,890
+line that we created.
+
+194
+00:13:40,900 --> 00:13:45,730
+So the closer we are to zero that means the closer we are to that line and the less sure we are about
+
+195
+00:13:45,730 --> 00:13:49,070
+which class this particular point should go to.
+
+196
+00:13:49,300 --> 00:13:51,500
+So keep that in mind.
+
+197
+00:13:51,770 --> 00:13:55,160
+So final step is the activation function sigmoid.
+
+198
+00:13:55,160 --> 00:13:59,050
+So then we're going to say yes is equal to session
+
+199
+00:14:01,880 --> 00:14:09,710
+and let's run this we'll say yes or a session run our final operation that we find is a member a post
+
+200
+00:14:09,740 --> 00:14:14,030
+or a traversals going to kind of go back and do the adding first in the matrix multiplication in the
+
+201
+00:14:14,030 --> 00:14:14,750
+sigmoid.
+
+202
+00:14:14,990 --> 00:14:16,210
+So we have our operation a.
+
+203
+00:14:16,310 --> 00:14:21,770
+And then we're going to create a feed dictionary for it and it is going to feed the results we did last
+
+204
+00:14:21,770 --> 00:14:23,870
+time we'll say eight and 10.
+
+205
+00:14:23,870 --> 00:14:24,730
+I believe that's what it was.
+
+206
+00:14:24,740 --> 00:14:25,370
+Scroll down here.
+
+207
+00:14:25,370 --> 00:14:30,430
+Yeah it was 8 and 10 and then we're going to run this and see what the result is.
+
+208
+00:14:30,480 --> 00:14:37,720
+It looks like we may have had a typo here so bad operant have for a so let's make sure or add there.
+
+209
+00:14:37,900 --> 00:14:41,290
+Looks like we had a typo here this should be Z vowel not Z.
+
+210
+00:14:41,290 --> 00:14:44,210
+So let's go back and change that in our sigmoid function.
+
+211
+00:14:44,230 --> 00:14:46,260
+Of course you can always check with the notes.
+
+212
+00:14:46,410 --> 00:14:47,700
+There should have no typos in them.
+
+213
+00:14:47,710 --> 00:14:48,680
+So is evil.
+
+214
+00:14:48,850 --> 00:14:49,520
+Run that again.
+
+215
+00:14:49,610 --> 00:14:50,300
+Okay perfect.
+
+216
+00:14:50,300 --> 00:14:56,020
+Let's come back in here and let's run all of these again real quick to make sure we have everything.
+
+217
+00:14:56,020 --> 00:15:00,540
+So graph set as default placeholder variable variable multiply sigmoid.
+
+218
+00:15:00,700 --> 00:15:03,550
+Run that and then we get 0.19.
+
+219
+00:15:03,550 --> 00:15:10,060
+So basically we're very very sure that this point is going to be long to class one which makes sense
+
+220
+00:15:10,060 --> 00:15:15,040
+because if you look at we're 8 and 10 so 8 over here 10 over here that's right in the middle.
+
+221
+00:15:15,040 --> 00:15:17,950
+So now let's do it for the other one maybe like a zero negative 10.
+
+222
+00:15:17,950 --> 00:15:20,990
+That should definitely belong to blue.
+
+223
+00:15:21,100 --> 00:15:23,390
+So we're going to run this again.
+
+224
+00:15:23,460 --> 00:15:30,980
+And like I say let's do something like for the features to add negative 10 run that.
+
+225
+00:15:31,030 --> 00:15:34,140
+And now we get something that's very very close to zero.
+
+226
+00:15:34,360 --> 00:15:37,840
+So notice here it's times ten to the power of negative six.
+
+227
+00:15:37,840 --> 00:15:39,820
+So this is essentially zero.
+
+228
+00:15:39,820 --> 00:15:43,090
+So it's also very sure that it belongs to the zero class.
+
+229
+00:15:43,250 --> 00:15:51,250
+OK so now we were able to successfully use our own graph objects placeholders variables activation functions
+
+230
+00:15:51,270 --> 00:15:55,610
+etc. to recession and actually perform a very simple classification.
+
+231
+00:15:55,750 --> 00:15:59,530
+And hopefully now that you know how to do this manually it's going to make learning tensor flow a lot
+
+232
+00:15:59,560 --> 00:16:02,680
+easier in performing all of this with tensor flow.
+
+233
+00:16:02,680 --> 00:16:05,140
+It's going to be much much easier than what we did right now.
+
+234
+00:16:05,140 --> 00:16:10,090
+This is kind of just eating your vegetables first before you get to jump in and dive into the really
+
+235
+00:16:10,090 --> 00:16:13,420
+nice features that a framework like tons flow provides for you.
+
+236
+00:16:13,450 --> 00:16:17,850
+So using intense flow is going to be a lot easier than all this because a lot of this can get scratched
+
+237
+00:16:17,860 --> 00:16:20,150
+your head and think about OK what exactly am I doing.
+
+238
+00:16:20,170 --> 00:16:24,640
+Step by step but tense flow is a really nice abstraction over all of this.
+
+239
+00:16:24,640 --> 00:16:27,440
+All right thanks everyone and I'll see it the next section of the course.
+

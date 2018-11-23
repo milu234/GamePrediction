@@ -1,0 +1,636 @@
+1
+00:00:05,310 --> 00:00:06,640
+Welcome back everyone.
+
+2
+00:00:06,660 --> 00:00:11,760
+Now it's time to continue our project here by actually creating the training session.
+
+3
+00:00:11,760 --> 00:00:15,680
+So we're going to create a few variables that the training session is going to use.
+
+4
+00:00:15,780 --> 00:00:20,900
+We can say that size will say that's equal to 100.
+
+5
+00:00:21,180 --> 00:00:26,310
+And then it POCs That's how many fool runs it does through the training data.
+
+6
+00:00:26,310 --> 00:00:30,470
+Now definitely more POCs means you're going to get better results from that generator.
+
+7
+00:00:30,660 --> 00:00:36,240
+But keep in mind that Gannes in general take a really long time to train.
+
+8
+00:00:36,270 --> 00:00:41,360
+So we've actually already ran on a very high powered GPS view.
+
+9
+00:00:41,610 --> 00:00:47,640
+This same session or graph that we're actually going to construct right now for 500 epochs and you can
+
+10
+00:00:47,640 --> 00:00:52,170
+grab that saved model and play around with it and see what results it's generating.
+
+11
+00:00:52,170 --> 00:00:56,820
+So right now we'll kind of keep things light we'll do 30 POCs although to really get good results you
+
+12
+00:00:56,820 --> 00:01:00,270
+should be doing plus 100 you.
+
+13
+00:01:00,450 --> 00:01:09,710
+So we'll do 30 full runs through training data and then we'll see in it is equal to say T.F. global
+
+14
+00:01:09,710 --> 00:01:15,950
+variables initialiser so we initialize all the variables and then we can also create a saver function
+
+15
+00:01:15,950 --> 00:01:17,170
+if we want to save it.
+
+16
+00:01:17,450 --> 00:01:19,070
+I won't do any saving right now.
+
+17
+00:01:19,070 --> 00:01:25,100
+So last thing I do is say samples is equal to an empty list and I'm going to save it.
+
+18
+00:01:25,190 --> 00:01:29,380
+An example sample of what the generators actually producing per epoch.
+
+19
+00:01:29,390 --> 00:01:34,490
+So at the end there's going to be 30 example images in this list.
+
+20
+00:01:34,490 --> 00:01:42,310
+OK so let's create the session will say with T.F. session as SPSS we first need to initialize those
+
+21
+00:01:42,310 --> 00:01:51,760
+variables will say run and it then we're going to say for every epoch and range of POCs that we just
+
+22
+00:01:51,760 --> 00:01:54,760
+defined we'll do the following.
+
+23
+00:01:54,760 --> 00:02:02,800
+First we're going to use classic division not true division to figure out how many rounds do I need
+
+24
+00:02:02,800 --> 00:02:07,390
+to do batches to actually go through all the training data.
+
+25
+00:02:08,440 --> 00:02:14,940
+So the number of batches are going to be using is going to be equal to this train.
+
+26
+00:02:15,160 --> 00:02:22,180
+The total number of examples two forward slashes for classic division not true division divided by the
+
+27
+00:02:22,180 --> 00:02:23,280
+batch size.
+
+28
+00:02:23,290 --> 00:02:29,320
+That's basically going to give us a whole number indicating how many batches for if you have each batch
+
+29
+00:02:29,320 --> 00:02:30,550
+be 100 images.
+
+30
+00:02:30,640 --> 00:02:35,350
+How many of those batches does it take to go through all the training examples which is as we know one
+
+31
+00:02:35,350 --> 00:02:37,460
+IPAC.
+
+32
+00:02:37,580 --> 00:02:44,960
+So then we're going to say for I in arr. of the number of batches we need to perform We're going to
+
+33
+00:02:44,960 --> 00:02:46,960
+grab a batch of data.
+
+34
+00:02:46,970 --> 00:02:55,870
+So say this training data grab the next batch and it's going to be defined by the size that we're going
+
+35
+00:02:55,870 --> 00:03:01,940
+to get the images and we're going to reshape and rescale them to pass them into the discriminator.
+
+36
+00:03:02,110 --> 00:03:09,580
+So we'll say the batch images is equal to batch index that 0.
+
+37
+00:03:09,620 --> 00:03:17,570
+And then we're going to reshape it and we'll reshape it to be batch size by 784
+
+38
+00:03:21,570 --> 00:03:26,830
+and then we're going to take that same things or say batch images is that images.
+
+39
+00:03:26,870 --> 00:03:30,660
+And then we're going to multiply by 2 and subtract one from that
+
+40
+00:03:34,030 --> 00:03:39,360
+an operation that's linear transformation basically allows us to rescale everything so that it makes
+
+41
+00:03:39,360 --> 00:03:45,410
+sense for the hyperbolic tangent activation function that discriminator network is going to be using.
+
+42
+00:03:45,720 --> 00:03:51,690
+So speaking of that we're going to create some noise will say batch Z is equal to and that's where we're
+
+43
+00:03:51,690 --> 00:03:52,650
+going to use some PI.
+
+44
+00:03:52,650 --> 00:03:58,320
+We're going to create some random uniform noise that goes from negative 1 to 1 just like the hyperbolic
+
+45
+00:03:58,320 --> 00:04:02,500
+tangent function and the sizes that will be defined by the batch size.
+
+46
+00:04:02,490 --> 00:04:08,610
+So in our case 100 and we'll go ahead and say 100 by 100 here.
+
+47
+00:04:08,670 --> 00:04:13,910
+OK so now we're going to run the optimizers and we're not actually going to save any of their outputs.
+
+48
+00:04:14,010 --> 00:04:19,370
+Really we're just going to run them and then the output that we really care about is the generator output.
+
+49
+00:04:19,620 --> 00:04:22,720
+So we'll go ahead and do that later on.
+
+50
+00:04:22,730 --> 00:04:26,210
+So we're going to say a session run and we're just using an underscore here because we're not really
+
+51
+00:04:26,210 --> 00:04:30,710
+saving any of their outputs to any variables because we don't really care about them.
+
+52
+00:04:30,830 --> 00:04:35,150
+We're going to have the scrimmaging your trainer and then we're going to have a feed dictionary here
+
+53
+00:04:35,230 --> 00:04:39,800
+in the dictionary it's going to be two things are passing in number we have the placeholders for the
+
+54
+00:04:39,800 --> 00:04:41,250
+real images.
+
+55
+00:04:41,250 --> 00:04:45,500
+Now we're going to pass and Bachche images that we just defined earlier and then we also have the Z
+
+56
+00:04:45,530 --> 00:04:47,600
+placeholder here.
+
+57
+00:04:47,600 --> 00:04:55,690
+So we'll see that Z and then we're going to do a very similar thing session run and this is going to
+
+58
+00:04:55,690 --> 00:05:05,610
+be for a trainer feed dictionary and this is just going to take in some noise that Z.
+
+59
+00:05:05,680 --> 00:05:07,490
+OK so that's running the optimizers.
+
+60
+00:05:07,510 --> 00:05:11,660
+And then we're going to line it up with the IPAC for a loop.
+
+61
+00:05:11,830 --> 00:05:13,710
+Well Line it up really of this for loop.
+
+62
+00:05:13,720 --> 00:05:15,670
+But make sure it's on this level.
+
+63
+00:05:15,670 --> 00:05:24,520
+So with this indentation we're then going to say go ahead and prints on e Poch and then we'll just say
+
+64
+00:05:24,520 --> 00:05:28,320
+format IPAC.
+
+65
+00:05:28,320 --> 00:05:31,710
+Make sure this is not in this for loop otherwise you'll see this printed.
+
+66
+00:05:31,740 --> 00:05:35,150
+Well way too many times OK.
+
+67
+00:05:35,180 --> 00:05:42,360
+Then we're going to do is we're going to get a sample from the generator as retraining so of say sample
+
+68
+00:05:42,360 --> 00:05:48,180
+Z is equal to the random uniform.
+
+69
+00:05:48,190 --> 00:05:50,050
+So we're going to pass on some noise here.
+
+70
+00:05:50,300 --> 00:05:56,240
+The size we're just going to say one by 100 because of the batch size is 100 in one because I just want
+
+71
+00:05:56,240 --> 00:06:04,790
+one sample basically just one piece of data so that ran the noise and then we're going to grab a generated
+
+72
+00:06:04,790 --> 00:06:06,830
+sample from our generator.
+
+73
+00:06:06,950 --> 00:06:13,780
+So we'll say a session run by that generator function passen Z here.
+
+74
+00:06:16,540 --> 00:06:17,980
+Because that's the placeholder.
+
+75
+00:06:18,010 --> 00:06:22,950
+And then we're going to do is say reuse is equal to true.
+
+76
+00:06:23,230 --> 00:06:27,090
+And then finally we will define the feed dictionary and the feed dictionary.
+
+77
+00:06:27,400 --> 00:06:30,880
+Z is just going to be that samples Z that we just created.
+
+78
+00:06:32,480 --> 00:06:39,230
+All right so we have samples out there and then we're going to append that generated sample to the list
+
+79
+00:06:39,230 --> 00:06:40,160
+of samples.
+
+80
+00:06:41,350 --> 00:06:41,780
+OK.
+
+81
+00:06:41,800 --> 00:06:46,780
+And then here if you wanted to you could save the model with you down to the note book you'll notice
+
+82
+00:06:46,780 --> 00:06:51,180
+that's commented out so you don't risk XLE overwriting the model that we have for you.
+
+83
+00:06:51,220 --> 00:06:52,790
+We don't need to read anything.
+
+84
+00:06:53,080 --> 00:06:53,320
+OK.
+
+85
+00:06:53,320 --> 00:06:54,720
+So pretty simple session.
+
+86
+00:06:54,730 --> 00:06:57,570
+All we're doing here is we're going to be running through this.
+
+87
+00:06:57,580 --> 00:06:59,060
+We have our batch images.
+
+88
+00:06:59,230 --> 00:07:02,310
+We're training those Herminator training in the generator as well.
+
+89
+00:07:02,350 --> 00:07:07,450
+And then every single epoch we're just going to run 30 of them we're going to save an example image
+
+90
+00:07:07,450 --> 00:07:11,370
+so hopefully they start off pretty noisy and they get better and better.
+
+91
+00:07:11,380 --> 00:07:17,200
+So the generator should at the very end the 30 POCs do something that sort of looks like a number 30
+
+92
+00:07:17,200 --> 00:07:18,510
+really isn't enough yet.
+
+93
+00:07:18,760 --> 00:07:24,750
+Definitely check out that 500 IPAC model that we provide for you if you really want to see good samples.
+
+94
+00:07:24,780 --> 00:07:26,950
+Let's go ahead and run this.
+
+95
+00:07:26,950 --> 00:07:28,510
+Make sure we have no typos here.
+
+96
+00:07:28,540 --> 00:07:32,370
+We should eventually see something like it says on the zero name.
+
+97
+00:07:32,380 --> 00:07:39,600
+Size is not defined so let's check what the alignment is on a size Sirico will say size equals run that
+
+98
+00:07:39,600 --> 00:07:40,290
+again.
+
+99
+00:07:40,290 --> 00:07:42,120
+And hopefully you have no typos.
+
+100
+00:07:42,540 --> 00:07:44,560
+Let's make sure on IPAC zero.
+
+101
+00:07:44,700 --> 00:07:46,710
+You know what we should eventually see on IPAC one.
+
+102
+00:07:46,740 --> 00:07:48,410
+OK so this is running now.
+
+103
+00:07:48,480 --> 00:07:50,490
+This will take a while to run.
+
+104
+00:07:50,490 --> 00:07:56,370
+Keep in mind I'm still running this on a very powerful GPU right here on a Nvidia type next.
+
+105
+00:07:56,370 --> 00:08:00,390
+So it's running very fast and even with that it's going to take a while.
+
+106
+00:08:00,390 --> 00:08:07,070
+So I'm going to fast forward in time until this is done training for 30 bucks.
+
+107
+00:08:07,070 --> 00:08:08,430
+All right so it's finished training.
+
+108
+00:08:08,450 --> 00:08:10,540
+So let's go ahead and see how it performs.
+
+109
+00:08:10,580 --> 00:08:17,590
+If we take a look at those samples it's going to be a list of pictures at least present as an array.
+
+110
+00:08:17,840 --> 00:08:19,670
+So let's go ahead and take one of those.
+
+111
+00:08:19,670 --> 00:08:24,080
+So the very first one right here we can check out its shape.
+
+112
+00:08:24,080 --> 00:08:31,880
+It's one by 784 So we want to reshape this to be an actual image so we'll say 28 by 28 and then we'll
+
+113
+00:08:31,880 --> 00:08:38,410
+say peel t show and we see what is essentially just noise.
+
+114
+00:08:38,410 --> 00:08:44,970
+So you can keep going further and further into time see see it it's a little less noisy and second or
+
+115
+00:08:44,980 --> 00:08:48,340
+30 Poch really if you're coming 0 indexing and you can keep going.
+
+116
+00:08:48,340 --> 00:08:54,790
+So let's go in and jump to 10 and see how it performs still pretty noisy will jump to 20.
+
+117
+00:08:54,850 --> 00:08:56,990
+See that performs still kind of noisy.
+
+118
+00:08:57,030 --> 00:08:58,470
+Can see trying to get some shape.
+
+119
+00:08:58,570 --> 00:09:00,950
+So let's see 30 prox the very 29.
+
+120
+00:09:00,960 --> 00:09:05,020
+I mean because we're starting indexing zero and see how that one is performing.
+
+121
+00:09:05,070 --> 00:09:09,340
+So you can see here that it's actually starting to perform a little better starting to look like a number
+
+122
+00:09:09,630 --> 00:09:14,220
+maybe twenty eight you can see here a little less noise because if we compare this to what the very
+
+123
+00:09:14,230 --> 00:09:21,180
+first one looked like at 0 you can see here it's a lot noisier.
+
+124
+00:09:21,200 --> 00:09:25,030
+All right so we could see with 30 epochs we were getting some improvement but we still haven't actually
+
+125
+00:09:25,030 --> 00:09:29,060
+seen that generator create something that looks like a real human hand written digit.
+
+126
+00:09:29,170 --> 00:09:34,330
+But luckily we've already ran a model for you on a powerful GPU for 500 pocks.
+
+127
+00:09:34,390 --> 00:09:36,310
+So let's go ahead and load that up first.
+
+128
+00:09:36,400 --> 00:09:41,870
+We're going to do here is a saver is equal to T.F. train saver.
+
+129
+00:09:42,030 --> 00:09:47,590
+Now we can pass any variable list parameter that allows us to link it to the generator variable list
+
+130
+00:09:47,590 --> 00:09:48,860
+that we had earlier.
+
+131
+00:09:48,880 --> 00:09:55,920
+So now we have the Savir Let's go ahead and create a session C-f session as SPSS and then we'll say
+
+132
+00:09:55,930 --> 00:10:05,330
+saver and we're going to restore the session and then the file path leps is going to be from the notes.
+
+133
+00:10:05,330 --> 00:10:06,990
+Let me grab that real quick.
+
+134
+00:10:07,020 --> 00:10:10,430
+Should be the models folder as a checkpoint file.
+
+135
+00:10:10,590 --> 00:10:13,730
+So I get that passed in there so we're going to restore that.
+
+136
+00:10:13,910 --> 00:10:16,430
+And then we're going to run the same code that we ran up here.
+
+137
+00:10:16,430 --> 00:10:25,120
+As far as changing a sample something to copy this sample sample copy that bring that down here.
+
+138
+00:10:25,140 --> 00:10:27,590
+Let's go ahead and generate five of these samples.
+
+139
+00:10:27,930 --> 00:10:38,110
+So we'll say new samples is an empty list LC for x in range 5.
+
+140
+00:10:38,150 --> 00:10:43,660
+We're going to do here is create these two samples are really just one sample.
+
+141
+00:10:43,660 --> 00:10:51,790
+So we'll create five random samples with this 500 IPAC model and then we will see new samples and we're
+
+142
+00:10:51,790 --> 00:10:55,180
+going to append that generated sample.
+
+143
+00:10:55,200 --> 00:10:59,770
+OK so let's run this and see how it performs and let's check out those new samples.
+
+144
+00:10:59,790 --> 00:11:03,890
+We'll grab those new samples and we'll grab one of them here.
+
+145
+00:11:04,960 --> 00:11:13,580
+We're going to need to reshape it to be 20 by 20 and let's say peel t show this and you can see here
+
+146
+00:11:13,580 --> 00:11:15,970
+at the really looks way more like a number.
+
+147
+00:11:15,970 --> 00:11:17,580
+So you can see here this looks like nine.
+
+148
+00:11:17,740 --> 00:11:21,840
+So check out what else was able to generate that kind of looks like a number seven.
+
+149
+00:11:21,840 --> 00:11:26,880
+You can see here it's maybe a little less clear to this one.
+
+150
+00:11:26,960 --> 00:11:33,590
+Obviously trying to create something that looks like a 9 3 0 here that one is not too bad.
+
+151
+00:11:33,760 --> 00:11:36,240
+And then four also kind of looking like a 9.
+
+152
+00:11:36,310 --> 00:11:41,080
+So you can see it's not just learning a particular number it's able to generate a lot of them.
+
+153
+00:11:41,080 --> 00:11:41,380
+All right.
+
+154
+00:11:41,410 --> 00:11:45,150
+So that's how you can use the model that we provided for you.
+
+155
+00:11:45,190 --> 00:11:49,990
+You can just run the note book theorically and then that way you don't need to kind of spend a lot of
+
+156
+00:11:49,990 --> 00:11:51,820
+time training your models.
+
+157
+00:11:51,850 --> 00:11:52,230
+OK.
+
+158
+00:11:52,240 --> 00:11:53,690
+Hope you enjoy this project.
+
+159
+00:11:53,710 --> 00:11:54,490
+Thanks everyone.
+

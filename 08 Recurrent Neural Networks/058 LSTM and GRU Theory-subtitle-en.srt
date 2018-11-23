@@ -1,0 +1,548 @@
+1
+00:00:05,400 --> 00:00:11,220
+Welcome everyone to this lecture we're going to be discussing Ellis T.M. and G.R. units or long short
+
+2
+00:00:11,220 --> 00:00:14,380
+term memory neurons and gated recurrent units.
+
+3
+00:00:15,540 --> 00:00:20,370
+Many of the solutions we just previously presented for vanishing gradients can also apply to recurrent
+
+4
+00:00:20,370 --> 00:00:25,830
+neural networks that is using different activation functions applying Bachan formalizations etc..
+
+5
+00:00:26,100 --> 00:00:31,980
+However because of the length of sequence input such as a really long time series input these could
+
+6
+00:00:31,980 --> 00:00:38,940
+slow down training a possible solution would just be to shorten the actual sequence you use for prediction.
+
+7
+00:00:39,090 --> 00:00:42,310
+But then that makes the model worse at predicting longer trends.
+
+8
+00:00:42,480 --> 00:00:49,120
+So we don't really want to have to sacrifice shortening our inputs in other issue recurrent neural networks
+
+9
+00:00:49,120 --> 00:00:54,370
+face is that after a while the networks are going to begin to forget those first inputs so we basically
+
+10
+00:00:54,370 --> 00:00:58,600
+have some sort of memory loss as information is lost at each step going through the recurrent neural
+
+11
+00:00:58,600 --> 00:00:59,340
+network.
+
+12
+00:00:59,380 --> 00:01:03,460
+So we really need some sort of long term memory solution for our networks.
+
+13
+00:01:04,510 --> 00:01:09,730
+This is where the long short term memory cell was created to help address some of these recurrent neural
+
+14
+00:01:09,730 --> 00:01:10,780
+network issues.
+
+15
+00:01:10,900 --> 00:01:12,900
+And it was introduced in 1997.
+
+16
+00:01:12,910 --> 00:01:19,480
+So we're going to go through how an LACMA cell works but quickly recall that a typical recurrent neuron
+
+17
+00:01:19,510 --> 00:01:24,850
+basically has this sort of structure where we have some input at T-minus one that we have the output
+
+18
+00:01:24,940 --> 00:01:31,040
+at T minus one and that output is also fed back in a long input at t.
+
+19
+00:01:31,070 --> 00:01:34,770
+So as a quick note these outputs are often called hidden.
+
+20
+00:01:34,790 --> 00:01:39,710
+So we can have instead of 2st output at T minus one we can say H T minus one.
+
+21
+00:01:39,920 --> 00:01:44,420
+And then that also gets fit in the input t that gets passed through some sort of activation function
+
+22
+00:01:44,630 --> 00:01:48,640
+like the hyperbolic tangent then that gives the output h of t etc..
+
+23
+00:01:48,830 --> 00:01:54,300
+So when you see HFT just kind of think of that as a typical output of a recurrent neuron cell.
+
+24
+00:01:54,440 --> 00:01:59,090
+All right so here we can see the entire model of a long short term memory cell.
+
+25
+00:01:59,300 --> 00:02:03,800
+And I know it can look really complicated if you see it in this format but it's actually not so bad.
+
+26
+00:02:03,830 --> 00:02:06,020
+When you break it down in parts.
+
+27
+00:02:06,260 --> 00:02:11,320
+So let's go ahead and first take a look at what's being inputted and what's being outputted here.
+
+28
+00:02:11,360 --> 00:02:14,770
+We still have those original inputs from a normal recurrent neuron.
+
+29
+00:02:14,780 --> 00:02:17,610
+Those h of T minus 1 and X of T.
+
+30
+00:02:17,780 --> 00:02:21,980
+But note here we have this third input and we'll call that the cell state.
+
+31
+00:02:21,980 --> 00:02:28,410
+So right now we're receiving the cell state at T-minus 1 and then the outputs we again output H A T
+
+32
+00:02:28,850 --> 00:02:30,700
+and then we also have the cell state.
+
+33
+00:02:30,710 --> 00:02:33,140
+So that's the current cell state c of T.
+
+34
+00:02:33,140 --> 00:02:38,480
+So what we're going to end up doing is we're going to take an H of T minus 1 and X of T as well as the
+
+35
+00:02:38,510 --> 00:02:39,950
+previous cell state.
+
+36
+00:02:39,950 --> 00:02:44,960
+C of T minus 1 and will output h of T as well as the current cell state.
+
+37
+00:02:44,990 --> 00:02:45,950
+C of T.
+
+38
+00:02:45,980 --> 00:02:52,990
+So we're going to do this step by step so the very first step is called the forgets Gates layer.
+
+39
+00:02:53,180 --> 00:02:58,640
+And this is going to be the first step or we decide what information are we going to forgets or throw
+
+40
+00:02:58,640 --> 00:03:00,990
+away from the cell state.
+
+41
+00:03:01,130 --> 00:03:08,690
+So what we end up doing here is the passen h of T minus 1 an X of t and we pass that in after performing
+
+42
+00:03:08,690 --> 00:03:13,640
+a linear transformation with some weights and biased terms into a sigmoid function.
+
+43
+00:03:13,660 --> 00:03:16,640
+I remember because this is essentially a sigmoid layer.
+
+44
+00:03:16,640 --> 00:03:23,590
+It's always going to output a number between 0 and 1 and a 1 is going to represent to keep it and a
+
+45
+00:03:23,600 --> 00:03:27,050
+zero is going to represent to forget about it or get rid of it.
+
+46
+00:03:27,320 --> 00:03:33,080
+So if you think back to maybe a language model where we're trying to predict the very next word based
+
+47
+00:03:33,080 --> 00:03:39,200
+on previous ones a cell state might include the gender of the present subject so that you end up picking
+
+48
+00:03:39,200 --> 00:03:40,510
+the correct pronoun.
+
+49
+00:03:40,580 --> 00:03:42,320
+So we end up seeing a new subject.
+
+50
+00:03:42,350 --> 00:03:45,540
+You want to forget about the gender of the old subject.
+
+51
+00:03:45,590 --> 00:03:53,440
+So that may be used use for a forget gait later when working with natural language as a sequence.
+
+52
+00:03:53,450 --> 00:03:59,410
+Now the very next step is to decide what new information are you going to store in the cell state.
+
+53
+00:03:59,420 --> 00:04:01,270
+So we already decided what we're going to forget.
+
+54
+00:04:01,280 --> 00:04:04,960
+Now we need to decide what are we actually going to store in the cell state.
+
+55
+00:04:04,970 --> 00:04:07,030
+Remember that c of T.
+
+56
+00:04:07,100 --> 00:04:09,600
+So the first part is a sigmoid layer.
+
+57
+00:04:09,650 --> 00:04:12,320
+And the second part is a hyperbolic tangent layer.
+
+58
+00:04:12,320 --> 00:04:17,750
+So let's go ahead and tackle that first part that sigmoid layer so that sigmoid layer is called the
+
+59
+00:04:17,840 --> 00:04:19,080
+input gate layer.
+
+60
+00:04:19,100 --> 00:04:22,690
+So we'll say that's equal to I have to look for input gate layer.
+
+61
+00:04:22,880 --> 00:04:29,870
+And again we take an H of T minus 1 and X of t do a linear transformation on it with W of II plus B
+
+62
+00:04:29,890 --> 00:04:36,790
+of-I we pass that into a sigmoid function and again now we have a bunch of values between 0 and once.
+
+63
+00:04:36,970 --> 00:04:40,180
+Then the second part of this is the hyperbolic tangent layer.
+
+64
+00:04:40,400 --> 00:04:45,880
+And that's again going take h of T minus 1 and ex-city do that linear transformation and then pass it
+
+65
+00:04:45,920 --> 00:04:47,410
+through a hyperbolic tangent.
+
+66
+00:04:47,660 --> 00:04:51,980
+So that ends up creating a vector of what we call new candidate values.
+
+67
+00:04:51,980 --> 00:04:55,250
+So that's that c of T with a little tilde above it.
+
+68
+00:04:55,250 --> 00:05:00,170
+So these are candidate values that could be added to the state and then the next step we're going to
+
+69
+00:05:00,170 --> 00:05:04,540
+combine these two to create an update to the cell state.
+
+70
+00:05:04,580 --> 00:05:09,560
+So if we think back to an example of a language model we essentially want to add the gender of the new
+
+71
+00:05:09,560 --> 00:05:16,090
+subject to the cell state and replace the old one that we've already decided we're forgetting.
+
+72
+00:05:16,120 --> 00:05:22,270
+So now it's time to update the old cell state to remember the old cell state is c of T minus one and
+
+73
+00:05:22,270 --> 00:05:29,470
+we eventually want to update that to the new cell say c of T so we can pass that on to the T plus one
+
+74
+00:05:30,220 --> 00:05:32,130
+state of the cell.
+
+75
+00:05:32,140 --> 00:05:35,260
+So in the previous steps we already decided what we're going to forget.
+
+76
+00:05:35,320 --> 00:05:37,950
+And we also already decided what we're going to store.
+
+77
+00:05:37,960 --> 00:05:42,370
+So now we need to do is just perform or execute these actions.
+
+78
+00:05:42,370 --> 00:05:48,780
+So what we end up doing is we multiply the old state c of T minus one by f of T.
+
+79
+00:05:48,790 --> 00:05:53,200
+So we end up forgetting the things that we essentially decided we're going to forget based off that
+
+80
+00:05:53,200 --> 00:06:00,400
+first sigmoid layer then we're going to add I have t that input gate layer times those candidate values
+
+81
+00:06:00,400 --> 00:06:02,590
+c of T with tilde on top.
+
+82
+00:06:02,620 --> 00:06:08,170
+So these are the new Kennedy values and now they're being scaled by how much we decided to update each
+
+83
+00:06:08,260 --> 00:06:09,370
+state value.
+
+84
+00:06:09,700 --> 00:06:14,440
+So if we think back to a case of a language model this is where we would actually drop the information
+
+85
+00:06:14,740 --> 00:06:20,980
+about that old subjects gender and add in new information based off what we decided in the previous
+
+86
+00:06:20,980 --> 00:06:22,540
+steps.
+
+87
+00:06:22,540 --> 00:06:27,460
+Now our final decision is going to be what do we output for H of T.
+
+88
+00:06:27,520 --> 00:06:30,130
+So this output is going to be based off your cells.
+
+89
+00:06:30,190 --> 00:06:31,930
+That is just a filter diversion.
+
+90
+00:06:32,200 --> 00:06:36,790
+So it's actually pretty straightforward now we just using H A T minus 1 an X of T.
+
+91
+00:06:36,880 --> 00:06:43,030
+We passed that after a linear transformation into the sigmoid layer and that's going to decide what
+
+92
+00:06:43,030 --> 00:06:46,310
+parts of the cell state were going to be outputting.
+
+93
+00:06:46,380 --> 00:06:50,190
+Then we put the cells stay through the hyperbolic tangent.
+
+94
+00:06:50,260 --> 00:06:54,020
+So that's going to push the values to be between negative 1 and 1.
+
+95
+00:06:54,160 --> 00:06:59,730
+And we're going to then multiply it by the output of that sigmoid again so that we only output the parts
+
+96
+00:06:59,740 --> 00:07:01,180
+we decided to.
+
+97
+00:07:01,180 --> 00:07:03,790
+So that's what's occurring here in this red line.
+
+98
+00:07:03,790 --> 00:07:09,130
+Again we're taking H A T minus 1 an X A T doing a linear transformation on it passing it through the
+
+99
+00:07:09,130 --> 00:07:12,100
+sigmoid And then once we have that output.
+
+100
+00:07:12,190 --> 00:07:14,600
+So we're going to say that's o of T output of T.
+
+101
+00:07:14,620 --> 00:07:21,000
+We're then going to multiply by the hyperbolic tangent of the sea of t or that current cell state.
+
+102
+00:07:21,100 --> 00:07:23,220
+And that gives us h of T.
+
+103
+00:07:23,320 --> 00:07:25,740
+So that's how an elist cell works.
+
+104
+00:07:27,400 --> 00:07:30,010
+Now there's different variants on an elist himself.
+
+105
+00:07:30,040 --> 00:07:33,670
+So there's a variance called the peep hole variance.
+
+106
+00:07:33,700 --> 00:07:36,160
+So this is actually quite popular.
+
+107
+00:07:36,160 --> 00:07:40,660
+And the reason for that is because it adds peepholes to all the gates.
+
+108
+00:07:40,660 --> 00:07:50,110
+So basically it allows these f of t of t and O of t to be able to see the previous cell state.
+
+109
+00:07:50,110 --> 00:07:51,640
+Or C of T minus 1.
+
+110
+00:07:51,670 --> 00:07:56,700
+So you can see here now instead of being a function of just h of T minus 1 and X of T.
+
+111
+00:07:56,770 --> 00:07:59,060
+We're also passing in a C of T minus one.
+
+112
+00:07:59,200 --> 00:08:03,310
+And then for the output we're also passing in a C T directly.
+
+113
+00:08:03,310 --> 00:08:06,170
+So that's called LS T.M. with peepholes.
+
+114
+00:08:06,200 --> 00:08:12,670
+Another variation of the LS tiam cell is called the gated recurrent unit or G or you and this was actually
+
+115
+00:08:12,670 --> 00:08:18,670
+introduced quite recently around 2014 and what it ends up doing is it actually simplifies things a bit
+
+116
+00:08:18,940 --> 00:08:24,470
+by combining the forget and input gates into a single what they call update Gates.
+
+117
+00:08:24,610 --> 00:08:27,100
+And it also merges the cells stay and hidden state.
+
+118
+00:08:27,340 --> 00:08:33,420
+And it makes a few other changes so this resulting model is actually simpler than standard elist him
+
+119
+00:08:33,430 --> 00:08:33,940
+models.
+
+120
+00:08:33,970 --> 00:08:39,300
+And because of that it's been growing increasingly popular over the last few years that it's been around.
+
+121
+00:08:39,310 --> 00:08:44,260
+So there's actually lots of other slight variations off of this and they're being introduced all the
+
+122
+00:08:44,260 --> 00:08:44,650
+time.
+
+123
+00:08:44,650 --> 00:08:50,260
+There was another one called depth gated recurrent neural networks and that was introduced in 2015.
+
+124
+00:08:50,440 --> 00:08:54,940
+And I mean who knows maybe in a few years we'll see another variation that further improves on this
+
+125
+00:08:54,940 --> 00:08:55,720
+model.
+
+126
+00:08:55,720 --> 00:09:01,960
+But the main idea is to understand how elist teams work and that allows you to quickly learn how these
+
+127
+00:09:01,960 --> 00:09:03,500
+variations work off of it.
+
+128
+00:09:05,160 --> 00:09:10,540
+Now fortunately we won't actually have to implement all of that logic ourselves tensor flow comes a
+
+129
+00:09:10,620 --> 00:09:13,640
+really nice year on models built in a nice API.
+
+130
+00:09:13,740 --> 00:09:19,810
+So it makes it really easy to swap in say in LSD hemself for a GI or use cell.
+
+131
+00:09:19,980 --> 00:09:24,290
+Essentially it's just a call to tensor flow which is why people use tensor flow in the first place.
+
+132
+00:09:24,290 --> 00:09:29,730
+So because of this we're going to do now is explore using this tensor flow recurrent neural network
+
+133
+00:09:29,730 --> 00:09:34,350
+API for time series prediction and generating new time series data.
+
+134
+00:09:34,350 --> 00:09:39,780
+So we've gone through kind of the more difficult parts of understanding vanishing gradients LACMA cells
+
+135
+00:09:39,810 --> 00:09:41,270
+gaitered recurrent units.
+
+136
+00:09:41,280 --> 00:09:46,440
+Now it's time to actually code this out and take it full advantage of tensor Flo's API.
+
+137
+00:09:46,440 --> 00:09:48,920
+All right thanks everyone and I'll see you at the next lecture.
+

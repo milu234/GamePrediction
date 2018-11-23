@@ -1,0 +1,936 @@
+1
+00:00:05,510 --> 00:00:10,850
+Welcome everyone to the machine learning overview lecture we're not going to take a little bit of time
+
+2
+00:00:10,850 --> 00:00:16,180
+to discuss some basic machine learning concepts and principles to set a foundation for future lecturers.
+
+3
+00:00:16,220 --> 00:00:21,080
+We're going to talk about the basics of supervised learning unsupervised learning reinforcement learning
+
+4
+00:00:21,110 --> 00:00:28,290
+some evaluation methods and more unlike typical computer programs machine learning techniques will literally
+
+5
+00:00:28,370 --> 00:00:34,010
+learn from data that is the same machine learning algorithms can actually find insights and data even
+
+6
+00:00:34,010 --> 00:00:37,460
+if they are specifically instructed what to look for in that data.
+
+7
+00:00:37,460 --> 00:00:41,660
+And that's what separates a machine learning algorithm from a typical computer program.
+
+8
+00:00:41,660 --> 00:00:46,100
+You're just giving the machine learning algorithm a set of rules to follow instead of actually telling
+
+9
+00:00:46,100 --> 00:00:49,290
+it what to look for it will find the insights on its own.
+
+10
+00:00:50,950 --> 00:00:56,260
+Now in this course we're going to be discussing how to use tensor flow for three major types of machine
+
+11
+00:00:56,260 --> 00:01:01,570
+learning algorithms or machine learning topics and that is supervised learning unsupervised learning
+
+12
+00:01:01,600 --> 00:01:07,120
+and reinforcement learning will also touch on other topics that we can use tensor flow for such as Word
+
+13
+00:01:07,120 --> 00:01:10,420
+embeddings with words like.
+
+14
+00:01:10,450 --> 00:01:13,360
+So let's first discuss supervised learning.
+
+15
+00:01:13,360 --> 00:01:18,520
+Supervised learning uses labelled data to predict the label given some features and that's the really
+
+16
+00:01:18,520 --> 00:01:19,140
+important part.
+
+17
+00:01:19,150 --> 00:01:24,730
+The fact that the data is labeled so whenever you think of supervised learning think label if the labels
+
+18
+00:01:24,730 --> 00:01:29,900
+continuous It's called the regression problem and if it's categorical It's called a classification problem.
+
+19
+00:01:31,610 --> 00:01:36,080
+So let's go ahead and give an example of a classification problem which would fall under supervised
+
+20
+00:01:36,080 --> 00:01:37,910
+learning for your data.
+
+21
+00:01:37,910 --> 00:01:43,550
+You'll have some features such as height and weights and the label could be something like gender.
+
+22
+00:01:43,550 --> 00:01:49,170
+So then your task could be given a person's height and weight predict their gender.
+
+23
+00:01:49,180 --> 00:01:50,520
+So what does this actually look like.
+
+24
+00:01:50,590 --> 00:01:53,850
+Well for instance we could just plot out a couple of points here.
+
+25
+00:01:53,860 --> 00:01:59,260
+Remember since this is supervised learning and classification we already know the labels in this case
+
+26
+00:01:59,320 --> 00:02:05,200
+our labels are male and female genders and we have height in weight as our features.
+
+27
+00:02:05,230 --> 00:02:11,530
+So for a classification task our model ends up being trained on some training data here then in the
+
+28
+00:02:11,530 --> 00:02:17,350
+future we'll get a new point who features we do know such as we know the weight and the height but we
+
+29
+00:02:17,350 --> 00:02:22,780
+don't know what class it belongs to then our machine learning algorithm will predict according to what
+
+30
+00:02:22,780 --> 00:02:25,060
+it's been trained on what class it should be.
+
+31
+00:02:25,060 --> 00:02:30,180
+And in that case it predict that male then there's also regression problems.
+
+32
+00:02:30,190 --> 00:02:35,190
+This is again a supervised learning technique because of a Russian problem does have a given label based
+
+33
+00:02:35,190 --> 00:02:36,930
+off historical values.
+
+34
+00:02:36,930 --> 00:02:41,650
+Now the only difference here is that the label is sort of being categorical such as male and female.
+
+35
+00:02:41,730 --> 00:02:44,550
+It's continuous such as the house price.
+
+36
+00:02:44,550 --> 00:02:49,620
+So in this case we'll have a dataset with features such as the square footage of a house how many rooms
+
+37
+00:02:49,620 --> 00:02:55,290
+it has etc. and we need to predict some continuous values such as house price so that when the task
+
+38
+00:02:55,290 --> 00:03:01,680
+is given a house size and the number of rooms predict the selling price of the house so when we plot
+
+39
+00:03:01,680 --> 00:03:03,300
+out this data it looks like this.
+
+40
+00:03:03,390 --> 00:03:06,030
+We have a price and let's say square feet.
+
+41
+00:03:06,030 --> 00:03:07,970
+So here only using one feature.
+
+42
+00:03:08,010 --> 00:03:13,590
+So on the x axis we have our feature the square feet of the house indicating how big the house is and
+
+43
+00:03:13,590 --> 00:03:17,280
+then on the y axis we have the actual label that we're trying to predict.
+
+44
+00:03:17,340 --> 00:03:22,110
+And in this case the label is continuous because it can't be split up into categorical units instead
+
+45
+00:03:22,110 --> 00:03:24,260
+of it's continuous Preissing value.
+
+46
+00:03:24,300 --> 00:03:28,110
+So your model will end up creating some sort of fit to the data.
+
+47
+00:03:28,110 --> 00:03:33,200
+In this case it kind of has a trend here that the larger the houses the higher in price.
+
+48
+00:03:33,210 --> 00:03:37,560
+So then when you get a new house whose price you don't know but you do know it's features such as the
+
+49
+00:03:37,560 --> 00:03:43,340
+square footage of the house you end up checking out your model and it returns back it's predicted price.
+
+50
+00:03:43,350 --> 00:03:47,040
+So that's how we regression supervised learning algorithm works.
+
+51
+00:03:47,040 --> 00:03:53,680
+And again this is a very basic example of this so supervised learning has the model train on historical
+
+52
+00:03:53,680 --> 00:03:58,150
+data that is already labeled such as those previous house sales.
+
+53
+00:03:58,150 --> 00:04:03,940
+Once the model is trained on that historical data it can then be used on new data or only the features
+
+54
+00:04:03,940 --> 00:04:06,120
+are known to attempt prediction.
+
+55
+00:04:06,160 --> 00:04:08,700
+So that can be really useful if you're a real estate agent.
+
+56
+00:04:08,770 --> 00:04:14,890
+You can look up all the features of previous houses that have sold and then match them up to their prices.
+
+57
+00:04:14,920 --> 00:04:20,410
+Train your model and then when the new house comes onto the market base of its features you can predict
+
+58
+00:04:20,470 --> 00:04:24,070
+what price it should sell for.
+
+59
+00:04:24,070 --> 00:04:29,620
+Now the question arises What if you don't have historical labels for your data you only have features
+
+60
+00:04:30,190 --> 00:04:35,590
+since you technically have no rights or correct answer to fit on that is you have no label.
+
+61
+00:04:35,590 --> 00:04:39,210
+You actually need to look for patterns in the data and find the structure.
+
+62
+00:04:39,330 --> 00:04:46,950
+And this is known as an unsupervised learning problem because you don't actually have the labels.
+
+63
+00:04:47,030 --> 00:04:50,840
+So let's walk through an example of an unsupervised learning problem.
+
+64
+00:04:50,900 --> 00:04:56,060
+It really common unsupervised learning task is called clustering where you're given data with just the
+
+65
+00:04:56,060 --> 00:05:00,410
+features no labels and your task is to cluster into similar groups.
+
+66
+00:05:00,410 --> 00:05:06,380
+So for example Mavin you're given data that has as a feature heights and weights for breeds of dogs
+
+67
+00:05:06,890 --> 00:05:11,720
+and however this is unsupervised learning you actually don't have the label you don't know what actual
+
+68
+00:05:11,720 --> 00:05:16,040
+breeds these are so you have no label for the breeds you just have the actual features the heights and
+
+69
+00:05:16,040 --> 00:05:17,870
+weights of these thugs.
+
+70
+00:05:17,870 --> 00:05:21,680
+So your task is to cluster together the data into similar groups.
+
+71
+00:05:21,680 --> 00:05:26,420
+It is then up to the data scientist or whoever is performing this machine learning task to interpret
+
+72
+00:05:26,420 --> 00:05:31,490
+what the clusters actually means and that usually indicates that unsupervised learning has a lot to
+
+73
+00:05:31,490 --> 00:05:32,750
+do with domain knowledge.
+
+74
+00:05:32,750 --> 00:05:38,450
+As far as interpreting the results so what does this look like as a really basic example.
+
+75
+00:05:38,680 --> 00:05:43,330
+Here plot out all our data points for these various heights and the weights of these dogs.
+
+76
+00:05:43,330 --> 00:05:48,730
+And then after computing your clustering algorithm you end up deciding that you have these two clusters
+
+77
+00:05:49,090 --> 00:05:54,190
+you're machine learning model says hey I think these two clusters are pretty similar to each other but
+
+78
+00:05:54,190 --> 00:05:58,900
+you should note that clustering isn't actually able to tell you what the group labels should be.
+
+79
+00:05:58,900 --> 00:06:02,920
+It can't report back what actual breeds of dogs these are.
+
+80
+00:06:02,920 --> 00:06:08,890
+All I can tell you is that these points in each cluster are similar to each other based off the features.
+
+81
+00:06:08,890 --> 00:06:13,480
+So it's a really important thing to know especially when it comes to evaluating unsupervised learning
+
+82
+00:06:13,480 --> 00:06:14,220
+models.
+
+83
+00:06:16,160 --> 00:06:20,540
+Now you might be wondering what about machine learning tasks that I've heard about or read about like
+
+84
+00:06:20,600 --> 00:06:25,850
+a computer learning to play a video game or drive a car etc. and that sort of reinforcement learning
+
+85
+00:06:25,850 --> 00:06:26,700
+comes into play.
+
+86
+00:06:26,750 --> 00:06:30,330
+And it's not quite like supervised learning or unsupervised learning.
+
+87
+00:06:30,530 --> 00:06:36,300
+Reinforcement learning works through trial and error which actions yield the greatest rewards.
+
+88
+00:06:37,340 --> 00:06:40,860
+So when it comes to reinforcement learning there are three major components.
+
+89
+00:06:40,880 --> 00:06:45,620
+That is the agent the environment and the actions and we'll cover this all more in depth when we actually
+
+90
+00:06:45,620 --> 00:06:48,230
+show you how to do reinforcement learning of Python.
+
+91
+00:06:48,440 --> 00:06:54,460
+But to start off the first major component is the agent and that is the learning or decision maker than
+
+92
+00:06:54,550 --> 00:06:56,260
+the agent has the environment.
+
+93
+00:06:56,300 --> 00:06:58,070
+And that's what the agent interacts with.
+
+94
+00:06:58,070 --> 00:07:03,740
+So for reinforcement learning trying to learn how to drive a car or self-driving car the environment
+
+95
+00:07:03,760 --> 00:07:08,630
+may be what it's reading in from the camera Thiede such as the street signs etc..
+
+96
+00:07:08,810 --> 00:07:13,760
+Or if you're training the agent to learn how to play a video game that would be the actual pixels on
+
+97
+00:07:13,760 --> 00:07:16,420
+the screen that can read then you have actions.
+
+98
+00:07:16,430 --> 00:07:19,800
+And that is what the agent can actually do in response to the environment.
+
+99
+00:07:20,030 --> 00:07:27,470
+For example self-driving car you could say break or hit the accelerator turn etc. for a videogame reinforcement
+
+100
+00:07:27,470 --> 00:07:31,030
+learning it would be what button to press based off the environment.
+
+101
+00:07:32,900 --> 00:07:38,120
+Than for the actual process of reinforcement learning what occurs is that the agent will choose the
+
+102
+00:07:38,120 --> 00:07:43,120
+actions that maximize some specified reward metric over a given amount of time.
+
+103
+00:07:43,220 --> 00:07:50,780
+Maybe if you're training an agent to play a video game that actual Ward is your high score then what
+
+104
+00:07:50,780 --> 00:07:55,580
+you're going to do is have the agent learn the best policy with the environment and it's going to respond
+
+105
+00:07:55,610 --> 00:07:57,230
+with the best actions.
+
+106
+00:07:58,880 --> 00:08:04,050
+So let's go ahead and walk through the basic machine learning process for a supervised learning problem.
+
+107
+00:08:04,070 --> 00:08:08,840
+Then afterwards we're going to discuss some key differences for unsupervised learning as well as discuss
+
+108
+00:08:08,890 --> 00:08:11,510
+holdout datasets at the very beginning of this course.
+
+109
+00:08:11,540 --> 00:08:16,720
+Most of what we're going to cover falls under supervised learning are unsupervised learning.
+
+110
+00:08:16,760 --> 00:08:20,960
+So it's important that we basically discuss what that whole process actually looks like because we're
+
+111
+00:08:20,960 --> 00:08:25,760
+going to be using tent's flow and you're own that's to actually solve these problems later on much later
+
+112
+00:08:25,760 --> 00:08:30,140
+in the course we'll discuss reinforcement learning which kind of has its own particular machine learning
+
+113
+00:08:30,140 --> 00:08:30,640
+process.
+
+114
+00:08:30,640 --> 00:08:35,090
+It doesn't really fall quite into this general machine learning process.
+
+115
+00:08:35,110 --> 00:08:37,390
+OK so let's go ahead and go step by step.
+
+116
+00:08:37,430 --> 00:08:40,160
+What a M-L process looks like.
+
+117
+00:08:40,190 --> 00:08:43,340
+First thing you have to do is actually acquire the data.
+
+118
+00:08:43,340 --> 00:08:46,940
+Now this really depends on what task you're trying to solve.
+
+119
+00:08:46,970 --> 00:08:52,310
+If it's something like a regression problem you need to acquire a previous house sales and you maybe
+
+120
+00:08:52,310 --> 00:08:58,670
+get that from something like Zill dot com or if you're trying to classify images into dogs versus cats
+
+121
+00:08:58,970 --> 00:09:04,040
+you somehow acquire the various data of images of dogs and cats.
+
+122
+00:09:04,340 --> 00:09:07,850
+Then the next step is to clean and organize the data.
+
+123
+00:09:07,880 --> 00:09:13,340
+So again maybe you got those actual images but they have too many pixels so it's too much information
+
+124
+00:09:13,610 --> 00:09:15,980
+and it's going to take a really long time to train your model.
+
+125
+00:09:16,130 --> 00:09:21,290
+So maybe you clean it down or take away edges or just try to get the faces of the dogs and the cats
+
+126
+00:09:21,590 --> 00:09:26,140
+instead of the whole body etc. or maybe try to do things like normalize the data.
+
+127
+00:09:26,330 --> 00:09:30,830
+So you do some sort of standard scaling on your data and unfortunately a lot of your time is actually
+
+128
+00:09:30,830 --> 00:09:35,060
+spent on cleaning the data and not so much on making the cool models.
+
+129
+00:09:35,060 --> 00:09:39,820
+So again most of your time is going to spent here on data cleaning.
+
+130
+00:09:40,220 --> 00:09:45,500
+So once you do that you do what's called a train test split and so you going to split your data into
+
+131
+00:09:45,590 --> 00:09:47,810
+a training set and a testing set.
+
+132
+00:09:47,810 --> 00:09:54,350
+Now there's lots of split ratios you can use a really common split ratio is to have 30 percent of your
+
+133
+00:09:54,350 --> 00:09:57,260
+data be test and then 70 percent the data be training.
+
+134
+00:09:57,380 --> 00:10:02,240
+But it really depends on the situation how clean your data is how much do you have access to.
+
+135
+00:10:02,270 --> 00:10:07,850
+And then we'll also discuss hold up data sets later on once you perform that train to split it's time
+
+136
+00:10:07,850 --> 00:10:11,030
+to actually train or fit your model on the training data.
+
+137
+00:10:11,210 --> 00:10:13,060
+So you'll have some sort of model.
+
+138
+00:10:13,070 --> 00:10:17,840
+And in this case we're going to use tensor flow and neural networks as our model and train that model
+
+139
+00:10:17,870 --> 00:10:19,660
+solely on that training set.
+
+140
+00:10:21,210 --> 00:10:25,350
+Then once you've trained that model it becomes time to evaluate that model.
+
+141
+00:10:25,380 --> 00:10:27,750
+And this is where that test set comes in.
+
+142
+00:10:27,750 --> 00:10:33,750
+Now the reason we use that separate test set is so we don't basically cheat since the model has already
+
+143
+00:10:33,750 --> 00:10:35,880
+been trained on the training set.
+
+144
+00:10:35,880 --> 00:10:41,160
+We want to evaluate it fairly against data that it has never seen before just like it would in the real
+
+145
+00:10:41,160 --> 00:10:41,630
+world.
+
+146
+00:10:41,700 --> 00:10:46,790
+Once it becomes time to deploy that model and that's the main idea behind that test train split.
+
+147
+00:10:46,950 --> 00:10:51,690
+So you train your model on that training data and evaluate your model on data it hasn't seen before
+
+148
+00:10:51,720 --> 00:10:53,530
+such as that test set.
+
+149
+00:10:53,610 --> 00:10:59,490
+Once you've done that you go ahead and adjust model parameters to try to get a better fit onto that
+
+150
+00:10:59,490 --> 00:11:00,510
+test set.
+
+151
+00:11:00,510 --> 00:11:06,030
+So again train your model on the training data evaluate how it performs on that test data set and then
+
+152
+00:11:06,030 --> 00:11:08,580
+you can make adjustments and cycle back and forth.
+
+153
+00:11:09,560 --> 00:11:14,590
+Once you're satisfied if your model you can then deploy it onto new incoming data.
+
+154
+00:11:14,700 --> 00:11:21,000
+So that's a very basic approach to machine learning acquire the data clean data split it into a test
+
+155
+00:11:21,150 --> 00:11:26,610
+and a train set train your model on that training set evaluated against a test set adjust the model
+
+156
+00:11:26,610 --> 00:11:27,300
+parameters.
+
+157
+00:11:27,300 --> 00:11:32,860
+Repeat that process until you're ready and set aside to deploy the model.
+
+158
+00:11:32,860 --> 00:11:37,600
+Now let's go ahead and discuss unsupervised learning remember unsupervised learning.
+
+159
+00:11:37,630 --> 00:11:39,860
+Those are data sets that had no labels.
+
+160
+00:11:39,940 --> 00:11:44,770
+So for unsupervised learning problems most of the time you're not actually going to do some sort of
+
+161
+00:11:44,770 --> 00:11:50,140
+test train split because it doesn't really make sense to evaluate your model against some test because
+
+162
+00:11:50,140 --> 00:11:53,600
+you don't know the correct labels to evaluate against.
+
+163
+00:11:53,610 --> 00:11:57,790
+So are we going gonna end up doing and said we're going to use all the data as training data and then
+
+164
+00:11:57,790 --> 00:12:02,500
+you're going to evaluate against the training data based off some sort of unsupervised learning metric
+
+165
+00:12:02,800 --> 00:12:05,610
+and we'll discuss those evaluation metrics in just a little bit.
+
+166
+00:12:05,710 --> 00:12:10,210
+But unsurprised unsupervised learning typically not going to have that test train split because it doesn't
+
+167
+00:12:10,210 --> 00:12:17,550
+really make sense because you don't actually know the correct answer to evaluate against then finally
+
+168
+00:12:17,590 --> 00:12:21,960
+let's go ahead and discuss a holdout set or an evaluation set.
+
+169
+00:12:21,970 --> 00:12:27,320
+Sometimes it's also called that and does a really similar process to a test train split.
+
+170
+00:12:27,500 --> 00:12:33,610
+Except we actually after we clean the data split it into three groups a training set a testing set and
+
+171
+00:12:33,610 --> 00:12:35,590
+what we call a holdout set.
+
+172
+00:12:35,590 --> 00:12:40,330
+And again the ratios between train test and hold out really different depending on how much study you
+
+173
+00:12:40,330 --> 00:12:42,460
+have and what that particular situation is.
+
+174
+00:12:42,460 --> 00:12:47,830
+So there's no real right or wrong answer on what the ratio should be between those three sets as far
+
+175
+00:12:47,830 --> 00:12:49,080
+as their sizes are.
+
+176
+00:12:49,360 --> 00:12:54,850
+But the actual process is really similar to what we saw before we take our data in we clean it we split
+
+177
+00:12:54,850 --> 00:12:56,320
+it into those three sets.
+
+178
+00:12:56,320 --> 00:13:01,940
+We train our model on the training data and then we test our model against the test data and the base
+
+179
+00:13:01,940 --> 00:13:07,660
+of those results we can adjust the model parameters test again etc. go through that little loop and
+
+180
+00:13:07,660 --> 00:13:12,070
+then once we're ready to deploy our model we have our holdout data set.
+
+181
+00:13:12,070 --> 00:13:18,370
+Now the purpose of the hold out data set is to try to get some sort of final metric or idea of how well
+
+182
+00:13:18,370 --> 00:13:19,930
+your model is going to perform.
+
+183
+00:13:20,020 --> 00:13:28,330
+The pond deployment you can think of it as not trying to cheat again with the test data because technically
+
+184
+00:13:28,360 --> 00:13:31,950
+we've also been adjusting model parameters against the test data.
+
+185
+00:13:31,990 --> 00:13:37,750
+We still don't have a true sense of how well the model performs against data that it's truly never seen
+
+186
+00:13:37,750 --> 00:13:40,420
+before and truly never been adjusted for.
+
+187
+00:13:40,540 --> 00:13:42,870
+And that's what we have that hold that data set.
+
+188
+00:13:42,880 --> 00:13:48,400
+Now the main idea here is that once you evaluate your model against the whole dataset you're not really
+
+189
+00:13:48,400 --> 00:13:51,100
+allowed to go back and adjust the model parameters.
+
+190
+00:13:51,100 --> 00:13:56,410
+The purpose of that holdout dataset is to get some sort of final report some sort of final metric to
+
+191
+00:13:56,470 --> 00:14:00,940
+let you know hey when we deploy this to the real world this is the sort of metrics that we're going
+
+192
+00:14:00,940 --> 00:14:07,090
+to expect because the model has truly never seen this data before and it's never had the parameters
+
+193
+00:14:07,150 --> 00:14:08,710
+adjusted for that data.
+
+194
+00:14:08,740 --> 00:14:15,670
+So that's the purpose of that whole that data set so we've been discussing a lot about model evaluation.
+
+195
+00:14:15,670 --> 00:14:21,070
+That last step has a lot to do with evaluating it against either the test data or the evaluation data
+
+196
+00:14:21,070 --> 00:14:22,140
+that hold out data.
+
+197
+00:14:22,330 --> 00:14:29,720
+So let's quickly dive into more details for certain problems later on in the course so supervised learning
+
+198
+00:14:29,930 --> 00:14:36,110
+for classification evaluation metrics you have things such as accuracy recall and precision and which
+
+199
+00:14:36,110 --> 00:14:39,400
+metric is the most important really depends on the specific situation.
+
+200
+00:14:39,530 --> 00:14:43,730
+But a lot of times in this course we're just going to be using accuracy because it's the easiest to
+
+201
+00:14:43,730 --> 00:14:44,360
+understand.
+
+202
+00:14:44,370 --> 00:14:50,540
+Basically all accuracy is is the number of correctly classified samples divided by the total number
+
+203
+00:14:50,540 --> 00:14:52,820
+of samples given to the actual model.
+
+204
+00:14:52,820 --> 00:14:58,230
+So again pretty straightforward for regression evaluation tests.
+
+205
+00:14:58,240 --> 00:15:00,420
+Again that falls under supervised learning.
+
+206
+00:15:00,420 --> 00:15:05,680
+There is lots of evaluation metrics things like mean UPS error mean squared error root mean squared
+
+207
+00:15:05,680 --> 00:15:06,260
+error.
+
+208
+00:15:06,580 --> 00:15:12,700
+Essentially all these are just measurements of on average how far off are you in your prediction from
+
+209
+00:15:12,700 --> 00:15:14,560
+the correct continuous value.
+
+210
+00:15:14,650 --> 00:15:20,740
+So mean absolute error means square root mean squared error to some manner or degree.
+
+211
+00:15:20,830 --> 00:15:26,650
+They're all trying to say the same thing on average your model predicts about this far off numerically.
+
+212
+00:15:26,650 --> 00:15:33,540
+So we'll be using these metrics when we do regression tests for unsupervised learning as far as evaluating
+
+213
+00:15:33,540 --> 00:15:36,070
+that model that becomes actually much harder to evaluate.
+
+214
+00:15:36,210 --> 00:15:39,150
+And it really depends on the overall goal of the task.
+
+215
+00:15:39,150 --> 00:15:44,160
+Again remember for unsupervised learning you never really had the correct labels to compare it to.
+
+216
+00:15:44,190 --> 00:15:50,280
+However you can use things like cluster homogeneity or something called the Ranh index to evaluate your
+
+217
+00:15:50,310 --> 00:15:55,530
+unsupervised learning model and we'll discuss those later on in the auto encoders section of the course.
+
+218
+00:15:56,960 --> 00:16:01,640
+Now remember for unsupervised learning even if you have good metrics your model may not have performed
+
+219
+00:16:01,670 --> 00:16:07,970
+well and you can see here especially kind of on that second row from the top that for humanised it's
+
+220
+00:16:07,970 --> 00:16:14,840
+really easy to see look correct clusters should be for those kind of moon shapes but depending on your
+
+221
+00:16:14,900 --> 00:16:20,720
+evaluation metrics you may get bad splits or bad clustering on your data where the metrics turn out
+
+222
+00:16:20,720 --> 00:16:24,140
+really well but the actual groupings don't look correct.
+
+223
+00:16:24,140 --> 00:16:30,020
+So again unsupervised learning clustering is just a really hard problem and evaluating it is also a
+
+224
+00:16:30,020 --> 00:16:30,810
+really hard problem.
+
+225
+00:16:30,810 --> 00:16:35,120
+So kind of keep that in mind as you encounter those problems in your own work.
+
+226
+00:16:36,630 --> 00:16:42,450
+Now for reinforcement learning evaluation is usually a lot more obvious since that evaluation or reward
+
+227
+00:16:42,480 --> 00:16:45,590
+metric is actually built into the actual training of the model.
+
+228
+00:16:45,630 --> 00:16:49,500
+So it's typically just how well the model performs against the task it's assigned.
+
+229
+00:16:49,500 --> 00:16:54,990
+So that particular score in the video game etc. and again we'll discuss this a lot more when we actually
+
+230
+00:16:54,990 --> 00:16:58,920
+show you how to perform reinforcement learning OK.
+
+231
+00:16:59,010 --> 00:17:03,690
+As a quick review we discussed machine learning the types of machine learning the general machine learning
+
+232
+00:17:03,690 --> 00:17:08,310
+process just the basic overview and basic overview of evaluation metrics.
+
+233
+00:17:08,340 --> 00:17:13,860
+Hopefully that gives you a nice little foundation to work off as we continue the rest of the course.
+
+234
+00:17:13,860 --> 00:17:15,450
+Thanks and I'll see you at the next lecture.
+

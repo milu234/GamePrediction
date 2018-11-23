@@ -1,0 +1,1092 @@
+1
+00:00:05,720 --> 00:00:07,010
+Welcome everyone.
+
+2
+00:00:07,010 --> 00:00:10,630
+Now it's time to actually create the recurrent neural network with tensor flow.
+
+3
+00:00:10,640 --> 00:00:13,400
+I'll start off with a couple of imports.
+
+4
+00:00:13,400 --> 00:00:22,040
+Will first important up-I as N.P. then will import sensor flow as T.F. then import that plot lib pipe
+
+5
+00:00:22,040 --> 00:00:30,820
+plot as PBT pipe plot and then some using Joop or notebook will say at play live in line.
+
+6
+00:00:31,270 --> 00:00:37,450
+OK now the next step is to actually create a class that will to both initialize the data and also send
+
+7
+00:00:37,480 --> 00:00:39,090
+batches of the data back.
+
+8
+00:00:39,130 --> 00:00:44,170
+Right now the next step is to create a class and this class is going to both be able to create the data
+
+9
+00:00:44,500 --> 00:00:46,910
+and generate batches to send back.
+
+10
+00:00:47,140 --> 00:00:47,920
+So will do the following.
+
+11
+00:00:47,920 --> 00:00:57,060
+Will say class time series data and this is just a normal class and it's going to have an in it method
+
+12
+00:00:57,660 --> 00:01:03,420
+which takes itself and we're going to start it off with the number of points we want to create and then
+
+13
+00:01:03,420 --> 00:01:10,180
+it's going to have an x min and an X max so let's go ahead and create a couple of attributes here.
+
+14
+00:01:10,910 --> 00:01:16,490
+Please say X-Men is equal to the X-Men provided same for X max
+
+15
+00:01:20,640 --> 00:01:29,250
+then all we're gonna do is the same thing for the number of points number of points and then we're also
+
+16
+00:01:29,250 --> 00:01:34,620
+going to define an attribute called resolution which is just how fine of a resolution are we actually
+
+17
+00:01:34,620 --> 00:01:41,340
+creating and we can easily calculate that by either the self-taught X Max or the actual x Maxxis provided.
+
+18
+00:01:41,520 --> 00:01:49,890
+So to kind of save some typing we'll just say X Max minus X-Men divided by the number of points then
+
+19
+00:01:49,920 --> 00:02:00,960
+will create X data and x data is going to be linearly spaced points using pi from x men to X Max and
+
+20
+00:02:00,960 --> 00:02:05,390
+we want the number of points provided and then we'll say self-taught.
+
+21
+00:02:05,560 --> 00:02:14,240
+Why true is equal to the sign self-taught ex-state of.
+
+22
+00:02:14,310 --> 00:02:15,950
+OK so do we actually have here.
+
+23
+00:02:16,020 --> 00:02:22,890
+Well so far we have this time series class that takes in the number of points wanted and the x men and
+
+24
+00:02:22,890 --> 00:02:27,930
+X max and it ends up doing is it creates a bunch of attributes to store some information.
+
+25
+00:02:27,930 --> 00:02:30,010
+First off those three provided them also.
+
+26
+00:02:30,150 --> 00:02:32,780
+The resolution then the x data.
+
+27
+00:02:32,780 --> 00:02:35,520
+So that's a number of linearly spaced points from X-Men.
+
+28
+00:02:35,520 --> 00:02:41,970
+Tx max and then also white true or white True's just defined as passing in this x data through the number
+
+29
+00:02:42,060 --> 00:02:51,190
+pi sine function that I'm also going to add in a convenience method called ret.
+
+30
+00:02:51,220 --> 00:03:01,300
+True for return true and this takes in any series of x values and it's going to return and sign X series
+
+31
+00:03:01,390 --> 00:03:04,930
+and that's going to be useful for comparing data that we don't have.
+
+32
+00:03:04,930 --> 00:03:11,950
+So for example if I wanted to know what the true value of any sign of the number 3 was I could then
+
+33
+00:03:11,950 --> 00:03:18,190
+call this method return true and it will return back and the sign of whatever series I happened to pass
+
+34
+00:03:18,190 --> 00:03:18,560
+in.
+
+35
+00:03:18,730 --> 00:03:20,330
+So this is more of just convenience.
+
+36
+00:03:21,200 --> 00:03:26,610
+Well right now the next method we need to create is going to be actually to generate batches of the
+
+37
+00:03:26,660 --> 00:03:28,740
+data.
+
+38
+00:03:28,860 --> 00:03:35,540
+So I'll say the next batch is going to be taking in self and then it's also going to take in the batch
+
+39
+00:03:35,540 --> 00:03:42,500
+size wanted and then the number of steps and I'm also going to add in this parameter which will see
+
+40
+00:03:42,620 --> 00:03:43,830
+later what it's for.
+
+41
+00:03:44,050 --> 00:03:48,470
+But it's called The Return batched time series and I'm going to set it by default equal to false and
+
+42
+00:03:48,470 --> 00:03:50,520
+as I mentioned we'll see that later on.
+
+43
+00:03:50,540 --> 00:03:52,730
+So let me comment out the steps that we need to do.
+
+44
+00:03:52,730 --> 00:04:03,650
+First off we need to grab a random starting point for a well I should say for each batch of data once
+
+45
+00:04:03,650 --> 00:04:12,730
+I have that I need to convert to be on the actual time series then I'm going to create a batch time
+
+46
+00:04:12,730 --> 00:04:29,750
+series on the X-axis and then I will create the y data for the time series X axis from previous that
+
+47
+00:04:32,040 --> 00:04:37,530
+then I'm just going to be formatting it for the recurrent neural network.
+
+48
+00:04:37,950 --> 00:04:39,600
+OK so let's actually do all this.
+
+49
+00:04:39,600 --> 00:04:41,510
+So I want to grab a random starting point.
+
+50
+00:04:41,610 --> 00:04:50,280
+So I was going to say random start as equal to any random Rand and I get a pass in the batch size and
+
+51
+00:04:50,280 --> 00:04:54,330
+one sort of Moran is just random values in a given shape.
+
+52
+00:04:55,130 --> 00:04:57,430
+So we'll see later on how we're actually gonna work with that.
+
+53
+00:04:57,680 --> 00:05:02,210
+So I need to convert this to actually be on the time series because right now this is just some random
+
+54
+00:05:02,210 --> 00:05:02,770
+number.
+
+55
+00:05:02,870 --> 00:05:04,880
+I don't know whether or not it's on the time series.
+
+56
+00:05:05,090 --> 00:05:09,750
+So I'll create another value called Time series start.
+
+57
+00:05:10,400 --> 00:05:16,370
+And that's going to be equal to random star and I'm going to multiply that by the following.
+
+58
+00:05:16,370 --> 00:05:30,360
+We're going to multiply that by the x Max minus leps the X-Men minus the number of steps times soft
+
+59
+00:05:30,850 --> 00:05:32,960
+resolution.
+
+60
+00:05:33,080 --> 00:05:38,900
+And that's going to basically convert this random star to be somewhere on the actual time series that
+
+61
+00:05:38,900 --> 00:05:40,100
+we defined earlier.
+
+62
+00:05:40,280 --> 00:05:45,490
+Because notice here I'm just taking the maximum value then subtracting the minimum value.
+
+63
+00:05:45,620 --> 00:05:49,880
+So now I have my points that are actually on that time series and then I'm going to subtract the number
+
+64
+00:05:49,880 --> 00:05:52,460
+of steps multiplied by the resolution.
+
+65
+00:05:52,490 --> 00:05:56,370
+And that's going to convert this random star to be somewhere in that time series.
+
+66
+00:05:56,600 --> 00:05:59,920
+Then I need to create a batch time series on the X-axis.
+
+67
+00:05:59,930 --> 00:06:01,670
+So that's actually a lot easier.
+
+68
+00:06:02,070 --> 00:06:05,930
+I just say Bache time series.
+
+69
+00:06:06,070 --> 00:06:11,170
+And then what I'm going to do is say equal to that starting point we just created and then I'm going
+
+70
+00:06:11,170 --> 00:06:21,320
+to add and points to it we'll say arr. 0 0 2 the number of steps asked for and we'll say plus 1 and
+
+71
+00:06:21,320 --> 00:06:27,230
+then we're going to multiply that by self-taught resolution so that this has the same resolution as
+
+72
+00:06:27,760 --> 00:06:29,030
+the points here.
+
+73
+00:06:29,990 --> 00:06:32,240
+OK then I need to create y data for this.
+
+74
+00:06:32,240 --> 00:06:33,670
+So this is actually an easier
+
+75
+00:06:36,250 --> 00:06:39,390
+sign batch time series.
+
+76
+00:06:39,770 --> 00:06:40,000
+OK.
+
+77
+00:06:40,010 --> 00:06:42,080
+So let's quickly review what we just did.
+
+78
+00:06:42,080 --> 00:06:44,630
+First off we essentially create a random starting point.
+
+79
+00:06:44,750 --> 00:06:49,370
+However we don't know whether or not this random starting point is on the actual time series data because
+
+80
+00:06:49,370 --> 00:06:54,260
+the time series data was first the final in the initialize this with an X Men in X max and a number
+
+81
+00:06:54,260 --> 00:06:55,260
+of points.
+
+82
+00:06:55,280 --> 00:07:01,370
+So we then convert this random start to be on the time series and we do that by multiplying that random
+
+83
+00:07:01,370 --> 00:07:08,060
+start with the result of the maximum value minus the minimum value minus the number of steps times the
+
+84
+00:07:08,060 --> 00:07:08,790
+resolution.
+
+85
+00:07:08,840 --> 00:07:15,440
+And that gives you a starting point on the time series then we need to actually create the x axis batch
+
+86
+00:07:15,440 --> 00:07:17,510
+of time series information.
+
+87
+00:07:17,510 --> 00:07:24,280
+So that ends up being that starting point we just decided plus 0 up 2 steps plus 1.
+
+88
+00:07:24,280 --> 00:07:28,530
+I remember steps is defined right here and then we multiply that by the resolution.
+
+89
+00:07:28,550 --> 00:07:35,420
+So it's going to be basically this resolution times this arrangement and then we have t start plus these
+
+90
+00:07:35,420 --> 00:07:39,380
+points and that's our Bachche time series then to convert that to y data.
+
+91
+00:07:39,380 --> 00:07:44,630
+It's actually quite easy it's just taking the sign of it so that it matches up with our actual function.
+
+92
+00:07:44,630 --> 00:07:50,170
+Now for formatting for the recurrent neural network it is a little trickier for you to say the following.
+
+93
+00:07:50,440 --> 00:07:58,210
+I'll say if return Bache TS going to return something.
+
+94
+00:07:58,230 --> 00:08:01,590
+I was going to comment that out right now because we'll get to that in just a second.
+
+95
+00:08:01,590 --> 00:08:05,880
+Else I'm going to return and this is what I'm going to do.
+
+96
+00:08:05,910 --> 00:08:09,150
+I'm going to return why batch
+
+97
+00:08:13,230 --> 00:08:21,060
+everything along the rows and then along the columns everything up to minus one here and then I'm going
+
+98
+00:08:21,060 --> 00:08:27,460
+to reshape this to be negative 1 steps 1.
+
+99
+00:08:27,560 --> 00:08:31,890
+So that's going to be the first item in this tuple that I return back and then I'm going to have y batch
+
+100
+00:08:33,970 --> 00:08:40,750
+everything along the rows and then one colon that are going to say reshape them is going to be negative
+
+101
+00:08:40,750 --> 00:08:44,530
+one staps one.
+
+102
+00:08:44,570 --> 00:08:46,080
+Let me zoom out real quick.
+
+103
+00:08:46,160 --> 00:08:52,250
+So recall that formatting or data was really important when we were working with the manual or creation
+
+104
+00:08:52,250 --> 00:08:53,650
+of a recurrent neural network.
+
+105
+00:08:53,780 --> 00:08:56,780
+And that's essentially what this reshape is doing here.
+
+106
+00:08:57,050 --> 00:08:58,180
+And that is the batches here.
+
+107
+00:08:58,220 --> 00:09:04,310
+So we have one batch that's going to represent the time series and this batch which represents the time
+
+108
+00:09:04,310 --> 00:09:07,710
+series shifted over by one step into the future.
+
+109
+00:09:07,760 --> 00:09:10,100
+That way we can then train on this data.
+
+110
+00:09:10,190 --> 00:09:17,290
+So I'm going to then copy this and I will return the same thing here except then I'll have a third item
+
+111
+00:09:18,540 --> 00:09:20,470
+which is called Bache underscore.
+
+112
+00:09:20,970 --> 00:09:26,940
+So that's if I actually also want the x axis information which is what this essential boolean value
+
+113
+00:09:26,940 --> 00:09:27,810
+is for.
+
+114
+00:09:28,250 --> 00:09:28,770
+OK.
+
+115
+00:09:28,950 --> 00:09:33,840
+So let's go ahead and quickly review what we did and then we're going to plot this out just so we can
+
+116
+00:09:33,840 --> 00:09:35,640
+visualize what we actually did.
+
+117
+00:09:35,640 --> 00:09:39,990
+But basically I had this class called time series data and when you call it you're going to provide
+
+118
+00:09:39,990 --> 00:09:45,990
+it the number of points you want and the X minimum value you want them on and the X max of all you want
+
+119
+00:09:45,990 --> 00:09:46,320
+them on.
+
+120
+00:09:46,320 --> 00:09:50,960
+So it's good to return let's say 50 points between 0 and 1 it's going to set up all its attributes.
+
+121
+00:09:50,970 --> 00:09:56,100
+Calculate the resolution of what you just asked for and then create the X data and then create the true
+
+122
+00:09:56,100 --> 00:10:01,390
+data which in our case we're just using the sine function as our white true.
+
+123
+00:10:01,520 --> 00:10:07,260
+Then we have a convenience method here that for any x series it returns the sign of it.
+
+124
+00:10:07,560 --> 00:10:09,150
+Then we have our next batch method.
+
+125
+00:10:09,260 --> 00:10:13,870
+This one is a little more complicated but when you break it down into steps it's not so bad.
+
+126
+00:10:13,910 --> 00:10:15,890
+We create some random starting point.
+
+127
+00:10:15,920 --> 00:10:18,810
+We need to make sure that random starting point is on the time series.
+
+128
+00:10:18,830 --> 00:10:23,390
+So we did this conversion using the X Max X-Men and resolution values.
+
+129
+00:10:23,390 --> 00:10:29,390
+Then once we have that time series starting point we're going to add on the number of steps asked four
+
+130
+00:10:29,540 --> 00:10:36,140
+times the resolution so that now has that information so that that's time series then we're going to
+
+131
+00:10:36,140 --> 00:10:42,640
+create the y values associated with that batch TS which is just passing batched TS into sign here.
+
+132
+00:10:42,980 --> 00:10:52,490
+Then I have two options if I want to return the Y batch information along with the actual x axis values
+
+133
+00:10:52,490 --> 00:10:55,610
+that it belongs to are axis values depending on you think about it.
+
+134
+00:10:55,820 --> 00:11:02,970
+Then I have the time series the time series shifted over by one step and then batched yes.
+
+135
+00:11:03,260 --> 00:11:07,280
+Otherwise if I just want these two batches then I just return these two tuples.
+
+136
+00:11:07,280 --> 00:11:13,800
+So again basically here we have this time series and then this time series shifted over by one timestep.
+
+137
+00:11:14,190 --> 00:11:19,730
+OK so now that we have that let's go ahead and create some data so we can actually visualize what's
+
+138
+00:11:19,730 --> 00:11:21,430
+happening here.
+
+139
+00:11:21,470 --> 00:11:25,830
+So we'll say TSA data is equal to time series data.
+
+140
+00:11:26,060 --> 00:11:30,530
+And let's say I want 250 points between 0 and 10.
+
+141
+00:11:30,530 --> 00:11:39,460
+So then I'm going to say Piazzi plots plot this time series data and out of this time series data object.
+
+142
+00:11:39,470 --> 00:11:42,400
+If I hit tab here notice I have all these nice attributes.
+
+143
+00:11:42,530 --> 00:11:48,630
+So I'm going to plot the X data versus Y true.
+
+144
+00:11:48,940 --> 00:11:49,640
+And there we have it.
+
+145
+00:11:49,690 --> 00:11:53,550
+We have our X data versus Y true which is just sign of x.
+
+146
+00:11:53,680 --> 00:11:57,430
+So that's all we did so far by creating this time series data.
+
+147
+00:11:57,430 --> 00:12:02,530
+So let's say I want each of my random batches to have 30 steps in it.
+
+148
+00:12:02,590 --> 00:12:07,280
+So I'll say a number of times that is equal to 30.
+
+149
+00:12:07,300 --> 00:12:08,960
+So a number of steps in batch.
+
+150
+00:12:08,980 --> 00:12:13,220
+And we're also going to use this for prediction steps into the future later on.
+
+151
+00:12:13,240 --> 00:12:25,210
+So I'm going to say why one white two Ts is equal to ts data and then called the next batch.
+
+152
+00:12:25,390 --> 00:12:27,370
+And I want if we come up here.
+
+153
+00:12:27,500 --> 00:12:28,350
+What we're going to do.
+
+154
+00:12:28,580 --> 00:12:31,660
+I'm going to ask for just batch size to be one.
+
+155
+00:12:31,880 --> 00:12:36,620
+And then I'm also going to ask for steps to be equal to the number of times that we're here.
+
+156
+00:12:36,620 --> 00:12:37,940
+So I want 30 steps.
+
+157
+00:12:37,970 --> 00:12:43,160
+I just want one batch and then I'm also going to ask for the Bache time series.
+
+158
+00:12:43,190 --> 00:12:45,610
+Basically that X data for our plot.
+
+159
+00:12:45,960 --> 00:12:52,470
+So going to say give me one batch of 30 samples and true.
+
+160
+00:12:52,500 --> 00:12:57,700
+I do want this time series data that way I can plot it later on since we're not going to use it.
+
+161
+00:12:57,810 --> 00:13:05,160
+We're going to have the option to just not pass in that parameter that I'm going to say VLT plot.
+
+162
+00:13:05,630 --> 00:13:08,780
+And well let's look at time series right now if we look at ts.
+
+163
+00:13:08,890 --> 00:13:12,230
+It's in this array right here where it's a nested array.
+
+164
+00:13:12,220 --> 00:13:15,820
+So if you take a look at the shape it's one by 31.
+
+165
+00:13:15,910 --> 00:13:18,330
+So I need to flatten this in order to actually plot it.
+
+166
+00:13:18,370 --> 00:13:24,990
+So if I flatten it out now I get this as a single one D-Rays if I take a look at the shape.
+
+167
+00:13:24,990 --> 00:13:27,380
+Now it's just 31 points.
+
+168
+00:13:27,390 --> 00:13:29,000
+So that's what map plot live needs.
+
+169
+00:13:29,250 --> 00:13:30,740
+So we're going to be using that.
+
+170
+00:13:30,870 --> 00:13:38,850
+So I'll say Piazzi the plot and then I'm also going to get white too and white is the same deal and
+
+171
+00:13:38,970 --> 00:13:44,940
+to flatten it and then I want an asterix here to be the actual points.
+
+172
+00:13:44,940 --> 00:13:47,430
+Now I'm going to get an error here if I just run this.
+
+173
+00:13:47,610 --> 00:13:51,210
+And the reason is because hey it's going to say Did I mention don't match up.
+
+174
+00:13:51,240 --> 00:13:53,000
+So it says one of these is 31.
+
+175
+00:13:53,040 --> 00:13:58,160
+And one of these is 30 and that makes sense because remember why one in y2 here.
+
+176
+00:13:58,200 --> 00:14:02,590
+As far as these training batches are concerned they're shifted over one step from each other so they're
+
+177
+00:14:02,600 --> 00:14:07,890
+each missing a whole step from the 31 possible points.
+
+178
+00:14:07,890 --> 00:14:14,780
+So what we're going to do then is for it to yes we're just going to say indexing starting from 1 all
+
+179
+00:14:14,780 --> 00:14:19,450
+the way to the end and then when we plot it we see we have these points right here.
+
+180
+00:14:19,610 --> 00:14:24,120
+Now because this is randomly chosen You're not going to get the same points I do.
+
+181
+00:14:24,290 --> 00:14:26,940
+So if I run this again so ask for another batch.
+
+182
+00:14:27,050 --> 00:14:29,990
+You'll notice I get a different part of that sinusoidal wave.
+
+183
+00:14:30,230 --> 00:14:34,820
+So keep that in mind every time you run this you're going to be getting different parts of the sign
+
+184
+00:14:34,940 --> 00:14:36,010
+as your batch.
+
+185
+00:14:36,020 --> 00:14:38,790
+If you're getting the same part every time then something is wrong.
+
+186
+00:14:38,850 --> 00:14:41,210
+You're not actually choosing random values here.
+
+187
+00:14:41,210 --> 00:14:43,150
+So that's a good indicator of something's wrong.
+
+188
+00:14:43,160 --> 00:14:48,010
+If you keep running these cells you should be constantly getting different segments of the sinewave.
+
+189
+00:14:48,260 --> 00:14:50,170
+OK so now let's play this out.
+
+190
+00:14:50,210 --> 00:15:03,960
+On top of our original sinewave so I'll say Piazzi plots TS data X data versus TS data y true and we'll
+
+191
+00:15:03,960 --> 00:15:11,360
+say we'll get the label to be sign up to you OK.
+
+192
+00:15:11,550 --> 00:15:14,020
+So remember that's just this plot right here.
+
+193
+00:15:14,370 --> 00:15:19,820
+And if I say at the very end the legend that I end up seeing sign of T.
+
+194
+00:15:19,920 --> 00:15:23,190
+So now let's go ahead and plot these random points that we just made.
+
+195
+00:15:23,190 --> 00:15:24,570
+So that little batch.
+
+196
+00:15:24,690 --> 00:15:27,230
+So I'll say the following will say Piazzi plot.
+
+197
+00:15:27,780 --> 00:15:32,050
+And I'm going to take T.S. flatten that I can just copy this right here.
+
+198
+00:15:32,190 --> 00:15:42,190
+He is fighting to flatten and then the Strix So let's grab that and then we're going to say label is
+
+199
+00:15:42,190 --> 00:15:47,080
+equal to single training instance
+
+200
+00:15:50,260 --> 00:15:53,100
+run that and you can see here there's a single training instance.
+
+201
+00:15:53,140 --> 00:15:59,520
+And if this legend is kind of blocking your view you can use a little peel tea.
+
+202
+00:16:00,010 --> 00:16:06,930
+Well at the very end of the cell you can use Piazzi Titely run that and that shift shifted over and
+
+203
+00:16:06,930 --> 00:16:08,550
+nothing's blocking anymore.
+
+204
+00:16:08,560 --> 00:16:08,880
+All right.
+
+205
+00:16:08,890 --> 00:16:12,480
+So if you were to keep running this you should constantly be getting new points.
+
+206
+00:16:12,480 --> 00:16:14,060
+So now look where this curve is.
+
+207
+00:16:14,080 --> 00:16:16,590
+So if I run this again I now see I grabbed.
+
+208
+00:16:16,630 --> 00:16:17,880
+This is my batch.
+
+209
+00:16:17,890 --> 00:16:23,170
+So what we're going to be doing is randomly grabbing two batches and they're shifted over from one another
+
+210
+00:16:23,500 --> 00:16:29,030
+which is why when we came back up here we ended up saying steps plus one here.
+
+211
+00:16:29,080 --> 00:16:34,170
+So that way when I asked for 31 each of these batches has 30 themselves.
+
+212
+00:16:34,170 --> 00:16:34,640
+OK.
+
+213
+00:16:34,870 --> 00:16:37,080
+So that's it for the data.
+
+214
+00:16:37,200 --> 00:16:41,740
+Well we're now going to show you is the training instance and what we're actually trying to predict.
+
+215
+00:16:41,740 --> 00:16:46,510
+So remember we are trying to predict a time series shifted over by one timestep.
+
+216
+00:16:46,510 --> 00:16:49,180
+So let me visualize that real quick.
+
+217
+00:16:49,390 --> 00:16:52,840
+So we're going to say training data.
+
+218
+00:16:52,960 --> 00:16:55,380
+What this actually looks like.
+
+219
+00:16:55,480 --> 00:17:07,940
+So let me create a training instance will say and PLN space five to well say five plus Test Data resolution
+
+220
+00:17:09,590 --> 00:17:10,790
+and we'll have this be.
+
+221
+00:17:10,850 --> 00:17:16,070
+Well have this resolution be multiplied by the number of times that's wanted plus 1.
+
+222
+00:17:16,850 --> 00:17:22,420
+And then the second parameter here in space is going to be the number of times that's a number of times
+
+223
+00:17:22,420 --> 00:17:25,470
+that's plus 1.
+
+224
+00:17:25,750 --> 00:17:27,880
+So what does this training instance actually look like.
+
+225
+00:17:27,880 --> 00:17:30,460
+It's just a bunch of values here.
+
+226
+00:17:30,470 --> 00:17:35,840
+So then what we're going to do is say PLCC and we'll say title
+
+227
+00:17:38,880 --> 00:17:40,170
+training instance.
+
+228
+00:17:40,170 --> 00:17:44,450
+So this is the actual data we're going to be feeding in our model and we're training it and I'm going
+
+229
+00:17:44,450 --> 00:17:54,380
+to plot out the training instance called negative 1 and then test data.
+
+230
+00:17:54,450 --> 00:17:57,480
+I'm going to ask to return the true values.
+
+231
+00:17:57,570 --> 00:18:00,030
+So that's why we have that convenience method there.
+
+232
+00:18:00,570 --> 00:18:05,380
+Train instance colon negative 1.
+
+233
+00:18:05,510 --> 00:18:11,230
+And then what we're going to say here is we'll have these b b zero or B.
+
+234
+00:18:11,240 --> 00:18:12,260
+Oh excuse me.
+
+235
+00:18:12,350 --> 00:18:17,030
+So it's going to be a little black thoughts and we're going to say marker size.
+
+236
+00:18:17,030 --> 00:18:19,280
+This is just for visualization purposes now.
+
+237
+00:18:19,460 --> 00:18:29,980
+Make these marks eyes 15 and the alpha is going to be 0.5 and let's give this a label of instance.
+
+238
+00:18:30,120 --> 00:18:33,290
+OK so that's our training instances go ahead and plot it out.
+
+239
+00:18:34,220 --> 00:18:34,580
+OK.
+
+240
+00:18:34,650 --> 00:18:37,830
+So that's actually blue not black Sorry black is OK.
+
+241
+00:18:38,000 --> 00:18:39,440
+So here's our training instance.
+
+242
+00:18:39,440 --> 00:18:46,520
+So we just created a training instance so again we just linearly spaced from five to five plus the data
+
+243
+00:18:46,520 --> 00:18:47,300
+resolution here.
+
+244
+00:18:47,300 --> 00:18:52,700
+So 5 up to 6.2 So 30 times steps forward from five.
+
+245
+00:18:52,850 --> 00:18:56,760
+Then we have Kilty training instance and we're plotting out this training instance.
+
+246
+00:18:56,760 --> 00:18:57,380
+All right.
+
+247
+00:18:57,560 --> 00:19:03,380
+So then we're going to want to predict one time step ahead of this so we're going to predict an entire
+
+248
+00:19:03,380 --> 00:19:05,270
+series shifted over by one step.
+
+249
+00:19:05,450 --> 00:19:09,780
+So I'm going to essentially mimic that by doing the following.
+
+250
+00:19:09,800 --> 00:19:21,440
+We'll say train instance one colon now and then we'll say TSA data return true of train instance one
+
+251
+00:19:21,440 --> 00:19:30,460
+colon and then very similar thing here will say oh for a black thought will make this market size a
+
+252
+00:19:30,460 --> 00:19:31,570
+little smaller.
+
+253
+00:19:31,570 --> 00:19:33,080
+You can change the colors if you want.
+
+254
+00:19:33,550 --> 00:19:37,960
+And those say labels equal to target.
+
+255
+00:19:38,350 --> 00:19:40,820
+OK so what is actually happening here.
+
+256
+00:19:40,870 --> 00:19:43,620
+Let me pass in the legend so we can see it.
+
+257
+00:19:45,050 --> 00:19:45,940
+Kilty Legin.
+
+258
+00:19:46,130 --> 00:19:48,580
+So I have my instance and I have my target.
+
+259
+00:19:48,830 --> 00:19:53,780
+So the blue is what is going to be the training here.
+
+260
+00:19:53,990 --> 00:19:56,260
+And then the black is the actual target.
+
+261
+00:19:56,270 --> 00:20:02,750
+So essentially the model is asked given these blue points can you generate these black points and you
+
+262
+00:20:02,750 --> 00:20:09,560
+should imagine that it's relatively easy to generate the points that should be exactly the same as the
+
+263
+00:20:09,560 --> 00:20:10,780
+points that you were fed.
+
+264
+00:20:10,790 --> 00:20:16,130
+The harder one is this point right here because technically you weren't given any data at that particular
+
+265
+00:20:16,150 --> 00:20:16,790
+x.
+
+266
+00:20:16,790 --> 00:20:23,330
+Now as you train the model you'll see that later on is actually not super simple to get the points that
+
+267
+00:20:23,330 --> 00:20:28,220
+you were actually given technically the correct answer to because of the way the recurrent neurons actually
+
+268
+00:20:28,220 --> 00:20:34,490
+work but this is the general idea given these blue points as a series can you generate these black points
+
+269
+00:20:34,490 --> 00:20:35,140
+in the series.
+
+270
+00:20:35,180 --> 00:20:39,510
+So shifted over one time step and that is the whole purpose of our model.
+
+271
+00:20:39,530 --> 00:20:43,970
+So coming up in the next lecture we're going to end up creating their model and running some more current
+
+272
+00:20:43,970 --> 00:20:46,910
+neural networks and then running the session.
+
+273
+00:20:47,190 --> 00:20:49,280
+Okay thanks everyone and I'll see you at the next lecture.
+

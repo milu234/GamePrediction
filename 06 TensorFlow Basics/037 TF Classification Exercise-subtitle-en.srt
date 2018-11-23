@@ -1,0 +1,296 @@
+1
+00:00:05,320 --> 00:00:10,540
+Hello everyone and welcome to the tensor flow classification exercise and this lecture will have an
+
+2
+00:00:10,600 --> 00:00:13,810
+overview of the exercise notebook and what you need to do.
+
+3
+00:00:13,930 --> 00:00:17,820
+And then in the next lecture we'll have a CO-2 long walk through these solutions.
+
+4
+00:00:17,830 --> 00:00:23,560
+Let's hop over to the Jupiter notebook and explain the tasks here and at the classification exercise
+
+5
+00:00:23,680 --> 00:00:24,400
+Notebook.
+
+6
+00:00:24,400 --> 00:00:29,020
+We're going to be working on some California's census data and we'll be trying to use the various features
+
+7
+00:00:29,080 --> 00:00:32,540
+of an individual to predict what class income they belong in.
+
+8
+00:00:32,710 --> 00:00:38,620
+So as a classification task we'll try to predict that they make less than $50000 a year or more than
+
+9
+00:00:38,620 --> 00:00:39,880
+$50000 a year.
+
+10
+00:00:39,880 --> 00:00:43,940
+So basically two classes there less than or greater than 50000.
+
+11
+00:00:44,230 --> 00:00:49,280
+So we have various features of these individuals things like their age their educational level.
+
+12
+00:00:49,300 --> 00:00:53,050
+Now whether or not they're married how many hours per week they work etc..
+
+13
+00:00:53,050 --> 00:00:53,970
+Country of origin.
+
+14
+00:00:54,010 --> 00:00:56,080
+And a lot of these young voters are categorical.
+
+15
+00:00:56,170 --> 00:00:58,540
+And we also have continuous features here.
+
+16
+00:00:58,540 --> 00:01:05,860
+So we're going to be needing to use those numeric column and categorical column attributes of the feature
+
+17
+00:01:05,860 --> 00:01:08,870
+column that tensor S-meter API gives you.
+
+18
+00:01:08,890 --> 00:01:12,170
+So basically we have to do just follow the directions in bold if you ever get stuck.
+
+19
+00:01:12,250 --> 00:01:16,960
+You can go ahead and jump to the next lecture where we go through the solutions and if just going through
+
+20
+00:01:16,960 --> 00:01:21,790
+a code long lectures more your style you can just go ahead and skip this exercise go to the next lecture
+
+21
+00:01:22,030 --> 00:01:24,000
+and come along with me.
+
+22
+00:01:24,030 --> 00:01:26,950
+So the very first thing we do is read in the data of pandas.
+
+23
+00:01:26,970 --> 00:01:32,280
+You can check it out and you'll have to note that tensor flow won't be able to understand the actual
+
+24
+00:01:32,280 --> 00:01:33,060
+labels here.
+
+25
+00:01:33,060 --> 00:01:37,600
+So we're trying to predict income bracket column but it's actually listed as strings.
+
+26
+00:01:37,620 --> 00:01:42,030
+So what you need to do is convert this label column to zeros and ones instead of strings.
+
+27
+00:01:42,210 --> 00:01:46,650
+If your not super familiar of how to do that with Pandurs you can kind of just skip this part and take
+
+28
+00:01:46,650 --> 00:01:48,090
+a peek at the solutions.
+
+29
+00:01:48,090 --> 00:01:52,470
+But something to note here is that one of these labels are both of these labels actually have a little
+
+30
+00:01:52,470 --> 00:01:55,110
+space for the string code.
+
+31
+00:01:55,110 --> 00:01:58,230
+So here I am highlighting the space so that should help you out.
+
+32
+00:01:58,440 --> 00:01:59,980
+OK so it's just a little hint.
+
+33
+00:02:00,010 --> 00:02:03,910
+Again you may want to use Pancho's apply Google that SEO works.
+
+34
+00:02:03,990 --> 00:02:07,290
+Then once you've done that perform a train test split on the data.
+
+35
+00:02:07,290 --> 00:02:12,390
+Once you've done that create the feature columns for the estimator so taken of categorical columns versus
+
+36
+00:02:12,390 --> 00:02:13,830
+continuous values.
+
+37
+00:02:13,830 --> 00:02:19,410
+Remember that for categorical columns you can use either a vocabulary list or a Hash bucket.
+
+38
+00:02:19,440 --> 00:02:24,630
+I would definitely recommend using hash buckets because it's unlikely for you to know all the unique
+
+39
+00:02:24,630 --> 00:02:27,030
+values in a vocab list using a hash bucket.
+
+40
+00:02:27,060 --> 00:02:33,210
+Much easier than I want you to put all these variables into a single list with the variable name C underscore
+
+41
+00:02:33,210 --> 00:02:34,800
+calls for feature columns.
+
+42
+00:02:34,890 --> 00:02:39,060
+Then the next thing you need to do is create an input function so the batch size is up to you.
+
+43
+00:02:39,060 --> 00:02:44,330
+I use the batch size of 100 but make sure you do shuffle in this input function for training.
+
+44
+00:02:44,580 --> 00:02:46,370
+Then you create your model T.F. estimator.
+
+45
+00:02:46,440 --> 00:02:49,260
+Go ahead and create a linear classifier if you want.
+
+46
+00:02:49,260 --> 00:02:54,690
+You can use a densely connected neural network classifier that remember from the lectures for the categorical
+
+47
+00:02:54,690 --> 00:02:57,460
+features you need to create those embedded columns.
+
+48
+00:02:57,490 --> 00:03:02,400
+So since that's a little bit more work we'll go ahead and just use a linear classifier for this particular
+
+49
+00:03:02,400 --> 00:03:06,990
+problem then you're going to train your model try to train it on at least 5000 steps.
+
+50
+00:03:06,990 --> 00:03:11,280
+Again depending on your computer's speed you can lower the amount of steps there but your results won't
+
+51
+00:03:11,280 --> 00:03:12,740
+be as good.
+
+52
+00:03:12,840 --> 00:03:15,360
+Then continue scrolling down once you've trained the model.
+
+53
+00:03:15,390 --> 00:03:16,670
+It's time for evaluation.
+
+54
+00:03:16,830 --> 00:03:19,430
+So I want you to create another input function for prediction.
+
+55
+00:03:19,440 --> 00:03:24,210
+But remember the prediction input function only needs to supply the X test data and you want to keep
+
+56
+00:03:24,210 --> 00:03:25,730
+shuffler equal to false.
+
+57
+00:03:25,880 --> 00:03:31,130
+Then use the model predict method passing your input function they'll produce a generator of predictions
+
+58
+00:03:31,140 --> 00:03:32,640
+just as we did in the lecture.
+
+59
+00:03:32,640 --> 00:03:37,050
+Then transform it into a list each item in your list is essentially going to be a dictionary looking
+
+60
+00:03:37,050 --> 00:03:37,830
+like that.
+
+61
+00:03:37,830 --> 00:03:41,400
+So if you want to do is grab these class IDs right here.
+
+62
+00:03:41,400 --> 00:03:44,650
+Those are the predictions of what class it belongs to.
+
+63
+00:03:44,730 --> 00:03:49,170
+Then once you have that list you can go ahead and import classification report from.
+
+64
+00:03:49,170 --> 00:03:53,720
+As he learned that metrics and go ahead and google this if you're unsure of how to use it.
+
+65
+00:03:53,730 --> 00:03:58,590
+But basically once you import this classification report all you have to do is provide the prediction
+
+66
+00:03:58,590 --> 00:04:00,790
+values of the labels something like this.
+
+67
+00:04:00,840 --> 00:04:05,370
+And the real White House values which we already did in the train to split above and you'll have this
+
+68
+00:04:05,370 --> 00:04:10,650
+nice little classification report telling me the precision the recall and the score values as well as
+
+69
+00:04:10,650 --> 00:04:15,650
+how many points it has and support for each of these classes 0 and 1.
+
+70
+00:04:15,990 --> 00:04:17,130
+Okay that's it.
+
+71
+00:04:17,130 --> 00:04:20,820
+If you have any questions feel free to post the Kewney forms but definitely check out the solutions
+
+72
+00:04:20,820 --> 00:04:21,420
+lecture.
+
+73
+00:04:21,480 --> 00:04:23,850
+We're going to code out and explain every step.
+
+74
+00:04:23,850 --> 00:04:25,300
+Thanks and I'll see at the next lecture.
+

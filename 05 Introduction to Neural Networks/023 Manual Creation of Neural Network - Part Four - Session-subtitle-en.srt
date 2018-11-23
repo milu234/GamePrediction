@@ -1,0 +1,520 @@
+1
+00:00:06,210 --> 00:00:11,700
+Welcome back everyone to this lecture on creating the session for our manual neural network.
+
+2
+00:00:12,530 --> 00:00:17,600
+Now that the graph has all the nodes in place what we need to do is make sure we execute all those node
+
+3
+00:00:17,630 --> 00:00:22,770
+operations including those variables and placeholders within the session in the correct order where
+
+4
+00:00:22,790 --> 00:00:27,080
+we're going to do is use a post order tree traversal to make sure we execute the nodes in that correct
+
+5
+00:00:27,110 --> 00:00:27,880
+order.
+
+6
+00:00:27,890 --> 00:00:32,210
+Now as far as the way the actual post order traversal works you don't really need to worry about those
+
+7
+00:00:32,210 --> 00:00:32,750
+details.
+
+8
+00:00:32,750 --> 00:00:36,890
+We'll never really encounter this again throughout the rest of the course so I'm just going to copy
+
+9
+00:00:36,890 --> 00:00:39,440
+and paste this function from the notes.
+
+10
+00:00:39,440 --> 00:00:43,030
+You can feel free to check out the Wikipedia page on tree traversal.
+
+11
+00:00:43,040 --> 00:00:47,000
+It has the full step by step outline of how Post order tree traversal works.
+
+12
+00:00:47,000 --> 00:00:49,640
+But for now we're just going to copy and paste that function.
+
+13
+00:00:49,760 --> 00:00:52,480
+Then we're gonna manually code out the session class.
+
+14
+00:00:52,520 --> 00:00:54,740
+Let's head to the notebook.
+
+15
+00:00:54,760 --> 00:00:55,100
+All right.
+
+16
+00:00:55,130 --> 00:01:00,760
+Back of the notebook here I'm just going to copy and paste from the notes provided the post order traversal
+
+17
+00:01:01,860 --> 00:01:06,090
+and basically what this does it's just that post order mixtures that we execute the computations in
+
+18
+00:01:06,090 --> 00:01:06,690
+the correct order.
+
+19
+00:01:06,690 --> 00:01:11,890
+So for instance we need to execute a times X first and then after that we can do X plus B.
+
+20
+00:01:12,120 --> 00:01:17,940
+So all this does is it kind of does this recursive function and and it ends up returning a list of all
+
+21
+00:01:17,940 --> 00:01:20,580
+those nodes in their correct order.
+
+22
+00:01:20,580 --> 00:01:23,130
+So it's going to run this again the details of this.
+
+23
+00:01:23,130 --> 00:01:25,800
+You really don't need to concern yourself with them.
+
+24
+00:01:25,800 --> 00:01:31,800
+Instead we're going to do is essentially treat this as something that takes in the operation and it
+
+25
+00:01:31,800 --> 00:01:34,890
+makes sure that they're all executed in the correct order.
+
+26
+00:01:34,920 --> 00:01:38,850
+So once we have that general there standing of what that function is doing we can create our session
+
+27
+00:01:38,850 --> 00:01:40,500
+class.
+
+28
+00:01:40,530 --> 00:01:48,570
+So let's go ahead and create a method in the session class called Run will say sulf operation and then
+
+29
+00:01:48,580 --> 00:01:54,420
+we're going to have a field dictionary which is the same terminology used in tensor flow.
+
+30
+00:01:54,490 --> 00:01:59,920
+So the operation itself is going to be the operation to compute and then the feed dictionary is a dictionary
+
+31
+00:01:59,950 --> 00:02:02,390
+mapping placeholders to input values.
+
+32
+00:02:02,440 --> 00:02:07,080
+Remember right now in our graph we only actually have values for those variables.
+
+33
+00:02:07,080 --> 00:02:11,770
+That was that 10 and that one from earlier the placeholders are still waiting for you to provide them
+
+34
+00:02:11,770 --> 00:02:12,440
+a value.
+
+35
+00:02:12,700 --> 00:02:15,400
+And we're going to use the feed dictionary to provide that value.
+
+36
+00:02:15,400 --> 00:02:19,990
+The reason we're doing with a feed dictionary is because later on we're going to be feeding our network
+
+37
+00:02:20,020 --> 00:02:21,110
+batches of data.
+
+38
+00:02:21,190 --> 00:02:25,220
+So we're going to be kind of feeding it a batch through that dictionary.
+
+39
+00:02:25,690 --> 00:02:32,430
+So we're going to say the notes post order is equal to a call to that traverse.
+
+40
+00:02:32,430 --> 00:02:38,300
+Post order function and we pass in that operation.
+
+41
+00:02:38,420 --> 00:02:48,830
+So we're going to say for node in nodes post order we'll do the following checks we'll say hey if the
+
+42
+00:02:48,830 --> 00:03:00,990
+type of node is equal to a placeholder node then I need that node output to be equal to the dictionary
+
+43
+00:03:01,860 --> 00:03:05,940
+key with that node else.
+
+44
+00:03:05,970 --> 00:03:15,380
+If the type of node is a variable node then I should already have that value so that node output is
+
+45
+00:03:15,380 --> 00:03:18,690
+going to be equal to that node value.
+
+46
+00:03:18,780 --> 00:03:23,470
+Otherwise if it's not a placeholder and if it's not a variable that means I have an operation.
+
+47
+00:03:23,820 --> 00:03:31,200
+So else for the operation I'll say the node inputs are equal to and here to use list comprehension we'll
+
+48
+00:03:31,190 --> 00:03:46,670
+say input node thought output for input node and node input node loops to make sure that's correct.
+
+49
+00:03:46,760 --> 00:03:49,020
+We zoom out one level so we can see this whole thing.
+
+50
+00:03:49,020 --> 00:03:55,080
+So I'm saying OK if this is not a placeholder and it's not a variable then otherwise I have an operation
+
+51
+00:03:56,270 --> 00:04:00,950
+so for this operation you need to make sure my pets are owners also know that input is going to be equal
+
+52
+00:04:00,950 --> 00:04:07,790
+to the output of that input node for every input node in node input nodes.
+
+53
+00:04:07,910 --> 00:04:09,460
+There we go Michalos plural.
+
+54
+00:04:09,530 --> 00:04:14,660
+So it winds up with that attribute we created earlier that I always say that the output of that note
+
+55
+00:04:14,750 --> 00:04:18,080
+is just going to be a computer operation.
+
+56
+00:04:18,200 --> 00:04:23,710
+So node inputs and you may be wondering what this Asterix here for.
+
+57
+00:04:23,710 --> 00:04:30,600
+So the Asterix is essentially just an args Asterix and it's just a way for us to provide these inputs
+
+58
+00:04:30,630 --> 00:04:34,770
+without knowing how many inputs we may have throughout the operation.
+
+59
+00:04:34,770 --> 00:04:38,700
+So technically we don't really know the size of this list so we pass it into computer.
+
+60
+00:04:38,850 --> 00:04:41,940
+We're going to just say Asterix note inputs.
+
+61
+00:04:42,120 --> 00:04:48,600
+Now granted all the operations we've done so far if we scroll back up really only expect two arguments
+
+62
+00:04:48,600 --> 00:04:52,650
+so these computer methods are really only expecting two parameters here.
+
+63
+00:04:52,740 --> 00:04:58,040
+But hey maybe we have another addition operation that adds three together or something like that.
+
+64
+00:04:58,200 --> 00:05:02,730
+So since we technically don't know beforehand how many parameters are going to pass in we're going to
+
+65
+00:05:02,760 --> 00:05:05,260
+use this Asterix for ARX.
+
+66
+00:05:05,400 --> 00:05:06,870
+What I'm saying.
+
+67
+00:05:07,180 --> 00:05:07,660
+Yes.
+
+68
+00:05:07,680 --> 00:05:15,400
+And you can check out the resource link for more details on that finally we'll say if the type is node
+
+69
+00:05:15,460 --> 00:05:31,760
+output is equal to list then I'm going to say node output is equal to loops and pray no output so that's
+
+70
+00:05:31,760 --> 00:05:34,080
+going to convert the list to an umpire is.
+
+71
+00:05:34,490 --> 00:05:40,560
+And then finally after this method I'm going to say return the operation output.
+
+72
+00:05:40,710 --> 00:05:43,220
+So return the requested note value.
+
+73
+00:05:43,400 --> 00:05:49,950
+And make sure I get everything correct else type note is equal to variable make sure I have that.
+
+74
+00:05:49,990 --> 00:05:56,410
+This should be ilah else.
+
+75
+00:05:57,030 --> 00:05:57,520
+OK.
+
+76
+00:05:57,740 --> 00:05:58,820
+So perfect.
+
+77
+00:05:58,820 --> 00:06:02,450
+We have our check for a placeholder in which case we give it the feed dictionary value.
+
+78
+00:06:02,630 --> 00:06:06,170
+If it's a variable in that case we give it the actual value of that variable.
+
+79
+00:06:06,170 --> 00:06:11,180
+So if we kind of check back to variable come back up here number that variable had this kind of initial
+
+80
+00:06:11,180 --> 00:06:12,020
+value here.
+
+81
+00:06:12,050 --> 00:06:14,570
+So self-taught value of that variable.
+
+82
+00:06:14,570 --> 00:06:18,280
+That's what we're talking about when we say no value here.
+
+83
+00:06:18,680 --> 00:06:22,160
+If it's not then it's an operation of a placeholder or a variable.
+
+84
+00:06:22,160 --> 00:06:27,440
+So then we have our inputs of the operation and our outputs the operation the output is just the result
+
+85
+00:06:27,530 --> 00:06:34,750
+of computing the inputs where the input is just a list of those node input nodes.
+
+86
+00:06:34,760 --> 00:06:44,770
+OK so let's go ahead and actually execute this say sess is equal to an instance of session and then
+
+87
+00:06:44,770 --> 00:06:52,330
+we're going to say results is equal to sess run and Lotusphere to have an operation in a feed dictionary
+
+88
+00:06:52,330 --> 00:06:58,300
+so we're going to say operation is equal to Z because remember our operation all the way at the end
+
+89
+00:06:58,330 --> 00:07:03,640
+is this final one or we add y M-B and why and connected to multiply which is then connected to placeholders
+
+90
+00:07:03,670 --> 00:07:04,850
+and the variables.
+
+91
+00:07:05,460 --> 00:07:06,520
+So kind of background here.
+
+92
+00:07:06,510 --> 00:07:15,470
+I'm going to provide a feed dictionary and the dictionary is going to say X is 10 so we run that we
+
+93
+00:07:15,470 --> 00:07:18,170
+check our results and we get back 100 1.
+
+94
+00:07:18,200 --> 00:07:25,280
+So if we remember our original function or we're trying to compute it's Z is equal to x plus be so 0
+
+95
+00:07:25,460 --> 00:07:26,550
+to 10 x plus 1.
+
+96
+00:07:26,600 --> 00:07:31,100
+If I provide x 10 that's 10 times then is 100 plus 1 is 101.
+
+97
+00:07:31,310 --> 00:07:33,920
+Come back down here we get back 101.
+
+98
+00:07:34,010 --> 00:07:36,320
+So it looks like we successfully did it.
+
+99
+00:07:36,470 --> 00:07:40,690
+Let's go ahead and show this with some matrix multiplication which is kind of a little more in common.
+
+100
+00:07:40,730 --> 00:07:42,290
+We're going to be doing with tensor flow.
+
+101
+00:07:42,650 --> 00:07:50,200
+So starting this all over from the top I create a graph object then I'm going to set that as the default
+
+102
+00:07:50,200 --> 00:07:52,130
+graph.
+
+103
+00:07:52,350 --> 00:08:01,620
+I'm going to have some variable and in this case the variable a be essentially a matrix so 10 20 say
+
+104
+00:08:01,710 --> 00:08:03,480
+30 40.
+
+105
+00:08:03,570 --> 00:08:09,370
+So we just have it be a nested list for now later on tent's flow will be passing in them piracies and
+
+106
+00:08:09,370 --> 00:08:11,780
+then we have 1 1.
+
+107
+00:08:12,040 --> 00:08:15,300
+Check your brackets here.
+
+108
+00:08:15,400 --> 00:08:21,430
+Then we have a placeholder a waiting x and then we'll say Y instead of equal to multiply is a matrix
+
+109
+00:08:21,430 --> 00:08:28,790
+multiplication now with X and then we'll say Z is equal to add y in B.
+
+110
+00:08:28,800 --> 00:08:39,360
+So now if I do the same thing as before I create a new session and then I say run the operation equal
+
+111
+00:08:39,360 --> 00:08:45,500
+to that news the operation is created and we'll see if the dictionary is now equal to 10 as before.
+
+112
+00:08:45,500 --> 00:08:47,170
+Now we get back in array.
+
+113
+00:08:47,250 --> 00:08:52,080
+So essentially kind of the same operations we did before except now it's based off a matrix.
+
+114
+00:08:52,170 --> 00:08:58,250
+So you can also change this to one common one to match the notes and you should see 101 to one throw
+
+115
+00:08:58,270 --> 00:08:59,210
+one 401.
+
+116
+00:08:59,430 --> 00:09:00,400
+Perfect.
+
+117
+00:09:00,410 --> 00:09:00,900
+All right.
+
+118
+00:09:01,020 --> 00:09:04,440
+So that's the very basics of how a session is going to work.
+
+119
+00:09:04,680 --> 00:09:10,260
+So up next we're going to do is convert this to kind of a more traditional classification problem by
+
+120
+00:09:10,260 --> 00:09:14,880
+putting in an activation function and then doing a really simple classification example or create some
+
+121
+00:09:14,880 --> 00:09:19,350
+blobs and then we're going to classify them into two classes zero or one red or blue.
+
+122
+00:09:19,380 --> 00:09:22,440
+We're going to define a perception type model.
+
+123
+00:09:22,440 --> 00:09:22,770
+All right.
+
+124
+00:09:22,800 --> 00:09:28,350
+So that's it as far as the very basics of creating your own graph and your own session session may be
+
+125
+00:09:28,350 --> 00:09:29,460
+a little confusing at first.
+
+126
+00:09:29,460 --> 00:09:34,350
+Definitely check the time or take the time to kind of go through each of these lines and it may be a
+
+127
+00:09:34,350 --> 00:09:37,960
+little confusing because you kind of forget what these attributes actually are.
+
+128
+00:09:38,100 --> 00:09:42,150
+So if there's an attribute you don't recognize go ahead and come back up to the classes where we find
+
+129
+00:09:42,150 --> 00:09:45,120
+them and then see what they're actually referring to.
+
+130
+00:09:45,120 --> 00:09:47,190
+All right thanks everyone and I'll see at the next lecture.
+

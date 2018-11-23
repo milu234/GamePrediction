@@ -1,0 +1,1008 @@
+1
+00:00:05,270 --> 00:00:08,980
+Welcome everyone to the solutions lecture for the time series exercise.
+
+2
+00:00:08,990 --> 00:00:12,700
+Let's hop over to the exercise notebook and start coding along the solutions.
+
+3
+00:00:12,950 --> 00:00:14,570
+OK here I am at the notebook.
+
+4
+00:00:14,600 --> 00:00:21,560
+First thing to do is import some pie and then we're also going to need to import Pandurs to work with
+
+5
+00:00:21,560 --> 00:00:25,490
+that CXXVI file and then we'll do some visualization later on.
+
+6
+00:00:25,520 --> 00:00:33,140
+Let's say I live as tea and then map plot lib in line OK.
+
+7
+00:00:33,150 --> 00:00:35,700
+So we're going to use pandas to read and to see as we file.
+
+8
+00:00:35,700 --> 00:00:39,740
+So I going to say milk is equal to p the read C S V.
+
+9
+00:00:39,870 --> 00:00:42,480
+And then we'll say monthly milk production.
+
+10
+00:00:42,510 --> 00:00:47,460
+So just as an untapped autocomplete there and then I'm also going to say that the index column is equal
+
+11
+00:00:47,460 --> 00:00:48,940
+to month.
+
+12
+00:00:49,500 --> 00:00:53,740
+So check out the head of the data frame it should look something like that.
+
+13
+00:00:54,150 --> 00:00:56,880
+And then we're going to do next is set the index.
+
+14
+00:00:56,880 --> 00:01:00,460
+So we'll do the following basically just copy and paste that line.
+
+15
+00:01:00,480 --> 00:01:02,190
+So milk index.
+
+16
+00:01:02,230 --> 00:01:07,480
+Copy that run that and then I'm also going to plot out the time series data.
+
+17
+00:01:07,480 --> 00:01:13,510
+So that's actually really easy only if you say milk dot plot and it should create this milk production
+
+18
+00:01:13,510 --> 00:01:14,930
+plot automatically for you.
+
+19
+00:01:15,130 --> 00:01:19,100
+And this happens automatically because of the index being a date time index.
+
+20
+00:01:19,170 --> 00:01:22,360
+So Pan those again really convenient to use there.
+
+21
+00:01:22,420 --> 00:01:24,310
+Now it's time for the train to split.
+
+22
+00:01:24,700 --> 00:01:31,780
+So remember we want to actually have the last 12 months be the tail end of our test set.
+
+23
+00:01:32,110 --> 00:01:39,620
+So we're going to do is if we say milk that info you'll notice I have a hundred and sixty eight rows.
+
+24
+00:01:39,820 --> 00:01:48,770
+So what I'm going to do is say my training set is equal to milk dot head.
+
+25
+00:01:49,050 --> 00:01:54,730
+And then I'm going to say essentially 168 minus 12 Well that's equal to 156.
+
+26
+00:01:54,750 --> 00:02:03,900
+So I'll put in 156 here and then I want the test set to be the talents all say milk tail last 12 months
+
+27
+00:02:04,430 --> 00:02:05,690
+and that's a really easy way.
+
+28
+00:02:05,730 --> 00:02:13,740
+You could also use I Alosi or I look with some slicing to do the same tasks but head and tail just makes
+
+29
+00:02:13,740 --> 00:02:14,870
+it really easy.
+
+30
+00:02:14,880 --> 00:02:20,790
+So in other ever trainset those first months or first years and the tail is just the last year we want
+
+31
+00:02:20,790 --> 00:02:22,080
+to scale the data.
+
+32
+00:02:22,080 --> 00:02:32,290
+So what we're going to do here now say from as Kaylor pre-processing import min max scaler are going
+
+33
+00:02:32,290 --> 00:02:41,280
+to create an instance of the scaler will say minimax scaler and then I will say train scaled and then
+
+34
+00:02:41,280 --> 00:02:48,120
+I'm going to do perform a transform only all the training set and then I'm going to say test scaled
+
+35
+00:02:49,920 --> 00:02:54,460
+and I'll say scaler transform and this is all the test set.
+
+36
+00:02:54,650 --> 00:02:57,210
+So now we've been able to successfully scale our data.
+
+37
+00:02:57,230 --> 00:03:02,210
+Remember we only want to fit it to the training set if we fit it to the entire set then we're assuming
+
+38
+00:03:02,210 --> 00:03:04,520
+we'll know about future behavior when scaling.
+
+39
+00:03:04,520 --> 00:03:09,730
+So we only want to do the fit transform on the training and then just transform on the test.
+
+40
+00:03:09,740 --> 00:03:11,660
+Up next is this batch function.
+
+41
+00:03:11,660 --> 00:03:13,550
+So let's go ahead and create it.
+
+42
+00:03:13,550 --> 00:03:14,540
+It's actually not so bad.
+
+43
+00:03:14,540 --> 00:03:16,860
+It's really similar to what we did during the lectures.
+
+44
+00:03:16,970 --> 00:03:18,660
+We create some random starting point.
+
+45
+00:03:18,690 --> 00:03:25,730
+So I'm going to say N.P. ran them and I'm going to choose some random integer between 0 and the length
+
+46
+00:03:25,850 --> 00:03:28,530
+of the training data that's being passed then.
+
+47
+00:03:28,580 --> 00:03:31,150
+So that's this training data appear.
+
+48
+00:03:31,430 --> 00:03:37,930
+So I will say training data and then I'm also going to subtract the number of steps.
+
+49
+00:03:37,930 --> 00:03:40,090
+So that's essentially what these instructions are trying to tell you.
+
+50
+00:03:40,090 --> 00:03:41,520
+So use this.
+
+51
+00:03:41,560 --> 00:03:45,640
+We ran them that ran that to set a random starting point index for the batch.
+
+52
+00:03:45,680 --> 00:03:48,900
+Remember that each batch needs to have the same number of steps in it.
+
+53
+00:03:49,120 --> 00:03:52,940
+So that means you should limit the starting point to zero.
+
+54
+00:03:53,060 --> 00:03:58,480
+Or excuse me the starting point to length of data minus steps which is going to be length for training
+
+55
+00:03:58,480 --> 00:03:59,850
+data mining steps.
+
+56
+00:04:00,010 --> 00:04:00,880
+Okay.
+
+57
+00:04:01,480 --> 00:04:03,160
+So there is our starting point.
+
+58
+00:04:03,160 --> 00:04:13,680
+Step two is to create a y data for this all say why batch is equal to and pray you trick taking that
+
+59
+00:04:13,680 --> 00:04:25,850
+training data and then say go from Branch start all the way to Rand start plus the number of steps plus
+
+60
+00:04:25,850 --> 00:04:34,740
+1 and then we just need to reshape this to be shapes of one wups steps plus one.
+
+61
+00:04:34,740 --> 00:04:38,140
+So again basically what the comment that steps we're telling you to do.
+
+62
+00:04:38,130 --> 00:04:44,680
+Then finally we just need to return the batches so I get return y batch.
+
+63
+00:04:45,140 --> 00:04:56,010
+All those rows and then will say one step backwards there reshape negative one steps one and then will
+
+64
+00:04:56,010 --> 00:04:56,690
+also return.
+
+65
+00:04:56,700 --> 00:05:03,480
+Why batch and essentially all the rows except one of say one to the verion here and then we'll reshape
+
+66
+00:05:03,480 --> 00:05:08,690
+that to be negative 1 steps 1 OK.
+
+67
+00:05:08,720 --> 00:05:11,630
+So now we have our next batch function.
+
+68
+00:05:11,630 --> 00:05:14,110
+It's time to actually set up the recurrent neural network model.
+
+69
+00:05:14,150 --> 00:05:21,970
+So the first thing you need to do is say import sensor flow as T.F. and then up next we have the constants.
+
+70
+00:05:22,340 --> 00:05:25,320
+So let's go ahead and fill these all out.
+
+71
+00:05:25,330 --> 00:05:29,960
+So essentially just use the ones that provided or play around with them totally OK as well.
+
+72
+00:05:30,100 --> 00:05:31,070
+The number of inputs.
+
+73
+00:05:31,090 --> 00:05:35,970
+Well that's just going to be one feature which essentially is the time series so that stays is one than
+
+74
+00:05:35,980 --> 00:05:37,050
+the number of time steps.
+
+75
+00:05:37,060 --> 00:05:40,240
+So the number of steps in each batch will go in limit that to just 12.
+
+76
+00:05:40,240 --> 00:05:46,530
+Since we're dealing with monthly data so a number of time steps it's going to be 12 and then the number
+
+77
+00:05:46,530 --> 00:05:50,280
+of neurons will go ahead and just say 100 just like we did last time during the lectures.
+
+78
+00:05:50,280 --> 00:05:54,350
+Again a value can easily play around with a number of outputs.
+
+79
+00:05:54,350 --> 00:05:58,040
+Are you going to create one sequence all number of up it's going to be one.
+
+80
+00:05:58,290 --> 00:06:00,480
+Then we have a learning rates.
+
+81
+00:06:00,480 --> 00:06:02,690
+Then we go ahead and choose a bit of a faster learning rate.
+
+82
+00:06:02,680 --> 00:06:09,600
+So like 0.03 And then number of training iterations we'll say let me scroll down here just a little
+
+83
+00:06:09,600 --> 00:06:15,280
+bit number of training iterations going to set that equal to 4000.
+
+84
+00:06:15,310 --> 00:06:20,580
+Again another valley you can play with and then the batch size will go ahead and just feed in one at
+
+85
+00:06:20,580 --> 00:06:21,100
+a time.
+
+86
+00:06:22,590 --> 00:06:25,610
+So now we can create placeholders for x and y.
+
+87
+00:06:26,400 --> 00:06:36,040
+So I'll say X is T.F. placeholder and it's going to be float 32 and then the shape will say none because
+
+88
+00:06:36,040 --> 00:06:37,750
+that's defined by the bat size.
+
+89
+00:06:38,020 --> 00:06:41,170
+And then we have the number of time steps so 12.
+
+90
+00:06:41,560 --> 00:06:48,430
+And then by the number of inputs and that's going to be almost the same thing for why except instead
+
+91
+00:06:48,430 --> 00:06:50,900
+of number of inputs that's going to be number of outputs
+
+92
+00:06:53,630 --> 00:06:54,440
+There we go.
+
+93
+00:06:54,740 --> 00:06:57,230
+So now we have X and Y are placeholders there.
+
+94
+00:06:57,260 --> 00:07:02,130
+It's time to create the recurrent neural network where you have a lot of stuff you can play around with
+
+95
+00:07:02,150 --> 00:07:02,890
+here.
+
+96
+00:07:03,320 --> 00:07:11,800
+So I'll just do the basic one will say T.F. contrib Arnon n ill say output projection mapper because
+
+97
+00:07:11,890 --> 00:07:18,910
+that's going to allow us to make up their go up prediction mapper or output projection rapper excuse
+
+98
+00:07:18,910 --> 00:07:24,400
+me because that's going to allow us to basically just get one output back and then I'm going to wrap
+
+99
+00:07:24,580 --> 00:07:30,510
+the T.F. contrib Arnon and we'll use a basic LACMA cell
+
+100
+00:07:33,510 --> 00:07:37,250
+where the number of units is going to be equal to the number of neurons.
+
+101
+00:07:37,260 --> 00:07:44,890
+That's just the 100 the activation that's going to be equal to T.F. and rectified linier act rectified
+
+102
+00:07:44,920 --> 00:07:52,120
+linear unit and then we have the output size that's going to be set up that size is equal to the number
+
+103
+00:07:52,120 --> 00:07:52,770
+of outputs.
+
+104
+00:07:52,810 --> 00:07:55,160
+In this case just one.
+
+105
+00:07:55,210 --> 00:07:55,930
+So let's run that.
+
+106
+00:07:55,930 --> 00:07:59,180
+Looks like I got my column mixed up.
+
+107
+00:07:59,290 --> 00:08:02,680
+So output size that goes into the upper projection wrapper.
+
+108
+00:08:02,680 --> 00:08:03,270
+There we go.
+
+109
+00:08:05,220 --> 00:08:05,690
+OK.
+
+110
+00:08:05,990 --> 00:08:11,180
+So we have our output projection wrapper that's outputting this just to be 1 output and that's wrapping
+
+111
+00:08:11,180 --> 00:08:12,170
+this basic elist.
+
+112
+00:08:12,190 --> 00:08:16,520
+So with a 100 year odds so that we don't get 100 outputs Instead we just have the output protection
+
+113
+00:08:16,520 --> 00:08:18,880
+wrapper sending just one output.
+
+114
+00:08:18,920 --> 00:08:23,800
+Next we want to pass in the cells variable into T.F. and in dynamic Arnon.
+
+115
+00:08:23,810 --> 00:08:24,960
+So let's go ahead and do that.
+
+116
+00:08:26,700 --> 00:08:33,870
+So we get back outputs and states just like we did in lecture with CTF and then we have a dynamic Arnon
+
+117
+00:08:34,410 --> 00:08:37,200
+we have a cell X that placeholder.
+
+118
+00:08:37,230 --> 00:08:45,580
+And we also specify the data type so data type is going to be as always Tier 3 to next we have the last
+
+119
+00:08:45,580 --> 00:08:47,170
+function and the optimizer.
+
+120
+00:08:47,170 --> 00:08:59,120
+So this is essentially same as the lectures will say to reduce mean staff reduce mean and then TFA squares
+
+121
+00:08:59,120 --> 00:09:03,310
+is the means quarter the product that outputs minus Y.
+
+122
+00:09:03,330 --> 00:09:04,920
+That true placeholder.
+
+123
+00:09:05,140 --> 00:09:14,670
+And then let's go ahead and create our optimizer will use the atom optimizer and we'll set its learning
+
+124
+00:09:14,670 --> 00:09:17,460
+right to be the learning rate with the above.
+
+125
+00:09:17,850 --> 00:09:24,930
+And then we want to set train equal to optimizer and we want the optimizer to end up minimizing or say
+
+126
+00:09:24,990 --> 00:09:33,830
+minimize loss that we need to initialize the global variables so we'll see it is equal to T.F. global
+
+127
+00:09:33,830 --> 00:09:35,430
+variables initialiser.
+
+128
+00:09:36,050 --> 00:09:41,000
+And then finally I want to create an instance of T.F. transceiver so I can see if my model will say
+
+129
+00:09:41,000 --> 00:09:46,790
+saver is equal to T.F. train sabor.
+
+130
+00:09:47,510 --> 00:09:51,590
+OK now it's time to actually run the session so we're going to run a session that trains in the batches
+
+131
+00:09:51,590 --> 00:09:53,320
+created by our next batch function.
+
+132
+00:09:53,600 --> 00:09:58,450
+And it's also going to add in that last evaluation just like we did during the lecture.
+
+133
+00:09:58,520 --> 00:10:03,420
+Going to add in a quick line here for my GPS options just in case.
+
+134
+00:10:03,600 --> 00:10:11,990
+So say T.F. GPU options and you don't need to do this if you're not using the actual GPU version of
+
+135
+00:10:11,990 --> 00:10:12,820
+Tancer flow.
+
+136
+00:10:14,060 --> 00:10:17,290
+So I need to save per process.
+
+137
+00:10:17,460 --> 00:10:25,120
+GP You memory underscore fraction and will use 90 percent.
+
+138
+00:10:25,120 --> 00:10:28,350
+My GP is memory.
+
+139
+00:10:28,510 --> 00:10:31,260
+OK so that I'm going to passen that config.
+
+140
+00:10:31,440 --> 00:10:33,630
+So let me just go ahead and copy and paste it.
+
+141
+00:10:33,630 --> 00:10:37,840
+Then again you don't need to do this.
+
+142
+00:10:37,940 --> 00:10:40,490
+So there we go GP units ready to go.
+
+143
+00:10:40,490 --> 00:10:43,030
+And now for the code.
+
+144
+00:10:43,030 --> 00:10:48,770
+So I'm going to say a session run and it's and then I'll do the following.
+
+145
+00:10:48,770 --> 00:10:55,400
+I'll say for iteration in a range and then I'm going to say some train iterations
+
+146
+00:10:59,040 --> 00:11:07,560
+XT batch y batch and then I'm going to call my next batch function on my scale data.
+
+147
+00:11:07,560 --> 00:11:13,710
+So remember I have my trained skilled data and then my batch size that I defined earlier it's going
+
+148
+00:11:13,710 --> 00:11:17,360
+to pass that in as well as the number of times steps I passed in earlier.
+
+149
+00:11:17,520 --> 00:11:20,650
+So those are the concepts I find all the way up here.
+
+150
+00:11:21,760 --> 00:11:29,260
+So scrolling back down now how are batches going to run our train variable.
+
+151
+00:11:29,320 --> 00:11:31,360
+And we need our feed dictionary.
+
+152
+00:11:31,360 --> 00:11:46,880
+So that's going to be x x batch y y batch that I'll say if my iteration Model 100 is equal to zero then
+
+153
+00:11:46,910 --> 00:11:55,320
+I mean squared air is equal to last evil and we'll have a feed dictionary here where X isn't going to
+
+154
+00:11:55,340 --> 00:12:04,840
+equal to or passen X batch and Y person white batch The other thing we could do isn't passing just on
+
+155
+00:12:04,840 --> 00:12:05,880
+our test data.
+
+156
+00:12:07,010 --> 00:12:13,640
+But right now just keep it the same way we had in the lecture that are going to say iteration is all
+
+157
+00:12:13,640 --> 00:12:15,350
+the same as we did in the lecture.
+
+158
+00:12:15,510 --> 00:12:18,690
+I mean square error comma.
+
+159
+00:12:18,750 --> 00:12:25,400
+MSE OK then that's going to save this and pass the Senate's code along just so I don't overwrite anything.
+
+160
+00:12:25,400 --> 00:12:27,200
+I would recommend you do the same.
+
+161
+00:12:27,200 --> 00:12:30,230
+So we'll run that and hopefully be in the training.
+
+162
+00:12:30,530 --> 00:12:31,110
+OK.
+
+163
+00:12:31,310 --> 00:12:33,950
+So this is going to then train for 4000 times.
+
+164
+00:12:33,950 --> 00:12:37,160
+That's something to hop for on time until this is done training.
+
+165
+00:12:37,160 --> 00:12:41,070
+All right so my model has now finished running and it's gone to a pretty low MSCE.
+
+166
+00:12:41,150 --> 00:12:47,540
+And as a quick note I previously made a little typo here on Savir so I had a rerun that to rerun the
+
+167
+00:12:47,540 --> 00:12:49,260
+entire session during the training.
+
+168
+00:12:49,460 --> 00:12:51,320
+But now there's trying for 4000 steps.
+
+169
+00:12:51,320 --> 00:12:53,300
+It's time to predict the future.
+
+170
+00:12:53,360 --> 00:12:54,740
+So we're going to show the test set.
+
+171
+00:12:54,770 --> 00:12:56,270
+So let's go ahead and do that.
+
+172
+00:12:56,270 --> 00:12:58,930
+Remember a test set just looks like this.
+
+173
+00:12:58,940 --> 00:13:04,010
+So a test set is the month that time stamp column and then the milk production.
+
+174
+00:13:04,010 --> 00:13:09,050
+And we want to actually add in our generated data.
+
+175
+00:13:09,050 --> 00:13:10,470
+So we're going to scroll down here.
+
+176
+00:13:10,640 --> 00:13:13,260
+So we want to attempt to predict those 12 months of data.
+
+177
+00:13:13,310 --> 00:13:15,730
+So we're going to create generative session.
+
+178
+00:13:15,770 --> 00:13:20,960
+So let's go ahead and do that we'll see with T.F. session as s.c.s I'm going to restore the model I
+
+179
+00:13:20,960 --> 00:13:21,850
+just created.
+
+180
+00:13:22,070 --> 00:13:24,100
+So let's copy and paste that string.
+
+181
+00:13:24,110 --> 00:13:27,710
+So it's stored as time series model code along.
+
+182
+00:13:27,990 --> 00:13:35,530
+So don't come back down here and place that in so we're going to restore that model and then I'm going
+
+183
+00:13:35,530 --> 00:13:42,910
+to set a training seemed to be equal to list and it's going to be my scaled training data.
+
+184
+00:13:42,910 --> 00:13:46,540
+Except it's not going to include the last 12 months.
+
+185
+00:13:46,690 --> 00:13:49,580
+So I'm going to see it with the entire training set.
+
+186
+00:13:50,680 --> 00:13:55,530
+So remember in the lectures we seeded it first of zeros and then a little bit of a sinusoidal wave.
+
+187
+00:13:55,540 --> 00:14:00,400
+Now I'm going to see it an entire training set and see what it says for the test set that last 12 months
+
+188
+00:14:00,400 --> 00:14:01,360
+of data.
+
+189
+00:14:01,510 --> 00:14:13,150
+So I'll say for iteration in range 12 because I want 12 months I'll say my next batch is equal to an
+
+190
+00:14:13,150 --> 00:14:18,990
+umpire rating of my train speed.
+
+191
+00:14:19,430 --> 00:14:25,350
+And we're going to go from number of time steps remember this just 12.
+
+192
+00:14:25,370 --> 00:14:29,220
+So from 12 from the very end all the way to the end.
+
+193
+00:14:29,720 --> 00:14:37,040
+And then I need to reshape this to be one by number of times that's by.
+
+194
+00:14:38,210 --> 00:14:44,500
+And then we're going to have our white widespread and that's going to be session run then we're going
+
+195
+00:14:44,500 --> 00:14:53,320
+to go outputs and we'll create a feed dictionary where we have X and then that X batch and then finally
+
+196
+00:14:53,320 --> 00:15:01,110
+we're going to append to our training seed y predicted values.
+
+197
+00:15:01,180 --> 00:15:05,370
+So we need to index actually grab them up.
+
+198
+00:15:05,470 --> 00:15:07,710
+So let's go in and run this.
+
+199
+00:15:08,170 --> 00:15:10,170
+And now we should have a train seat.
+
+200
+00:15:10,390 --> 00:15:12,040
+So we're going to show a result of the prediction.
+
+201
+00:15:12,040 --> 00:15:19,330
+So if I train speed you should get some predictions that look more or less like this.
+
+202
+00:15:19,350 --> 00:15:20,730
+So let's see how he did.
+
+203
+00:15:20,820 --> 00:15:21,140
+All right.
+
+204
+00:15:21,140 --> 00:15:25,710
+The next step is to grab the portion of the results that are actually that generated values.
+
+205
+00:15:25,710 --> 00:15:30,350
+So if we take a look at train speed that's going to be everything past 12.
+
+206
+00:15:30,360 --> 00:15:31,900
+So here are my first 12.
+
+207
+00:15:32,050 --> 00:15:37,440
+I want to grab these results right here and then apply inverse transform because remember right now
+
+208
+00:15:37,500 --> 00:15:40,710
+these are not the correct units they are still scaled to units.
+
+209
+00:15:40,710 --> 00:15:42,340
+So let's go ahead and do that.
+
+210
+00:15:44,290 --> 00:15:51,470
+We'll see the result is equal to scaler and then I'm going to call inverse transform we'll say NPR-A
+
+211
+00:15:52,970 --> 00:16:02,300
+train speed from 12 all the way onwards and then I need to reshape this to be 12 1 and then I want to
+
+212
+00:16:02,300 --> 00:16:04,630
+create a new column on the test called generated.
+
+213
+00:16:04,670 --> 00:16:07,310
+So let's go ahead and make that happen also.
+
+214
+00:16:07,340 --> 00:16:07,930
+Test set
+
+215
+00:16:10,580 --> 00:16:14,480
+generated it's going to be able to results.
+
+216
+00:16:14,480 --> 00:16:17,030
+So going to run that you make it a warning here.
+
+217
+00:16:17,060 --> 00:16:18,000
+Feel free to ignore it.
+
+218
+00:16:18,010 --> 00:16:23,620
+It's just basically telling you that you may be setting a copy then we're going to view the test set
+
+219
+00:16:23,710 --> 00:16:24,150
+data.
+
+220
+00:16:24,150 --> 00:16:26,040
+So let's go in and see that test set.
+
+221
+00:16:26,330 --> 00:16:28,910
+And now it should look something like this.
+
+222
+00:16:29,000 --> 00:16:31,280
+So you can see here we are definitely overestimating.
+
+223
+00:16:31,280 --> 00:16:34,130
+So we'll have to explore that when we actually plot this out.
+
+224
+00:16:34,130 --> 00:16:35,940
+So let's go ahead and do that.
+
+225
+00:16:36,050 --> 00:16:41,350
+We'll say test set the plots and let's see how far off we're.
+
+226
+00:16:41,390 --> 00:16:41,740
+All right.
+
+227
+00:16:41,750 --> 00:16:49,460
+So the good news is we're definitely approaching that behavior but unfortunately we're overestimating
+
+228
+00:16:49,520 --> 00:16:50,530
+the milk production.
+
+229
+00:16:50,550 --> 00:16:52,340
+To what actually happened.
+
+230
+00:16:52,400 --> 00:16:58,490
+So what we can do is try to maybe use a different neuron type and see if we can have more information
+
+231
+00:16:58,490 --> 00:16:58,800
+there.
+
+232
+00:16:58,850 --> 00:17:01,770
+So let's go in and go back and try to fix that.
+
+233
+00:17:02,090 --> 00:17:07,520
+So I'm going to scroll back up here to where we actually chose the recurrent neural network type.
+
+234
+00:17:07,520 --> 00:17:14,300
+All right so what I'm going to try doing is changing the cell type to a gated recurrent unit and then
+
+235
+00:17:14,330 --> 00:17:19,550
+I'm going to expand the number of iterations but then because of that I'll give it a slower learning
+
+236
+00:17:19,550 --> 00:17:20,230
+rate.
+
+237
+00:17:20,360 --> 00:17:22,330
+So let's go ahead and try that out.
+
+238
+00:17:22,430 --> 00:17:25,950
+And I'm going to hop forward in time and see what the results are.
+
+239
+00:17:25,970 --> 00:17:26,350
+All right.
+
+240
+00:17:26,360 --> 00:17:31,250
+So looks like that resulted in a much closer fitting to the actual test data.
+
+241
+00:17:31,280 --> 00:17:37,010
+A few things to keep in mind is that our original model is still only being trained to predict the time
+
+242
+00:17:37,010 --> 00:17:38,990
+series one step ahead.
+
+243
+00:17:39,050 --> 00:17:44,930
+And it's kind of a lot to ask it to generate 12 full steps ahead which is why you'll never end up getting
+
+244
+00:17:44,930 --> 00:17:45,820
+perfect results.
+
+245
+00:17:45,860 --> 00:17:47,470
+Given the way we're trained the model.
+
+246
+00:17:47,720 --> 00:17:54,620
+So somebody could end up doing in the future is trying to if the original model train it with an error
+
+247
+00:17:54,770 --> 00:17:58,690
+of not just one step ahead but a full 12 steps ahead.
+
+248
+00:17:58,820 --> 00:18:02,780
+Now in issue with this particular training set is that it's a little too small and it's going to let
+
+249
+00:18:02,780 --> 00:18:07,850
+me your options as far as the amount of data you have if you're going to end up testing and generating
+
+250
+00:18:08,120 --> 00:18:09,570
+a full 12 steps ahead.
+
+251
+00:18:09,650 --> 00:18:13,430
+But if you do take that approach you should see even better results.
+
+252
+00:18:13,430 --> 00:18:16,040
+All right thanks everyone and I'll see you at the next lecture.
+

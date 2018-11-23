@@ -1,0 +1,144 @@
+1
+00:00:00,530 --> 00:00:04,920
+Welcome to the complete guide to tensor flow for deep learning of Python.
+
+2
+00:00:04,990 --> 00:00:08,490
+My name is Jose Portsea and I'll be your instructor for this course.
+
+3
+00:00:08,500 --> 00:00:14,470
+I currently have over a quarter of a million students on me teaching various topics such as Python machine
+
+4
+00:00:14,470 --> 00:00:16,950
+learning data science finance and more.
+
+5
+00:00:17,110 --> 00:00:22,990
+I'm also a technical corporate trainer for Fortune 500 companies and this course will teach you how
+
+6
+00:00:22,990 --> 00:00:28,250
+to use Google's tensor framework to perform the latest cutting edge techniques in machine learning.
+
+7
+00:00:28,300 --> 00:00:32,890
+This course is based off the same deep learning material I've developed for some of the world's top
+
+8
+00:00:32,890 --> 00:00:34,180
+tech companies.
+
+9
+00:00:34,690 --> 00:00:38,250
+Let's give you a quick overview of the course curriculum.
+
+10
+00:00:38,740 --> 00:00:43,920
+We'll start off a brief crash course in the central Python data science library including some Peiffer
+
+11
+00:00:43,930 --> 00:00:50,520
+numerical processing Pandurs for data analysis that plotted for visualization utilizing sikat learn
+
+12
+00:00:50,520 --> 00:00:52,510
+for processing machine learning data sets.
+
+13
+00:00:53,850 --> 00:00:58,260
+Once we done with the crash course we'll focus on building an intuitive understanding of the basics
+
+14
+00:00:58,260 --> 00:01:05,670
+of neural that works including trance activation functions back propagation and more after those neural
+
+15
+00:01:05,670 --> 00:01:06,550
+network basics.
+
+16
+00:01:06,570 --> 00:01:10,370
+We'll explore how to unlock the full potential of deep learning with tensor flow.
+
+17
+00:01:11,330 --> 00:01:15,170
+In this course we cover a variety of ways.
+
+18
+00:01:15,380 --> 00:01:20,300
+We'll begin the course by understanding basic artificial neural networks such as densely connected networks
+
+19
+00:01:20,610 --> 00:01:27,050
+will learn how to use these for basic classification and regression tests afterwards we'll work on understanding
+
+20
+00:01:27,050 --> 00:01:34,520
+convolutional here that works eventually using them to solve complex image classification tasks that
+
+21
+00:01:34,520 --> 00:01:38,990
+will move on to creating recurrent neural networks including the latest topics in the field such as
+
+22
+00:01:38,990 --> 00:01:44,390
+long or short term memory units and gaitered recurrent recurrent that works you'll be able to analyze
+
+23
+00:01:44,390 --> 00:01:50,890
+sequences of data such as Time series will also cover other models such as the words of an algorithm
+
+24
+00:01:50,890 --> 00:01:56,100
+for word and beddings allowing us to map individual words to vectors and explore the relationships between
+
+25
+00:01:57,840 --> 00:02:05,850
+will cover how to use auto encoders perform unsupervised tasks that works this course even covers advanced
+
+26
+00:02:05,850 --> 00:02:10,690
+topics such as generative adversarial networks and how to use reinforcement learning algorithms.
+
+27
+00:02:10,830 --> 00:02:17,900
+The open AI will teach networks how to solve tasks such as playing video games of this course you'll
+
+28
+00:02:17,900 --> 00:02:23,120
+get clear video explanations for every topic including easy to understand slides to cover theoretical
+
+29
+00:02:23,120 --> 00:02:29,130
+aspects in an intuitive way and fully coded notebooks to easily reference the code shown in the course.
+
+30
+00:02:31,000 --> 00:02:35,740
+Not only do you get great technical content but you'll also get access to our online question and answer
+
+31
+00:02:35,740 --> 00:02:40,910
+forms and or chat room recone go for quick help and talk with thousands of other students.
+
+32
+00:02:41,760 --> 00:02:45,960
+Upon completion of this course you'll also get a certificate of completion that you can post on your
+
+33
+00:02:45,960 --> 00:02:51,650
+LinkedIn profile to show off to your colleagues and potential employers all of this comes with a 30
+
+34
+00:02:51,650 --> 00:02:56,640
+day money back guarantee so you can try the entire course risk free.
+
+35
+00:02:56,650 --> 00:03:01,200
+Check out the various other preview videos you can get a glimpse of everything we have inside the course.
+
+36
+00:03:01,240 --> 00:03:02,950
+Enroll today and we'll see you inside.
+

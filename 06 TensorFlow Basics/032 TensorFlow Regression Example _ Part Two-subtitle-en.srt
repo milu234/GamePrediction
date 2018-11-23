@@ -1,0 +1,1260 @@
+1
+00:00:05,530 --> 00:00:07,540
+Welcome back everyone in this lecture.
+
+2
+00:00:07,540 --> 00:00:13,390
+We're going to see how we can now solve the regression task with the tensor estimator API.
+
+3
+00:00:13,400 --> 00:00:19,460
+Now there are lots of other higher level API such as carious the senseful layers API tensor Flo's slim
+
+4
+00:00:19,760 --> 00:00:20,400
+etc..
+
+5
+00:00:20,430 --> 00:00:24,960
+Now we're going to cover the most popular ones later on in the Miscellaneous section of the course.
+
+6
+00:00:25,130 --> 00:00:30,380
+We'll usually deal with either a pure tensor flow or this estimator API just here in the beginning to
+
+7
+00:00:30,380 --> 00:00:33,890
+kind of get you slowly ranking up on your intenser flow skills.
+
+8
+00:00:33,980 --> 00:00:38,560
+But right now let's quickly describe how to use the estimator API.
+
+9
+00:00:38,640 --> 00:00:42,840
+So the T.F. estimator API actually has several model types to choose from going to quickly show you
+
+10
+00:00:42,840 --> 00:00:44,390
+the various options.
+
+11
+00:00:44,970 --> 00:00:46,280
+So here are the estimators types.
+
+12
+00:00:46,300 --> 00:00:50,980
+There's first just the classic linear classifier and it just constructs a linear classification model.
+
+13
+00:00:51,180 --> 00:00:54,760
+And there's also a linear regressors which constructs a linear regression model.
+
+14
+00:00:54,870 --> 00:01:00,220
+Things that we've seen in the past then there's also the densely connected neural network classifier
+
+15
+00:01:00,220 --> 00:01:04,660
+which constructs a neural network classification model and then there's also the DNN regressors which
+
+16
+00:01:04,660 --> 00:01:07,630
+is densely connected neural network regress model.
+
+17
+00:01:07,810 --> 00:01:13,750
+So before we had these classic linear classification and linear regression methods now we can use neural
+
+18
+00:01:13,750 --> 00:01:17,770
+network classification models and there's slight differences in how you can use these two which will
+
+19
+00:01:17,770 --> 00:01:23,380
+cover later on when we actually show the examples of the way the feature columns have to be given to
+
+20
+00:01:23,380 --> 00:01:25,060
+the estimator object.
+
+21
+00:01:25,120 --> 00:01:27,960
+And then besides those there's actually combine versions.
+
+22
+00:01:28,090 --> 00:01:31,790
+So there's DNN will in your combine classifier and it just constructs a neural network.
+
+23
+00:01:31,870 --> 00:01:36,970
+And when you combine classification model and similarly there's the same thing for the regress or you
+
+24
+00:01:36,970 --> 00:01:38,250
+don't have to worry about memorizing.
+
+25
+00:01:38,320 --> 00:01:43,510
+Right now we'll walk you through it very slowly and again we'll cover it in more detail than that miscellaneous
+
+26
+00:01:43,510 --> 00:01:45,370
+section.
+
+27
+00:01:45,600 --> 00:01:49,660
+So in general the format to use these estimator API is we do the following.
+
+28
+00:01:49,750 --> 00:01:53,600
+We first the final list of feature columns and the feature columns.
+
+29
+00:01:53,610 --> 00:01:56,350
+It's actually a special estimator data type.
+
+30
+00:01:56,430 --> 00:02:02,010
+So you end up doing is you can either define just a general feature column and then pass that into a
+
+31
+00:02:02,010 --> 00:02:07,860
+list or later on we're going to see that the estimator API actually has a lot of built in tools to help
+
+32
+00:02:07,860 --> 00:02:12,300
+you deal with things like categorical features and not having to worry about making dummy variables
+
+33
+00:02:12,300 --> 00:02:12,980
+out of them.
+
+34
+00:02:13,170 --> 00:02:17,970
+So the final list of feature columns are typical example right now it's going to be really simple.
+
+35
+00:02:17,970 --> 00:02:22,800
+So you're basically just going to see us make that estimator feature columns API call but later on we'll
+
+36
+00:02:22,800 --> 00:02:27,320
+see more complicated examples and we'll see how the customary path can really help you with that.
+
+37
+00:02:27,330 --> 00:02:31,310
+So once you have the final list of feature columns what you end up doing is you create the estimator
+
+38
+00:02:31,320 --> 00:02:35,420
+model and then after you do that you go ahead and create a data input function.
+
+39
+00:02:35,550 --> 00:02:36,880
+And that's just another convenience.
+
+40
+00:02:36,880 --> 00:02:41,730
+The major API has for you the data input function is basically an input function that either takes in
+
+41
+00:02:42,000 --> 00:02:47,900
+your data as a null array or there's a separate data input function for Pandurs data frames.
+
+42
+00:02:47,940 --> 00:02:51,480
+So if you like working pie you can stick a pie if you prefer Pancho's.
+
+43
+00:02:51,660 --> 00:02:56,490
+You can stick with pand those is just two different calls depending on what kind of format your data
+
+44
+00:02:56,490 --> 00:02:57,440
+is in.
+
+45
+00:02:57,450 --> 00:03:01,920
+Then once you've done that it almost works like if you're familiar of sikat learn it works like one
+
+46
+00:03:01,920 --> 00:03:02,400
+of their.
+
+47
+00:03:02,390 --> 00:03:06,870
+Machine learning model objects So basically once you have your estimator model and you pass in the feature
+
+48
+00:03:06,870 --> 00:03:09,330
+columns you call train to train the model.
+
+49
+00:03:09,390 --> 00:03:13,980
+You can call it evaluate it to evaluate it against some test data that you already know the labels for
+
+50
+00:03:14,370 --> 00:03:16,260
+and then you can also separately call predict.
+
+51
+00:03:16,260 --> 00:03:20,460
+So maybe you have some test data that you don't know the correct labels for and you just want to predict
+
+52
+00:03:20,790 --> 00:03:23,710
+what you think the labels could be called a predict method.
+
+53
+00:03:23,730 --> 00:03:28,040
+So you have to train a method evaluate method and predict method all the estimate or object.
+
+54
+00:03:28,080 --> 00:03:29,970
+So let's go ahead and jump right in.
+
+55
+00:03:29,970 --> 00:03:34,860
+Keep in mind this is a really simple example so it may not be the best use case for the estimator API
+
+56
+00:03:34,890 --> 00:03:40,890
+just because it really only has one feature later on for the other examples of regression and classification
+
+57
+00:03:40,890 --> 00:03:42,970
+that we'll see later on in the section.
+
+58
+00:03:42,990 --> 00:03:45,960
+You'll see the estimate API is a lot more useful here.
+
+59
+00:03:45,960 --> 00:03:47,570
+OK let's start off by creating that feature.
+
+60
+00:03:47,570 --> 00:03:53,490
+COLLINS We were discussing earlier I'll head over to the notebook now for underscore column and then
+
+61
+00:03:53,490 --> 00:03:59,300
+Dot again you can see that there's different columns so you can basically apply two.
+
+62
+00:03:59,490 --> 00:04:03,950
+And we're going to show a lot more examples of this in our classification walk through our code along.
+
+63
+00:04:03,960 --> 00:04:09,600
+So right now I'm going to kind of wave my hand over this part but keep in mind we will take a much deeper
+
+64
+00:04:09,600 --> 00:04:16,380
+dive into this feature column but I'm going to say T.F. feature column Gnumeric column because we do
+
+65
+00:04:16,380 --> 00:04:23,250
+have a numeric column value of x data and then if you do shift tab here it needs a key and a shape so
+
+66
+00:04:23,250 --> 00:04:26,850
+I'll say the key is to string x and the shape.
+
+67
+00:04:26,850 --> 00:04:31,620
+Remember we just have essentially one dimension here so just say shape is 1.
+
+68
+00:04:31,620 --> 00:04:34,380
+And then this whole thing needs to go into a list.
+
+69
+00:04:34,410 --> 00:04:39,750
+So we actually just have one feature here so we have all the feature columns essentially just a list
+
+70
+00:04:39,750 --> 00:04:43,790
+of a single item here a single feature column and it's a numeric column.
+
+71
+00:04:43,920 --> 00:04:46,840
+So kind of keep this in mind for the classification code along.
+
+72
+00:04:46,950 --> 00:04:53,360
+We're going to walk through a realistic example that has many more columns and what we're showing here.
+
+73
+00:04:53,370 --> 00:04:55,570
+OK so we have our feature set up.
+
+74
+00:04:55,770 --> 00:04:59,220
+Then we set up our estimator and to do that.
+
+75
+00:04:59,230 --> 00:05:06,160
+This is basically the main part of the API say T.F. dot estimator dot and then we're going to do a linear
+
+76
+00:05:06,190 --> 00:05:11,500
+regress or so there's a linear classifier and if you actually go back here you can see that there's
+
+77
+00:05:11,980 --> 00:05:17,390
+various T.F. estimators There's also a dense near on that were classifier and that's neural network
+
+78
+00:05:17,400 --> 00:05:18,100
+aggressor.
+
+79
+00:05:18,160 --> 00:05:22,110
+We'll talk about those later on but for now we have a simple regressors.
+
+80
+00:05:22,270 --> 00:05:27,640
+So we're going to say T.F. the estimator that linear aggressor and then we need to tell it where are
+
+81
+00:05:27,640 --> 00:05:28,760
+the feature columns.
+
+82
+00:05:28,900 --> 00:05:30,890
+So it has a parameter called feature columns.
+
+83
+00:05:30,910 --> 00:05:34,040
+And then you pass in that list of feature columns that you created.
+
+84
+00:05:34,390 --> 00:05:37,960
+And again we're going to see much more complicated examples where we have more than just one feature
+
+85
+00:05:37,960 --> 00:05:40,570
+column OK.
+
+86
+00:05:40,630 --> 00:05:43,170
+Then you should see kind of a bunch of warnings blah blah.
+
+87
+00:05:43,180 --> 00:05:44,280
+But don't worry about that.
+
+88
+00:05:44,290 --> 00:05:45,900
+It's just basically information.
+
+89
+00:05:45,900 --> 00:05:51,850
+So estimator has been created and this kind of works basically like a psychic learn as the mater if
+
+90
+00:05:51,850 --> 00:05:52,890
+you've used those before.
+
+91
+00:05:53,050 --> 00:05:57,120
+But I also want to show you how did that train split you've got over it before.
+
+92
+00:05:57,130 --> 00:05:58,990
+So let's actually implement it now.
+
+93
+00:05:59,340 --> 00:06:09,550
+We'll say from S-K learn the model underscore selection import train test split and then if we say train
+
+94
+00:06:09,550 --> 00:06:21,130
+test play here I'm going to do the following or say that X train and then X event or X tests.
+
+95
+00:06:21,150 --> 00:06:27,000
+Really depends what we want to call it and then why train and then we have y evil or white test is equal
+
+96
+00:06:27,000 --> 00:06:28,570
+to train tests.
+
+97
+00:06:29,130 --> 00:06:34,300
+And then I'm going to pass in my X data and then I'm going to pass on the true values for that.
+
+98
+00:06:34,300 --> 00:06:39,550
+And let's go ahead and say my test size is equal to 0.3.
+
+99
+00:06:39,780 --> 00:06:47,370
+And then let's also give it a random states of ones or want in case you kind of want to follow along.
+
+100
+00:06:47,380 --> 00:06:47,670
+All right.
+
+101
+00:06:47,680 --> 00:06:49,520
+So now I've done my train split.
+
+102
+00:06:49,610 --> 00:06:51,720
+Let's confirm that I kind of check these out.
+
+103
+00:06:52,060 --> 00:06:54,860
+So if I take a look at my training data.
+
+104
+00:06:55,270 --> 00:06:57,260
+I want to actually print out the shape of this trick.
+
+105
+00:06:57,280 --> 00:07:02,950
+So check out the shape and I have 700000 points that make sense.
+
+106
+00:07:02,950 --> 00:07:08,360
+My training point should be 70 percent of my data and 70 percent of a million is 700000.
+
+107
+00:07:08,500 --> 00:07:11,840
+Let's go ahead and check the same thing for my x evil.
+
+108
+00:07:12,190 --> 00:07:19,000
+So say X eveil shape and that's 300000 and you'll see the same things for the White train and why eveil
+
+109
+00:07:19,600 --> 00:07:22,420
+belts go ahead and set up the estimator inputs.
+
+110
+00:07:22,420 --> 00:07:28,390
+So S-meter inputs a little bit of this funky thing but basically you need to have an input function
+
+111
+00:07:28,420 --> 00:07:34,240
+that kind of acts like your feed dictionary and batch size indicator all at once.
+
+112
+00:07:35,030 --> 00:07:36,760
+So we show you how to do that right now.
+
+113
+00:07:37,100 --> 00:07:41,060
+You're going to say inputs underscore if you are see.
+
+114
+00:07:41,210 --> 00:07:42,890
+So just the variable name.
+
+115
+00:07:43,160 --> 00:07:50,690
+Then you're going to call T.F. estimator that inputs and then right now we're going to be inputting
+
+116
+00:07:50,690 --> 00:07:52,110
+from a null PI array.
+
+117
+00:07:52,280 --> 00:07:58,370
+So we're going to say no PI inputs a fan but if you also hit tab here you'll notice there's an option
+
+118
+00:07:58,370 --> 00:08:00,240
+for a pair of those data input.
+
+119
+00:08:00,410 --> 00:08:02,740
+So what's nice about this T.F. the estimator API.
+
+120
+00:08:02,870 --> 00:08:05,760
+It can take inputs from both NUMP pie and Pandurs.
+
+121
+00:08:05,780 --> 00:08:07,780
+Right now we're dealing with some pie in the future.
+
+122
+00:08:07,790 --> 00:08:13,180
+We'll see it coatl example with a panda state of free.
+
+123
+00:08:13,310 --> 00:08:17,420
+The next step to passen is basically the x and y.
+
+124
+00:08:17,420 --> 00:08:22,980
+So we're going to do here is essentially pasan a dictionary here.
+
+125
+00:08:23,210 --> 00:08:28,960
+So remember appear if we come back we said that this feature column has this key X.
+
+126
+00:08:29,240 --> 00:08:36,580
+So we're going to pass in the same key X there and then say X underscore train.
+
+127
+00:08:36,710 --> 00:08:42,680
+So there'll be X data and then we're also going to use y train and then let's go ahead and give it a
+
+128
+00:08:42,680 --> 00:08:48,290
+batch size so what you can see we're kind of doing all these steps though we there are multiple lines
+
+129
+00:08:48,380 --> 00:08:51,900
+in one single input function with the estimator API.
+
+130
+00:08:52,130 --> 00:08:56,100
+We can say batch size 8 or 4 you can kind of play around with that.
+
+131
+00:08:56,240 --> 00:08:59,300
+And here I'm just going to say a couple of more arguments.
+
+132
+00:08:59,300 --> 00:09:02,520
+Number of e POCs is equal to none.
+
+133
+00:09:02,550 --> 00:09:07,620
+And then I'm also going to say shuffle is equal to true.
+
+134
+00:09:07,730 --> 00:09:08,300
+All right.
+
+135
+00:09:08,300 --> 00:09:14,300
+So I have my PI input function ready to go and then I'm going to do a really similar thing here.
+
+136
+00:09:14,330 --> 00:09:19,780
+I'm going to copy and paste this and then I'm going to create two more input functions later on there
+
+137
+00:09:19,820 --> 00:09:23,140
+we're going to use for evaluation.
+
+138
+00:09:23,230 --> 00:09:31,020
+So I'm going to basically rename this to train and put phunk and then set that equal to the same thing
+
+139
+00:09:31,020 --> 00:09:31,410
+here.
+
+140
+00:09:31,410 --> 00:09:36,120
+Let me zoom in or zoom out one level so we can kind of see a little bit more of all this.
+
+141
+00:09:36,300 --> 00:09:37,390
+So there's my input function.
+
+142
+00:09:37,390 --> 00:09:38,510
+There's my original one.
+
+143
+00:09:38,700 --> 00:09:45,350
+And now I have one almost the exact copy called Train funk except here I'm going to say that the number
+
+144
+00:09:45,380 --> 00:09:45,920
+epochs.
+
+145
+00:09:45,930 --> 00:09:49,920
+I want it to be trained on is specifically 1000.
+
+146
+00:09:49,920 --> 00:09:55,030
+And I also want to shuffle equal to false OK.
+
+147
+00:09:55,030 --> 00:09:55,830
+There we go.
+
+148
+00:09:57,600 --> 00:10:02,040
+And the reason I have a shuffle equals false here for this train is because I'm going to be using this
+
+149
+00:10:02,040 --> 00:10:06,870
+train input function for evaluation against a test input function.
+
+150
+00:10:06,960 --> 00:10:09,360
+So I'm actually going to copy this whole thing again.
+
+151
+00:10:11,670 --> 00:10:13,090
+Do shift enter.
+
+152
+00:10:13,110 --> 00:10:18,370
+Paste it but instead of being trained it's going to be tested and also it's going to be called evolves.
+
+153
+00:10:18,390 --> 00:10:20,860
+Kind of follow the same naming convention we have earlier.
+
+154
+00:10:21,090 --> 00:10:27,660
+And instead of X train this will be X evil and instead of Y train that will be y Ebell
+
+155
+00:10:30,730 --> 00:10:32,100
+OK perfect.
+
+156
+00:10:32,120 --> 00:10:33,950
+So we have these three input functions.
+
+157
+00:10:33,950 --> 00:10:36,710
+Our first step is to train the estimator.
+
+158
+00:10:36,710 --> 00:10:44,370
+So the way we do that is we say estimator that train and then you just pasand the input function that
+
+159
+00:10:44,370 --> 00:10:45,590
+you just created.
+
+160
+00:10:45,630 --> 00:10:47,600
+So say input phunk.
+
+161
+00:10:47,760 --> 00:10:53,100
+Now for this very first one we didn't actually specify the number of epoxy or steps we want it to run.
+
+162
+00:10:53,130 --> 00:10:58,000
+So we're going to do that here in the train so you can say input func and you can say steps.
+
+163
+00:10:58,020 --> 00:10:59,820
+So that's how we're going to have here.
+
+164
+00:10:59,820 --> 00:11:02,920
+We'll say run it for 1000 steps.
+
+165
+00:11:03,090 --> 00:11:04,300
+So we're going to run that.
+
+166
+00:11:04,350 --> 00:11:08,850
+Ill save it and then you should eventually see the steps running gives you information.
+
+167
+00:11:08,860 --> 00:11:14,430
+Mary these are errors essentially just reporting back what the final last step is et cetera slashed
+
+168
+00:11:14,430 --> 00:11:16,010
+the loss at each of these steps.
+
+169
+00:11:16,110 --> 00:11:21,720
+So you can see here we start with a huge loss 4:51 And very quickly we begin to die down.
+
+170
+00:11:21,720 --> 00:11:25,770
+It may come up and down as you continue training can see here kind of oscillates a little bit between
+
+171
+00:11:25,770 --> 00:11:31,900
+6 and 11 but eventually we get some sort of convergence to a loss here on our training set.
+
+172
+00:11:31,920 --> 00:11:34,010
+So we're able to train the estimator.
+
+173
+00:11:34,050 --> 00:11:39,690
+Now it's time to actually get some evaluation metrics and the estimator API also has nice methods or
+
+174
+00:11:39,690 --> 00:11:41,070
+convenience methods for that.
+
+175
+00:11:41,970 --> 00:11:44,720
+So I will zoom in on my time here so we can see that.
+
+176
+00:11:44,890 --> 00:11:51,560
+Let's go to get the metrics on the training data the way I'm going to do that is I will say train underscore
+
+177
+00:11:51,710 --> 00:11:59,000
+metrics and then off of this estimator object instead of saying like that up here train I'm going to
+
+178
+00:11:59,000 --> 00:12:06,080
+say evaluates and then I'm going to specify that my input function is now that train input function
+
+179
+00:12:06,750 --> 00:12:10,340
+and I'll say steps is equal to 1000.
+
+180
+00:12:10,340 --> 00:12:16,610
+So the reason I want this train input function instead of this input function is because since I'm using
+
+181
+00:12:16,610 --> 00:12:21,560
+this to evaluate I specifically don't want to shuffle this I want to make sure everything's in the same
+
+182
+00:12:21,620 --> 00:12:22,220
+order.
+
+183
+00:12:22,280 --> 00:12:27,980
+That way I can do the evaluation correctly and see how it performs against the true label.
+
+184
+00:12:27,980 --> 00:12:31,160
+So we're going to run that get those train metrics.
+
+185
+00:12:31,160 --> 00:12:33,830
+So depending on your computer this may take a little bit of time.
+
+186
+00:12:33,830 --> 00:12:36,020
+You should end up with some kind of huge output here.
+
+187
+00:12:36,170 --> 00:12:40,910
+And if this output is bothering you you can always click here on cell and say current output.
+
+188
+00:12:40,910 --> 00:12:44,680
+Clear your results will still exist but it will clear the output.
+
+189
+00:12:44,750 --> 00:12:50,360
+So I'll go ahead and run that again and keep the output there and then scroll down a little bit.
+
+190
+00:12:50,390 --> 00:12:52,290
+I have a pretty fast computer so keep that in mind.
+
+191
+00:12:52,310 --> 00:12:58,570
+Your results may not be as fast as mine next what we're going to do is the exact same thing will say
+
+192
+00:12:58,630 --> 00:12:59,660
+eveil metrics.
+
+193
+00:12:59,680 --> 00:13:08,740
+Essentially our test metrics so say estimator evaluates and then will say input function is equal to
+
+194
+00:13:08,770 --> 00:13:10,700
+my evil input function.
+
+195
+00:13:11,580 --> 00:13:14,490
+And then when you say steps as equal to 1000 here.
+
+196
+00:13:14,820 --> 00:13:15,920
+Let's run that again.
+
+197
+00:13:15,930 --> 00:13:20,310
+You kind of see this huge output and once that's done running what we can do is compare the results
+
+198
+00:13:20,670 --> 00:13:25,240
+on the evaluation of our training data in our test data.
+
+199
+00:13:25,410 --> 00:13:27,370
+We're going to scroll down here in order to do that.
+
+200
+00:13:27,540 --> 00:13:38,590
+And what we're going to do is we're going to say Prince the train metrics so that evaluation method
+
+201
+00:13:38,590 --> 00:13:44,350
+we just did or that evaluate method we just did has a nice output which is essentially like a dictionary
+
+202
+00:13:44,350 --> 00:13:49,940
+Sarno and say training data metrics.
+
+203
+00:13:49,990 --> 00:13:50,830
+Let's run that.
+
+204
+00:13:50,870 --> 00:13:52,490
+And so we can see our loss.
+
+205
+00:13:52,510 --> 00:13:56,130
+The average loss and then Globalstar which was something to find earlier.
+
+206
+00:13:56,260 --> 00:14:02,620
+Now that I understand my training data metrics I want to compare that to my tests or evaluation set
+
+207
+00:14:02,620 --> 00:14:03,450
+metrics.
+
+208
+00:14:03,520 --> 00:14:13,600
+So I will do the exact same thing here except I will print out evil metrics and then say print's evil
+
+209
+00:14:14,220 --> 00:14:15,440
+metrics.
+
+210
+00:14:15,670 --> 00:14:20,490
+And this is a really nice way to check if your model is overfitting to your training data.
+
+211
+00:14:20,560 --> 00:14:27,640
+A good indicator of your model being overfit to your training data is when you have a really low loss
+
+212
+00:14:27,650 --> 00:14:31,500
+on your training data but a really high loss on your evil data.
+
+213
+00:14:31,510 --> 00:14:35,680
+We want these to be basically as close as possible to each other.
+
+214
+00:14:35,680 --> 00:14:37,540
+That doesn't mean we want them both to be high.
+
+215
+00:14:37,540 --> 00:14:43,420
+We want them both to be low hopefully but a good sign that you're not overfitting is that your training
+
+216
+00:14:43,420 --> 00:14:46,380
+data loss is pretty similar to your test data loss.
+
+217
+00:14:46,390 --> 00:14:51,430
+You should always expect your evaluation cost to perform slightly worse than your training data.
+
+218
+00:14:51,430 --> 00:14:53,240
+Again this really depends on your data.
+
+219
+00:14:53,260 --> 00:14:58,460
+Uranium splits how much data you gave the training versus how much gave to test revaluation etc..
+
+220
+00:14:58,600 --> 00:15:05,140
+Lots of specific factors for your specific situation but in general you kind of want these to be relatively
+
+221
+00:15:05,140 --> 00:15:10,360
+similar and not way off from each other if you're training data metrics are much much better than your
+
+222
+00:15:10,420 --> 00:15:14,700
+evaluation or test data metrics that you're probably overfitting to your training data.
+
+223
+00:15:15,250 --> 00:15:21,730
+OK so we're almost done here except a really common question where we're creating models is the question
+
+224
+00:15:21,850 --> 00:15:24,350
+well how do I predict new values.
+
+225
+00:15:24,400 --> 00:15:28,040
+The metrics are nice but let's say actually wanted to play this thing.
+
+226
+00:15:28,060 --> 00:15:35,290
+How do we get those new values those predicted values well that show you are going to create a new input
+
+227
+00:15:35,290 --> 00:15:46,040
+function called input Ethen predict and it's going to be T.F. estimator inputs again a PI input function
+
+228
+00:15:46,700 --> 00:15:51,250
+and I'm going to pass in test or new data here.
+
+229
+00:15:51,320 --> 00:15:52,940
+So what does that actually mean.
+
+230
+00:15:52,940 --> 00:15:58,670
+Well let's say I have some new data of X Remember we're doing just a simple linear regression.
+
+231
+00:15:58,670 --> 00:16:03,170
+So I'm going to say my brand new data to predict.
+
+232
+00:16:03,220 --> 00:16:08,680
+So given some x value what is its corresponding y label according to your model.
+
+233
+00:16:08,770 --> 00:16:16,340
+So we're going to say my brand new data is P Lynde's space 0 10 10 points here.
+
+234
+00:16:16,500 --> 00:16:21,810
+So these are 10 points that my model has never seen before and they're conveniently linearly spaced
+
+235
+00:16:21,890 --> 00:16:27,570
+again you kind of play around these values here but this essentially brand new data the model has never
+
+236
+00:16:27,570 --> 00:16:29,150
+really seen these data points before.
+
+237
+00:16:29,280 --> 00:16:31,730
+In a sense it kind of has depending on how you created data.
+
+238
+00:16:31,890 --> 00:16:34,490
+But we're going to pretend like it's never seen before.
+
+239
+00:16:34,620 --> 00:16:39,350
+So we have our input function to predict and we're going to pass that in as X here.
+
+240
+00:16:39,360 --> 00:16:50,190
+Our brand new data so brand new data and then we're also going to do here is say shuffle is false so
+
+241
+00:16:50,230 --> 00:16:54,100
+say shuffle is equal to false.
+
+242
+00:16:54,350 --> 00:16:54,990
+We'll run that.
+
+243
+00:16:54,990 --> 00:16:56,770
+So now we have an input function to predict.
+
+244
+00:16:56,780 --> 00:17:02,210
+So we're going to say estimator and instead of saying train or evaluate the final method I want to show
+
+245
+00:17:02,210 --> 00:17:08,330
+you is the Predict method where you just pass in that input function predicts.
+
+246
+00:17:08,340 --> 00:17:13,680
+So the difference between this T.F. estimator input that we created versus the previous ones is here
+
+247
+00:17:13,740 --> 00:17:17,580
+I'm passing brand new data that I want to predict for.
+
+248
+00:17:17,610 --> 00:17:20,700
+So let's go ahead and run this.
+
+249
+00:17:20,700 --> 00:17:25,320
+And you'll notice it's a generator object which means if I actually want to see the results I need to
+
+250
+00:17:25,620 --> 00:17:31,230
+either iterate through this or conveniently I can cast that to a list and then I'll see a list of all
+
+251
+00:17:31,230 --> 00:17:34,200
+the predictions and here we have it.
+
+252
+00:17:34,190 --> 00:17:39,860
+It basically returns a list of dictionaries where the key is predictions and we have some sort of array
+
+253
+00:17:39,860 --> 00:17:43,550
+value as well as the data type that it is.
+
+254
+00:17:43,550 --> 00:17:47,340
+So let's actually kind of plot these out and see how we did.
+
+255
+00:17:47,450 --> 00:17:57,700
+So what we could do is say we'll say predictions is equal to an empty list Scalzo be an array and then
+
+256
+00:17:57,700 --> 00:18:07,550
+I'm going to say for pred in estimator predict actually I'm going to copy and paste from here.
+
+257
+00:18:07,580 --> 00:18:18,370
+So basically in that list so for prediction created by this generator objects I'm going to say predictions
+
+258
+00:18:19,210 --> 00:18:21,730
+and I'm going to append x.
+
+259
+00:18:21,730 --> 00:18:22,730
+Whoops.
+
+260
+00:18:22,850 --> 00:18:26,850
+Fred predictions.
+
+261
+00:18:27,070 --> 00:18:32,860
+The reason I'm doing this append operation here is because remember each of these items is a dictionary.
+
+262
+00:18:32,860 --> 00:18:38,800
+So in calling the predictions key which is going to return that array value it predicted for it and
+
+263
+00:18:38,800 --> 00:18:41,380
+then I'm going to run that.
+
+264
+00:18:41,590 --> 00:18:44,860
+And then we should be able to see a nice list of predictions.
+
+265
+00:18:44,920 --> 00:18:45,790
+So great.
+
+266
+00:18:45,790 --> 00:18:49,180
+There is my array Let's actually plot these out and see how we did.
+
+267
+00:18:49,630 --> 00:18:56,620
+So I will say my data are going to sample an equal to 250 here.
+
+268
+00:18:56,820 --> 00:19:00,070
+And let's go in and do a random scatter plot again like we did last time.
+
+269
+00:19:01,290 --> 00:19:12,170
+So scatter where x is equal to x data and Y is equal to y so remember those are our samples here.
+
+270
+00:19:13,140 --> 00:19:16,920
+And let's do a plot based off of our predictions.
+
+271
+00:19:16,920 --> 00:19:24,730
+So I'm going to say N.P. when space actually I could just pass in our brand new data that we have so
+
+272
+00:19:25,360 --> 00:19:32,560
+that brand new data plotted out our predictions and then let's make it a red line and you can see we
+
+273
+00:19:32,560 --> 00:19:35,860
+have kind of the same linear fit we predicted last time.
+
+274
+00:19:35,890 --> 00:19:37,960
+Now we can even do the points themselves.
+
+275
+00:19:37,960 --> 00:19:42,150
+So these are the points I predicted according to my model you could see here is essentially falling
+
+276
+00:19:42,160 --> 00:19:45,010
+that Weikel said it's supposed be that we did earlier.
+
+277
+00:19:45,010 --> 00:19:46,960
+So that is how you use the S-meter object.
+
+278
+00:19:46,960 --> 00:19:49,510
+Let's quickly do a review of everything we just did.
+
+279
+00:19:49,720 --> 00:19:53,890
+And if it's still a little fuzzy to you don't worry we're going to do a classification example that
+
+280
+00:19:53,890 --> 00:19:55,640
+uses a T.F. estimator API.
+
+281
+00:19:55,870 --> 00:19:57,940
+And I think that's going to make it a lot clearer.
+
+282
+00:19:57,940 --> 00:20:03,220
+This was pretty confusing to me personally when I first saw it but once I went through a couple of examples
+
+283
+00:20:03,280 --> 00:20:06,850
+it became a lot clearer and the workflow became really clear.
+
+284
+00:20:06,910 --> 00:20:09,910
+So we won't be using the estimator API beyond this section.
+
+285
+00:20:09,910 --> 00:20:10,960
+Not really.
+
+286
+00:20:10,980 --> 00:20:16,680
+Said We're going to be using kind of the more thorough way with the placeholders the variables etc..
+
+287
+00:20:16,750 --> 00:20:21,720
+But I do want you to be aware in case you ever plan to use tensor flow for simpler tasks such as regression
+
+288
+00:20:21,740 --> 00:20:23,200
+classification.
+
+289
+00:20:23,350 --> 00:20:25,990
+The S-meter API is really useful here.
+
+290
+00:20:26,110 --> 00:20:32,590
+So really quick review we have to create the list of feature columns and every item in this list does
+
+291
+00:20:32,590 --> 00:20:36,420
+a special feature called Call where either you have a numeric column.
+
+292
+00:20:36,430 --> 00:20:40,630
+Maybe you have a categorical column and we'll show you how to create those later and then you provide
+
+293
+00:20:40,630 --> 00:20:42,320
+it with a key as well as a shape.
+
+294
+00:20:42,580 --> 00:20:47,680
+Then you actually create your estimator later on we'll show you how to do more complicated estimators
+
+295
+00:20:47,680 --> 00:20:51,270
+such as a dense neural network classifier or aggressor.
+
+296
+00:20:51,400 --> 00:20:53,530
+Then we do a train test split.
+
+297
+00:20:53,530 --> 00:20:57,400
+You should really be doing this regardless of using T.F. estimator or not.
+
+298
+00:20:57,690 --> 00:20:59,990
+Then we actually create some input functions.
+
+299
+00:21:00,060 --> 00:21:02,840
+I create an input function based on my training data.
+
+300
+00:21:02,860 --> 00:21:09,790
+Then I create two more input functions one for my training data one for my test data and the main difference
+
+301
+00:21:09,790 --> 00:21:14,880
+there is I'm telling it not to shuffle it that way my evaluations are an order then I train the data
+
+302
+00:21:15,040 --> 00:21:17,560
+on that first input function based off the training data.
+
+303
+00:21:17,560 --> 00:21:21,180
+Once that's done I can evaluate my training data metrics.
+
+304
+00:21:21,190 --> 00:21:27,260
+I can also evaluate my eveil metrics which is basically going to calculate the loss function for me.
+
+305
+00:21:27,490 --> 00:21:32,350
+So then it reports back the last this is a nice way to check for overfitting if I ever want to predict
+
+306
+00:21:32,460 --> 00:21:38,500
+off of New data points I can just create a new input function for prediction where I passen the data
+
+307
+00:21:38,500 --> 00:21:40,020
+values I want to predict for.
+
+308
+00:21:40,120 --> 00:21:45,160
+And then I can say shuffle is equal to false then I call a scimitar that predict which remember is a
+
+309
+00:21:45,160 --> 00:21:50,650
+generator object seen in either case as a list or if you want just iterate through it and then append
+
+310
+00:21:50,650 --> 00:21:55,540
+the new results and then we can plot them out to a histogram whatever you really want to do.
+
+311
+00:21:55,540 --> 00:21:56,140
+OK.
+
+312
+00:21:56,360 --> 00:21:57,670
+Put those interesting to you.
+
+313
+00:21:57,670 --> 00:22:01,870
+Again if you're a little fuzzy on this don't worry the classification examples going to clear up even
+
+314
+00:22:01,870 --> 00:22:02,690
+further.
+
+315
+00:22:02,690 --> 00:22:03,410
+I'll see you there.
+

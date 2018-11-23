@@ -1,0 +1,340 @@
+1
+00:00:05,590 --> 00:00:06,750
+Welcome back everyone.
+
+2
+00:00:06,790 --> 00:00:11,430
+To finish off this section of the course we're going to manually create in your own network and what
+
+3
+00:00:11,440 --> 00:00:16,450
+I mean by the word manual is we won't be using it frameworks such as tents or flow instead of we're
+
+4
+00:00:16,450 --> 00:00:22,270
+going to be doing is trying to mimic sensor flow ourselves by manually coding out the classes and functions
+
+5
+00:00:22,280 --> 00:00:27,580
+needed doing this before we actually use the tense flow of framework is really going to help build a
+
+6
+00:00:27,580 --> 00:00:29,630
+nice foundation for your understanding.
+
+7
+00:00:29,680 --> 00:00:35,290
+We're not going to build out something very complex here it's going to be a very primitive neural network
+
+8
+00:00:35,320 --> 00:00:40,570
+but it should really help you for the future section when we actually show a lot of the same class names
+
+9
+00:00:40,570 --> 00:00:43,100
+and functions used with tensor flow.
+
+10
+00:00:43,360 --> 00:00:44,620
+Let's go ahead and get started.
+
+11
+00:00:44,740 --> 00:00:49,360
+We're going to start off a really brief overview of object oriented programming and the super keyword
+
+12
+00:00:49,450 --> 00:00:50,490
+in Python.
+
+13
+00:00:50,500 --> 00:00:52,440
+Let's open up a new Jupiter notebook.
+
+14
+00:00:52,450 --> 00:00:56,780
+All right so let's start off of a really quick overview of object oriented programming.
+
+15
+00:00:56,800 --> 00:00:58,390
+Nothing too crazy here.
+
+16
+00:00:58,720 --> 00:01:02,570
+And then we'll also show the super keywords and we're going to be using it later on.
+
+17
+00:01:02,830 --> 00:01:07,660
+So to create your own objects in Python you just have the class keyword and then you can create something
+
+18
+00:01:07,660 --> 00:01:14,260
+like a simple class and then inside of this when you have functions here instead of a closter called
+
+19
+00:01:14,260 --> 00:01:20,300
+methods and you always start off this method which kind of initializes the class and then Ill always
+
+20
+00:01:20,300 --> 00:01:22,180
+take in a soft keyword.
+
+21
+00:01:22,460 --> 00:01:27,480
+So it's code to make a really simple one that just says Prince Hello.
+
+22
+00:01:28,130 --> 00:01:28,450
+OK.
+
+23
+00:01:28,450 --> 00:01:30,450
+So those are simple class.
+
+24
+00:01:30,580 --> 00:01:35,790
+So if I say S is equal to the string let's say world.
+
+25
+00:01:35,820 --> 00:01:40,850
+I can see hey the type of s it says some sort of string object.
+
+26
+00:01:40,870 --> 00:01:47,560
+And if I do s dot and then hit tab here I can see the various methods and attributes that are available
+
+27
+00:01:47,560 --> 00:01:49,040
+for that object.
+
+28
+00:01:49,060 --> 00:01:54,300
+So let's try this for an object that we created will say x is equal to a simple class.
+
+29
+00:01:54,400 --> 00:01:59,910
+And if you don't have any princes there and then you type in X it's going to say hey it's a simple class.
+
+30
+00:01:59,950 --> 00:02:05,510
+If you actually want to create an instance of a simple class you have these princes right here.
+
+31
+00:02:05,680 --> 00:02:14,530
+So let's run this again and then I see hello because this method executes upon a creation of an instance
+
+32
+00:02:14,650 --> 00:02:15,820
+of this class.
+
+33
+00:02:15,820 --> 00:02:20,920
+So it says hello and then if I check x that says hey simple class at.
+
+34
+00:02:20,950 --> 00:02:25,870
+And it points to a specific point in your computer's memory saying hey this is actually an instance
+
+35
+00:02:25,870 --> 00:02:32,290
+of this class simple class because it's not just me it's simple class it's living at this part in your
+
+36
+00:02:32,290 --> 00:02:34,120
+computer's memory.
+
+37
+00:02:34,120 --> 00:02:39,270
+So very basics of creating a class there let's go in and delete these cells.
+
+38
+00:02:39,270 --> 00:02:42,900
+All right let's go ahead and add another method to our simple class.
+
+39
+00:02:43,350 --> 00:02:50,940
+We'll say the IF and we'll just have it be called Yele and yell isn't really going to do anything except
+
+40
+00:02:51,040 --> 00:02:59,460
+printouts yelling so again and when I say x is equal to a new instance of simple class and it's going
+
+41
+00:02:59,460 --> 00:03:07,220
+to say hello and then went to X dot tab it will autocomplete yell and then it will say yelling.
+
+42
+00:03:07,230 --> 00:03:11,280
+So now I have my method here of this simple class.
+
+43
+00:03:11,280 --> 00:03:13,180
+Ok now that I have that simple class working.
+
+44
+00:03:13,230 --> 00:03:18,980
+Let's go ahead and create in other class and we'll call this extended class.
+
+45
+00:03:20,730 --> 00:03:25,170
+You can really call it whatever you want but the reason I'm calling extend that class is because I'm
+
+46
+00:03:25,170 --> 00:03:32,940
+going to essentially extend or inherit from the simple class so have simple class.
+
+47
+00:03:32,950 --> 00:03:40,020
+There and then I'm going to say the F underscore underscore in it or underscore pasand sulfur again
+
+48
+00:03:40,830 --> 00:03:46,750
+in here it's just going to print out extend.
+
+49
+00:03:46,830 --> 00:03:53,340
+So let's go ahead and say why is equal to an instance of this extended class.
+
+50
+00:03:53,510 --> 00:03:56,120
+And now we see extend.
+
+51
+00:03:56,120 --> 00:04:00,890
+Now notice what happened here is that we only saw extend but even if we inherited from simple class
+
+52
+00:04:01,190 --> 00:04:01,870
+we didn't see.
+
+53
+00:04:01,880 --> 00:04:02,620
+Hello.
+
+54
+00:04:02,900 --> 00:04:06,830
+Now this inheritance does allow us to use methods from simple class.
+
+55
+00:04:06,830 --> 00:04:12,050
+So even though I don't have a Yale method inside of this extended class it's only inside a simple class
+
+56
+00:04:12,890 --> 00:04:18,710
+this variable y if I say y dots tab it still has yellow attached to it.
+
+57
+00:04:18,770 --> 00:04:20,720
+Then it will still say yelling.
+
+58
+00:04:20,780 --> 00:04:27,630
+So now the question arises How can I make this in a special method also execute inside of the success
+
+59
+00:04:27,630 --> 00:04:28,450
+of the class.
+
+60
+00:04:28,550 --> 00:04:32,970
+And the way you do that is through the super keyword.
+
+61
+00:04:33,290 --> 00:04:40,490
+So when I call super Here it basically tells Python hey go grab whatever class I'm inheriting from and
+
+62
+00:04:40,490 --> 00:04:48,710
+then I can say Dot underscore underscore in its underscore underscore close parentheses and then run
+
+63
+00:04:48,710 --> 00:04:50,370
+this out and run.
+
+64
+00:04:50,390 --> 00:04:55,880
+Extend that class again and going to see how low an extent because I basically said hey go ahead and
+
+65
+00:04:56,660 --> 00:05:01,010
+run the init method of this simple class and then it prints out Hello.
+
+66
+00:05:01,010 --> 00:05:10,320
+And if this hello took in arguments for example it says take an argument name and we go ahead and concatenate
+
+67
+00:05:10,320 --> 00:05:16,230
+that name Runcible simple class again to make sure those changes are saved.
+
+68
+00:05:16,250 --> 00:05:22,810
+Now if I run it here I can provide a name to run that again and they will say hello Jose.
+
+69
+00:05:23,150 --> 00:05:23,460
+OK.
+
+70
+00:05:23,480 --> 00:05:25,630
+So that's the very basics.
+
+71
+00:05:25,640 --> 00:05:28,250
+Just very quick overview of object oriented programming.
+
+72
+00:05:28,280 --> 00:05:31,900
+Hopefully I've already encountered object oriented programming before.
+
+73
+00:05:32,030 --> 00:05:35,650
+This is really more an overview of this super keyword and O.P..
+
+74
+00:05:35,780 --> 00:05:41,450
+If you're totally unfamiliar O.P. you may want to go back and check that out in a more normal Python
+
+75
+00:05:41,450 --> 00:05:44,030
+course instead of a steep learning course.
+
+76
+00:05:44,030 --> 00:05:44,700
+All right.
+
+77
+00:05:44,780 --> 00:05:50,870
+Coming up next we're going to do is discuss operations and we're going to basically make our own operation
+
+78
+00:05:50,870 --> 00:05:55,660
+which is a node in a graph and senseful is also going to use this concept of a graph.
+
+79
+00:05:55,670 --> 00:05:59,930
+So once we have that operation class that we create We're going to create couple of example operations
+
+80
+00:06:00,200 --> 00:06:03,800
+such as additional placation and matrix multiplication.
+
+81
+00:06:03,890 --> 00:06:09,410
+Afterwards we'll create placeholders variables in our own graph class and then we'll be able to actually
+
+82
+00:06:09,410 --> 00:06:12,710
+create a very very simple neural network.
+
+83
+00:06:12,720 --> 00:06:13,010
+All right.
+
+84
+00:06:13,010 --> 00:06:15,320
+So we'll do all of that in the next lecture.
+
+85
+00:06:15,320 --> 00:06:16,570
+Thanks and I'll see you there.
+

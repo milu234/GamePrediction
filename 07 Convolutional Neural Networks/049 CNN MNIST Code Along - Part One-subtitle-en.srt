@@ -1,0 +1,952 @@
+1
+00:00:05,390 --> 00:00:11,090
+Hello everyone and welcome to the data convolutional neural network code along in this lecture.
+
+2
+00:00:11,120 --> 00:00:15,770
+We're going to connect the theory ideas that we previously talked about to actual implementation of
+
+3
+00:00:15,770 --> 00:00:17,200
+code intenser flow.
+
+4
+00:00:17,420 --> 00:00:20,690
+Let's open up a Jupiter notebook and get started all right.
+
+5
+00:00:20,690 --> 00:00:26,420
+So the first thing I'm going to do is import sensor flow of course as T.F. and then I'm going to set
+
+6
+00:00:26,420 --> 00:00:28,020
+up the data just like we did before.
+
+7
+00:00:28,070 --> 00:00:33,210
+We'll say from tensor flow examples tutorials.
+
+8
+00:00:33,460 --> 00:00:42,020
+This import our input data then we'll say this is equal to input data function and then we're going
+
+9
+00:00:42,020 --> 00:00:47,290
+to call read data sets off this and then it makes the pass in the correct location.
+
+10
+00:00:47,330 --> 00:00:51,250
+Otherwise you may accidently redounded everything instead of just extracting it.
+
+11
+00:00:53,040 --> 00:00:53,450
+OK.
+
+12
+00:00:53,470 --> 00:00:55,260
+And we'll set one hot equal to true.
+
+13
+00:00:55,270 --> 00:00:56,460
+Just like we did before.
+
+14
+00:00:56,710 --> 00:00:58,680
+So now I have my data set.
+
+15
+00:00:58,690 --> 00:01:01,270
+I'm first going to create a couple of helper functions.
+
+16
+00:01:01,330 --> 00:01:02,610
+Zoom in one level here.
+
+17
+00:01:03,100 --> 00:01:09,130
+So I'll create a couple of helper functions and I'm first going to create a helper function that will
+
+18
+00:01:09,130 --> 00:01:10,950
+help me initialize the weights.
+
+19
+00:01:12,500 --> 00:01:13,470
+Of a layer.
+
+20
+00:01:13,470 --> 00:01:18,120
+The next one is going to help initialize the bias of a layer and then we'll have some other ones that
+
+21
+00:01:18,120 --> 00:01:21,620
+do return a to deconvolution.
+
+22
+00:01:21,930 --> 00:01:27,600
+So basically taking a tensor and taking a filter and apply it as a convolution and then also do a pooling
+
+23
+00:01:28,700 --> 00:01:29,840
+helper function.
+
+24
+00:01:29,840 --> 00:01:34,360
+After that we should have enough to actually build out functions that create layers themselves.
+
+25
+00:01:34,370 --> 00:01:40,910
+So let me do a couple of cells here and then start initializing weights so initializing weights is pretty
+
+26
+00:01:40,910 --> 00:01:41,720
+straightforward.
+
+27
+00:01:43,310 --> 00:01:47,250
+Going to create a function called initialize weights and then it just takes a shape which will provide
+
+28
+00:01:47,250 --> 00:01:48,090
+later on.
+
+29
+00:01:48,090 --> 00:01:55,400
+Depending on the size of your images and the size of sensors so I'll say it ran them distribution.
+
+30
+00:01:55,400 --> 00:02:00,860
+So I to just grabbed the weights from a random tradition and the distribution I'm going to use is a
+
+31
+00:02:00,860 --> 00:02:02,870
+truncated a normal distribution.
+
+32
+00:02:03,800 --> 00:02:07,710
+It's going to have the same shape and if you do shift tab here it can tell you you can apply mean standard
+
+33
+00:02:07,720 --> 00:02:08,870
+deviation etc..
+
+34
+00:02:08,980 --> 00:02:12,560
+We'll keep them around zero but we don't want such a high standard deviation.
+
+35
+00:02:12,700 --> 00:02:19,460
+So say 0.1 and then I'm going to return as a variable.
+
+36
+00:02:19,920 --> 00:02:26,090
+These weights so T.F. thought variable in its random distribution.
+
+37
+00:02:27,970 --> 00:02:33,310
+The next thing we're going to do is create a function that will initiate the bias values we'll see in
+
+38
+00:02:33,320 --> 00:02:34,540
+a bias.
+
+39
+00:02:34,600 --> 00:02:38,440
+It just takes in a shape and we'll say in bias.
+
+40
+00:02:38,510 --> 00:02:44,260
+Vowels are equal to and in this case we'll just have them all be the same value we'll just have them
+
+41
+00:02:44,330 --> 00:02:49,970
+all be constants of we'll say 0.1 and we'll have the shape be the shape.
+
+42
+00:02:49,980 --> 00:02:54,960
+So these are just constants and we're going to return them as a variable just as we see them in the
+
+43
+00:02:54,960 --> 00:02:56,670
+past.
+
+44
+00:02:56,700 --> 00:02:59,090
+So those are only in it by his vowels.
+
+45
+00:02:59,670 --> 00:03:06,270
+OK so we have our Random weights and we initialize the biases all 0.1 and they all taken a shape depending
+
+46
+00:03:06,330 --> 00:03:08,160
+on the tensor.
+
+47
+00:03:08,160 --> 00:03:13,450
+Up next we want to convenience function that helps create that 2D convolution.
+
+48
+00:03:13,590 --> 00:03:19,260
+So there already is a nice convenient function within tensor flow that automatically creates a to the
+
+49
+00:03:19,260 --> 00:03:20,300
+convolution.
+
+50
+00:03:20,370 --> 00:03:26,640
+What it does is it takes in an input tensor and an input kernel or filter tensor and then performs the
+
+51
+00:03:26,640 --> 00:03:30,780
+convolution on it depending on what strides and what padding you provide.
+
+52
+00:03:30,780 --> 00:03:34,730
+So what we're essentially going to do is create a little bit of a wrapper around it.
+
+53
+00:03:36,590 --> 00:03:38,710
+That sets the parameters for us.
+
+54
+00:03:38,780 --> 00:03:43,090
+So I'm going to create a function called seal on the to the.
+
+55
+00:03:43,310 --> 00:03:45,450
+And it takes in an X and a W.
+
+56
+00:03:45,510 --> 00:03:50,940
+So what does X and W X that's going to be our actual input tensor.
+
+57
+00:03:51,000 --> 00:03:53,510
+So the shape of that is going to be the batch.
+
+58
+00:03:53,520 --> 00:03:59,520
+So that's that batch of actual images that will have the height of the images the width of the images
+
+59
+00:03:59,610 --> 00:04:01,650
+and then the channels.
+
+60
+00:04:01,650 --> 00:04:05,640
+So these channels if it's grayscale are just going to be one grayscale channel.
+
+61
+00:04:05,640 --> 00:04:08,850
+If it's red green blue or a color image will have multiple channels there.
+
+62
+00:04:09,120 --> 00:04:14,990
+So this is essentially just the input data and then W is going to be that kernel.
+
+63
+00:04:15,170 --> 00:04:16,710
+Remember back to that grid.
+
+64
+00:04:16,800 --> 00:04:26,930
+And this is going to have the definitions of the heights all say filter heights then filter with then
+
+65
+00:04:27,230 --> 00:04:36,020
+the number of channels that are coming in and then the number of channels you want out.
+
+66
+00:04:36,100 --> 00:04:44,220
+So then we're going to return our built in intenser flow to the convolutions you can see here is a bunch
+
+67
+00:04:44,220 --> 00:04:45,610
+of convolutions already built in.
+
+68
+00:04:45,630 --> 00:04:52,440
+So each month the basic to the convolution we pass in the input sensor passenger filter and then there's
+
+69
+00:04:52,440 --> 00:04:56,830
+two parameters we want to set here which is why we're doing this as a convenient function.
+
+70
+00:04:56,880 --> 00:04:58,710
+The first one is strides.
+
+71
+00:04:58,710 --> 00:05:02,480
+So what strides do we want to take each way in each dimension.
+
+72
+00:05:02,520 --> 00:05:06,920
+In this case we're going to do pretty vanilla just ones in every direction.
+
+73
+00:05:07,350 --> 00:05:12,100
+And then the last one I want to do is padding so there are essentially two codes we can do here.
+
+74
+00:05:12,330 --> 00:05:14,030
+One is valid and one is same.
+
+75
+00:05:14,280 --> 00:05:18,620
+So if you want to make sure that the size is the same then you can pad it with zeros.
+
+76
+00:05:18,660 --> 00:05:23,190
+So we'll go ahead and do zero padding which the string code for that is same.
+
+77
+00:05:23,190 --> 00:05:25,680
+And you can check out if you do shift tab here.
+
+78
+00:05:25,700 --> 00:05:27,660
+It has the full docstring for this.
+
+79
+00:05:27,720 --> 00:05:30,330
+That explains the various codes and what they mean.
+
+80
+00:05:30,330 --> 00:05:32,770
+So eventually come down here it says padding.
+
+81
+00:05:32,880 --> 00:05:37,980
+You have same and valid and you can go to the documentation tells you what padding out room to use or
+
+82
+00:05:38,040 --> 00:05:40,290
+what Same counts and what value count says.
+
+83
+00:05:40,290 --> 00:05:41,580
+So we just want the same size.
+
+84
+00:05:41,590 --> 00:05:48,050
+So this basically zeros out that padding or adds in the zeros for the padding.
+
+85
+00:05:48,180 --> 00:05:50,460
+Then up next we're going to have our pooling layer.
+
+86
+00:05:50,580 --> 00:05:53,940
+So this pooling is going to be another convenience function.
+
+87
+00:05:53,940 --> 00:05:55,730
+Basically the same as we did here.
+
+88
+00:05:55,770 --> 00:06:00,180
+So there's already a tensor flow pooling function that does this for us and we're going to add in some
+
+89
+00:06:00,180 --> 00:06:03,240
+parameters as a bit of a convenience for us.
+
+90
+00:06:03,240 --> 00:06:08,970
+So we'll do a max pooling rumor that basically has this little grid and it grabs the max value in that
+
+91
+00:06:08,970 --> 00:06:11,910
+grid by a certain stride.
+
+92
+00:06:12,680 --> 00:06:20,350
+So I'll say this is a two by two max pooling it takes in some tensor X and this X is the same X that
+
+93
+00:06:20,350 --> 00:06:21,660
+we just described.
+
+94
+00:06:21,670 --> 00:06:28,260
+So this X is just going to be the Bachche the heights the width and the channels here.
+
+95
+00:06:28,270 --> 00:06:35,250
+So it's that the tensor and then we're going to return the convenience function that's already built
+
+96
+00:06:35,340 --> 00:06:40,030
+into sensor flow so sensor already has the max pool.
+
+97
+00:06:40,390 --> 00:06:47,230
+And this takes in the actual tensor you want to apply this to and then it has a couple of parameters
+
+98
+00:06:47,230 --> 00:06:52,010
+case size strides and then padding.
+
+99
+00:06:52,030 --> 00:06:56,890
+So we already know what padding is that just pads it was duros sold put the same code there and then
+
+100
+00:06:56,890 --> 00:07:03,300
+we have case size and Streitz so case size is the size of the window for each dimension of the input
+
+101
+00:07:03,300 --> 00:07:09,360
+sensor and strides is the stride of the sliding window for each dimension of the input sensor.
+
+102
+00:07:09,400 --> 00:07:15,700
+Remember our input tensor is going to be a bunch of images so that's that batch dimension that we have
+
+103
+00:07:15,700 --> 00:07:20,690
+the height and width of an individual image and then the color channel.
+
+104
+00:07:20,740 --> 00:07:27,160
+So the only that basically pooling that I want to do is along the height and width of an individual
+
+105
+00:07:27,190 --> 00:07:33,190
+image which means as far as the size is concerned I'm going to do a one that I'm going to have a two
+
+106
+00:07:33,190 --> 00:07:35,220
+by two along the height and width.
+
+107
+00:07:35,320 --> 00:07:36,710
+So that's the actual pooling.
+
+108
+00:07:36,940 --> 00:07:41,140
+And then a again along the channels and I'm going to do the same thing for streite.
+
+109
+00:07:41,140 --> 00:07:42,730
+So we're going to stride by two.
+
+110
+00:07:42,990 --> 00:07:49,740
+So say one two by two and then one again and whoops there he goes.
+
+111
+00:07:49,750 --> 00:07:51,540
+There are my strides.
+
+112
+00:07:51,580 --> 00:07:56,140
+So again we're only really concerned as far as the pooling along in individual images height and width
+
+113
+00:07:56,200 --> 00:08:01,830
+which is why we're getting these images of 1 2 2 1 and 1 2 2 1.
+
+114
+00:08:02,090 --> 00:08:07,560
+So now we have our convenience functions that basically already set these parameters for us that we
+
+115
+00:08:07,580 --> 00:08:09,240
+don't need to provide them every time.
+
+116
+00:08:09,280 --> 00:08:14,000
+All we need to do now is call our little shorter functions instead of calling these long ones with these
+
+117
+00:08:14,000 --> 00:08:16,300
+parameters over and over again.
+
+118
+00:08:16,310 --> 00:08:20,470
+Now we're going to create two functions where we actually create the layers.
+
+119
+00:08:20,510 --> 00:08:26,220
+So the first one is going to be the convolutional air.
+
+120
+00:08:26,270 --> 00:08:35,380
+So this function in fact we'll just call it convolutional layer is going to take some input X and then
+
+121
+00:08:35,380 --> 00:08:47,400
+the shape parameter so we'll create the weights by asking in weights with the shape and the biases are
+
+122
+00:08:47,400 --> 00:08:49,860
+just going to run along the third dimension.
+
+123
+00:08:49,860 --> 00:08:57,020
+So I'll say it biases and then we're just going to pass in shape three here.
+
+124
+00:08:58,990 --> 00:09:04,580
+And then I'm going to return T.F. tensor flow and.
+
+125
+00:09:04,860 --> 00:09:08,220
+I'm going to use a rectified linear unit as the activation function.
+
+126
+00:09:08,220 --> 00:09:21,410
+So say r e l you and I'm going to pass in the to the convolution of input X with those weights Plus
+
+127
+00:09:21,410 --> 00:09:29,750
+the biased terms and that's my convolutional layer then I'm going to do just a normal layer or essentially
+
+128
+00:09:29,750 --> 00:09:31,250
+a fully connected layer.
+
+129
+00:09:33,640 --> 00:09:38,850
+So we'll make this function say normal full layer.
+
+130
+00:09:39,760 --> 00:09:50,600
+And this is going to take in some input layer of a size and we'll say the input size is equal to the
+
+131
+00:09:50,600 --> 00:09:54,910
+integer of the input layer.
+
+132
+00:09:55,140 --> 00:10:05,790
+And we want to get the shape of the index one they mention will say w initialize the weights and then
+
+133
+00:10:05,820 --> 00:10:14,400
+we're going to pass passen input size by size to create that layer and then we'll say B is equal to
+
+134
+00:10:16,050 --> 00:10:18,830
+initialize by its size.
+
+135
+00:10:19,480 --> 00:10:22,670
+And we're going to return T.F. makes for small allocation.
+
+136
+00:10:22,670 --> 00:10:26,580
+Remember this is just a normal fully connected layer of the input layer.
+
+137
+00:10:26,610 --> 00:10:33,800
+It's times the weights Plus the buys strips.
+
+138
+00:10:34,330 --> 00:10:40,000
+So now we have two functions one creates a convolutional air one creates a normal fully connected layer.
+
+139
+00:10:40,210 --> 00:10:46,360
+So it's time to actually build out multiple layers along with the placeholders do a loss function do
+
+140
+00:10:46,360 --> 00:10:50,110
+an optimizer initialize the variables and run the session.
+
+141
+00:10:50,110 --> 00:10:55,000
+I would say the hardest part of all of this is keeping in mind your dimensions.
+
+142
+00:10:55,000 --> 00:10:58,700
+Once you do this multiple times if image sets you start to get pretty.
+
+143
+00:10:58,690 --> 00:11:02,890
+So this idea of these for them actions just across the board you have your batch your height your with
+
+144
+00:11:02,890 --> 00:11:07,570
+your channels but in the very beginning it can be hard to keep track or just try to visualize these
+
+145
+00:11:07,600 --> 00:11:12,580
+kind of for the tensors floating around in the layers so it definitely takes a lot of practice as a
+
+146
+00:11:12,580 --> 00:11:16,450
+quick note to kind of understand these dimensions and have them be intuitive.
+
+147
+00:11:16,450 --> 00:11:17,940
+It's definitely not intuitive at first.
+
+148
+00:11:17,950 --> 00:11:23,160
+At least it wasn't for me when I was first starting out but now it's go ahead and start building out
+
+149
+00:11:23,290 --> 00:11:25,210
+our convolutional all that work.
+
+150
+00:11:25,210 --> 00:11:28,930
+So the first thing we're going to do here is create our placeholders.
+
+151
+00:11:29,380 --> 00:11:33,330
+So we have X is going to be a placeholder.
+
+152
+00:11:33,340 --> 00:11:41,350
+This is our actual data so I'll say to 32 and we'll see the shape we'll say none because that's the
+
+153
+00:11:41,350 --> 00:11:42,500
+size of that batch.
+
+154
+00:11:42,520 --> 00:11:46,060
+And then 784 because that's how many pixels are in the data.
+
+155
+00:11:46,090 --> 00:11:48,700
+So that's 28 times 28.
+
+156
+00:11:49,130 --> 00:11:50,230
+Then we have y true.
+
+157
+00:11:50,240 --> 00:11:53,830
+These are the y true labels remember it's one encoded.
+
+158
+00:11:54,110 --> 00:12:01,310
+Which means when I say to flip 32 I'll pass in the shape as none because it's again going to be the
+
+159
+00:12:01,310 --> 00:12:05,930
+batch size and then 10 because it's 0 through 9 because they're 100 coded.
+
+160
+00:12:06,110 --> 00:12:07,360
+So those are my placeholders.
+
+161
+00:12:07,400 --> 00:12:11,210
+I only use those for the feed dictionaries and now it's time to actually create the layers
+
+162
+00:12:14,730 --> 00:12:16,980
+so the first one we're going to say is the image layer.
+
+163
+00:12:17,020 --> 00:12:27,150
+That's essentially our input and we're going to take an the input X and I'm going to reshape it to the
+
+164
+00:12:27,150 --> 00:12:33,860
+following shape say negative 1 28 by 28 comma 1.
+
+165
+00:12:33,940 --> 00:12:42,720
+So why am I doing this because I want to reshape this flattened out array into the image again.
+
+166
+00:12:42,730 --> 00:12:45,330
+So 28 by 28 That's the height and width.
+
+167
+00:12:45,340 --> 00:12:46,560
+I remember this one.
+
+168
+00:12:46,630 --> 00:12:47,590
+It's just greyscale.
+
+169
+00:12:47,590 --> 00:12:50,220
+There's only one color channel there.
+
+170
+00:12:50,650 --> 00:12:52,270
+So now that's my image.
+
+171
+00:12:52,270 --> 00:12:54,740
+And then I go start off with my first convolutional.
+
+172
+00:12:55,270 --> 00:12:58,560
+So I'll say convo one.
+
+173
+00:12:59,060 --> 00:13:05,690
+So I have a convolutional where I need to provided the image and then I need to provide essentially
+
+174
+00:13:05,690 --> 00:13:09,050
+the shape of the actual weight tensor.
+
+175
+00:13:09,320 --> 00:13:12,490
+So this is where you can kind of play around with the values here.
+
+176
+00:13:12,740 --> 00:13:17,680
+We'll go ahead and follow that initial diagram we saw back in the slides where were has a five by five
+
+177
+00:13:17,690 --> 00:13:19,210
+convolutional there.
+
+178
+00:13:19,550 --> 00:13:22,940
+And then we'll say 1 and 32.
+
+179
+00:13:23,360 --> 00:13:29,790
+So basically this convolution is going to compute 32 features for each five by five patch.
+
+180
+00:13:29,900 --> 00:13:34,230
+So that means the weight sensor is a 5 5 1 and 32.
+
+181
+00:13:34,250 --> 00:13:36,960
+So those first two dimensions are the patch size.
+
+182
+00:13:36,980 --> 00:13:39,250
+So that's the actual patch five by five.
+
+183
+00:13:39,290 --> 00:13:41,540
+The next number is the input channels.
+
+184
+00:13:41,540 --> 00:13:43,970
+Remember we're dealing with grayscale So just one.
+
+185
+00:13:44,240 --> 00:13:46,350
+And then this last number 32.
+
+186
+00:13:46,370 --> 00:13:48,290
+That's the actual features you're computing.
+
+187
+00:13:48,320 --> 00:13:50,800
+So that's the number of output channels.
+
+188
+00:13:50,810 --> 00:13:55,960
+Then once I finished with that first convolutional there I'll go ahead and do my first puling layer.
+
+189
+00:13:56,030 --> 00:14:03,740
+So say the pulling layer that's attached to this first convolution is convo one pooling then going to
+
+190
+00:14:03,740 --> 00:14:05,180
+call my max pulling function.
+
+191
+00:14:05,180 --> 00:14:12,470
+So I was Max pool two by two and then just passen the results of that first convolutional air.
+
+192
+00:14:12,560 --> 00:14:17,300
+The next thing we're going to do is build our second set of layers so another convolutional air followed
+
+193
+00:14:17,300 --> 00:14:19,220
+by another pooling layer.
+
+194
+00:14:19,280 --> 00:14:26,510
+So say convoke too is going to be another convolutional layer that takes the output of that previous
+
+195
+00:14:26,510 --> 00:14:27,210
+fooling layer.
+
+196
+00:14:27,210 --> 00:14:33,800
+So I'll say convo one pooling and in order to build a deep network we're going to stack several layers
+
+197
+00:14:33,800 --> 00:14:34,350
+of this type.
+
+198
+00:14:34,340 --> 00:14:35,720
+So we want to do here.
+
+199
+00:14:35,870 --> 00:14:43,580
+For the shape give it the same five by five patches before and then remember or input right now is going
+
+200
+00:14:43,580 --> 00:14:45,020
+to now be 32.
+
+201
+00:14:46,890 --> 00:14:55,710
+And we'll say we want 64 features for each five by five patch and then we'll pass this in with pulling
+
+202
+00:14:55,710 --> 00:14:56,190
+again.
+
+203
+00:14:56,190 --> 00:15:07,560
+So we'll say convo to pooling is equal to max pool two by two and then we're going to pasan convert
+
+204
+00:15:07,560 --> 00:15:10,410
+to.
+
+205
+00:15:10,520 --> 00:15:11,460
+There we go.
+
+206
+00:15:11,480 --> 00:15:16,880
+Then finally we're going to flatten out this result Lehre so that we can connect it to a fully connected
+
+207
+00:15:16,880 --> 00:15:17,580
+player.
+
+208
+00:15:17,990 --> 00:15:26,120
+So we will say convo two flats is going to be convert to pooling except we're going to reshape it will
+
+209
+00:15:26,120 --> 00:15:34,680
+say kind of the two pulling we'll say minus one by and since we know you have a 7 by 7 image remember
+
+210
+00:15:35,010 --> 00:15:37,020
+the output here with 64.
+
+211
+00:15:37,020 --> 00:15:47,300
+We're going to say seven times seven times 64 and then we'll say fool or one is just equal to T.F. we'll
+
+212
+00:15:47,300 --> 00:15:54,660
+do a rectify linear unit for activation and we'll pass that normal full error with the flattens Larry
+
+213
+00:15:54,680 --> 00:15:58,670
+here convert to flat and then we decide on how many neurons we want here.
+
+214
+00:15:58,670 --> 00:16:06,630
+So we'll do 1024 run that and it looks like we may have a typo somewhere that says tensor object has
+
+215
+00:16:06,630 --> 00:16:08,340
+no attribute get shape.
+
+216
+00:16:08,370 --> 00:16:12,710
+So let's go back up to this normal foolisher if we take a look at get shape here.
+
+217
+00:16:12,710 --> 00:16:15,030
+I believe this should have an underscore.
+
+218
+00:16:15,030 --> 00:16:16,300
+Now let's run that again.
+
+219
+00:16:16,350 --> 00:16:17,750
+Come back here.
+
+220
+00:16:17,910 --> 00:16:18,790
+Run this again.
+
+221
+00:16:18,810 --> 00:16:19,350
+OK good.
+
+222
+00:16:19,440 --> 00:16:20,990
+So that takes care of that.
+
+223
+00:16:21,240 --> 00:16:23,450
+And then let's go ahead and add a dropout.
+
+224
+00:16:23,460 --> 00:16:31,080
+So what we do here for the dropouts try to prevent overfitting is we'll say create some holding probabilities
+
+225
+00:16:32,300 --> 00:16:33,520
+be placeholder
+
+226
+00:16:36,050 --> 00:16:44,130
+to float 32 and we'll say fool one drop out.
+
+227
+00:16:44,150 --> 00:16:47,480
+And luckily tensor flow has a nice convenient function for a dropout.
+
+228
+00:16:47,720 --> 00:16:49,450
+And he basically just passing the letter.
+
+229
+00:16:49,460 --> 00:16:54,430
+So we'll say fool layer 1 and the probability that it's kept.
+
+230
+00:16:54,440 --> 00:16:59,980
+So say keep probability is equal to the placeholder hold probability.
+
+231
+00:17:00,310 --> 00:17:02,730
+That way we can find it later on.
+
+232
+00:17:02,930 --> 00:17:09,070
+And then finally we'll say why predictions is equal to a normal full air pass in that full one drop
+
+233
+00:17:09,100 --> 00:17:10,070
+layer.
+
+234
+00:17:10,160 --> 00:17:14,320
+And then since we have 10 labels will pass and a 10 here.
+
+235
+00:17:14,330 --> 00:17:16,270
+OK so that's all are layers.
+
+236
+00:17:16,280 --> 00:17:21,080
+Up next we're going to do is create a last function and optimizer initialize the variables and then
+
+237
+00:17:21,080 --> 00:17:22,230
+run our session.
+
+238
+00:17:22,340 --> 00:17:25,210
+We'll go ahead and continue right where we left off in the very next lecture.
+
